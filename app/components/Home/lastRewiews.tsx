@@ -89,6 +89,7 @@ export const LastReviews: React.FC = () => {
             ))}
           </Swiper>
         )}
+        
 
         {/* Кастомный контейнер для пагинации */}
         <div
