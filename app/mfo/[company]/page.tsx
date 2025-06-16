@@ -2,17 +2,32 @@ import Image from "next/image";
 import DetailsText from "../../components/DetailsText";
 import OftenQuestions from "../../components/OftenQuestions";
 import Link from "next/link";
-import TermsOfRegistration from "../../termsOfRegistration/page";
 import AboutButtons from "../../components/AboutButtons";
 import React from "react";
-import { Metadata } from "next";
 import Bread from "../../components/Bread";
 import { LastReviews } from "../../components/Home/lastRewiews";
 import Calculator from "../../components/Catalog/Calculator";
-export async function generateMetadata({ params }): Promise<Metadata> {
-  const rawCompany = params?.company || "sgroshi"; // если не передан — по умолчанию "sgroshi"
-  const companySlug = decodeURIComponent(rawCompany);
+import TermsOfRegistration from "@/app/components/termsOfRegistration";
+import { Metadata } from "next";
 
+type PageParams = {
+  company: string;
+};
+
+// Определяем тип для поисковых параметров
+type SearchParams = {
+  [key: string]: string | string[] | undefined;
+};
+
+// Основной тип для страницы
+interface PageProps {
+  params: PageParams;
+  searchParams?: SearchParams;
+}
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const companySlug = decodeURIComponent(params.company || "sgroshi");
   return {
     title: `${companySlug} - условия займа, отзывы, рейтинг`,
     description: `Полные условия займа в ${companySlug}. Требования к заемщикам, процентные ставки, отзывы клиентов.`,
@@ -27,12 +42,9 @@ export async function generateMetadata({ params }): Promise<Metadata> {
   };
 }
 
-export default function CatalogPage({
-  params,
-}: {
-  params: { company?: string };
-}) {
-  const companySlug = decodeURIComponent(params?.company || "sgroshi");
+export default function CatalogPage({ params }: PageProps) {
+  // остальной код компонента остается без изменений
+  const companySlug = decodeURIComponent(params.company || "sgroshi");
   return (
     <>
       <Bread />

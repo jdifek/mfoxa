@@ -2,7 +2,7 @@
 
 import AboutButtons from "@/app/components/AboutButtons";
 import Bread from "@/app/components/Bread";
-import TermsOfRegistration from "@/app/termsOfRegistration/page";
+import TermsOfRegistration from "@/app/components/termsOfRegistration";
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import Dropdown from "@/app/ui/Dropdown";
 import { Metadata } from "next";
