@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const OftenQuestions: React.FC = () => {
+const OftenQuestionsComponent: React.FC = () => {
   const questionsMOK = [
     {
       name: "Частые вопросы Швидко Гроші",
@@ -34,7 +34,7 @@ const OftenQuestions: React.FC = () => {
   return (
     <>
       <h2
-        className="text-[36px] mt-[50px] mb-[50px]  font-[700] leading-[100%] text-[#222] mb-[50px]"
+        className="text-[36px] mt-[50px]   font-[700] leading-[100%] text-[#222] mb-[50px]"
         style={{ fontFamily: "var(--second-family)" }}
       >
         Частые вопросы Швидко Гроші
@@ -51,7 +51,7 @@ const OftenQuestions: React.FC = () => {
               className="flex justify-between items-center p-[16px] cursor-pointer"
               onClick={() => toggleQuestion(index)}
             >
-              <p className="font-bold text-[14px] leading-[136%] text-[#222]">
+              <p className="font-bold text-[13px] md:text-[15px] leading-[136%] text-[#222]">
                 {question.name}
               </p>
               {isOpen ? (
@@ -87,7 +87,7 @@ const OftenQuestions: React.FC = () => {
               )}
             </div>
             {isOpen && (
-              <div className="px-[16px] pb-[16px] text-[14px] text-[#444] leading-[1.5]">
+              <div className="px-[16px] pb-[16px] text-[13px] md:text-[15px] text-[#444] leading-[1.5]">
                 {question.content}
               </div>
             )}
@@ -98,4 +98,6 @@ const OftenQuestions: React.FC = () => {
   );
 };
 
-export default OftenQuestions;
+export default function OftenQuestions() {
+  return <OftenQuestionsComponent />;
+}

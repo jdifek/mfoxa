@@ -8,14 +8,14 @@ const Footer: React.FC = () => {
       className="px-[100px] pt-[50px] pb-[20px]"
       style={{
         textAlign: "center",
-        backgroundColor: "#ffff",
+        backgroundColor: "#fff",
       }}
     >
-      <div className="flex justify-between items-center mb-[20px]">
-        <Image src={"/logo.svg"} alt="Company logo" width={132} height={30} />
+      <div className="flex justify-between items-center mb-[20px] flex-col md:flex-row">
+        <Image src={"/logo.svg"} alt="Company logo" width={132} height={30} className="mb-[20px] md:mb-0" />
 
         {/* НАВИГАЦИЯ */}
-        <div className="flex gap-[30px]">
+        <div className="flex gap-[30px] mb-[20px] md:mb-0 flex-col md:flex-row">
           {[
             { name: "О нас", href: "/about" },
             { name: "Контакты", href: "/contacts" },
@@ -30,14 +30,15 @@ const Footer: React.FC = () => {
         </div>
 
         {/* СОЦСЕТИ */}
-        <div className="flex gap-[10px]">
+        <div className="flex gap-[10px] mb-[20px] md:mb-0  md:flex-row">
           {["71", "70", "69", "68", "67"].map((num) => (
             <Image
               key={num}
               src={`/Frame ${num}.svg`}
-              alt="Company logo"
+              alt="Social media icon"
               width={37}
               height={37}
+              className="w-[30px] h-[30px] md:w-[37px] md:h-[37px]"
             />
           ))}
         </div>
@@ -51,11 +52,11 @@ const Footer: React.FC = () => {
       </p>
 
       {/* НИЖНЯЯ ЛИНИЯ */}
-      <div className="flex justify-between">
+      <div className="flex justify-between flex-col md:flex-row gap-[20px] md:gap-0">
         <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
           © 2013-2025 ТОВ «МАНІВЕО ШВИДКА ФІНАНСОВА ДОПОМОГА».
         </p>
-        <div className="gap-[20px] flex">
+        <div className="gap-[20px] flex flex-col md:flex-row">
           <p className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-[#724dea]">
             Українська
           </p>

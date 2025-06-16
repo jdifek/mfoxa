@@ -1,28 +1,92 @@
+/* Google Fonts подключение */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap'); /* ← заменяет Formular */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap'); /* ← заменяет Graphik */
+
 @import "tailwindcss";
 
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
 
+/* CSS-переменные */
 :root {
+  --font-family: "Montserrat", sans-serif;
+  --second-family: "Plus Jakarta Sans", sans-serif;
+  --third-family: "Inter", sans-serif;
+  --font3: "Manrope", sans-serif;         /* ЗАМЕНА Formular */
+  --font4: "Jura", sans-serif;
+  --font5: "DM Sans", sans-serif;         /* ЗАМЕНА Graphik */
+  --font6: "Golos Text", sans-serif;
+
   --background: #ffffff;
-  --foreground: #EBEBF9;
+  --foreground: #ebebf9;
 }
 
+/* Tailwind CSS override (если надо) */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-family);
 }
 
+/* Dark mode адаптация */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #EBEBF9;
+    --background: #ebebf9;
     --foreground: #ededed;
   }
 }
 
+/* Основной стиль */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-family);
 }
 
+/* Пример: заголовки */
+h2 {
+  font-family: var(--second-family);
+}
+
+.slider {
+  -webkit-appearance: none;
+  height: 21px;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 2px;
+  background: #724DEA;
+  border-radius: 1px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -9px; /* centers circle on track */
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #724DEA;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 0 0;
+  transition: background 0.3s ease;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #724DEA;
+  border: none;
+  cursor: pointer;
+}

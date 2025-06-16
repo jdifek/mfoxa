@@ -1,15 +1,14 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import DetailsText from "../DetailsText";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
+import Bread from "../components/Bread";
 
-export const LastReviews: React.FC = () => {
+const TermsOfRegistrationComponent: React.FC = () => {
   const paginationRef = useRef<HTMLDivElement | null>(null);
   const [isSwiperReady, setIsSwiperReady] = useState(false);
 
@@ -20,12 +19,14 @@ export const LastReviews: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full mt-[50px] mb-[92px] px-[20px] relative">
+    <>
+
+    <div className="w-full mt-[20px] md:mt-[50px] mb-[92px] px-[0px] md: relative">
       <h2
-        className="text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+        className="text-[20px] sm:text-[28px] md:text-[36px] font-bold leading-none text-[#222] mb-5 sm:mb-6 md:mb-7"
         style={{ fontFamily: "var(--second-family)" }}
       >
-        Последние отзывы на портале
+        Условия оформления займа в Швидко Гроші
       </h2>
 
       <div className="relative">
@@ -49,41 +50,66 @@ export const LastReviews: React.FC = () => {
             breakpoints={{
               320: { slidesPerView: 1, spaceBetween: 0 },
               640: { slidesPerView: 2, spaceBetween: 20 },
-              1024: { slidesPerView: 4, spaceBetween: 20 },
+              1024: { slidesPerView: 3, spaceBetween: 20 },
             }}
           >
             {[1, 2, 3, 4, 5, 6, 7].map((el, index) => (
               <SwiperSlide key={index}>
                 <div className=" w-full rounded-lg bg-white p-[16px] shadow-md">
-                  <div className="flex gap-[10px] mb-[14px]">
-                    <Image
-                      src="/logo (1).svg"
-                      alt="logo"
-                      width={34}
-                      height={34}
-                    />
-                    <div className="flex flex-col">
-                      <p
-                        className="font-[700] text-[12px] leading-[142%] text-[#222]"
-                        style={{ fontFamily: "var(--font-family)" }}
-                      >
-                        SlonCredit
-                      </p>
-                      <p
-                        className="font-[700] text-[16px] leading-[100%] text-[#724dea]"
-                        style={{ fontFamily: "var(--font3)" }}
-                      >
-                        4,8 <span className="text-[#67677a]">из 5</span>
-                      </p>
+                  <Image
+                    className="flex justify-center mx-auto mb-[16px]"
+                    src={"/image.png"}
+                    alt="photo"
+                    style={{ width: "333px", height: "107px" }}
+                    width={333}
+                    height={107}
+                  />
+
+                  <p
+                    className="mb-[16px]"
+                    style={{
+                      fontFamily: "var(--font3)",
+                      fontWeight: 700,
+                      fontSize: "16px",
+                      lineHeight: "100%",
+                      color: "#222",
+                    }}
+                  >
+                    Швидко Гроші
+                  </p>
+
+                  <hr className="mb-[16px]" />
+                  <div className="flex justify-between">
+                    <p className="font-medium  mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
+                      Тариф
+                    </p>
+                    <div className="rounded-[8px] px-[10px] py-[3px] w-[71px] h-[25px] bg-[#e2ffe6] font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-[#00ba9e]">
+                      Новый
                     </div>
                   </div>
-                  <p
-                    className="font-[700] text-[12px] md:text-[15px] leading-[142%] text-[#222] mb-[10px]"
-                    style={{ fontFamily: "var(--font-family)" }}
-                  >
-                    Инна
-                  </p>
-                  <DetailsText />
+                  <hr className="mb-[16px]" />
+
+                  {[
+                    { title: "Сумма", description: "до 50000₴" },
+                    { title: "Срок", description: "до 30 дней" },
+                    { title: "Ставка", description: "3%" },
+                    { title: "РРС", description: "до 100000%" },
+                  ].map((el, i) => (
+                    <>
+                      <div key={i} className="flex justify-between">
+                        <p className="font-medium  mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
+                          {el.title}
+                        </p>
+                        <div className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-right text-[#222]">
+                          {el.description}
+                        </div>
+                      </div>
+                      <hr className="mb-[16px]" />
+                    </>
+                  ))}
+                  <div className="bg-[#00ba9e] mx-auto h-[40px] w-[200px] text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer">
+                    Получить деньги
+                  </div>
                 </div>
               </SwiperSlide>
             ))}
@@ -137,11 +163,6 @@ export const LastReviews: React.FC = () => {
           </svg>
         </button>
       </div>
-      <ButtonGreenBorder
-        width={"100%"}
-        text="Все отзывы"
-        className="mt-[90px]"
-      />
 
       {/* Стили для точного отображения 4 элементов и позиционирования пагинации */}
       <style jsx global>{`
@@ -195,5 +216,11 @@ export const LastReviews: React.FC = () => {
         }
       `}</style>
     </div>
+    </>
   );
 };
+
+
+export default function TermsOfRegistration() {
+  return <TermsOfRegistrationComponent />;
+}

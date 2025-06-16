@@ -1,14 +1,29 @@
 import Image from "next/image";
 import React from "react";
+import Bread from "../components/Bread";
 
 const About: React.FC = () => {
   return (
     <>
-      <div className="p-[30px] mb-[50px] bg-white rounded-lg mt-[30px]">
-        <h2 className="mb-[20px] font-[var(--font3)] font-bold text-[36px] leading-[100%] text-[#222]">
+          <Bread />
+
+      <div className="p-[30px] mb-[30px] sm:mb-[40px] md:mb-[50px] bg-white rounded-lg mt-[30px]">
+        <h2
+          className="text-[20px] sm:text-[28px] md:text-[36px] 
+font-[700] leading-[100%] 
+text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
+          style={{ fontFamily: "var(--second-family)" }}
+        >
+          {" "}
           Наша команда экспертов
         </h2>
-        <p className="font-[var(--font-family)] font-medium text-[15px] leading-[133%] text-[#222]">
+        <p
+          className="
+    text-[11px] sm:text-[12px] md:text-[13px] 
+    font-[500] leading-[138%] 
+    text-[#222] 
+  "
+        >
           Маркетплейс mfoxa.com.ua создан командой профессионалов финансовой
           сферы, которые обладают обширными знаниями и опытом, необходимыми для
           того, чтобы предоставлять достоверную и проверенную информацию о
@@ -22,9 +37,9 @@ const About: React.FC = () => {
             <div className="flex gap-[10px] mb-[10px]">
               <Image src={"/photo.svg"} alt="photo" width={64} height={64} />
               <div className="flex flex-col gap-[5px]">
-                <p className="font-[var(--font3)] font-bold text-[20px] leading-[100%] text-[#222]">
+                <h3 className="font-[var(--font3)] font-bold text-[16px] sm:md:text-[17px] md:text-[20px] leading-[100%] text-[#222]">
                   Бондаренко Ольга Владимировна
-                </p>
+                </h3>
                 <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#67677a]">
                   СЕО mfoxa.com.ua
                 </p>
@@ -59,8 +74,8 @@ const About: React.FC = () => {
         ))}
       </div>
 
-      <div className="p-[30px] bg-white p-2.5 rounded-lg h-[100px] mb-[50px] mt-[50px]">
-        <p className="font-[var(--font-family)] font-medium text-[15px] leading-[133%] text-[#222]">
+      <div className="p-[10px] sm:p-[20px] md:p-[30px] bg-white ounded-lg h-[100px] mb-[30px] sm:mb-[50px] mt-[30px] sm:mt-[50px]">
+        <p className="font-[var(--font-family)] font-medium text-[13px] sm:text-[14px] md:text-[14px] leading-[133%] text-[#222]">
           Наши эксперты регулярно проходят повышение квалификации и обучение,
           чтобы предоставлять вам актуальные рекомендации и обеспечивать высокий
           уровень доверия и профессионализма

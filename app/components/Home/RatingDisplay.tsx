@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 
 const ratings = [
@@ -7,7 +8,13 @@ const ratings = [
   { label: "Удобство сайта", value: 2.8, color: "#EF3E4A" },
 ];
 
-const CircleRating = ({ value, color }) => (
+
+type CircleRatingProps = {
+  value: any;
+  color: any;
+}
+
+const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
   <svg width="32" height="32" viewBox="0 0 50 50">
     <circle cx="25" cy="25" r="23" stroke="#eee" strokeWidth="2" fill="none" />
     <circle

@@ -1,29 +1,43 @@
-import React from 'react';
-import clsx from 'clsx';
+import React from "react";
+import clsx from "clsx";
+import Link from "next/link";
 
 interface ButtonGreenBorderProps {
   text: string;
   width: string;
   className?: string;
+  link?: string;
 }
 
-const ButtonGreenBorder: React.FC<ButtonGreenBorderProps> = ({ text, width, className }) => {
+const ButtonGreenBorder: React.FC<ButtonGreenBorderProps> = ({
+  text,
+  link,
+  width,
+  className,
+}) => {
+  const commonClasses = clsx(
+    "border border-[#00ba9e] text-[#00ba9e] rounded-[8px] flex items-center mx-auto justify-center font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-center",
+    className
+  );
+
+  const style = {
+    width,
+    height: "39px",
+    padding: "12px 10px",
+  };
+
   return (
-    <div
-      className={clsx(
-        "border-[#00ba9e] mx-auto text-[#00ba9e] rounded-[8px] flex items-center justify-center",
-        className
+    <>
+      {link ? (
+        <Link href={link} className={commonClasses} style={style}>
+          {text}
+        </Link>
+      ) : (
+        <div className={commonClasses} style={style}>
+          {text}
+        </div>
       )}
-      style={{
-        border: "1px solid #00ba9e",
-        borderRadius: "8px",
-        padding: "12px 10px",
-        height: "39px",
-        width: width,
-      }}
-    >
-      {text}
-    </div>
+    </>
   );
 };
 

@@ -1,9 +1,16 @@
-import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
+import ButtonGreenBorder from "../ui/ButtonGreenBorder";
+import Image from "next/image";
+import OftenQuestions from "../components/OftenQuestions";
+import InfoHelpful from "../components/InfoHelpful";
+import Questions from "../components/Home/Questions";
+import { LastReviews } from "../components/Home/lastRewiews";
+import Dropdown from "../ui/Dropdown";
+import Bread from "../components/Bread";
+import { AboutButtons } from "../components/Loan/AboutButtons";
+import Link from "next/link";
 
-const BestLoans: React.FC = () => {
+const LoanPage: React.FC = () => {
   const loans = [
     {
       name: "SLON Credit",
@@ -20,15 +27,29 @@ const BestLoans: React.FC = () => {
   ];
 
   return (
-    <div className="w-full mt-[50px] px-[20px]">
-      <h2
-        className="text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
-        style={{ fontFamily: "var(--second-family)" }}
-      >
-        Лучшие кредиты онлайн
-      </h2>
+    <>
+      <Bread />
 
-      <div className="flex justify-between flex-wrap gap-[20px] md:flex-nowrap md:overflow-x-auto">
+      <div className="p-[30px] mb-[30px] bg-white rounded-lg mt-[30px]">
+        <h2 className="mb-[20px] font-[var(--font3)] font-bold text-[36px] leading-[100%] text-[#222]">
+          Займы
+        </h2>
+        <p className="font-[var(--font-family)] font-medium text-[15px] leading-[133%] text-[#222]">
+          Подберите и оформите лучший для себя займ на срочную покупку или
+          хозяйственные нужды. Получение микрозайма от 1 000 до 100 000 рублей
+          через сервис «Займи.ру»
+        </p>
+      </div>
+      <AboutButtons />
+      <Dropdown
+        options={[
+          "Сначала новые",
+          "Сначала старые",
+          "По популярности",
+          "По рейтингу",
+        ]}
+      />
+      <div className="flex justify-between flex-wrap  gap-[20px] md:flex-nowrap md:overflow-x-auto">
         {loans.map((loan, index) => (
           <div
             key={index}
@@ -95,8 +116,8 @@ const BestLoans: React.FC = () => {
                 </p>
                 <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
                   <div className="flex flex-col text-[12px]">
-                    <p className="text-[#67677a] font-medium">Сумма</p>
-                    <p className="text-[#222] font-bold">
+                    <p className="text-[#67677a] font-medium ">Сумма</p>
+                    <p className="text-[#222] font-bold ">
                       от 1000 до 100 000 грн.
                     </p>
                   </div>
@@ -140,15 +161,15 @@ const BestLoans: React.FC = () => {
 
             <footer className="mt-[10px] flex  sm:flex-row gap-[10px] items-center justify-between flex-wrap">
               <ButtonGreenBorder
-                link="/loan"
+                link="/mfo/sgroshi"
                 width="100%"
                 text="Подробнее"
                 className="flex-1"
               />
 
               <Link
-                href={"/loan"}
-                className="bg-[#00ba9e]     whitespace-nowrap
+              href={'/mfo/sgroshi'}
+                className="bg-[#00ba9e]      whitespace-nowrap
  flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
               >
                 Получить деньги
@@ -157,8 +178,27 @@ const BestLoans: React.FC = () => {
           </div>
         ))}
       </div>
-    </div>
+
+      <ButtonGreenBorder
+        width="100%"
+        text="Показать еще"
+        className="my-[20px]"
+      />
+
+      <LastReviews />
+
+      <OftenQuestions />
+      <InfoHelpful />
+
+      <Questions />
+      <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] mt-[30px] text-[#67677a]">
+        Дата добавления страницы 12.10.2025
+      </p>
+      <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+        Дата изменения страницы 12.10.2025{" "}
+      </p>
+    </>
   );
 };
 
-export default BestLoans;
+export default LoanPage;

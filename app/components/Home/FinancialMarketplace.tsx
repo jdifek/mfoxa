@@ -18,25 +18,32 @@ const FinancialMarketplace: React.FC = () => {
   return (
     <section className="w-full mt-[50px] px-[20px] mb-[50px]">
       <h2
-        className="text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+        className="text-[20px] sm:text-[28px] md:text-[36px] 
+font-[700] leading-[100%] 
+text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
         style={{ fontFamily: "var(--second-family)" }}
       >
         Финансовый маркетплейс МФО в Украине
       </h2>
       <p
-        className="text-[13px] font-[500] leading-[138%] text-[#222] mb-[30px]"
+        className="
+    text-[11px] sm:text-[12px] md:text-[13px] 
+    font-[500] leading-[138%] 
+    text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]
+  "
         style={{ fontFamily: "var(--font-family)" }}
       >
         Подберите и оформите лучший для себя займ на срочную покупку или
         хозяйственные нужды. Получение микрозайма от 1 000 до 100 000 рублей
         через сервис «Займи.ру»
       </p>
-      <div className="grid grid-cols-5 gap-1.5">
+
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
         {categories.map((item, index) => (
           <div
             key={index}
             className={`bg-white p-2.5 rounded-lg h-[118px] ${
-              index === 0 ? "col-span-2" : ""
+              index === 0 ? " sm:col-span-2 col-span-2" : ""
             }`}
             style={{
               fontFamily: "var(--font3)",
