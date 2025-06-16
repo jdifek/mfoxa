@@ -48,7 +48,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-        <div className="px-[10px] md:px-[50px] lg:px-[100px] pb-[20px] md:pb-[40px] lg:pb-[50px]">
+        <div className="px-[10px] max-w-[1400px] md:px-[50px] lg:px-[100px] pb-[20px] md:pb-[40px] lg:pb-[50px]">
           {children}
         </div>
 
