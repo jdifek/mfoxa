@@ -5,7 +5,6 @@ import ButtonGreenBorder from "../ui/ButtonGreenBorder";
 import OftenQuestions from "../components/OftenQuestions";
 import Questions from "../components/Home/Questions";
 import InfoHelpful from "../components/InfoHelpful";
-import DetailsText from "../components/DetailsText";
 import Dropdown from "../ui/Dropdown";
 import Bread from "../components/Bread";
 
