@@ -38,30 +38,62 @@ text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
         через сервис «Займи.ру»
       </p>
 
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
+      <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
         {categories.map((item, index) => (
           <div
             key={index}
-            className={`bg-white p-2.5 rounded-lg h-[118px] ${
-              index === 0 ? " sm:col-span-2 col-span-2" : ""
+            className={`bg-white p-2.5 rounded-lg  ${
+              index === 0 ? "md:col-span-2" : ""
             }`}
             style={{
               fontFamily: "var(--font3)",
               fontWeight: 700,
               fontSize: "16px",
               lineHeight: "100%",
-              color: "#724dea",
             }}
           >
-            <p className="mb-[10px]">{item.title}</p>
-            <div className="flex justify-end">
+            {/* mobile layout */}
+            <div className="flex flex-col items-center md:hidden">
               <Image
                 src={item.image}
                 alt={item.title}
-                className="mb-2"
-                width={60}
-                height={60}
+                width={50}
+                height={50}
+                className="mb-[10px] h-[50px]"
               />
+              <p
+                className="text-center"
+                style={{
+                  fontFamily: "var(--font-family)",
+                  fontWeight: 500,
+                  fontSize: "10px",
+                  lineHeight: "120%",
+                  color: "#222",
+                }}
+              >
+                {item.title === "С плохой кредитной историей" ? (
+                  <>
+                    <span className="block md:hidden">С плохой КИ</span>
+                    <span className="hidden md:block">{item.title}</span>
+                  </>
+                ) : (
+                  item.title
+                )}
+              </p>
+            </div>
+
+            {/* desktop (md+) layout */}
+            <div className="hidden md:flex flex-col h-full justify-between">
+              <p className="mb-[10px] text-[#724dea]">{item.title}</p>
+              <div className="flex justify-end">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={60}
+                  height={60}
+                  className="mb-2 "
+                />
+              </div>
             </div>
           </div>
         ))}
