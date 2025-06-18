@@ -26,7 +26,7 @@ const tops = [
 type CircleRatingProps = {
   value: any;
   color: any;
-}
+};
 const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
   <svg width="32" height="32" viewBox="0 0 50 50">
     <circle cx="25" cy="25" r="23" stroke="#eee" strokeWidth="2" fill="none" />
@@ -67,7 +67,7 @@ const MfoPage: React.FC = () => {
 
   return (
     <>
-          <Bread />
+      <Bread />
 
       <div className="p-[10px] md:p-[30px] mb-[20px] sm:mb-[30px] md:mb-[50px] bg-white rounded-lg mx-[0px] md:mx-[20px] ">
         <h2
@@ -102,9 +102,7 @@ const MfoPage: React.FC = () => {
                   height={50}
                   className="object-contain"
                 />
-                <p className="text-[#222] font-bold text-[16px]">
-                  {top.name}
-                </p>
+                <p className="text-[#222] font-bold text-[16px]">{top.name}</p>
               </header>
               <div className="grid grid-cols-2 gap-[16px]">
                 {ratings.map((item, index) => (
@@ -148,10 +146,7 @@ const MfoPage: React.FC = () => {
                   </p>
                   <div className="grid grid-cols-4 gap-[16px] text-black text-sm">
                     {ratings.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-[10px]"
-                      >
+                      <div key={index} className="flex items-center gap-[10px]">
                         <CircleRating value={item.value} color={item.color} />
                         <div className="flex flex-col">
                           <span
@@ -188,32 +183,26 @@ const MfoPage: React.FC = () => {
         </div>
       )}
 
-<div className="px-0 md:px-[20px]">
-
-
-      <ButtonGreenBorder
-        width="100%"
-        text="Показать еще"
-        className="mt-[20px] mb-[30px]"
-      />
-</div>
+      <div className="px-0 md:px-[20px]">
+        <ButtonGreenBorder
+          width="100%"
+          text="Показать еще"
+          className="mt-[20px] mb-[30px]"
+        />
+      </div>
 
       <DetailsText />
       <OftenQuestions />
       <InfoHelpful />
       <Questions />
-      <div className="px-0 md:px-[20px]">
-
-      <div className="px-0 md:px-[20px]">
-
-<p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
-  Дата добавления страницы 12.10.2025
-</p>
-<p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
-  Дата изменения страницы 12.10.2025
-</p>
-</div>
-      </div>
+        <div className="px-0 md:px-[20px]">
+          <p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+            Дата добавления страницы 12.10.2025
+          </p>
+          <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+            Дата изменения страницы 12.10.2025
+          </p>
+        </div>
     </>
   );
 };
