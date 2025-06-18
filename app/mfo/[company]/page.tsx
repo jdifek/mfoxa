@@ -224,7 +224,7 @@ export default function CatalogPage({ params }: PageProps) {
             ))}
           </div>
 
-          <div className="p-[10px] md:p-[30px] sm:p-[20px]  w-full md:w-1/2 mb-[0px] md:mb-[50px] bg-white rounded-lg mt-[10px]">
+          <div className="p-[10px] md:p-[30px]  l:mb-[0px] sm:p-[20px]  w-full md:w-1/2 md:mb-[50px] bg-white rounded-lg mb-[20px]">
             <h2
               className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
               style={{ fontFamily: "var(--second-family)" }}
@@ -267,7 +267,7 @@ export default function CatalogPage({ params }: PageProps) {
       </div>
       <div className="px-0 md:px-[20px]">
         <div className=" flex flex-col md:flex-row w-full gap-[20px] ">
-          <div className="p-[10px] md:p-[30px] sm:p-[20px]  w-full md:w-1/2 mb-[0px] md:mb-[50px] bg-white rounded-lg ">
+          <div className="p-[10px] flex-col gap-[20px] md:p-[30px] sm:p-[20px]  w-full md:w-1/2 mb-[0px] md:mb-[50px] bg-white rounded-lg ">
             <h2
               className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
               style={{ fontFamily: "var(--second-family)" }}
@@ -334,7 +334,7 @@ export default function CatalogPage({ params }: PageProps) {
               Получить деньги
             </div>
           </div>
-          <div className="p-[10px] md:p-[30px] sm:p-[20px] mb-[0px] md:mb-[50px]  w-full md:w-1/2  bg-white rounded-lg mt-[10px]">
+          <div className="p-[10px] md:p-[30px] sm:p-[20px] mb-[0px] md:mb-[50px]  w-full md:w-1/2  bg-white rounded-lg ">
             <h2
               className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
               style={{ fontFamily: "var(--second-family)" }}
