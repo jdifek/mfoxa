@@ -20,9 +20,9 @@ const BestLoans: React.FC = () => {
   ];
 
   return (
-    <div className="w-full mt-[50px] px-[20px]">
+    <div className="w-full px-[0px] md:px-[20px]">
       <h2
-        className="text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+        className="text-[20px] md:text-[36px]  font-[700] leading-[100%] text-[#222] mb-[30px]"
         style={{ fontFamily: "var(--second-family)" }}
       >
         Лучшие кредиты онлайн
@@ -32,7 +32,7 @@ const BestLoans: React.FC = () => {
         {loans.map((loan, index) => (
           <div
             key={index}
-            className="w-full md:w-[370px] h-auto rounded-[20px] bg-white p-[16px] shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
+            className="w-full md:w-[370px] h-auto rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
           >
             <header className="flex gap-[10px] items-center mb-[10px]">
               <Image
@@ -66,11 +66,11 @@ const BestLoans: React.FC = () => {
 
             <main className="flex flex-col gap-[10px]">
               {/* Первый блок */}
-              <div className="border border-[#00ba9e] rounded-[8px] p-[12px] h-[101px]">
+              <div className="border border-[#00ba9e] rounded-[8px] p-[7px]  md:p-[12px] h-[101px]">
                 <p className="text-[#00ba9e] text-[12px] font-bold">
                   Новый кредит
                 </p>
-                <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
+                <div className="border-t border-[#e0e0e0] mt-[10px]  pt-[10px]  flex justify-center gap-[10px] text-center">
                   <div className="flex flex-col text-[12px]">
                     <p className="text-[#67677a] font-medium">Сумма</p>
                     <p className="text-[#222] font-bold">
@@ -89,11 +89,11 @@ const BestLoans: React.FC = () => {
               </div>
 
               {/* Второй блок — другой цвет */}
-              <div className="border border-[#724DEA] rounded-[8px] p-[12px] h-[101px]">
+              <div className="border border-[#724DEA] rounded-[8px] p-[7px]  md:p-[12px] h-[101px]">
                 <p className="text-[#724DEA] text-[12px] font-bold">
                   Повторный кредит
                 </p>
-                <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
+                <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px]  flex justify-center gap-[10px] text-center">
                   <div className="flex flex-col text-[12px]">
                     <p className="text-[#67677a] font-medium">Сумма</p>
                     <p className="text-[#222] font-bold">

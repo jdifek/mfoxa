@@ -19,6 +19,7 @@ const TermsOfRegistrationComponent: React.FC = () => {
 
   return (
     <>
+      <div className="px-0 md:px-[20px]">
 
     <div className="w-full mt-[20px] md:mt-[50px] mb-[92px] px-[0px] md: relative">
       <h2
@@ -214,6 +215,7 @@ const TermsOfRegistrationComponent: React.FC = () => {
           background: #724dea;
         }
       `}</style>
+    </div>
     </div>
     </>
   );

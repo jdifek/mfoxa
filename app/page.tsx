@@ -44,17 +44,19 @@ export default function Home() {
       <BestLoans />
 
       <ButtonGreenBorder
-        width="256px"
+        width="100%"
         text="Показать еще"
-        className="mt-[20px] mx-auto"
+        className="mt-[20px] mx-auto sm:!w-[256px]"
       />
 
       <TopUkrMFO />
-      <ButtonGreenBorder
-        width="100%"
-        text="Показать еще"
-        className="mt-[40px] mb-[50px] "
-      />
+      <div className="px-0 md:px-[20px]">
+        <ButtonGreenBorder
+          width="100%"
+          text="Показать еще"
+          className="mt-[20px] md:mt-[40px] mb-[30px] md:mb-[50px]"
+        />
+      </div>
 
       <LastReviews />
 

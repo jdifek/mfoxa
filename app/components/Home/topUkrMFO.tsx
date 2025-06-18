@@ -20,9 +20,9 @@ export const TopUkrMFO: React.FC = () => {
   ];
 
   return (
-    <div className="w-full mt-[50px] px-[20px]">
+    <div className="w-full mt-[50px] px-[0px] md:px-[20px]">
       <h2
-        className="text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+        className="text-[20px] md:text-[36px]  font-[700] leading-[100%] text-[#222] mb-[30px]"
         style={{ fontFamily: "var(--second-family)" }}
       >
         ТОП украинских МФО по мнению заемщиков
@@ -58,10 +58,10 @@ export const TopUkrMFO: React.FC = () => {
             </div>
 
             <ButtonGreenBorder
-            link="/mfo"
+              link="/mfo"
               className="mt-[20px]"
               width="100%"
-              text="Показать еще"
+              text="Подробнее"
             />
           </div>
         ))}

@@ -3,7 +3,9 @@ import React from "react";
 
 const InfoHelpful: React.FC = () => {
   return (
-    <div className="p-[30px] mb-[50px] bg-white rounded-lg mt-[30px] flex flex-col sm:flex-row sm:justify-between sm:items-center text-center sm:text-left gap-[20px] sm:gap-0">
+    <div className="px-0 md:px-[20px]">
+
+    <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[30px] md:mb-[50px] bg-white rounded-lg mt-[30px] flex flex-col sm:flex-row sm:justify-between sm:items-center text-center sm:text-left gap-[20px] sm:gap-0">
       {/* Автор */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-[10px] sm:gap-[20px] items-center">
         <Image src={"/photo.svg"} alt="photo" width={60} height={60} />
@@ -59,6 +61,7 @@ const InfoHelpful: React.FC = () => {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 };

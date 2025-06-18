@@ -3,32 +3,40 @@ import React from "react";
 import Bread from "../components/Bread";
 export const metadata: Metadata = {
   title: "Контакты MFoxa | Свяжитесь с нами",
-  description: "Контактная информация финансового маркетплейса MFoxa. Адрес, телефон, email для связи с поддержкой.",
-  
+  description:
+    "Контактная информация финансового маркетплейса MFoxa. Адрес, телефон, email для связи с поддержкой.",
+
   openGraph: {
     title: "Контакты MFoxa",
     description: "Как связаться с финансовым маркетплейсом MFoxa",
     url: "https://mfoxa.com.ua/contacts",
-    images: [{
-      url: "https://mfoxa.com.ua/og-contacts.jpg",
-      width: 1200,
-      height: 630,
-      alt: "Контакты MFoxa"
-    }]
+    images: [
+      {
+        url: "https://mfoxa.com.ua/og-contacts.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Контакты MFoxa",
+      },
+    ],
   },
-  
+
   alternates: {
-    canonical: "https://mfoxa.com.ua/contacts"
+    canonical: "https://mfoxa.com.ua/contacts",
   },
-  
-  keywords: ["контакты MFoxa", "поддержка МФО", "связаться с финансовым маркетплейсом"]
-}
+
+  keywords: [
+    "контакты MFoxa",
+    "поддержка МФО",
+    "связаться с финансовым маркетплейсом",
+  ],
+};
 const ContactPage: React.FC = () => {
   return (
     <>
-          <Bread />
+      <Bread />
+      <div className="px-0 md:px-[20px]">
 
-      <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px]  sm:mb-[30px] md:mb-[50px] bg-white rounded-lg  mt-[30px]">
+      <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px]  sm:mb-[30px] md:mb-[50px] bg-white rounded-lg   mt-[10px] md:mt-[30px]">
         <h2
           className="text-[20px] sm:text-[28px] md:text-[36px] 
 font-[700] leading-[100%] 
@@ -53,7 +61,9 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
           учреждений.
         </p>
       </div>
+      </div>
 
+    <div className="px-0 md:px-[20px]">
       <div className="p-[10px] sm:p-[20px] md:p-[20px] mb-[50px] bg-white rounded-lg ">
         <div className="flex justify-between flex-col sm:flex-row gap-[20px]">
           <div className="flex flex-col gap-[10px]">
@@ -104,13 +114,18 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
           ></iframe>
         </div>
       </div>
+        
+      </div>
 
-      <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
-        Дата добавления страницы 12.10.2025
-      </p>
-      <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
-        Дата изменения страницы 12.10.2025{" "}
-      </p>
+
+      <div className="px-0 md:px-[20px]">
+        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+          Дата добавления страницы 12.10.2025
+        </p>
+        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+          Дата изменения страницы 12.10.2025{" "}
+        </p>{" "}
+      </div>
     </>
   );
 };

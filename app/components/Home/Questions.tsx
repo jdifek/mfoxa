@@ -32,7 +32,7 @@ const Questions: React.FC = () => {
   };
 
   return (
-    <React.Fragment>
+    <div className="px-0 md:px-[20px]">
       {questionsMOK.map((question, index) => {
         const isOpen = openIndex === index;
 
@@ -88,7 +88,7 @@ const Questions: React.FC = () => {
           </div>
         );
       })}
-    </React.Fragment>
+    </div>
   );
 };
 

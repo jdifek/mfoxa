@@ -5,17 +5,23 @@ import React from "react";
 const Footer: React.FC = () => {
   return (
     <footer
-      className="px-[100px] pt-[50px] pb-[20px]"
+      className="px-[10px] md:px-[100px] pt-[30px] md:pt-[50px] pb-[10px] md:pb-[20px]"
       style={{
         textAlign: "center",
         backgroundColor: "#fff",
       }}
     >
       <div className="flex justify-between items-center mb-[20px] flex-col md:flex-row">
-        <Image src={"/logo.svg"} alt="Company logo" width={132} height={30} className="mb-[20px] md:mb-0" />
+        <Image
+          src={"/logo.svg"}
+          alt="Company logo"
+          width={132}
+          height={30}
+          className="mb-[20px] md:mb-0"
+        />
 
         {/* НАВИГАЦИЯ */}
-        <div className="flex gap-[30px] mb-[20px] md:mb-0 flex-col md:flex-row">
+        <div className="flex gap-[20px] md:gap-[30px] mb-[20px] md:mb-0 flex-col md:flex-row">
           {[
             { name: "О нас", href: "/about" },
             { name: "Контакты", href: "/contacts" },
@@ -28,7 +34,16 @@ const Footer: React.FC = () => {
             </Link>
           ))}
         </div>
-
+        <div className="flex md:hidden mb-[20px] justify-between flex-col md:flex-row gap-[20px] md:gap-0">
+          <div className="gap-[20px] flex ">
+            <p className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-[#724dea]">
+              Українська
+            </p>
+            <p className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-[#9393a3]">
+              Русский
+            </p>
+          </div>
+        </div>
         {/* СОЦСЕТИ */}
         <div className="flex gap-[10px] mb-[20px] md:mb-0  md:flex-row">
           {["71", "70", "69", "68", "67"].map((num) => (
@@ -52,7 +67,7 @@ const Footer: React.FC = () => {
       </p>
 
       {/* НИЖНЯЯ ЛИНИЯ */}
-      <div className="flex justify-between flex-col md:flex-row gap-[20px] md:gap-0">
+      <div className="hidden md:flex justify-between flex-col md:flex-row gap-[20px] md:gap-0">
         <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
           © 2013-2025 ТОВ «МАНІВЕО ШВИДКА ФІНАНСОВА ДОПОМОГА».
         </p>

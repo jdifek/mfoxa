@@ -1,18 +1,18 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import DetailsText from "../DetailsText";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
+import { usePathname } from "next/navigation";
 
 export const LastReviews: React.FC = () => {
   const paginationRef = useRef<HTMLDivElement | null>(null);
   const [isSwiperReady, setIsSwiperReady] = useState(false);
-
+  const pathname = usePathname();
   useEffect(() => {
     if (paginationRef.current) {
       setIsSwiperReady(true); // Устанавливаем готовность Swiper только после привязки paginationRef
@@ -20,12 +20,14 @@ export const LastReviews: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full mt-[50px] mb-[92px] px-[20px] relative">
+    <div className="w-full  mb-[30px] md:mb-[60px] px-[0px] md:px-[20px] relative">
       <h2
-        className="text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+        className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] md:mb-[30px]"
         style={{ fontFamily: "var(--second-family)" }}
       >
-        Последние отзывы на портале
+        {pathname.startsWith("/mfo/") && pathname.split("/").length === 3
+          ? "Отзывы МФО"
+          : "Последние отзывы на портале"}
       </h2>
 
       <div className="relative">
@@ -54,7 +56,7 @@ export const LastReviews: React.FC = () => {
           >
             {[1, 2, 3, 4, 5, 6, 7].map((el, index) => (
               <SwiperSlide key={index}>
-                <div className=" w-full rounded-lg bg-white p-[16px] shadow-md">
+                <div className=" w-full rounded-lg bg-white p-[10px] md:p-[16px] shadow-md">
                   <div className="flex gap-[10px] mb-[14px]">
                     <Image
                       src="/logo (1).svg"
@@ -83,13 +85,37 @@ export const LastReviews: React.FC = () => {
                   >
                     Инна
                   </p>
-                  <DetailsText />
+                  <p
+                    className="mb-[10px] text-[13px] md:text-[15px]"
+                    style={{
+                      fontFamily: "var(--font-family)",
+                      fontWeight: 500,
+                      lineHeight: "138%",
+                      color: "#222",
+                    }}
+                  >
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud
+                  </p>
+
+                  <p
+                    className=" underline  text-[13px] md:text-[15px]"
+                    style={{
+                      fontFamily: "var(--font-family)",
+                      fontWeight: 500,
+                      lineHeight: "138%",
+                      textDecorationSkipInk: "none",
+                      color: "#724dea",
+                    }}
+                  >
+                    Показать полностью
+                  </p>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         )}
-        
 
         {/* Кастомный контейнер для пагинации */}
         <div
@@ -99,7 +125,7 @@ export const LastReviews: React.FC = () => {
 
         {/* Кнопка ВЛЕВО */}
         <button
-          className="custom-prev absolute bottom-[-60px] left-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm"
+          className="custom-prev absolute bottom-[-50px] left-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm"
           aria-label="Prev"
         >
           <svg
@@ -120,7 +146,7 @@ export const LastReviews: React.FC = () => {
 
         {/* Кнопка ВПРАВО */}
         <button
-          className="custom-next absolute bottom-[-60px] right-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm"
+          className="custom-next absolute bottom-[-50px] right-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm"
           aria-label="Next"
         >
           <svg
@@ -139,9 +165,10 @@ export const LastReviews: React.FC = () => {
         </button>
       </div>
       <ButtonGreenBorder
+        link="/reviews"
         width={"100%"}
         text="Все отзывы"
-        className="mt-[90px]"
+        className="mt-[70px]"
       />
 
       {/* Стили для точного отображения 4 элементов и позиционирования пагинации */}

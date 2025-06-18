@@ -69,7 +69,7 @@ const MfoPage: React.FC = () => {
     <>
           <Bread />
 
-      <div className="p-[30px] mb-[20px] sm:mb-[30px] md:mb-[50px] bg-white rounded-lg mx-[20px] mt-[30px]">
+      <div className="p-[10px] md:p-[30px] mb-[20px] sm:mb-[30px] md:mb-[50px] bg-white rounded-lg mx-[0px] md:mx-[20px] ">
         <h2
           className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
           style={{ fontFamily: "var(--second-family)" }}
@@ -88,11 +88,11 @@ const MfoPage: React.FC = () => {
 
       {isMobile ? (
         // === Mobile version (карточки) ===
-        <div className="px-[20px] mb-[50px] flex flex-wrap gap-[20px]">
+        <div className="px-[0px] md:px-[20px]  mb-[20px] flex flex-wrap gap-[20px]">
           {tops.map((top, i) => (
             <div
               key={i}
-              className="w-full rounded-[20px] bg-white p-[16px] shadow-md"
+              className="w-full rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md"
             >
               <header className="flex gap-[10px] items-center mb-[10px]">
                 <Image
@@ -124,7 +124,7 @@ const MfoPage: React.FC = () => {
               <ButtonGreenBorder
                 className="mt-[20px]"
                 width="100%"
-                text="Показать еще"
+                text="Подробнее"
               />
             </div>
           ))}
@@ -188,23 +188,32 @@ const MfoPage: React.FC = () => {
         </div>
       )}
 
+<div className="px-0 md:px-[20px]">
+
+
       <ButtonGreenBorder
         width="100%"
         text="Показать еще"
-        className="mt-[40px] mb-[50px]"
+        className="mt-[20px] mb-[30px]"
       />
+</div>
 
       <DetailsText />
       <OftenQuestions />
       <InfoHelpful />
       <Questions />
+      <div className="px-0 md:px-[20px]">
 
-      <p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
-        Дата добавления страницы 12.10.2025
-      </p>
-      <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
-        Дата изменения страницы 12.10.2025
-      </p>
+      <div className="px-0 md:px-[20px]">
+
+<p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+  Дата добавления страницы 12.10.2025
+</p>
+<p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+  Дата изменения страницы 12.10.2025
+</p>
+</div>
+      </div>
     </>
   );
 };

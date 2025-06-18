@@ -1,6 +1,6 @@
 const Bread = () => {
   return (
-    <div className="p-[10px] my-[10px] flex gap-[9px] text-[#222] text-[12px] font-medium leading-[142%]" style={{ fontFamily: "var(--font-family)" }}>
+    <div className="p-[10px] md:pl-[20px] my-[10px] flex gap-[9px] text-[#222] text-[12px] font-medium leading-[142%]" style={{ fontFamily: "var(--font-family)" }}>
       <svg
         width="16"
         height="16"

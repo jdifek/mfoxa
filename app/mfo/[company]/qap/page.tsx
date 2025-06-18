@@ -12,58 +12,65 @@ const Qap = () => {
   return (
     <>
       <Bread />
-
-      <h2
-        className="text-[20px] sm:text-[28px] md:text-[36px] 
-font-[700] leading-[100%] 
-text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
-        style={{ fontFamily: "var(--second-family)" }}
-      >
-        Частые вопросы Швидко Гроші{" "}
-      </h2>
-      <AboutButtons />
-      <div className="  md:mb-[20px] mb-[10px] mt-[30px] w-full rounded-lg bg-white p-[20px] shadow-md">
+      <div className="px-0 md:px-[20px]">
         <h2
           className="text-[20px] sm:text-[28px] md:text-[36px] 
 font-[700] leading-[100%] 
 text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
           style={{ fontFamily: "var(--second-family)" }}
         >
-          {" "}
-          Заголовок для страницы вопросы Швидко Гроші
+          Частые вопросы Швидко Гроші{" "}
         </h2>
-        <p
-          className="
+      </div>
+
+      <AboutButtons />
+      <div className="px-0 md:px-[20px]">
+        <div className="  md:mb-[20px] mb-[10px] mt-[30px] w-full rounded-lg bg-white p-[20px] shadow-md">
+          <h2
+            className="text-[20px] sm:text-[28px] md:text-[36px] 
+font-[700] leading-[100%] 
+text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
+            style={{ fontFamily: "var(--second-family)" }}
+          >
+            {" "}
+            Заголовок для страницы вопросы Швидко Гроші
+          </h2>
+          <p
+            className="
     text-[11px] sm:text-[12px] md:text-[13px] 
     font-[500] leading-[138%] 
     text-[#222] 
   "
-          style={{ fontFamily: "var(--font-family)" }}
-        >
-          Клиенты микрокредитной компании «Екапуста» получают доступ в личный
-          кабинет. Это сервис, через который можно управлять займом, оплачивать
-          его, переносить даты возврата. ЛК работает бесплатно и доступен везде,
-          где есть выход в интернет.
-        </p>
-      </div>
-      <div className="flex  gap-[10px] flex-row sm:justify-between items-center">
-        <Dropdown
-          options={[
-            "Сначала новые",
-            "Сначала старые",
-            "По популярности",
-            "По рейтингу",
-          ]}
-        />
-
-        <div className="bg-[#00ba9e]  text-white font-bold text-[14px] rounded-[8px] px-[16px] py-[9.5px] w-full sm:w-[235px] text-center cursor-pointer">
-          <p className="m-0 p-0"> Задать вопрос</p>
+            style={{ fontFamily: "var(--font-family)" }}
+          >
+            Клиенты микрокредитной компании «Екапуста» получают доступ в личный
+            кабинет. Это сервис, через который можно управлять займом,
+            оплачивать его, переносить даты возврата. ЛК работает бесплатно и
+            доступен везде, где есть выход в интернет.
+          </p>
         </div>
       </div>
+      <div className="px-0 md:px-[20px]">
+        <div className="flex  gap-[10px] flex-row sm:justify-between items-center">
+          <Dropdown
+            options={[
+              "Сначала новые",
+              "Сначала старые",
+              "По популярности",
+              "По рейтингу",
+            ]}
+          />
+
+          <div className="bg-[#00ba9e]  text-white font-bold text-[14px] rounded-[8px] px-[16px] py-[9.5px] w-full sm:w-[235px] text-center cursor-pointer">
+            <p className="m-0 p-0"> Задать вопрос</p>
+          </div>
+        </div>
+      </div>
+      <div className="px-0 md:px-[20px]">
 
       {[1, 2, 3, 4, 5, 6].map((el, i) => (
         <React.Fragment key={i}>
-          <div className="p-[30px] mb-[10px]  bg-white rounded-lg mt-[10px]">
+          <div className="p-[10px] md:p-[30px] mb-[10px]  bg-white rounded-lg mt-[10px]">
             <div className="flex gap-[10px] mb-[14px]">
               <Image src="/logo (1).svg" alt="logo" width={34} height={34} />
               <div className="flex flex-col">
@@ -143,7 +150,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
               </p>
             </div>
 
-            <p className="mb-[18px] font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#724dea] underline [text-decoration-skip-ink:none]">
+            <p className="mb-[14px] md:mb-[18px] font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#724dea] underline [text-decoration-skip-ink:none]">
               Ответить
             </p>
 
@@ -169,21 +176,26 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
           </div>
         </React.Fragment>
       ))}
+      </div>
+      <div className="px-0 md:px-[20px]">
 
       <ButtonGreenBorder
         width="100%"
         text="Показать еще"
         className="mt-[40px] mb-[50px] "
       />
+      </div>
 
       <TermsOfRegistration />
 
-      <p className="font-[var(--font-family)] font-medium mt-[50px] text-[13px] leading-[138%] text-[#67677a]">
-        Дата добавления страницы 12.10.2025
-      </p>
-      <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
-        Дата изменения страницы 12.10.2025
-      </p>
+      <div className="px-0 md:px-[20px]">
+        <p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+          Дата добавления страницы 12.10.2025
+        </p>
+        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+          Дата изменения страницы 12.10.2025
+        </p>
+      </div>
     </>
   );
 };

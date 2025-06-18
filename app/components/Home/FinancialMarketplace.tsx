@@ -16,7 +16,7 @@ const categories = [
 
 const FinancialMarketplace: React.FC = () => {
   return (
-    <section className="w-full mt-[50px] px-[20px] mb-[50px]">
+    <section className="w-full mt-[20px] md:mt-[50px] px-[0px] md:px-[20px] mb-[30px] md:mb-[30px]">
       <h2
         className="text-[20px] sm:text-[28px] md:text-[36px] 
 font-[700] leading-[100%] 
