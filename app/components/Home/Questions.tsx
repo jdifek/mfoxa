@@ -1,30 +1,72 @@
-'use client'
-import React, { useState } from "react";
+'use client';
+import React, { useState } from 'react';
+import Link from 'next/link';
+
+interface QuestionItem {
+  name: string;
+  links: { label: string; url: string }[];
+}
+
+const questions: QuestionItem[] = [
+  {
+    name: 'Популярные МФО',
+    links: Array(24).fill({
+      label: 'moneyman',
+      url: 'https://zaimi.ru/mfo/joymoney/',
+    }),
+  },
+  {
+    name: 'Быстрая выплата',
+    links: Array(24).fill({
+      label: 'moneyman',
+      url: 'https://zaimi.ru/mfo/joymoney/',
+    }),
+  },
+  {
+    name: 'Без залога',
+    links: Array(24).fill({
+      label: 'moneyman',
+      url: 'https://zaimi.ru/mfo/joymoney/',
+    }),
+  },
+  {
+    name: 'Низкий процент',
+    links: Array(24).fill({
+      label: 'moneyman',
+      url: 'https://zaimi.ru/mfo/joymoney/',
+    }),
+  },
+  {
+    name: 'На карту',
+    links: Array(24).fill({
+      label: 'moneyman',
+      url: 'https://zaimi.ru/mfo/joymoney/',
+    }),
+  },
+  {
+    name: 'Круглосуточно',
+    links: Array(24).fill({
+      label: 'moneyman',
+      url: 'https://zaimi.ru/mfo/joymoney/',
+    }),
+  },
+  {
+    name: 'Без отказа',
+    links: Array(24).fill({
+      label: 'moneyman',
+      url: 'https://zaimi.ru/mfo/joymoney/',
+    }),
+  },
+  {
+    name: 'С любой КИ',
+    links: Array(24).fill({
+      label: 'moneyman',
+      url: 'https://zaimi.ru/mfo/joymoney/',
+    }),
+  },
+];
 
 const Questions: React.FC = () => {
-  const questionsMOK = [
-    {
-      name: "Популярные МФО",
-      content: "Контент про популярные МФО.",
-    },
-    {
-      name: "Быстрая выплата",
-      content: "Контент про быструю выплату.",
-    },
-    {
-      name: "Без залога",
-      content: "Контент про отсутствие залога.",
-    },
-    {
-      name: "Низкий процент",
-      content: "Контент про низкий процент.",
-    },
-    {
-      name: "На карту",
-      content: "Контент про перевод на карту.",
-    },
-  ];
-
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleQuestion = (index: number) => {
@@ -33,7 +75,7 @@ const Questions: React.FC = () => {
 
   return (
     <div className="px-0 md:px-[20px]">
-      {questionsMOK.map((question, index) => {
+      {questions.map((question, index) => {
         const isOpen = openIndex === index;
 
         return (
@@ -81,10 +123,30 @@ const Questions: React.FC = () => {
               )}
             </div>
             {isOpen && (
-              <div className="px-[16px] pb-[16px] text-[14px] text-[#444] leading-[1.5]">
-                {question.content}
-              </div>
-            )}
+              <div className="px-[16px] pb-[16px] grid grid-cols-2 gap-[10px] sm:grid-cols-6 sm:gap-[10px]">
+              {question.links.map((link, linkIndex) => (
+      <Link
+        key={linkIndex}
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-max"
+        style={{
+          fontFamily: 'var(--font-family)',
+          fontWeight: 500,
+          fontSize: '13px',
+          lineHeight: '138%',
+          textDecoration: 'underline',
+          textDecorationSkipInk: 'none',
+          color: '#00ba9e',
+        }}
+      >
+        {link.label}
+      </Link>
+    ))}
+  </div>
+)}
+
           </div>
         );
       })}

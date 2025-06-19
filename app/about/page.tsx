@@ -32,8 +32,8 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
         </div>
       </div>
       <div className="px-0 md:px-[20px]">
-        <div className="flex gap-[20px] flex-wrap">
-          {[1, 2, 3].map((el, i) => (
+      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-[20px]">
+      {[1, 2, 3].map((el, i) => (
             <div
               key={i}
               className="bg-white p-[10px] sm:p-[20px] md:p-[30px] rounded-lg flex-1"

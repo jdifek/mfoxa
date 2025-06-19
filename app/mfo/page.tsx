@@ -21,6 +21,12 @@ const tops = [
   { name: "Швидко гроші", img: "/2.svg" },
   { name: "Credit 7", img: "/1.svg" },
   { name: "SLON Credit", img: "/3.svg" },
+  { name: "Швидко гроші", img: "/2.svg" },
+  { name: "Credit 7", img: "/1.svg" },
+  { name: "SLON Credit", img: "/3.svg" },
+  { name: "Швидко гроші", img: "/2.svg" },
+  { name: "Credit 7", img: "/1.svg" },
+  { name: "SLON Credit", img: "/3.svg" },
 ];
 
 type CircleRatingProps = {
@@ -104,7 +110,16 @@ const MfoPage: React.FC = () => {
                 />
                 <p className="text-[#222] font-bold text-[16px]">{top.name}</p>
               </header>
+             <div className=" flex gap-[10px]">
+               <Image
+                src={"/Frame 163.svg"}
+                alt=""
+                width={10}
+                height={10}
+                style={{ height: "74px", width: "74px" }}
+              />
               <div className="grid grid-cols-2 gap-[16px]">
+                
                 {ratings.map((item, index) => (
                   <div key={index} className="flex gap-[10px] items-center">
                     <CircleRating value={item.value} color={item.color} />
@@ -119,6 +134,7 @@ const MfoPage: React.FC = () => {
                   </div>
                 ))}
               </div>
+             </div>
               <ButtonGreenBorder
                 className="mt-[20px]"
                 width="100%"

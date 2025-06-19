@@ -21,7 +21,7 @@ const TermsOfRegistrationComponent: React.FC = () => {
     <>
       <div className="px-0 md:px-[20px]">
 
-    <div className="w-full mt-[20px] md:mt-[50px] mb-[92px] px-[0px] md: relative">
+    <div className="w-full mt-[20px] md:mt-[50px] mb-[92px] px-[0px] md:relative">
       <h2
         className="text-[20px] sm:text-[28px] md:text-[36px] font-bold leading-none text-[#222] mb-5 sm:mb-6 md:mb-7"
         style={{ fontFamily: "var(--second-family)" }}
@@ -48,19 +48,19 @@ const TermsOfRegistrationComponent: React.FC = () => {
             slidesPerGroup={1}
             className="pb-[100px] max-w-[1280px] mx-auto"
             breakpoints={{
-              320: { slidesPerView: 1, spaceBetween: 0 },
+              320: { slidesPerView: 2, spaceBetween: 10 },
               640: { slidesPerView: 2, spaceBetween: 20 },
               1024: { slidesPerView: 3, spaceBetween: 20 },
             }}
           >
             {[1, 2, 3, 4, 5, 6, 7].map((el, index) => (
               <SwiperSlide key={index}>
-                <div className=" w-full rounded-lg bg-white p-[16px] shadow-md">
+                <div className=" w-full rounded-lg bg-white p-[10px]  md:p-[16px] shadow-md">
                   <Image
-                    className="flex justify-center mx-auto mb-[16px]"
+                    className="flex w-[152px] h-[49px] md:w-[333px] md:h-[107px] justify-center mx-auto mb-[16px]"
                     src={"/image.png"}
                     alt="photo"
-                    style={{ width: "333px", height: "107px" }}
+                  
                     width={333}
                     height={107}
                   />
@@ -79,7 +79,7 @@ const TermsOfRegistrationComponent: React.FC = () => {
                   </p>
 
                   <hr className="mb-[16px]" />
-                  <div className="flex justify-between">
+                  <div className="flex justify-between ">
                     <p className="font-medium  mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
                       Тариф
                     </p>
@@ -107,7 +107,7 @@ const TermsOfRegistrationComponent: React.FC = () => {
                       <hr className="mb-[16px]" />
                     </>
                   ))}
-                  <div className="bg-[#00ba9e] mx-auto h-[40px] w-[200px] text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer">
+                  <div className="bg-[#00ba9e] mx-auto h-[40px] w-full text-white font-bold text-[13px] text-nowrap  rounded-[8px] px-[17px] md:px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer">
                     Получить деньги
                   </div>
                 </div>

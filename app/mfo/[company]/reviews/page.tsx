@@ -193,12 +193,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                   </p>
                 </div>
               </div>
-              <p
-                className="font-[700] text-[12px] md:text-[15px] leading-[142%] text-[#222] mb-[10px]"
-                style={{ fontFamily: "var(--font-family)" }}
-              >
-                Инна
-              </p>
+            
               <p
                 className="mb-[10px]"
                 style={{

@@ -24,6 +24,30 @@ const LoanPage: React.FC = () => {
       name: "Miloan",
       img: "/6.svg",
     },
+    {
+      name: "SLON Credit",
+      img: "/3.svg",
+    },
+    {
+      name: "CreditKasa",
+      img: "/4.svg",
+    },
+    {
+      name: "Miloan",
+      img: "/6.svg",
+    },
+    {
+      name: "SLON Credit",
+      img: "/3.svg",
+    },
+    {
+      name: "CreditKasa",
+      img: "/4.svg",
+    },
+    {
+      name: "Miloan",
+      img: "/6.svg",
+    },
   ];
 
   return (
@@ -149,26 +173,44 @@ const LoanPage: React.FC = () => {
                 {/* Детали */}
                 <div className="space-y-[10px] text-[12px] text-[#9393a3]">
                   <div className="flex justify-between">
-                    <p>РРС</p>
-                    <p>от 0,01 до 100000%</p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">РРС</p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">от 0,01 до 100000%</p>
                   </div>
                   <hr />
                   <div className="flex justify-between">
-                    <p>Юр. лицо</p>
-                    <p>ООО “Швидко Гроші”</p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">Юр. лицо</p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">ООО “Швидко Гроші”</p>
                   </div>
                   <hr />
                   <div className="flex justify-between">
-                    <p>Лицензия НБУ</p>
-                    <p>№0000 от 22.22.2222</p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">Лицензия НБУ</p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">№0000 от 22.22.2222</p>
                   </div>
                   <hr />
                   <div>
-                    <p>Базовые характеристики услуги</p>
+                    <Link
+                      href="/"
+                      className="underline text-[10px] font-medium leading-[120%] text-[#9393a3]"
+                      style={{
+                        fontFamily: "var(--font-family)",
+                        textDecorationSkipInk: "none",
+                      }}
+                    >
+                      Базовые характеристики услуги
+                    </Link>{" "}
                   </div>
                   <hr />
                   <div>
-                    <p>Предупреждение пользователя о последствиях</p>
+                    <Link
+                      href="/"
+                      className="underline text-[10px] font-medium leading-[120%] text-[#9393a3]"
+                      style={{
+                        fontFamily: "var(--font-family)",
+                        textDecorationSkipInk: "none",
+                      }}
+                    >
+                      Предупреждение пользователя о последствиях
+                    </Link>{" "}
                   </div>
                 </div>
               </main>

@@ -40,7 +40,7 @@ export const AboutButtonsComponent = () => {
 
   return (
     <div className="px-0 md:px-[20px]">
-      <div className="flex gap-[10px] w-full my-[30px] md:my-[50px] overflow-x-auto">
+      <div className="flex gap-[10px] w-full my-[30px] md:my-[50px] overflow-x-auto no-scrollbar">
         {[
           "О компании",
           "Отзывы",

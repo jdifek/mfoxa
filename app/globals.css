@@ -67,7 +67,14 @@ h2 {
   background: #724DEA;
   border-radius: 1px;
 }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;

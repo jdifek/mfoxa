@@ -55,7 +55,7 @@ export const LastReviews: React.FC = () => {
             }}
           >
             {[1, 2, 3, 4, 5, 6, 7].map((el, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index} className="no-scrollbar">
                 <div className=" w-full rounded-lg bg-white p-[10px] md:p-[16px] shadow-md">
                   <div className="flex gap-[10px] mb-[14px]">
                     <Image
