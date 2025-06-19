@@ -174,7 +174,7 @@ const BestLoans: React.FC = () => {
                   <div>
                     <Link
                       href="/"
-                      className="underline  text-[10px] font-medium leading-[120%] text-[#9393a3]"
+                      className="underline  text-[10px] font-medium leading-[120%] text-[#00ba9e]"
                       style={{
                         fontFamily: "var(--font-family)",
                         textDecorationSkipInk: "none",
@@ -187,7 +187,7 @@ const BestLoans: React.FC = () => {
                   <div>
                     <Link
                       href="/"
-                      className="underline text-[10px] font-medium leading-[120%] text-[#9393a3]"
+                      className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
                       style={{
                         fontFamily: "var(--font-family)",
                         textDecorationSkipInk: "none",
