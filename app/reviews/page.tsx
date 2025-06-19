@@ -55,7 +55,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
             доступен везде, где есть выход в интернет.
           </p>
 
-          <div className="flex gap-[20px] mt-[20px]">
+          <div className="flex gap-[40px] mt-[20px]">
             <div className="flex flex-col">
               <p className="font-[var(--font3)] font-bold  text-[20px] sm:text-[28px] md:text-[36px] leading-[100%] text-[#222]">
                 188

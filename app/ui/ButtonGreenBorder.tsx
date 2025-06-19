@@ -7,6 +7,7 @@ interface ButtonGreenBorderProps {
   width: string;
   className?: string;
   link?: string;
+  onClick?: () => void;
 }
 
 const ButtonGreenBorder: React.FC<ButtonGreenBorderProps> = ({
@@ -14,9 +15,10 @@ const ButtonGreenBorder: React.FC<ButtonGreenBorderProps> = ({
   link,
   width,
   className,
+  onClick,
 }) => {
   const commonClasses = clsx(
-    "border border-[#00ba9e] text-[#00ba9e] rounded-[8px] flex items-center mx-auto justify-center font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-center",
+    "border cursor-pointer border-[#00ba9e] text-[#00ba9e] rounded-[8px] flex items-center mx-auto justify-center font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-center",
     className
   );
 
@@ -29,11 +31,16 @@ const ButtonGreenBorder: React.FC<ButtonGreenBorderProps> = ({
   return (
     <>
       {link ? (
-        <Link href={link} className={commonClasses} style={style}>
+        <Link
+          onClick={onClick}
+          href={link}
+          className={commonClasses}
+          style={style}
+        >
           {text}
         </Link>
       ) : (
-        <div className={commonClasses} style={style}>
+        <div onClick={onClick} className={commonClasses} style={style}>
           {text}
         </div>
       )}

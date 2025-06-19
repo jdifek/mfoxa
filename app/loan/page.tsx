@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import ButtonGreenBorder from "../ui/ButtonGreenBorder";
 import Image from "next/image";
 import OftenQuestions from "../components/OftenQuestions";
@@ -11,6 +13,11 @@ import { AboutButtons } from "../components/Loan/AboutButtons";
 import Link from "next/link";
 
 const LoanPage: React.FC = () => {
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  const handleShowMore = () => {
+    setVisibleCount((prev) => prev + 3);
+  };
   const loans = [
     {
       name: "SLON Credit",
@@ -77,12 +84,12 @@ const LoanPage: React.FC = () => {
           ]}
         />
       </div>
-      <div className="px-0 md:px-[20px]">
-        <div className="flex justify-between flex-wrap  gap-[20px] md:flex-nowrap md:overflow-x-auto">
-          {loans.map((loan, index) => (
+      <div className="px-0 md:px-[20px] mb-5">
+        <div className="flex justify-between flex-col gap-[20px] md:grid md:grid-cols-2 lg:grid-cols-3 ">
+          {loans.slice(0, visibleCount).map((loan, index) => (
             <div
               key={index}
-              className="w-full md:w-[370px] h-auto rounded-[20px] bg-white p-[10px] md:p-[16px]  shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
+              className="w-full h-auto rounded-[20px] bg-white p-[10px] md:p-[16px]  shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
             >
               <header className="flex gap-[10px] items-center mb-[10px]">
                 <Image
@@ -173,18 +180,30 @@ const LoanPage: React.FC = () => {
                 {/* Детали */}
                 <div className="space-y-[10px] text-[12px] text-[#9393a3]">
                   <div className="flex justify-between">
-                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">РРС</p>
-                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">от 0,01 до 100000%</p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                      РРС
+                    </p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                      от 0,01 до 100000%
+                    </p>
                   </div>
                   <hr />
                   <div className="flex justify-between">
-                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">Юр. лицо</p>
-                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">ООО “Швидко Гроші”</p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                      Юр. лицо
+                    </p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                      ООО “Швидко Гроші”
+                    </p>
                   </div>
                   <hr />
                   <div className="flex justify-between">
-                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">Лицензия НБУ</p>
-                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">№0000 от 22.22.2222</p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                      Лицензия НБУ
+                    </p>
+                    <p className=" text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                      №0000 от 22.22.2222
+                    </p>
                   </div>
                   <hr />
                   <div>
@@ -235,13 +254,16 @@ const LoanPage: React.FC = () => {
           ))}
         </div>
       </div>
-      <div className="px-0 md:px-[20px]">
-        <ButtonGreenBorder
-          width="100%"
-          text="Показать еще"
-          className="my-[20px]"
-        />
-      </div>
+      {visibleCount < loans.length && (
+        <div className="px-0 mb-5 md:px-[20px]">
+          <ButtonGreenBorder
+            text="Показать еще"
+            width="100%"
+            className="sm:!w-[256px]"
+            onClick={handleShowMore}
+          />
+        </div>
+      )}
 
       <LastReviews />
 

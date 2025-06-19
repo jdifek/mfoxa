@@ -42,12 +42,12 @@ export default function Home() {
     <div>
       <FinancialMarketplace />
       <BestLoans />
-
+{/* 
       <ButtonGreenBorder
         width="100%"
         text="Показать еще"
         className="mt-[20px] mx-auto sm:!w-[256px]"
-      />
+      /> */}
 
       <TopUkrMFO />
       <div className="px-0 md:px-[20px]">
