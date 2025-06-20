@@ -125,8 +125,8 @@ export const LastReviews: React.FC = () => {
 
         {/* Кнопка ВЛЕВО */}
         <button
-          className="custom-prev absolute bottom-[-50px] left-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm"
-          aria-label="Prev"
+className="custom-prev cursor-pointer absolute bottom-[-50px] left-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-100 hover:shadow-md"
+aria-label="Prev"
         >
           <svg
             width="14"
@@ -146,8 +146,8 @@ export const LastReviews: React.FC = () => {
 
         {/* Кнопка ВПРАВО */}
         <button
-          className="custom-next absolute bottom-[-50px] right-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm"
-          aria-label="Next"
+className="custom-next cursor-pointer absolute bottom-[-50px] right-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-100 hover:shadow-md"
+aria-label="Next"
         >
           <svg
             width="14"

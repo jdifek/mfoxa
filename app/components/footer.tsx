@@ -1,8 +1,13 @@
+"use client"
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const Footer: React.FC = () => {
+  const [language, setLanguage] = useState<"uk" | "ru">("uk");
+
+  const socialIcons = ["71", "70", "69", "68", "67"];
+
   return (
     <footer
       className="px-[10px] md:px-[100px] pt-[30px] md:pt-[50px] pb-[10px] md:pb-[20px]"
@@ -34,27 +39,50 @@ const Footer: React.FC = () => {
             </Link>
           ))}
         </div>
-        <div className="flex md:hidden mb-[20px] justify-between flex-col md:flex-row gap-[20px] md:gap-0">
-          <div className="gap-[20px] flex ">
-            <p className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-[#724dea]">
-              Українська
-            </p>
-            <p className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-[#9393a3]">
-              Русский
-            </p>
-          </div>
+
+        {/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ для мобильных */}
+        <div className="flex md:hidden mb-[20px] justify-center gap-[20px]">
+          <p
+            onClick={() => setLanguage("uk")}
+            className={`font-[var(--font-family)] font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
+              language === "uk"
+                ? "text-[#724dea]"
+                : "text-[#9393a3] hover:text-[#724dea]"
+            }`}
+          >
+            Українська
+          </p>
+          <p
+            onClick={() => setLanguage("ru")}
+            className={`font-[var(--font-family)] font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
+              language === "ru"
+                ? "text-[#724dea]"
+                : "text-[#9393a3] hover:text-[#724dea]"
+            }`}
+          >
+            Русский
+          </p>
         </div>
+
         {/* СОЦСЕТИ */}
-        <div className="flex gap-[10px] mb-[20px] md:mb-0  md:flex-row">
-          {["71", "70", "69", "68", "67"].map((num) => (
-            <Image
+        <div className="flex gap-[10px] mb-[20px] md:mb-0 md:flex-row justify-center">
+          {socialIcons.map((num) => (
+            <a
               key={num}
-              src={`/Frame ${num}.svg`}
-              alt="Social media icon"
-              width={37}
-              height={37}
-              className="w-[30px] h-[30px] md:w-[37px] md:h-[37px]"
-            />
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer transform transition-transform duration-200 hover:scale-110"
+              aria-label="Social media link"
+            >
+              <Image
+                src={`/Frame ${num}.svg`}
+                alt="Social media icon"
+                width={37}
+                height={37}
+                className="w-[30px] h-[30px] md:w-[37px] md:h-[37px]"
+              />
+            </a>
           ))}
         </div>
       </div>
@@ -71,11 +99,25 @@ const Footer: React.FC = () => {
         <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
           © 2013-2025 ТОВ «МАНІВЕО ШВИДКА ФІНАНСОВА ДОПОМОГА».
         </p>
-        <div className="gap-[20px] flex flex-col md:flex-row">
-          <p className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-[#724dea]">
+        <div className="gap-[20px] flex flex-col md:flex-row justify-center">
+          <p
+            onClick={() => setLanguage("uk")}
+            className={`font-[var(--font-family)] font-medium text-[14px] leading-[136%] cursor-pointer ${
+              language === "uk"
+                ? "text-[#724dea]"
+                : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"
+            }`}
+          >
             Українська
           </p>
-          <p className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-[#9393a3]">
+          <p
+            onClick={() => setLanguage("ru")}
+            className={`font-[var(--font-family)] font-medium text-[14px] leading-[136%] cursor-pointer ${
+              language === "ru"
+                ? "text-[#724dea]"
+                : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"
+            }`}
+          >
             Русский
           </p>
         </div>

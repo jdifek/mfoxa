@@ -88,7 +88,7 @@ export default function CatalogPage({ params }: PageProps) {
               </div>
             </div>
             <div
-              className="bg-[#00ba9e]   mb-[20px] md:mb-0   whitespace-nowrap
+              className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out    mb-[20px] md:mb-0   whitespace-nowrap
  h-[40px] w-full md:w-[200px] text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer"
             >
               Получить деньги
@@ -332,7 +332,7 @@ export default function CatalogPage({ params }: PageProps) {
               подачи заявки.
             </p>
 
-            <div className="bg-[#00ba9e] mx-auto h-[40px] w-full text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer">
+            <div className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out  mx-auto h-[40px] w-full text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer">
               Получить деньги
             </div>
           </div>

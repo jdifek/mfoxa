@@ -81,8 +81,8 @@ const Questions: React.FC = () => {
         return (
           <div
             key={index}
-            className="w-full mb-[10px] rounded-lg bg-white shadow-md"
-          >
+            className="w-full mb-[10px] rounded-lg bg-white shadow-md transition-all duration-200 ease-in-out hover:shadow-lg hover:bg-gray-100"
+            >
             <div
               className="flex justify-between items-center p-[16px] cursor-pointer"
               onClick={() => toggleQuestion(index)}

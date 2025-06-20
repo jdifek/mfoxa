@@ -18,7 +18,8 @@ const ButtonGreenBorder: React.FC<ButtonGreenBorderProps> = ({
   onClick,
 }) => {
   const commonClasses = clsx(
-    "border cursor-pointer border-[#00ba9e] text-[#00ba9e] rounded-[8px] flex items-center mx-auto justify-center font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-center",
+    "border border-[#00ba9e] text-[#00ba9e] rounded-[8px] flex items-center justify-center mx-auto cursor-pointer font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-center",
+    "transition-all duration-200 ease-in-out hover:bg-[#00ba9e]/10 ",
     className
   );
 
@@ -28,23 +29,19 @@ const ButtonGreenBorder: React.FC<ButtonGreenBorderProps> = ({
     padding: "12px 10px",
   };
 
-  return (
-    <>
-      {link ? (
-        <Link
-          onClick={onClick}
-          href={link}
-          className={commonClasses}
-          style={style}
-        >
-          {text}
-        </Link>
-      ) : (
-        <div onClick={onClick} className={commonClasses} style={style}>
-          {text}
-        </div>
-      )}
-    </>
+  return link ? (
+    <Link
+      onClick={onClick}
+      href={link}
+      className={commonClasses}
+      style={style}
+    >
+      {text}
+    </Link>
+  ) : (
+    <div onClick={onClick} className={commonClasses} style={style}>
+      {text}
+    </div>
   );
 };
 

@@ -107,7 +107,7 @@ const TermsOfRegistrationComponent: React.FC = () => {
                       <hr className="mb-[16px]" />
                     </>
                   ))}
-                  <div className="bg-[#00ba9e] mx-auto h-[40px] w-full text-white font-bold text-[13px] text-nowrap  rounded-[8px] px-[17px] md:px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer">
+                  <div className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out  mx-auto h-[40px] w-full text-white font-bold text-[13px] text-nowrap  rounded-[8px] px-[17px] md:px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer">
                     Получить деньги
                   </div>
                 </div>

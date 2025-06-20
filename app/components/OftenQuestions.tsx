@@ -44,7 +44,7 @@ const OftenQuestionsComponent: React.FC = () => {
 
         return (
           <div key={index} className=" px-0 md:px-[20px] ">
-            <div className="w-full mb-[10px] rounded-lg bg-white shadow-md">
+            <div className="w-full transition-all duration-200 ease-in-out hover:shadow-lg hover:bg-gray-100 mb-[10px] rounded-lg bg-white shadow-md">
               <div
                 className="flex justify-between items-center p-[16px] cursor-pointer"
                 onClick={() => toggleQuestion(index)}

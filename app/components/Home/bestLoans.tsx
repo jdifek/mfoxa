@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import Image from "next/image";
 import Link from "next/link";
@@ -209,7 +209,7 @@ const BestLoans: React.FC = () => {
 
                 <Link
                   href={"/loan"}
-                  className="bg-[#00ba9e]     whitespace-nowrap
+                  className="bg-[#00ba9e]  hover:bg-[#009d85] transition-all duration-200 ease-in-out    whitespace-nowrap
  flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
                 >
                   Получить деньги
