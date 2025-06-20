@@ -5,7 +5,6 @@ import FinancialMarketplace from "./components/Home/FinancialMarketplace";
 import { LastReviews } from "./components/Home/lastRewiews";
 import Questions from "./components/Home/Questions";
 import { TopUkrMFO } from "./components/Home/topUkrMFO";
-import ButtonGreenBorder from "./ui/ButtonGreenBorder";
 export const metadata: Metadata = {
   title: "Рейтинг МФО Украины 2024 | ТОП-10 микрофинансовых организаций",
   description:
