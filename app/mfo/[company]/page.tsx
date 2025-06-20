@@ -9,6 +9,7 @@ import { LastReviews } from "../../components/Home/lastRewiews";
 import Calculator from "../../components/Catalog/Calculator";
 import TermsOfRegistration from "@/app/components/termsOfRegistration";
 import { Metadata } from "next";
+import CalctTarifButtonsts from "@/app/components/CalctTarifButtons";
 
 type PageParams = {
   company: string;
@@ -43,7 +44,7 @@ export async function generateMetadata({
 }
 
 export default function CatalogPage({ params }: PageProps) {
-  // остальной код компонента остается без изменений
+
   const companySlug = decodeURIComponent(params.company || "sgroshi");
   return (
     <>
@@ -281,28 +282,7 @@ export default function CatalogPage({ params }: PageProps) {
             <p className="font-medium  mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
               Выберите тариф
             </p>
-            <div className="flex mb-[10px] gap-[10px]">
-              {["Новый", "Повторный", "Акция"].map((el, i) => (
-                <div
-                  key={i}
-                  className={`px-[10px] py-[8px] rounded-[35px] h-[33px] flex items-center justify-center text-[11px] font-medium leading-[145%] text-center ${
-                    i === 0
-                      ? "bg-[#724dea] text-white"
-                      : "bg-[#d6d6f9] text-[#9393a3]"
-                  }`}
-                  style={{ fontFamily: "var(--font-family)" }}
-                >
-                  <p
-                    className={`text-[12px] leading-[142%] font-medium ${
-                      i === 0 ? "text-white" : "text-[#724dea]"
-                    }`}
-                    style={{ fontFamily: "var(--font-family)" }}
-                  >
-                    {el}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <CalctTarifButtonsts />
 
             <Calculator />
 
