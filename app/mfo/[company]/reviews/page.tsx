@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+'use client'
 import AboutButtons from "@/app/components/AboutButtons";
 import Bread from "@/app/components/Bread";
 import TermsOfRegistration from "@/app/components/termsOfRegistration";
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import Dropdown from "@/app/ui/Dropdown";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 import Image from "next/image";
-import React from "react";
-export const metadata: Metadata = {
-  title: "Отзывы о МФО Украины - правдивые мнения клиентов",
-  description:
-    "Честные отзывы о микрофинансовых организациях Украины. Реальные оценки и рейтинги клиентов.",
-  openGraph: {
-    title: "Отзывы о МФО Украины - правдивые мнения клиентов",
-    description: "Реальные отзывы о работе микрофинансовых компаний",
-    images: ["https://mfoxa.com.ua/og-reviews.jpg"],
-  },
-  alternates: {
-    canonical: "https://mfoxa.com.ua/reviews",
-  },
-};
+import React, { useState } from "react";
+// export const metadata: Metadata = {
+//   title: "Отзывы о МФО Украины - правдивые мнения клиентов",
+//   description:
+//     "Честные отзывы о микрофинансовых организациях Украины. Реальные оценки и рейтинги клиентов.",
+//   openGraph: {
+//     title: "Отзывы о МФО Украины - правдивые мнения клиентов",
+//     description: "Реальные отзывы о работе микрофинансовых компаний",
+//     images: ["https://mfoxa.com.ua/og-reviews.jpg"],
+//   },
+//   alternates: {
+//     canonical: "https://mfoxa.com.ua/reviews",
+//   },
+// };
 const ratings = [
   { label: "Скорость выдачи", value: 4.8, color: "#00BDA5" },
   { label: "Прозрачные условия", value: 4.1, color: "#92C83E" },
@@ -60,7 +60,24 @@ const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
     </text>
   </svg>
 );
+const reviews = Array(12).fill(null).map((_, i) => ({
+  id: i + 1,
+  user: i % 2 === 0 ? "Инна" : "Александр",
+  date: "20.10.2024",
+  text:
+    "Сайт рыбат екст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке...",
+}));
 export default function CompanyRewiws() {
+  const INITIAL_COUNT = 3;
+  const LOAD_MORE_COUNT = 3;
+
+  // Стейт: сколько отзывов отображать
+  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+
+  // Обработчик кнопки "Показать еще"
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + LOAD_MORE_COUNT, reviews.length));
+  };
   return (
     <>
       <Bread />
@@ -173,7 +190,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
         </div>
       </div>
       <div className="px-0 md:px-[20px]">
-        {[1, 2, 3, 4, 5, 6].map((el, i) => (
+      {reviews.slice(0, visibleCount).map((review, i) => (
           <React.Fragment key={i}>
             <div className="p-[10px] md:p-[30px]   bg-white rounded-lg mt-[10px]">
               <div className="flex gap-[10px] mb-[14px]">
@@ -251,40 +268,52 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                 </p>
               </div>
 
-              <p className="mb-[14px] md:mb-[18px] font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#724dea] underline [text-decoration-skip-ink:none]">
-                Ответить
-              </p>
+              <p
+  className="mb-[14px] w-max md:mb-[18px] font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#724dea] underline [text-decoration-skip-ink:none] cursor-pointer hover:text-[#532bbf] hover:no-underline"
+>
+  Ответить
+</p>
+
 
               <div className="flex  justify-between items-center">
                 <p className="font-[var(--font-family)] font-bold text-[13px] leading-[138%] text-[#222]">
                   Отзыв полезен?
                 </p>
-
                 <div className="flex gap-[10px] ">
-                  <div className="border whitespace-nowrap border-[#00ba9e] rounded-lg px-[10px] py-[8px] w-[58px] h-[34px] flex items-center justify-center">
-                    <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-center text-[#00ba9e]">
-                      Да (5)
-                    </p>
-                  </div>
+  <div
+    className="border border-[#00ba9e] rounded-lg px-[10px] py-[8px] whitespace-nowrap h-[34px] flex items-center justify-center cursor-pointer
+    text-[#00ba9e] hover:bg-[#00ba9e] hover:text-white hover:border-[#00ba9e] transition-colors duration-200"
+  >
+    <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-center m-0">
+      Да (5)
+    </p>
+  </div>
 
-                  <div className="border whitespace-nowrap border-[#f22a52] rounded-lg px-[10px] py-[8px] w-[67px] h-[34px] flex items-center justify-center">
-                    <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-center text-[#f22a52]">
-                      Нет(15)
-                    </p>
-                  </div>
-                </div>
+  <div
+    className="border border-[#f22a52] rounded-lg px-[10px] py-[8px] whitespace-nowrap h-[34px] flex items-center justify-center cursor-pointer
+    text-[#f22a52] hover:bg-[#f22a52] hover:text-white hover:border-[#f22a52] transition-colors duration-200"
+  >
+    <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-center m-0">
+      Нет (15)
+    </p>
+  </div>
+</div>
+
               </div>
             </div>
           </React.Fragment>
         ))}
       </div>
-      <div className="px-0 md:px-[20px]">
-        <ButtonGreenBorder
-          width="100%"
-          text="Показать еще"
-          className="mt-[20px] md:mt-[40px] mb-[20px] md:mb-[50px] "
-        />
-      </div>
+      {visibleCount < reviews.length && (
+          <div className="px-0 md:px-[20px]">
+            <ButtonGreenBorder
+              width="100%"
+              text="Показать еще"
+              className="mt-[20px] md:mt-[40px] mb-[20px] md:mb-[50px]"
+              onClick={handleLoadMore}
+            />
+          </div>
+        )}
 
       <TermsOfRegistration />
       <div className="px-0 md:px-[20px]">

@@ -100,13 +100,12 @@ export const LastReviews: React.FC = () => {
                   </p>
 
                   <p
-                    className=" underline  text-[13px] md:text-[15px]"
+                    className=" text-[13px] w-max md:text-[15px] cursor-pointer underline text-[#6239e8] transition-colors duration-200 hover:text-[#9278ea]"
                     style={{
                       fontFamily: "var(--font-family)",
                       fontWeight: 500,
                       lineHeight: "138%",
                       textDecorationSkipInk: "none",
-                      color: "#724dea",
                     }}
                   >
                     Показать полностью
@@ -125,8 +124,8 @@ export const LastReviews: React.FC = () => {
 
         {/* Кнопка ВЛЕВО */}
         <button
-className="custom-prev cursor-pointer absolute bottom-[-50px] left-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-100 hover:shadow-md"
-aria-label="Prev"
+          className="custom-prev cursor-pointer absolute bottom-[-50px] left-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-100 hover:shadow-md"
+          aria-label="Prev"
         >
           <svg
             width="14"
@@ -146,8 +145,8 @@ aria-label="Prev"
 
         {/* Кнопка ВПРАВО */}
         <button
-className="custom-next cursor-pointer absolute bottom-[-50px] right-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-100 hover:shadow-md"
-aria-label="Next"
+          className="custom-next cursor-pointer absolute bottom-[-50px] right-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-100 hover:shadow-md"
+          aria-label="Next"
         >
           <svg
             width="14"

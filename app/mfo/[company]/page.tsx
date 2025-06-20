@@ -81,9 +81,10 @@ export default function CatalogPage({ params }: PageProps) {
                   <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#222]">
                     4.8<span className="text-[#67677a]">/5</span>
                   </p>
-                  <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] underline underline-offset-2 text-right text-[#00ba9e]">
-                    119 отзывов
-                  </p>
+                  <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] underline underline-offset-2 text-right text-[#00ba9e] hover:text-[#009e88] hover:underline-offset-4 transition-all duration-200 cursor-pointer">
+  119 отзывов
+</p>
+
                 </div>
               </div>
             </div>

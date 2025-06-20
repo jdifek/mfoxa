@@ -124,7 +124,7 @@ const TermsOfRegistrationComponent: React.FC = () => {
 
         {/* Кнопка ВЛЕВО */}
         <button
-          className="custom-prev absolute bottom-[-60px] left-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm"
+          className="custom-prev hover:bg-gray-100 hover:shadow-md cursor-pointer absolute bottom-[-60px] left-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm"
           aria-label="Prev"
         >
           <svg
@@ -145,7 +145,7 @@ const TermsOfRegistrationComponent: React.FC = () => {
 
         {/* Кнопка ВПРАВО */}
         <button
-          className="custom-next absolute bottom-[-60px] right-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm"
+          className="custom-next hover:bg-gray-100 hover:shadow-md cursor-pointer absolute bottom-[-60px] right-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm"
           aria-label="Next"
         >
           <svg

@@ -19,13 +19,12 @@ const DetailsText = () => {
         </p>
 
         <p
-          className=" underline mb-[30px] md:mb-[50px] text-[13px] md:text-[15px]"
+          className="mb-[30px] w-max md:mb-[50px] text-[13px] md:text-[15px] cursor-pointer underline text-[#724dea] transition-colors duration-200 hover:text-[#9278ea]"
           style={{
             fontFamily: "var(--font-family)",
             fontWeight: 500,
             lineHeight: "138%",
             textDecorationSkipInk: "none",
-            color: "#724dea",
           }}
         >
           Показать полностью

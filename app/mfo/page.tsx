@@ -63,6 +63,7 @@ const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
 
 const MfoPage: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(3);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 640);
@@ -70,6 +71,10 @@ const MfoPage: React.FC = () => {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
+
+  const handleShowMore = () => {
+    setVisibleCount((prev) => Math.min(prev + 3, tops.length));
+  };
 
   return (
     <>
@@ -94,8 +99,8 @@ const MfoPage: React.FC = () => {
 
       {isMobile ? (
         // === Mobile version (карточки) ===
-        <div className="px-[0px] md:px-[20px]  mb-[20px] flex flex-wrap gap-[20px]">
-          {tops.map((top, i) => (
+        <div className="px-[0px] md:px-[20px] mb-[20px] flex flex-wrap gap-[20px]">
+          {tops.slice(0, visibleCount).map((top, i) => (
             <div
               key={i}
               className="w-full rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md"
@@ -110,31 +115,30 @@ const MfoPage: React.FC = () => {
                 />
                 <p className="text-[#222] font-bold text-[16px]">{top.name}</p>
               </header>
-             <div className=" flex gap-[10px]">
-               <Image
-                src={"/Frame 163.svg"}
-                alt=""
-                width={10}
-                height={10}
-                style={{ height: "74px", width: "74px" }}
-              />
-              <div className="grid grid-cols-2 gap-[16px]">
-                
-                {ratings.map((item, index) => (
-                  <div key={index} className="flex gap-[10px] items-center">
-                    <CircleRating value={item.value} color={item.color} />
-                    <div>
-                      <p className="text-[11px] font-medium text-[#222]">
-                        {item.label}
-                      </p>
-                      <p className="text-[11px] text-[#9393a3] font-medium">
-                        12 место
-                      </p>
+              <div className="flex gap-[10px]">
+                <Image
+                  src={"/Frame 163.svg"}
+                  alt=""
+                  width={10}
+                  height={10}
+                  style={{ height: "74px", width: "74px" }}
+                />
+                <div className="grid grid-cols-2 gap-[16px]">
+                  {ratings.map((item, index) => (
+                    <div key={index} className="flex gap-[10px] items-center">
+                      <CircleRating value={item.value} color={item.color} />
+                      <div>
+                        <p className="text-[11px] font-medium text-[#222]">
+                          {item.label}
+                        </p>
+                        <p className="text-[11px] text-[#9393a3] font-medium">
+                          12 место
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-             </div>
               <ButtonGreenBorder
                 className="mt-[20px]"
                 width="100%"
@@ -146,7 +150,7 @@ const MfoPage: React.FC = () => {
       ) : (
         // === Desktop version (таблица) ===
         <div className="p-[30px] mb-[50px] bg-white rounded-lg mx-[20px] mt-[30px]">
-          {[1, 2, 3].map((el, i) => (
+          {tops.slice(0, visibleCount).map((top, i) => (
             <React.Fragment key={i}>
               <div className="flex gap-[20px] items-center">
                 <Image
@@ -158,7 +162,7 @@ const MfoPage: React.FC = () => {
                 />
                 <div className="flex flex-col gap-[8px]">
                   <p className="font-[var(--font-family)] font-medium text-[15px] leading-[133%] text-[#222]">
-                    Оценки пользователей МФО {tops[i].name}
+                    Оценки пользователей МФО {top.name}
                   </p>
                   <div className="grid grid-cols-4 gap-[16px] text-black text-sm">
                     {ratings.map((item, index) => (
@@ -199,26 +203,29 @@ const MfoPage: React.FC = () => {
         </div>
       )}
 
-      <div className="px-0 md:px-[20px]">
-        <ButtonGreenBorder
-          width="100%"
-          text="Показать еще"
-          className="mt-[20px] mb-[30px]"
-        />
-      </div>
+      {visibleCount < tops.length && (
+        <div className="px-0 md:px-[20px]">
+          <ButtonGreenBorder
+            width="100%"
+            text="Показать еще"
+            className="mt-[20px] mb-[30px]"
+            onClick={handleShowMore}
+          />
+        </div>
+      )}
 
       <DetailsText />
       <OftenQuestions />
       <InfoHelpful />
       <Questions />
-        <div className="px-0 md:px-[20px]">
-          <p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
-            Дата добавления страницы 12.10.2025
-          </p>
-          <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
-            Дата изменения страницы 12.10.2025
-          </p>
-        </div>
+      <div className="px-0 md:px-[20px]">
+        <p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+          Дата добавления страницы 12.10.2025
+        </p>
+        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+          Дата изменения страницы 12.10.2025
+        </p>
+      </div>
     </>
   );
 };

@@ -114,9 +114,10 @@ const LoanPage: React.FC = () => {
                     <p className="text-[13px] text-[#222] font-medium leading-[138%]">
                       4.8<span className="text-[#67677a]">/5</span>
                     </p>
-                    <p className="text-[13px] font-medium underline text-[#00ba9e]">
-                      119 отзывов
-                    </p>
+                    <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] hover:underline-offset-4 transition-all duration-200 cursor-pointer">
+  119 отзывов
+</p>
+
                   </div>
                 </div>
               </header>

@@ -50,13 +50,7 @@ export default function Home() {
       /> */}
 
       <TopUkrMFO />
-      <div className="px-0 md:px-[20px]">
-        <ButtonGreenBorder
-          width="100%"
-          text="Показать еще"
-          className="mt-[20px] md:mt-[40px] mb-[30px] md:mb-[50px]"
-        />
-      </div>
+      
 
       <LastReviews />
 
