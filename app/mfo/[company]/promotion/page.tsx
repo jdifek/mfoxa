@@ -1,6 +1,29 @@
 import AboutButtons from "@/app/components/AboutButtons";
 import Bread from "@/app/components/Bread";
 import Image from "next/image";
+type Props = { params: { company: string } };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = params.company || "";  // Вместо params.slug
+  const companyName = slug ? slug.replace(/-/g, " ").toUpperCase() : "КОМПАНИЯ";
+
+  return {
+    title: `Промокоды ${companyName} — актуальные акции и скидки`,
+    description:
+      `Самые выгодные промокоды для ${companyName}. Получите эксклюзивные скидки и бонусы. Актуальные акции с ограниченным сроком действия.`,
+    keywords: ["промокоды", `${companyName}`, "скидки", "акции", "займы"],
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      title: `Промокоды ${companyName} — актуальные акции и скидки`,
+      description:
+        `Самые выгодные промокоды для ${companyName}. Получите эксклюзивные скидки и бонусы. Актуальные акции с ограниченным сроком действия.`,
+      type: "website",
+    },
+  };
+}
 
 const Promotion = () => {
   return (

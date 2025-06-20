@@ -1,7 +1,24 @@
 import AboutButtons from "@/app/components/AboutButtons";
 import Bread from "@/app/components/Bread";
 import Image from "next/image";
+type Props = { params: { company: string } };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = params.company || "";
+  const companyName = slug ? slug.replace(/-/g, " ").toUpperCase() : "КОМПАНИЯ";
+
+  return {
+    title: `Личный кабинет ${companyName} — вход и регистрация`,
+    description: `Инструкция по входу в личный кабинет ${companyName}. Как зарегистрироваться и использовать сервис.`,
+    keywords: ["личный кабинет", companyName, "вход", "регистрация", "сервис"],
+    robots: { index: true, follow: true },
+    openGraph: {
+      title: `Личный кабинет ${companyName} — вход и регистрация`,
+      description: `Инструкция по входу в личный кабинет ${companyName}. Как зарегистрироваться и использовать сервис.`,
+      type: "website",
+    },
+  };
+}
 const Login = () => {
   return (
     <>
