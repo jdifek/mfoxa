@@ -5,11 +5,11 @@ import Link from "next/link";
 import AboutButtons from "../../components/AboutButtons";
 import React from "react";
 import Bread from "../../components/Bread";
-import { LastReviews } from "../../components/Home/lastRewiews";
+import { LastReviews } from "../../components/Home/LastRewiews";
 import Calculator from "../../components/Catalog/Calculator";
-import TermsOfRegistration from "@/app/components/termsOfRegistration";
 import { Metadata } from "next";
 import CalctTarifButtonsts from "@/app/components/CalctTarifButtons";
+import TermsOfRegistration from "@/app/components/TermsOfRegistration";
 
 type PageParams = {
   company: string;
@@ -44,7 +44,6 @@ export async function generateMetadata({
 }
 
 export default function CatalogPage({ params }: PageProps) {
-
   const companySlug = decodeURIComponent(params.company || "sgroshi");
   return (
     <>
@@ -58,7 +57,7 @@ export default function CatalogPage({ params }: PageProps) {
               </div>
 
               <div className="flex flex-col">
-                <p className="font-[var(--font3)] font-bold text-[16px] md:text-[30px] leading-[100%] mb-[10px] text-[#222]">
+                <p className=" font-bold text-[16px] md:text-[30px] leading-[100%] mb-[10px] text-[#222]">
                   {companySlug === "sgroshi" ? "Швидко Гроші" : "Компания"}
                 </p>
                 <div className="flex  gap-[5px] items-center">
@@ -79,13 +78,12 @@ export default function CatalogPage({ params }: PageProps) {
                       </svg>
                     ))}
                   </div>
-                  <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#222]">
+                  <p className=" font-medium text-[13px] leading-[138%] text-[#222]">
                     4.8<span className="text-[#67677a]">/5</span>
                   </p>
-                  <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] underline underline-offset-2 text-right text-[#00ba9e] hover:text-[#009e88] hover:underline-offset-4 transition-all duration-200 cursor-pointer">
-  119 отзывов
-</p>
-
+                  <p className=" font-medium text-[13px] leading-[138%] underline underline-offset-2 text-right text-[#00ba9e] hover:text-[#009e88] hover:underline-offset-4 transition-all duration-200 cursor-pointer">
+                    119 отзывов
+                  </p>
                 </div>
               </div>
             </div>
@@ -97,50 +95,50 @@ export default function CatalogPage({ params }: PageProps) {
             </div>
           </div>
 
-          <h2 className="mb-[14px] md:mb-[30px] font-[var(--font3)] font-bold text-[20px] md:text-[36px] leading-[100%] text-[#222]">
+          <h2 className="mb-[14px] md:mb-[30px] font-bold text-[20px] md:text-[36px] leading-[100%] text-[#222]">
             О компании {companySlug === "sgroshi" ? "Швидко Гроші" : "Компания"}
           </h2>
 
           <hr className="mb-[14px] md:mb-[30px] " />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 mb-[10px]">
-          <div className="flex flex-col gap-[10px]">
-              <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#67677a]">
+            <div className="flex flex-col gap-[10px]">
+              <p className=" font-medium text-[11px] leading-[145%] text-[#67677a]">
                 Юридическое лицо
               </p>
-              <p className="font-[var(--font-family)] font-bold text-[14px] leading-[136%] text-[#222]">
+              <p className=" font-bold text-[14px] leading-[136%] text-[#222]">
                 ООО Финансовая организация “{" "}
                 {companySlug === "sgroshi" ? "Швидко Гроші" : "Компания"}”
               </p>
             </div>
             <hr className="block sm:hidden my-[14px]" />
             <div className="flex flex-col gap-[10px]">
-              <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#67677a]">
+              <p className=" font-medium text-[11px] leading-[145%] text-[#67677a]">
                 Телефон
               </p>
-              <p className="font-[var(--font-family)] font-bold text-[14px] leading-[136%] text-[#222]">
+              <p className=" font-bold text-[14px] leading-[136%] text-[#222]">
                 +38 (063) 178-64-56
               </p>
             </div>
           </div>
-          
+
           <hr className="mb-[14px] md:mb-[30px] " />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 mb-[10px]">
-          <div className="flex flex-col gap-[10px]">
-              <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#67677a]">
+            <div className="flex flex-col gap-[10px]">
+              <p className=" font-medium text-[11px] leading-[145%] text-[#67677a]">
                 Юридический адрес
               </p>
-              <p className="font-[var(--font-family)] font-bold text-[14px] leading-[136%] text-[#222]">
+              <p className=" font-bold text-[14px] leading-[136%] text-[#222]">
                 г. Киев, ул. Прживальского 19б. стр. 17а
               </p>
             </div>
             <hr className="block sm:hidden my-[14px]" />
             <div className="flex flex-col gap-[10px]">
-              <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#67677a]">
+              <p className=" font-medium text-[11px] leading-[145%] text-[#67677a]">
                 Электронная почта
               </p>
-              <p className="font-[var(--font-family)] font-bold text-[14px] leading-[136%] text-[#222]">
+              <p className=" font-bold text-[14px] leading-[136%] text-[#222]">
                 info@sgroshi.com.ua
               </p>
             </div>
@@ -148,22 +146,22 @@ export default function CatalogPage({ params }: PageProps) {
           <hr className="mb-[14px] md:mb-[30px] " />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 mb-[10px]">
-          <div className="flex flex-col gap-[10px]">
-              <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#67677a]">
+            <div className="flex flex-col gap-[10px]">
+              <p className=" font-medium text-[11px] leading-[145%] text-[#67677a]">
                 Лицензия НБУ
               </p>
-              <p className="font-[var(--font-family)] font-bold text-[14px] leading-[136%] text-[#222]">
+              <p className=" font-bold text-[14px] leading-[136%] text-[#222]">
                 №1200124-65 от 22.05.2024
               </p>
             </div>
             <hr className="block sm:hidden my-[14px]" />
             <div className="flex flex-col gap-[10px]">
-              <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#67677a]">
+              <p className=" font-medium text-[11px] leading-[145%] text-[#67677a]">
                 Официальный сайт
               </p>
               <Link
                 href={"www.sgroshi.com.ua"}
-                className="w-max font-[var(--font-family)] font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
+                className="w-max  font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
                 style={{ textDecorationSkipInk: "none" }}
               >
                 www.sgroshi.com.ua
@@ -171,19 +169,19 @@ export default function CatalogPage({ params }: PageProps) {
             </div>
           </div>
 
-          <p className="mb-[10px] font-[var(--font-family)] font-medium text-[10px] leading-[140%] text-[#67677a]">
+          <p className="mb-[10px]  font-medium text-[10px] leading-[140%] text-[#67677a]">
             Полезные материалы
           </p>
 
           <Link
             href="https://sgroshi.com.ua/storage/app/public/docs/pravila_nadannya_koshtiv_u_pozyku_v_tomu_chysli_na_umovah_fin_credytu_zatvertdsheni(16-05-2023).pdf"
-            className="block w-max font-[var(--font-family)] font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
+            className="block w-max  font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
           >
             Базовые характеристики и услуги
           </Link>
           <Link
             href="https://sgroshi.com.ua/storage/app/public/docs/pravila_nadannya_koshtiv_u_pozyku_v_tomu_chysli_na_umovah_fin_credytu_zatvertdsheni(16-05-2023).pdf"
-            className="w-max font-[var(--font-family)] font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
+            className="w-max  font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
           >
             Предупреждение пользователя о последствиях
           </Link>
@@ -219,7 +217,7 @@ export default function CatalogPage({ params }: PageProps) {
                   <p className="font-medium mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
                     {el.title}
                   </p>
-                  <div className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-right text-[#222]">
+                  <div className=" font-medium text-[14px] leading-[136%] text-right text-[#222]">
                     {el.description}
                   </div>
                 </div>
@@ -297,7 +295,7 @@ export default function CatalogPage({ params }: PageProps) {
                   <p className="font-medium  mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
                     {el.title}
                   </p>
-                  <div className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-right text-[#222]">
+                  <div className=" font-medium text-[14px] leading-[136%] text-right text-[#222]">
                     {el.description}
                   </div>
                 </div>
@@ -364,10 +362,10 @@ export default function CatalogPage({ params }: PageProps) {
       <LastReviews />
       <DetailsText />
       <div className="px-0 md:px-[20px]">
-        <p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+        <p className=" font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
           Дата добавления страницы 12.10.2025
         </p>
-        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+        <p className="font-medium  text-[13px] leading-[138%] text-[#67677a]">
           Дата изменения страницы 12.10.2025
         </p>
       </div>

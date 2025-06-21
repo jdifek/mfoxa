@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 type DropdownProps = {
-  options?: string[];
+  options: string[];
 };
 const DropdownComponent: React.FC<DropdownProps> = ({ options }) => {
   const [selected, setSelected] = useState("Сначала новые");

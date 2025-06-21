@@ -9,7 +9,7 @@ const Calculator = () => {
   return (
     <div className="mb-[19px] flex gap-[10px] justify-between items-center">
       {/* Сумма займа */}
-      <div className="border border-[#d6d6f9] border-2 rounded-lg px-4 pt-[13px] pb-[9px] w-[260px] h-[69px] relative">
+      <div className=" border-[#d6d6f9] border-2 rounded-lg px-4 pt-[13px] pb-[9px] w-[260px] h-[69px] relative">
         <p
           className="font-medium text-[12px] leading-[142%] text-[#222]"
           style={{ fontFamily: "var(--font-family)" }}
@@ -42,7 +42,7 @@ const Calculator = () => {
       </div>
 
       {/* Сроки займа */}
-      <div className="border border-[#d6d6f9] border-2 rounded-lg px-4 pt-[13px] pb-[9px] w-[260px] h-[69px] relative">
+      <div className=" border-[#d6d6f9] border-2 rounded-lg px-4 pt-[13px] pb-[9px] w-[260px] h-[69px] relative">
         <p
           className="font-medium text-[12px] leading-[142%] text-[#222]"
           style={{ fontFamily: "var(--font-family)" }}

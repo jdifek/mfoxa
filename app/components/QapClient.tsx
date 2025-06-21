@@ -2,7 +2,7 @@
 
 import AboutButtons from "@/app/components/AboutButtons";
 import Bread from "@/app/components/Bread";
-import TermsOfRegistration from "@/app/components/termsOfRegistration";
+import TermsOfRegistration from "@/app/components/TermsOfRegistration";
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import Dropdown from "@/app/ui/Dropdown";
 import Image from "next/image";
@@ -132,12 +132,12 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                       stroke-width="2"
                     />
                   </svg>
-                  <p className="font-[var(--font-family)] font-bold text-[13px] leading-[138%] text-[#724dea]">
+                  <p className=" font-bold text-[13px] leading-[138%] text-[#724dea]">
                     Александр
                   </p>
                 </div>
 
-                <p className="ml-[26px] font-[var(--font-family)] font-medium text-[13px] sm:text-[15px] leading-[133%] text-[#222]">
+                <p className="ml-[26px]  font-medium text-[13px] sm:text-[15px] leading-[133%] text-[#222]">
                   Сайт рыбат екст поможет дизайнеру, верстальщику, вебмастеру
                   сгенерировать несколько абзацев более менее осмысленного
                   текста рыбы на русском языке, а начинающему оратору отточить
@@ -150,35 +150,34 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                 </p>
               </div>
 
-              <p className="mb-[14px] w-max md:mb-[18px] font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#724dea] underline [text-decoration-skip-ink:none] cursor-pointer hover:text-[#532bbf] hover:no-underline">
+              <p className="mb-[14px] w-max md:mb-[18px]  font-medium text-[13px] leading-[138%] text-[#724dea] underline [text-decoration-skip-ink:none] cursor-pointer hover:text-[#532bbf] hover:no-underline">
                 Ответить
               </p>
 
               <div className="flex justify-between items-center">
-                <p className="font-[var(--font-family)] font-bold text-[13px]  leading-[138%] text-[#222]">
+                <p className=" font-bold text-[13px]  leading-[138%] text-[#222]">
                   Вопрос полезен?
                 </p>
 
                 <div className="flex gap-[10px] ">
-  <div
-    className="border border-[#00ba9e] rounded-lg px-[10px] py-[8px] whitespace-nowrap h-[34px] flex items-center justify-center cursor-pointer
+                  <div
+                    className="border border-[#00ba9e] rounded-lg px-[10px] py-[8px] whitespace-nowrap h-[34px] flex items-center justify-center cursor-pointer
     text-[#00ba9e] hover:bg-[#00ba9e] hover:text-white hover:border-[#00ba9e] transition-colors duration-200"
-  >
-    <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-center m-0">
-      Да (5)
-    </p>
-  </div>
+                  >
+                    <p className=" font-medium text-[13px] leading-[138%] text-center m-0">
+                      Да (5)
+                    </p>
+                  </div>
 
-  <div
-    className="border border-[#f22a52] rounded-lg px-[10px] py-[8px] whitespace-nowrap h-[34px] flex items-center justify-center cursor-pointer
+                  <div
+                    className="border border-[#f22a52] rounded-lg px-[10px] py-[8px] whitespace-nowrap h-[34px] flex items-center justify-center cursor-pointer
     text-[#f22a52] hover:bg-[#f22a52] hover:text-white hover:border-[#f22a52] transition-colors duration-200"
-  >
-    <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-center m-0">
-      Нет (15)
-    </p>
-  </div>
-</div>
-
+                  >
+                    <p className=" font-medium text-[13px] leading-[138%] text-center m-0">
+                      Нет (15)
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </React.Fragment>
@@ -195,10 +194,10 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
       <TermsOfRegistration />
 
       <div className="px-0 md:px-[20px]">
-        <p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+        <p className=" font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
           Дата добавления страницы 12.10.2025
         </p>
-        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+        <p className=" font-medium text-[13px] leading-[138%] text-[#67677a]">
           Дата изменения страницы 12.10.2025
         </p>
       </div>

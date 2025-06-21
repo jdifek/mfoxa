@@ -161,7 +161,7 @@ const MfoPageClient: React.FC = () => {
                   alt="img"
                 />
                 <div className="flex flex-col gap-[8px]">
-                  <p className="font-[var(--font-family)] font-medium text-[15px] leading-[133%] text-[#222]">
+                  <p className=" font-medium text-[15px] leading-[133%] text-[#222]">
                     Оценки пользователей МФО {top.name}
                   </p>
                   <div className="grid grid-cols-4 gap-[16px] text-black text-sm">
@@ -219,10 +219,10 @@ const MfoPageClient: React.FC = () => {
       <InfoHelpful />
       <Questions />
       <div className="px-0 md:px-[20px]">
-        <p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+        <p className=" font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
           Дата добавления страницы 12.10.2025
         </p>
-        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+        <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
           Дата изменения страницы 12.10.2025
         </p>
       </div>

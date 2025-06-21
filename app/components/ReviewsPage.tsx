@@ -59,18 +59,18 @@ const ReviewsClient: React.FC = () => {
 
           <div className="flex gap-[40px] mt-[20px]">
             <div className="flex flex-col">
-              <p className="font-[var(--font3)] font-bold  text-[20px] sm:text-[28px] md:text-[36px] leading-[100%] text-[#222]">
+              <p className=" font-bold  text-[20px] sm:text-[28px] md:text-[36px] leading-[100%] text-[#222]">
                 188
               </p>
-              <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#222]">
+              <p className=" font-medium text-[11px] leading-[145%] text-[#222]">
                 Компаний
               </p>
             </div>
             <div className="flex flex-col">
-              <p className="font-[var(--font3)] font-bold  text-[20px] sm:text-[28px] md:text-[36px]  leading-[100%] text-[#222]">
+              <p className=" font-bold  text-[20px] sm:text-[28px] md:text-[36px]  leading-[100%] text-[#222]">
                 53 690
               </p>
-              <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#222]">
+              <p className="font-medium text-[11px] leading-[145%] text-[#222]">
                 Отзывов
               </p>
             </div>

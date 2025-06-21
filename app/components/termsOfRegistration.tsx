@@ -83,7 +83,7 @@ const TermsOfRegistrationComponent: React.FC = () => {
                     <p className="font-medium  mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
                       Тариф
                     </p>
-                    <div className="rounded-[8px] px-[10px] py-[3px] w-[71px] h-[25px] bg-[#e2ffe6] font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-[#00ba9e]">
+                    <div className="rounded-[8px] px-[10px] py-[3px] w-[71px] h-[25px] bg-[#e2ffe6]  font-medium text-[14px] leading-[136%] text-[#00ba9e]">
                       Новый
                     </div>
                   </div>
@@ -100,7 +100,7 @@ const TermsOfRegistrationComponent: React.FC = () => {
                         <p className="font-medium  mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
                           {el.title}
                         </p>
-                        <div className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-right text-[#222]">
+                        <div className=" font-medium text-[14px] leading-[136%] text-right text-[#222]">
                           {el.description}
                         </div>
                       </div>

@@ -3,7 +3,7 @@
 "use client";
 import AboutButtons from "@/app/components/AboutButtons";
 import Bread from "@/app/components/Bread";
-import TermsOfRegistration from "@/app/components/termsOfRegistration";
+import TermsOfRegistration from "@/app/components/TermsOfRegistration";
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import Dropdown from "@/app/ui/Dropdown";
 import Image from "next/image";
@@ -57,7 +57,6 @@ const reviews = Array(12)
     text: "Сайт рыбат екст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке...",
   }));
 
-
 export default function CompanyRewiwsClient({ slug }: { slug: string }) {
   const INITIAL_COUNT = 3;
   const LOAD_MORE_COUNT = 3;
@@ -96,18 +95,18 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
               className="w-[163px] md:w-[300px] h-[52px] md:h-[96px]"
             />
             <div className="flex flex-col gap-[1px] items-center">
-              <p className="font-[var(--font-family)] text-nowrap font-medium text-[11px] leading-[145%] text-[#222]">
+              <p className=" text-nowrap font-medium text-[11px] leading-[145%] text-[#222]">
                 их 125 МФО
               </p>
-              <p className="font-[var(--font-family)] font-bold text-[14px] sm:text-[16px] md:text-[18px] leading-[133%] text-[#222]">
+              <p className=" font-bold text-[14px] sm:text-[16px] md:text-[18px] leading-[133%] text-[#222]">
                 1 место
               </p>
             </div>
             <div className="flex flex-col gap-[1px] items-center">
-              <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#222]">
+              <p className=" font-medium text-[11px] leading-[145%] text-[#222]">
                 отзывов
               </p>
-              <p className="font-[var(--font-family)] font-bold text-[14px] sm:text-[16px] md:text-[18px] leading-[133%] text-[#222]">
+              <p className=" font-bold text-[14px] sm:text-[16px] md:text-[18px] leading-[133%] text-[#222]">
                 2 564
               </p>
             </div>
@@ -126,7 +125,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
             />
 
             <div className="flex flex-col gap-[8px] w-full">
-              <p className="font-[var(--font3)] font-bold text-[12px] text-start text-nowrap  sm:text-[14px] md:text-[16px] leading-[100%] text-[#222] ">
+              <p className=" font-bold text-[12px] text-start text-nowrap  sm:text-[14px] md:text-[16px] leading-[100%] text-[#222] ">
                 Оценки пользователей МФО Швидко гроші
               </p>
 
@@ -151,7 +150,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                     >
                       <CircleRating value={item.value} color={item.color} />
                       <span
-                        className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-[#222]"
+                        className=" font-medium text-[11px] leading-[145%] text-[#222]"
                         style={{ maxWidth: "70px" }}
                       >
                         {item.label}
@@ -241,12 +240,12 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                       stroke-width="2"
                     />
                   </svg>
-                  <p className="font-[var(--font-family)] font-bold text-[13px] leading-[138%] text-[#724dea]">
+                  <p className=" font-bold text-[13px] leading-[138%] text-[#724dea]">
                     Александр
                   </p>
                 </div>
 
-                <p className="ml-[26px] font-[var(--font-family)] font-medium text-[13px] sm:text-[15px] leading-[133%] text-[#222]">
+                <p className="ml-[26px]  font-medium text-[13px] sm:text-[15px] leading-[133%] text-[#222]">
                   Сайт рыбат екст поможет дизайнеру, верстальщику, вебмастеру
                   сгенерировать несколько абзацев более менее осмысленного
                   текста рыбы на русском языке, а начинающему оратору отточить
@@ -259,12 +258,12 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                 </p>
               </div>
 
-              <p className="mb-[14px] w-max md:mb-[18px] font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#724dea] underline [text-decoration-skip-ink:none] cursor-pointer hover:text-[#532bbf] hover:no-underline">
+              <p className="mb-[14px] w-max md:mb-[18px]  font-medium text-[13px] leading-[138%] text-[#724dea] underline [text-decoration-skip-ink:none] cursor-pointer hover:text-[#532bbf] hover:no-underline">
                 Ответить
               </p>
 
               <div className="flex  justify-between items-center">
-                <p className="font-[var(--font-family)] font-bold text-[13px] leading-[138%] text-[#222]">
+                <p className=" font-bold text-[13px] leading-[138%] text-[#222]">
                   Отзыв полезен?
                 </p>
                 <div className="flex gap-[10px] ">
@@ -272,7 +271,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                     className="border border-[#00ba9e] rounded-lg px-[10px] py-[8px] whitespace-nowrap h-[34px] flex items-center justify-center cursor-pointer
     text-[#00ba9e] hover:bg-[#00ba9e] hover:text-white hover:border-[#00ba9e] transition-colors duration-200"
                   >
-                    <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-center m-0">
+                    <p className=" font-medium text-[13px] leading-[138%] text-center m-0">
                       Да (5)
                     </p>
                   </div>
@@ -281,7 +280,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                     className="border border-[#f22a52] rounded-lg px-[10px] py-[8px] whitespace-nowrap h-[34px] flex items-center justify-center cursor-pointer
     text-[#f22a52] hover:bg-[#f22a52] hover:text-white hover:border-[#f22a52] transition-colors duration-200"
                   >
-                    <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-center m-0">
+                    <p className=" font-medium text-[13px] leading-[138%] text-center m-0">
                       Нет (15)
                     </p>
                   </div>
@@ -304,10 +303,10 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
 
       <TermsOfRegistration />
       <div className="px-0 md:px-[20px]">
-        <p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+        <p className=" font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
           Дата добавления страницы 12.10.2025
         </p>
-        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+        <p className=" font-medium text-[13px] leading-[138%] text-[#67677a]">
           Дата изменения страницы 12.10.2025
         </p>
       </div>

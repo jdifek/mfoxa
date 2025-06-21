@@ -6,7 +6,7 @@ import Image from "next/image";
 import OftenQuestions from "../components/OftenQuestions";
 import InfoHelpful from "../components/InfoHelpful";
 import Questions from "../components/Home/Questions";
-import { LastReviews } from "../components/Home/lastRewiews";
+import { LastReviews } from "../components/Home/LastRewiews";
 import Dropdown from "../ui/Dropdown";
 import Bread from "../components/Bread";
 import { AboutButtons } from "../components/Loan/AboutButtons";
@@ -62,10 +62,10 @@ const LoanClientPage: React.FC = () => {
       <Bread />
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px] md:mb-[30px] bg-white rounded-lg mt-[10px] md:mt-[30px]">
-          <h2 className="mb-[20px] font-[var(--font3)] font-bold text-[20px] md:text-[36px] leading-[100%] text-[#222]">
+          <h2 className="mb-[20px]  font-bold text-[20px] md:text-[36px] leading-[100%] text-[#222]">
             Займы
           </h2>
-          <p className="font-[var(--font-family)] font-medium text-[13px] md:text-[15px] leading-[133%] text-[#222]">
+          <p className=" font-medium text-[13px] md:text-[15px] leading-[133%] text-[#222]">
             Подберите и оформите лучший для себя займ на срочную покупку или
             хозяйственные нужды. Получение микрозайма от 1 000 до 100 000 рублей
             через сервис «Займи.ру»
@@ -115,9 +115,8 @@ const LoanClientPage: React.FC = () => {
                       4.8<span className="text-[#67677a]">/5</span>
                     </p>
                     <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] hover:underline-offset-4 transition-all duration-200 cursor-pointer">
-  119 отзывов
-</p>
-
+                      119 отзывов
+                    </p>
                   </div>
                 </div>
               </header>
@@ -273,10 +272,10 @@ const LoanClientPage: React.FC = () => {
 
       <Questions />
       <div className="px-0 md:px-[20px]">
-        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] mt-[30px] text-[#67677a]">
+        <p className=" font-medium text-[13px] leading-[138%] mt-[30px] text-[#67677a]">
           Дата добавления страницы 12.10.2025
         </p>
-        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+        <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
           Дата изменения страницы 12.10.2025{" "}
         </p>
       </div>
@@ -284,4 +283,4 @@ const LoanClientPage: React.FC = () => {
   );
 };
 
-export default LoanClientPage
+export default LoanClientPage;

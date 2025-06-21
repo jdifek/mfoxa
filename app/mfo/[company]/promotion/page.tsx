@@ -1,16 +1,16 @@
 import AboutButtons from "@/app/components/AboutButtons";
 import Bread from "@/app/components/Bread";
+import { Metadata } from "next";
 import Image from "next/image";
 type Props = { params: { company: string } };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const slug = params.company || "";  // Вместо params.slug
+  const slug = params.company || ""; // Вместо params.slug
   const companyName = slug ? slug.replace(/-/g, " ").toUpperCase() : "КОМПАНИЯ";
 
   return {
     title: `Промокоды ${companyName} — актуальные акции и скидки`,
-    description:
-      `Самые выгодные промокоды для ${companyName}. Получите эксклюзивные скидки и бонусы. Актуальные акции с ограниченным сроком действия.`,
+    description: `Самые выгодные промокоды для ${companyName}. Получите эксклюзивные скидки и бонусы. Актуальные акции с ограниченным сроком действия.`,
     keywords: ["промокоды", `${companyName}`, "скидки", "акции", "займы"],
     robots: {
       index: true,
@@ -18,8 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     openGraph: {
       title: `Промокоды ${companyName} — актуальные акции и скидки`,
-      description:
-        `Самые выгодные промокоды для ${companyName}. Получите эксклюзивные скидки и бонусы. Актуальные акции с ограниченным сроком действия.`,
+      description: `Самые выгодные промокоды для ${companyName}. Получите эксклюзивные скидки и бонусы. Актуальные акции с ограниченным сроком действия.`,
       type: "website",
     },
   };
@@ -53,10 +52,10 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                   style={{ width: "100px", height: "100px" }}
                 />
                 <div className="flex flex-col  gap-[10px]">
-                  <p className="font-[var(--font3)] font-bold text-[16px] leading-[100%] text-[#222]">
+                  <p className="font-bold text-[16px] leading-[100%] text-[#222]">
                     Швидко Гроші
                   </p>
-                  <p className="font-[var(--font-family)] font-medium text-[12px]   xl:text-[14px]  leading-[136%] text-[#222]">
+                  <p className=" font-medium text-[12px]   xl:text-[14px]  leading-[136%] text-[#222]">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et
                   </p>
@@ -66,10 +65,10 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
               <hr className="mb-[10px] mt-[10px]" />
 
               <div className="flex justify-between">
-                <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+                <p className=" font-medium text-[13px] leading-[138%] text-[#67677a]">
                   Срок действия
                 </p>
-                <p className="font-[var(--font-family)] font-bold text-[13px] leading-[138%] text-right text-[#222]">
+                <p className=" font-bold text-[13px] leading-[138%] text-right text-[#222]">
                   12.10.2025
                 </p>
               </div>
@@ -85,10 +84,10 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
         </div>
       </div>{" "}
       <div className="px-0 md:px-[20px]">
-        <p className="font-[var(--font-family)] font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+        <p className="font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
           Дата добавления страницы 12.10.2025
         </p>
-        <p className="font-[var(--font-family)] font-medium text-[13px] leading-[138%] text-[#67677a]">
+        <p className=" font-medium text-[13px] leading-[138%] text-[#67677a]">
           Дата изменения страницы 12.10.2025
         </p>
       </div>

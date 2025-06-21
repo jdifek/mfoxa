@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import DetailsText from "./components/DetailsText";
-import BestLoans from "./components/Home/bestLoans";
+import BestLoans from "./components/Home/BestLoans";
 import FinancialMarketplace from "./components/Home/FinancialMarketplace";
-import { LastReviews } from "./components/Home/lastRewiews";
+import { LastReviews } from "./components/Home/LastRewiews";
 import Questions from "./components/Home/Questions";
-import { TopUkrMFO } from "./components/Home/topUkrMFO";
+import { TopUkrMFO } from "./components/Home/TopUkrMFO";
 export const metadata: Metadata = {
   title: "Рейтинг МФО Украины 2024 | ТОП-10 микрофинансовых организаций",
   description:

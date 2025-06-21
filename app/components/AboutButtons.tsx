@@ -54,7 +54,7 @@ export const AboutButtonsComponent = () => {
             <button
               key={index}
               onClick={() => handleButtonClick(text)}
-              className={`cursor-pointer whitespace-nowrap rounded-[35px] p-[8px_10px] sm:p-[10px_12px] md:p-[14px_20px] flex items-center justify-center font-[var(--font-family)] font-medium text-[15px] leading-[133%] ${
+              className={`cursor-pointer whitespace-nowrap rounded-[35px] p-[8px_10px] sm:p-[10px_12px] md:p-[14px_20px] flex items-center justify-center  font-medium text-[15px] leading-[133%] ${
                 isActive
                   ? "bg-[#d6d6f9] text-[#724dea]"
                   : text === "% Промокоды"

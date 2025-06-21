@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
             { name: "Карта сайта", href: "/sitemap" },
           ].map((el, i) => (
             <Link href={el.href} key={i}>
-              <p className="font-[var(--font-family)] font-medium text-[14px] leading-[136%] text-center text-[#222] cursor-pointer hover:text-[#724dea] transition-colors duration-200">
+              <p className=" font-medium text-[14px] leading-[136%] text-center text-[#222] cursor-pointer hover:text-[#724dea] transition-colors duration-200">
                 {el.name}
               </p>
             </Link>
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
         <div className="flex md:hidden mb-[20px] justify-center gap-[20px]">
           <p
             onClick={() => setLanguage("uk")}
-            className={`font-[var(--font-family)] font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
+            className={` font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
               language === "uk"
                 ? "text-[#724dea]"
                 : "text-[#9393a3] hover:text-[#724dea]"
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
           </p>
           <p
             onClick={() => setLanguage("ru")}
-            className={`font-[var(--font-family)] font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
+            className={` font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
               language === "ru"
                 ? "text-[#724dea]"
                 : "text-[#9393a3] hover:text-[#724dea]"
@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* ОПИСАНИЕ */}
-      <p className="mb-[20px] font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
+      <p className="mb-[20px]  font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
         Ліцензія НБУ від 08.03.2024 р. на надання коштів та банківських металів
         у кредит, безстрокова. Перший сервіс онлайн-кредитів в Україні, в якому
         можна швидко отримати гроші на карту будь-якого українського банку.
@@ -96,13 +96,13 @@ const Footer: React.FC = () => {
 
       {/* НИЖНЯЯ ЛИНИЯ */}
       <div className="hidden md:flex justify-between flex-col md:flex-row gap-[20px] md:gap-0">
-        <p className="font-[var(--font-family)] font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
+        <p className=" font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
           © 2013-2025 ТОВ «МАНІВЕО ШВИДКА ФІНАНСОВА ДОПОМОГА».
         </p>
         <div className="gap-[20px] flex flex-col md:flex-row justify-center">
           <p
             onClick={() => setLanguage("uk")}
-            className={`font-[var(--font-family)] font-medium text-[14px] leading-[136%] cursor-pointer ${
+            className={` font-medium text-[14px] leading-[136%] cursor-pointer ${
               language === "uk"
                 ? "text-[#724dea]"
                 : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"
@@ -112,7 +112,7 @@ const Footer: React.FC = () => {
           </p>
           <p
             onClick={() => setLanguage("ru")}
-            className={`font-[var(--font-family)] font-medium text-[14px] leading-[136%] cursor-pointer ${
+            className={` font-medium text-[14px] leading-[136%] cursor-pointer ${
               language === "ru"
                 ? "text-[#724dea]"
                 : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"

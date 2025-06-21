@@ -1,4 +1,5 @@
 import QapClient from "@/app/components/QapClient";
+import { Metadata } from "next";
 
 type Props = { params: { company: string } };
 
