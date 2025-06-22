@@ -21,7 +21,7 @@ const FinancialMarketplace: React.FC = () => {
         className="text-[20px] sm:text-[28px] md:text-[36px] 
 font-[700] leading-[100%] 
 text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
-        style={{ fontFamily: "var(--second-family)" }}
+        style={{ fontFamily: "var(--Jakarta)" }}
       >
         Финансовый маркетплейс МФО в Украине
       </h2>
@@ -31,7 +31,7 @@ text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
     font-[500] leading-[138%] 
     text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]
   "
-        style={{ fontFamily: "var(--font-family)" }}
+        style={{ fontFamily: "var(--Montserrat)" }}
       >
         Подберите и оформите лучший для себя займ на срочную покупку или
         хозяйственные нужды. Получение микрозайма от 1 000 до 100 000 рублей
@@ -46,7 +46,7 @@ text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
               index === 0 ? "md:col-span-2" : ""
             }`}
             style={{
-              fontFamily: "var(--font3)",
+              fontFamily: "var(--Manrope)",
               fontWeight: 700,
               fontSize: "16px",
               lineHeight: "100%",
@@ -64,7 +64,7 @@ text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
               <p
                 className="text-center"
                 style={{
-                  fontFamily: "var(--font-family)",
+                  fontFamily: "var(--Montserrat)",
                   fontWeight: 500,
                   fontSize: "10px",
                   lineHeight: "120%",

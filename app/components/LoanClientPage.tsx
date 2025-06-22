@@ -155,7 +155,7 @@ const LoanClientPage: React.FC = () => {
                       <p className="text-[#67677a] font-medium ">Сумма</p>
                       <p
                         style={{
-                          fontFamily: "var(--font-family)",
+                          fontFamily: "var(--Montserrat)",
                           fontWeight: 700,
                           fontSize: "12px",
                           lineHeight: "142%",
@@ -211,7 +211,7 @@ const LoanClientPage: React.FC = () => {
                       href="/"
                       className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
                       style={{
-                        fontFamily: "var(--font-family)",
+                        fontFamily: "var(--Montserrat)",
                         textDecorationSkipInk: "none",
                       }}
                     >
@@ -224,7 +224,7 @@ const LoanClientPage: React.FC = () => {
                       href="/"
                       className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
                       style={{
-                        fontFamily: "var(--font-family)",
+                        fontFamily: "var(--Montserrat)",
                         textDecorationSkipInk: "none",
                       }}
                     >

@@ -9,6 +9,7 @@ import InfoHelpful from "../components/InfoHelpful";
 import Questions from "../components/Home/Questions";
 import DetailsText from "../components/DetailsText";
 import Bread from "../components/Bread";
+import { MfoListStructuredData } from "../structured-data/MfoListStructuredData";
 
 const ratings = [
   { label: "Скорость выдачи", value: 4.8, color: "#00BDA5" },
@@ -75,21 +76,29 @@ const MfoPageClient: React.FC = () => {
   const handleShowMore = () => {
     setVisibleCount((prev) => Math.min(prev + 3, tops.length));
   };
-
+  const companies = tops.slice(0, visibleCount).map((top, index) => ({
+    name: top.name,
+    url: `https://mfoxa.com.ua/mfo/${encodeURIComponent(top.name.toLowerCase().replace(/\s+/g, "-"))}`,
+    ratingValue: 4.5,
+    reviewCount: 100 + index * 10,
+    position: index + 1,
+  }));
   return (
     <>
+    <MfoListStructuredData companies={companies} />
+
       <Bread />
 
       <div className="p-[10px] md:p-[30px] mb-[20px] sm:mb-[30px] md:mb-[50px] bg-white rounded-lg mx-[0px] md:mx-[20px] ">
         <h2
           className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
-          style={{ fontFamily: "var(--second-family)" }}
+          style={{ fontFamily: "var(--Jakarta)" }}
         >
           Рейтинг МФО Украины по отзывам клиентов
         </h2>
         <p
           className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] leading-[138%] text-[#222]"
-          style={{ fontFamily: "var(--font-family)" }}
+          style={{ fontFamily: "var(--Montserrat)" }}
         >
           Подберите и оформите лучший для себя займ на срочную покупку или
           хозяйственные нужды. Получение микрозайма от 1 000 до 100 000 рублей
@@ -171,7 +180,7 @@ const MfoPageClient: React.FC = () => {
                         <div className="flex flex-col">
                           <span
                             style={{
-                              fontFamily: "var(--font-family)",
+                              fontFamily: "var(--Montserrat)",
                               fontWeight: 500,
                               fontSize: "11px",
                               lineHeight: "145%",
@@ -182,7 +191,7 @@ const MfoPageClient: React.FC = () => {
                           </span>
                           <p
                             style={{
-                              fontFamily: "var(--font-family)",
+                              fontFamily: "var(--Montserrat)",
                               fontWeight: 500,
                               fontSize: "11px",
                               lineHeight: "145%",

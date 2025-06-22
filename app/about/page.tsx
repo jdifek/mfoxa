@@ -12,7 +12,7 @@ const About: React.FC = () => {
             className="text-[20px] sm:text-[28px] md:text-[36px] 
 font-[700] leading-[100%] 
 text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
-            style={{ fontFamily: "var(--second-family)" }}
+            style={{ fontFamily: "var(--Jakarta)" }}
           >
             {" "}
             Наша команда экспертов

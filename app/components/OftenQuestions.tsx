@@ -35,7 +35,7 @@ const OftenQuestionsComponent: React.FC = () => {
     <>
       <h2
         className="px-0 md:px-[20px] text-[20px] md:text-[36px] mt-[30px] md:mt-[50px]  font-[700] leading-[100%] text-[#222]  mb-[14px] sm:mb-[30px] md:mb-[50px]"
-        style={{ fontFamily: "var(--second-family)" }}
+        style={{ fontFamily: "var(--Jakarta)" }}
       >
         Частые вопросы Швидко Гроші
       </h2>

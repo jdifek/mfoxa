@@ -43,7 +43,7 @@ const Login: NextPage<Props> = async ({ params }) => {
       <div className="px-0 md:px-[20px]">
         <h2
           className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
-          style={{ fontFamily: "var(--second-family)" }}
+          style={{ fontFamily: "var(--Jakarta)" }}
         >
           Личный кабинет {companyName}
         </h2>
@@ -119,7 +119,7 @@ const Login: NextPage<Props> = async ({ params }) => {
         <div className="border mt-[30px] md:mt-[50px] border-[#d6d6f9] rounded-lg p-[30px] w-full bg-white">
           <h2
             className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
-            style={{ fontFamily: "var(--second-family)" }}
+            style={{ fontFamily: "var(--Jakarta)" }}
           >
             Как войти в личный кабинет {companyName}
           </h2>

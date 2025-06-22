@@ -54,7 +54,7 @@ const BestLoans: React.FC = () => {
       <div className="w-full px-[0px] md:px-[20px]">
         <h2
           className="text-[20px] md:text-[36px]  font-[700] leading-[100%] text-[#222] mb-[30px]"
-          style={{ fontFamily: "var(--second-family)" }}
+          style={{ fontFamily: "var(--Jakarta)" }}
         >
           Лучшие кредиты онлайн
         </h2>
@@ -89,9 +89,8 @@ const BestLoans: React.FC = () => {
                       4.8<span className="text-[#67677a]">/5</span>
                     </p>
                     <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
-  119 отзывов
-</p>
-
+                      119 отзывов
+                    </p>
                   </div>
                 </div>
               </header>
@@ -177,7 +176,7 @@ const BestLoans: React.FC = () => {
                       href="/"
                       className="underline  text-[10px] font-medium leading-[120%] text-[#00ba9e]"
                       style={{
-                        fontFamily: "var(--font-family)",
+                        fontFamily: "var(--Montserrat)",
                         textDecorationSkipInk: "none",
                       }}
                     >
@@ -190,7 +189,7 @@ const BestLoans: React.FC = () => {
                       href="/"
                       className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
                       style={{
-                        fontFamily: "var(--font-family)",
+                        fontFamily: "var(--Montserrat)",
                         textDecorationSkipInk: "none",
                       }}
                     >

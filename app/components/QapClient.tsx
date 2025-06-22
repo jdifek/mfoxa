@@ -17,7 +17,7 @@ const QapClient = () => {
           className="text-[20px] sm:text-[28px] md:text-[36px] 
 font-[700] leading-[100%] 
 text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
-          style={{ fontFamily: "var(--second-family)" }}
+          style={{ fontFamily: "var(--Jakarta)" }}
         >
           Частые вопросы Швидко Гроші{" "}
         </h2>
@@ -30,7 +30,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
             className="text-[20px] sm:text-[28px] md:text-[36px] 
 font-[700] leading-[100%] 
 text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
-            style={{ fontFamily: "var(--second-family)" }}
+            style={{ fontFamily: "var(--Jakarta)" }}
           >
             {" "}
             Заголовок для страницы вопросы Швидко Гроші
@@ -41,7 +41,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
     font-[500] leading-[138%] 
     text-[#222] 
   "
-            style={{ fontFamily: "var(--font-family)" }}
+            style={{ fontFamily: "var(--Montserrat)" }}
           >
             Клиенты микрокредитной компании «Екапуста» получают доступ в личный
             кабинет. Это сервис, через который можно управлять займом,
@@ -75,13 +75,13 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                 <div className="flex flex-col">
                   <p
                     className="font-[700] text-[12px] leading-[142%] text-[#222]"
-                    style={{ fontFamily: "var(--font-family)" }}
+                    style={{ fontFamily: "var(--Montserrat)" }}
                   >
                     SlonCredit
                   </p>
                   <p
                     className="font-[700] text-[16px] leading-[100%] text-[#724dea]"
-                    style={{ fontFamily: "var(--font3)" }}
+                    style={{ fontFamily: "var(--Manrope)" }}
                   >
                     4,8 <span className="text-[#67677a]">из 5</span>
                   </p>
@@ -89,14 +89,14 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
               </div>
               <p
                 className="font-[700] text-[12px] md:text-[15px] leading-[142%] text-[#222] mb-[10px]"
-                style={{ fontFamily: "var(--font-family)" }}
+                style={{ fontFamily: "var(--Montserrat)" }}
               >
                 Инна
               </p>
               <p
                 className="mb-[10px]"
                 style={{
-                  fontFamily: "var(--font-family)",
+                  fontFamily: "var(--Montserrat)",
                   fontWeight: 500,
                   fontSize: "13px",
                   lineHeight: "138%",

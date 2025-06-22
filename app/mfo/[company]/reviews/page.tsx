@@ -1,11 +1,17 @@
 import CompanyRewiwsClient from "@/app/components/CompanyRewiwsClient";
 import { Metadata } from "next";
 
-type Props = { params: { company: string } };
+interface Props {
+  params: Promise<{ company: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const slug = params.company || "";  // Вместо params.slug
-  const companyName = slug ? slug.replace(/-/g, " ").toUpperCase() : "КОМПАНИЯ";
+  const resolvedParams = await params;
+  const slug = decodeURIComponent(resolvedParams.company || "sgroshi");
+  const companyName = slug === "sgroshi"
+    ? "Швидко Гроші"
+    : slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
   return {
     title: `Отзывы ${companyName} — честные мнения клиентов`,
@@ -14,16 +20,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `Отзывы ${companyName}`,
       description: `Отзывы и рейтинг компании ${companyName}.`,
-      url: `https://ваш-домен.ua/reviews/${slug}`,
-      siteName: "Zaimi.ru",
+      url: `https://mfoxa.com.ua/mfo/${slug}/reviews`, // Заменено на реальный домен
+      siteName: "MFoxa", // Исправлено: Zaimi.ru → MFoxa
       type: "website",
     },
     alternates: {
-      canonical: `https://ваш-домен.ua/reviews/${slug}`,
+      canonical: `https://mfoxa.com.ua/mfo/${slug}/reviews`, // Заменено на реальный домен
     },
   };
 }
 
-export default function CompanyReviewsPage({ params }: Props) {
-  return <CompanyRewiwsClient slug={params.company} />;  // Аналогично здесь
+export default async function CompanyReviewsPage({ params }: Props) {
+  const resolvedParams = await params;
+  const companySlug = decodeURIComponent(resolvedParams.company || "sgroshi");
+  return <CompanyRewiwsClient slug={companySlug} />;
 }

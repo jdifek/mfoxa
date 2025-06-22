@@ -7,7 +7,7 @@ const DetailsText = () => {
         <p
           className="mb-[10px] text-[13px] md:text-[15px]"
           style={{
-            fontFamily: "var(--font-family)",
+            fontFamily: "var(--Montserrat)",
             fontWeight: 500,
             lineHeight: "138%",
             color: "#222",
@@ -21,7 +21,7 @@ const DetailsText = () => {
         <p
           className="mb-[30px] w-max md:mb-[50px] text-[13px] md:text-[15px] cursor-pointer underline text-[#724dea] transition-colors duration-200 hover:text-[#9278ea]"
           style={{
-            fontFamily: "var(--font-family)",
+            fontFamily: "var(--Montserrat)",
             fontWeight: 500,
             lineHeight: "138%",
             textDecorationSkipInk: "none",

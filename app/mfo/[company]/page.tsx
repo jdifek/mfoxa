@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from "next/image";
 import DetailsText from "../../components/DetailsText";
 import OftenQuestions from "../../components/OftenQuestions";
@@ -10,25 +11,19 @@ import Calculator from "../../components/Catalog/Calculator";
 import { Metadata } from "next";
 import CalctTarifButtonsts from "@/app/components/CalctTarifButtons";
 import TermsOfRegistration from "@/app/components/TermsOfRegistration";
+import { MicrodataCompany } from "@/app/structured-data/MicrodataCompany";
+export const dynamic = 'force-dynamic';
 
-type PageParams = {
-  company: string;
-};
 
-// Определяем тип для поисковых параметров
-type SearchParams = {
-  [key: string]: string | string[] | undefined;
-};
-
-// Основной тип для страницы
 interface PageProps {
-  params: PageParams;
-  searchParams?: SearchParams;
+  params: Promise<{ company: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const companySlug = decodeURIComponent(params.company || "sgroshi");
+
+// Функция генерации метаданных
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = await params; // Разрешаем Promise
+  const companySlug = decodeURIComponent(resolvedParams.company || "sgroshi");
   return {
     title: `${companySlug} - условия займа, отзывы, рейтинг`,
     description: `Полные условия займа в ${companySlug}. Требования к заемщикам, процентные ставки, отзывы клиентов.`,
@@ -43,10 +38,13 @@ export async function generateMetadata({
   };
 }
 
-export default function CatalogPage({ params }: PageProps) {
-  const companySlug = decodeURIComponent(params.company || "sgroshi");
+export default async function CatalogPage({ params, searchParams }: PageProps) {
+  const resolvedParams = await params;
+  const companySlug = decodeURIComponent(resolvedParams.company || "sgroshi");
   return (
     <>
+      <MicrodataCompany company={companySlug} />
+
       <Bread />
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] md:p-[30px] sm:p-[20px] mb-[30px] md:mb-[50px] bg-white rounded-lg mt-[10px]">
@@ -196,7 +194,7 @@ export default function CatalogPage({ params }: PageProps) {
           <div className="p-[10px] md:p-[30px] sm:p-[20px] w-full md:w-1/2 mb-[0px] md:mb-[50px] bg-white rounded-lg mt-[10px]">
             <h2
               className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
-              style={{ fontFamily: "var(--second-family)" }}
+              style={{ fontFamily: "var(--Jakarta)" }}
             >
               Требования к заемщику{" "}
               {companySlug === "sgroshi" ? "Швидко Гроші" : "Компания"}
@@ -229,7 +227,7 @@ export default function CatalogPage({ params }: PageProps) {
           <div className="p-[10px] md:p-[30px]  l:mb-[0px] sm:p-[20px]  w-full md:w-1/2 md:mb-[50px] bg-white rounded-lg mb-[20px]">
             <h2
               className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
-              style={{ fontFamily: "var(--second-family)" }}
+              style={{ fontFamily: "var(--Jakarta)" }}
             >
               Способы получения денег{" "}
               {companySlug === "sgroshi" ? "Швидко Гроші" : "Компания"}
@@ -272,7 +270,7 @@ export default function CatalogPage({ params }: PageProps) {
           <div className="p-[10px] flex-col gap-[20px] md:p-[30px] sm:p-[20px]  w-full md:w-1/2 mb-[0px] md:mb-[50px] bg-white rounded-lg ">
             <h2
               className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
-              style={{ fontFamily: "var(--second-family)" }}
+              style={{ fontFamily: "var(--Jakarta)" }}
             >
               Калькулятор процентов{" "}
               {companySlug === "sgroshi" ? "Швидко Гроші" : "Компания"}
@@ -304,7 +302,7 @@ export default function CatalogPage({ params }: PageProps) {
             ))}
             <p
               className="font-medium text-[11px] leading-[145%] mb-[10px] text-center text-[#9393a3]"
-              style={{ fontFamily: "var(--font-family)" }}
+              style={{ fontFamily: "var(--Montserrat)" }}
             >
               Расчет носит справочный характер и не включает в себя другие
               комиссии компании. Точные значения рассчитываются только после
@@ -318,7 +316,7 @@ export default function CatalogPage({ params }: PageProps) {
           <div className="p-[10px] md:p-[30px] sm:p-[20px] mb-[0px] md:mb-[50px]  w-full md:w-1/2  bg-white rounded-lg ">
             <h2
               className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
-              style={{ fontFamily: "var(--second-family)" }}
+              style={{ fontFamily: "var(--Jakarta)" }}
             >
               Способы погашения займа{" "}
               {companySlug === "sgroshi" ? "Швидко Гроші" : "Компания"}

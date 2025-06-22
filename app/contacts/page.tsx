@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import React from "react";
 import Bread from "../components/Bread";
+import { ContactStructuredData } from "../structured-data/ContactStructuredData";
 export const metadata: Metadata = {
   title: "Контакты MFoxa | Свяжитесь с нами",
   description:
@@ -33,6 +34,8 @@ export const metadata: Metadata = {
 const ContactPage: React.FC = () => {
   return (
     <>
+      <ContactStructuredData />
+
       <Bread />
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px]  sm:mb-[30px] md:mb-[50px] bg-white rounded-lg   mt-[10px] md:mt-[30px]">
@@ -40,7 +43,7 @@ const ContactPage: React.FC = () => {
             className="text-[20px] sm:text-[28px] md:text-[36px] 
 font-[700] leading-[100%] 
 text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
-            style={{ fontFamily: "var(--second-family)" }}
+            style={{ fontFamily: "var(--Jakarta)" }}
           >
             Контакты
           </h2>
@@ -50,7 +53,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
     font-[500] leading-[138%] 
     text-[#222] 
   "
-            style={{ fontFamily: "var(--font-family)" }}
+            style={{ fontFamily: "var(--Montserrat)" }}
           >
             Сервис предоставляет актуальную информацию о кредитных продуктах
             различных банков и микрофинансовых организаций Украины. Все

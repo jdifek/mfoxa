@@ -8,11 +8,10 @@ const ratings = [
   { label: "Удобство сайта", value: 2.8, color: "#EF3E4A" },
 ];
 
-
 type CircleRatingProps = {
   value: any;
   color: any;
-}
+};
 
 const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
   <svg width="32" height="32" viewBox="0 0 50 50">
@@ -48,17 +47,17 @@ export default function RatingDisplay() {
       {ratings.map((item, index) => (
         <div key={index} className="flex items-center gap-[10px]">
           <CircleRating value={item.value} color={item.color} />
-            <span
+          <span
             style={{
-              fontFamily: "var(--font-family)",
+              fontFamily: "var(--Montserrat)",
               fontWeight: 500,
               fontSize: "11px",
               lineHeight: "145%",
               color: "#222",
             }}
-            >
+          >
             {item.label}
-            </span>
+          </span>
         </div>
       ))}
     </div>

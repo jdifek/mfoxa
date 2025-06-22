@@ -1,23 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import QapClient from "@/app/components/QapClient";
 import { Metadata } from "next";
 
-type Props = { params: { company: string } };
+interface Props {
+  params: Promise<{ company: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const slug = params.company || "";
-  const companyName = slug ? slug.replace(/-/g, " ").toUpperCase() : "КОМПАНИЯ";
+  const resolvedParams = await params;
+  const slug = decodeURIComponent(resolvedParams.company || "sgroshi");
+  const companyName =
+    slug === "sgroshi"
+      ? "Швидко Гроші"
+      : slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
   return {
     title: `Вопросы и ответы ${companyName} — часто задаваемые вопросы`,
     description: `Ответы на часто задаваемые вопросы по ${companyName}. Узнайте больше о займах, условиях и сервисе.`,
-    keywords: [
-      "вопросы",
-      "FAQ",
-      `${companyName}`,
-      "займы",
-      "условия",
-      "поддержка",
-    ],
+    keywords: ["вопросы", "FAQ", companyName, "займы", "условия", "поддержка"],
     robots: {
       index: true,
       follow: true,
@@ -30,6 +31,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function Qap() {
+export default async function Qap({ params }: Props) {
   return <QapClient />;
 }

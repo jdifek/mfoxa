@@ -76,7 +76,7 @@ export default function CompanyRewiwsClient({ slug }: { slug: string }) {
           className="text-[20px] sm:text-[28px] md:text-[36px] 
 font-[700] leading-[100%] 
 text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
-          style={{ fontFamily: "var(--second-family)" }}
+          style={{ fontFamily: "var(--Jakarta)" }}
         >
           Отзывы Швидко Гроші{" "}
         </h2>
@@ -188,13 +188,13 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
                 <div className="flex flex-col">
                   <p
                     className="font-[700] text-[12px] leading-[142%] text-[#222]"
-                    style={{ fontFamily: "var(--font-family)" }}
+                    style={{ fontFamily: "var(--Montserrat)" }}
                   >
                     Инна
                   </p>
                   <p
                     className="font-[500] text-[12px] leading-[100%] text-[#724dea]"
-                    style={{ fontFamily: "var(--font3)" }}
+                    style={{ fontFamily: "var(--Manrope)" }}
                   >
                     <span className="text-[#67677a]">20.10.2024</span>
                   </p>
@@ -204,7 +204,7 @@ text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
               <p
                 className="mb-[10px]"
                 style={{
-                  fontFamily: "var(--font-family)",
+                  fontFamily: "var(--Montserrat)",
                   fontWeight: 500,
                   fontSize: "13px",
                   lineHeight: "138%",

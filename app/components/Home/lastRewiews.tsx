@@ -23,7 +23,7 @@ export const LastReviews: React.FC = () => {
     <div className="w-full  mb-[30px] md:mb-[60px] px-[0px] md:px-[20px] relative">
       <h2
         className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] md:mb-[30px]"
-        style={{ fontFamily: "var(--second-family)" }}
+        style={{ fontFamily: "var(--Jakarta)" }}
       >
         {pathname.startsWith("/mfo/") && pathname.split("/").length === 3
           ? "Отзывы МФО"
@@ -67,13 +67,13 @@ export const LastReviews: React.FC = () => {
                     <div className="flex flex-col">
                       <p
                         className="font-[700] text-[12px] leading-[142%] text-[#222]"
-                        style={{ fontFamily: "var(--font-family)" }}
+                        style={{ fontFamily: "var(--Montserrat)" }}
                       >
                         SlonCredit
                       </p>
                       <p
                         className="font-[700] text-[16px] leading-[100%] text-[#724dea]"
-                        style={{ fontFamily: "var(--font3)" }}
+                        style={{ fontFamily: "var(--Manrope)" }}
                       >
                         4,8 <span className="text-[#67677a]">из 5</span>
                       </p>
@@ -81,14 +81,14 @@ export const LastReviews: React.FC = () => {
                   </div>
                   <p
                     className="font-[700] text-[12px] md:text-[15px] leading-[142%] text-[#222] mb-[10px]"
-                    style={{ fontFamily: "var(--font-family)" }}
+                    style={{ fontFamily: "var(--Montserrat)" }}
                   >
                     Инна
                   </p>
                   <p
                     className="mb-[10px] text-[13px] md:text-[15px]"
                     style={{
-                      fontFamily: "var(--font-family)",
+                      fontFamily: "var(--Montserrat)",
                       fontWeight: 500,
                       lineHeight: "138%",
                       color: "#222",
@@ -102,7 +102,7 @@ export const LastReviews: React.FC = () => {
                   <p
                     className=" text-[13px] w-max md:text-[15px] cursor-pointer underline text-[#6239e8] transition-colors duration-200 hover:text-[#9278ea]"
                     style={{
-                      fontFamily: "var(--font-family)",
+                      fontFamily: "var(--Montserrat)",
                       fontWeight: 500,
                       lineHeight: "138%",
                       textDecorationSkipInk: "none",

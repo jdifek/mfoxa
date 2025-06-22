@@ -1,6 +1,6 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
 
 interface QuestionItem {
   name: string;
@@ -9,59 +9,59 @@ interface QuestionItem {
 
 const questions: QuestionItem[] = [
   {
-    name: 'Популярные МФО',
+    name: "Популярные МФО",
     links: Array(24).fill({
-      label: 'moneyman',
-      url: 'https://zaimi.ru/mfo/joymoney/',
+      label: "moneyman",
+      url: "https://zaimi.ru/mfo/joymoney/",
     }),
   },
   {
-    name: 'Быстрая выплата',
+    name: "Быстрая выплата",
     links: Array(24).fill({
-      label: 'moneyman',
-      url: 'https://zaimi.ru/mfo/joymoney/',
+      label: "moneyman",
+      url: "https://zaimi.ru/mfo/joymoney/",
     }),
   },
   {
-    name: 'Без залога',
+    name: "Без залога",
     links: Array(24).fill({
-      label: 'moneyman',
-      url: 'https://zaimi.ru/mfo/joymoney/',
+      label: "moneyman",
+      url: "https://zaimi.ru/mfo/joymoney/",
     }),
   },
   {
-    name: 'Низкий процент',
+    name: "Низкий процент",
     links: Array(24).fill({
-      label: 'moneyman',
-      url: 'https://zaimi.ru/mfo/joymoney/',
+      label: "moneyman",
+      url: "https://zaimi.ru/mfo/joymoney/",
     }),
   },
   {
-    name: 'На карту',
+    name: "На карту",
     links: Array(24).fill({
-      label: 'moneyman',
-      url: 'https://zaimi.ru/mfo/joymoney/',
+      label: "moneyman",
+      url: "https://zaimi.ru/mfo/joymoney/",
     }),
   },
   {
-    name: 'Круглосуточно',
+    name: "Круглосуточно",
     links: Array(24).fill({
-      label: 'moneyman',
-      url: 'https://zaimi.ru/mfo/joymoney/',
+      label: "moneyman",
+      url: "https://zaimi.ru/mfo/joymoney/",
     }),
   },
   {
-    name: 'Без отказа',
+    name: "Без отказа",
     links: Array(24).fill({
-      label: 'moneyman',
-      url: 'https://zaimi.ru/mfo/joymoney/',
+      label: "moneyman",
+      url: "https://zaimi.ru/mfo/joymoney/",
     }),
   },
   {
-    name: 'С любой КИ',
+    name: "С любой КИ",
     links: Array(24).fill({
-      label: 'moneyman',
-      url: 'https://zaimi.ru/mfo/joymoney/',
+      label: "moneyman",
+      url: "https://zaimi.ru/mfo/joymoney/",
     }),
   },
 ];
@@ -82,7 +82,7 @@ const Questions: React.FC = () => {
           <div
             key={index}
             className="w-full mb-[10px] rounded-lg bg-white shadow-md transition-all duration-200 ease-in-out hover:shadow-lg hover:bg-gray-100"
-            >
+          >
             <div
               className="flex justify-between items-center p-[16px] cursor-pointer"
               onClick={() => toggleQuestion(index)}
@@ -124,29 +124,28 @@ const Questions: React.FC = () => {
             </div>
             {isOpen && (
               <div className="px-[16px] pb-[16px] grid grid-cols-2 gap-[10px] sm:grid-cols-6 sm:gap-[10px]">
-              {question.links.map((link, linkIndex) => (
-      <Link
-        key={linkIndex}
-        href={link.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-max"
-        style={{
-          fontFamily: 'var(--font-family)',
-          fontWeight: 500,
-          fontSize: '13px',
-          lineHeight: '138%',
-          textDecoration: 'underline',
-          textDecorationSkipInk: 'none',
-          color: '#00ba9e',
-        }}
-      >
-        {link.label}
-      </Link>
-    ))}
-  </div>
-)}
-
+                {question.links.map((link, linkIndex) => (
+                  <Link
+                    key={linkIndex}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-max"
+                    style={{
+                      fontFamily: "var(--Montserrat)",
+                      fontWeight: 500,
+                      fontSize: "13px",
+                      lineHeight: "138%",
+                      textDecoration: "underline",
+                      textDecorationSkipInk: "none",
+                      color: "#00ba9e",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         );
       })}

@@ -12,7 +12,7 @@ const CalctTarifButtonsts = () => {
         <div
           onClick={() => setActiveTariff(el)} // меняем выбранный тариф при клике
           key={i}
-          style={{ fontFamily: "var(--font-family)" }}
+          style={{ fontFamily: "var(--Montserrat)" }}
           className={`px-[10px] py-[8px] rounded-[35px] h-[33px] flex items-center justify-center text-[11px] font-medium leading-[145%] text-center cursor-pointer
             ${
               activeTariff === el
@@ -24,7 +24,7 @@ const CalctTarifButtonsts = () => {
             className={`text-[12px] leading-[142%] font-medium ${
               activeTariff === el ? "text-white" : "text-[#724dea]"
             }`}
-            style={{ fontFamily: "var(--font-family)" }}
+            style={{ fontFamily: "var(--Montserrat)" }}
           >
             {el}
           </p>

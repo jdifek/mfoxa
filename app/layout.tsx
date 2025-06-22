@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import "./globals.css";
+import { StructuredData } from "./structured-data/StructuredData";
 
 export const metadata: Metadata = {
   title: "MFoxa - Финансовый маркетплейс Украины",
@@ -47,6 +48,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+      <StructuredData />
+
         <Header />
         <div className="px-[10px] max-w-[1440px] mx-auto md:px-[50px] lg:px-[100px] pb-[20px] md:pb-[40px] lg:pb-[50px]">
           {children}

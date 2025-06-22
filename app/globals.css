@@ -1,11 +1,11 @@
 /* Google Fonts подключение */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jura:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap'); /* ← заменяет Formular */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap'); /* ← заменяет Graphik */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jura:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap"); /* ← заменяет Formular */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"); /* ← заменяет Graphik */
 
 @import "tailwindcss";
 
@@ -15,13 +15,13 @@
 
 /* CSS-переменные */
 :root {
-  --font-family: "Montserrat", sans-serif;
-  --second-family: "Plus Jakarta Sans", sans-serif;
-  --third-family: "Inter", sans-serif;
-  --font3: "Manrope", sans-serif;         /* ЗАМЕНА Formular */
-  --font4: "Jura", sans-serif;
-  --font5: "DM Sans", sans-serif;         /* ЗАМЕНА Graphik */
-  --font6: "Golos Text", sans-serif;
+  --Montserrat: "Montserrat", sans-serif;
+  --Jakarta: "Plus Jakarta Sans", sans-serif;
+  --Inter: "Inter", sans-serif;
+  --Manrope: "Manrope", sans-serif; /* ЗАМЕНА Formular */
+  --Jura: "Jura", sans-serif;
+  --DMSans: "DM Sans", sans-serif; /* ЗАМЕНА Graphik */
+  --Golos: "Golos Text", sans-serif;
 
   --background: #ffffff;
   --foreground: #ebebf9;
@@ -31,7 +31,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-family);
+  --font-sans: var(--Montserrat);
 }
 
 /* Dark mode адаптация */
@@ -46,12 +46,12 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-family);
+  montserrat: var(--Montserrat);
 }
 
 /* Пример: заголовки */
 h2 {
-  font-family: var(--second-family);
+  montserrat: var(--Jakarta);
 }
 
 .slider {
@@ -64,7 +64,7 @@ h2 {
 
 .slider::-webkit-slider-runnable-track {
   height: 2px;
-  background: #724DEA;
+  background: #724dea;
   border-radius: 1px;
 }
 .no-scrollbar::-webkit-scrollbar {
@@ -82,7 +82,7 @@ h2 {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #724DEA;
+  background: #724dea;
   cursor: pointer;
   border: none;
   box-shadow: 0 0 0 0;
@@ -93,7 +93,7 @@ h2 {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #724DEA;
+  background: #724dea;
   border: none;
   cursor: pointer;
 }

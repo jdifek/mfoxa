@@ -9,13 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        primary: ['Montserrat', 'sans-serif'],
-        secondary: ['"Plus Jakarta Sans"', 'sans-serif'],
-        third: ['Inter', 'sans-serif'],
-        font3: ['Manrope', 'sans-serif'],       // ← замена Formular
-        font4: ['Jura', 'sans-serif'],
-        font5: ['"DM Sans"', 'sans-serif'],     // ← замена Graphik
-        font6: ['"Golos Text"', 'sans-serif'],
+        primary: ["Montserrat", "sans-serif"],
+        secondary: ['"Plus Jakarta Sans"', "sans-serif"],
+        third: ["Inter", "sans-serif"],
+        Manrope: ["Manrope", "sans-serif"], // ← замена Formular
+        Jura: ["Jura", "sans-serif"],
+        DMSans: ['"DM Sans"', "sans-serif"], // ← замена Graphik
+        Golos: ['"Golos Text"', "sans-serif"],
       },
       colors: {
         background: "#ffffff",
