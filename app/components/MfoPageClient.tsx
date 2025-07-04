@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
-
+// components/MfoPageClient.tsx
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ButtonGreenBorder from "../ui/ButtonGreenBorder";
 import OftenQuestions from "../components/OftenQuestions";
 import InfoHelpful from "../components/InfoHelpful";
@@ -10,12 +9,13 @@ import Questions from "../components/Home/Questions";
 import DetailsText from "../components/DetailsText";
 import Bread from "../components/Bread";
 import { MfoListStructuredData } from "../structured-data/MfoListStructuredData";
+import { PageDatesResponse } from "../services/PageDatesService";
 
 const ratings = [
-  { label: "Скорость выдачи", value: 4.8, color: "#00BDA5" },
-  { label: "Прозрачные условия", value: 4.1, color: "#92C83E" },
-  { label: "Служба поддержки", value: 3.8, color: "#CC9B00" },
-  { label: "Удобство сайта", value: 2.8, color: "#EF3E4A" },
+  { key: "speed", value: 4.8, color: "#00BDA5" },
+  { key: "transparency", value: 4.1, color: "#92C83E" },
+  { key: "support", value: 3.8, color: "#CC9B00" },
+  { key: "usability", value: 2.8, color: "#EF3E4A" },
 ];
 
 const tops = [
@@ -31,11 +31,18 @@ const tops = [
 ];
 
 type CircleRatingProps = {
-  value: any;
-  color: any;
+  value: number;
+  color: string;
 };
+
 const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
-  <svg width="32" height="32" viewBox="0 0 50 50">
+  <svg
+    width="32"
+    height="32"
+    viewBox="0 0 50 50"
+    role="img"
+    aria-label={`Rating: ${value}`}
+  >
     <circle cx="25" cy="25" r="23" stroke="#eee" strokeWidth="2" fill="none" />
     <circle
       cx="25"
@@ -62,52 +69,57 @@ const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
   </svg>
 );
 
-const MfoPageClient: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(3);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 640);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  const handleShowMore = () => {
-    setVisibleCount((prev) => Math.min(prev + 3, tops.length));
+type MfoPageClientProps = {
+  translations: {
+    mfo: (key: string, params?: any) => string;
+    ratings: (key: string, params?: any) => string;
   };
+  visibleCount?: number;
+  isMobile: boolean;
+  locale: string;
+  dates: PageDatesResponse;
+};
+
+export default async function MfoPageClient({
+  translations,
+  visibleCount = 3,
+  isMobile,
+  locale,
+  dates,
+}: MfoPageClientProps) {
+  const { mfo, ratings: ratingsT } = translations;
+
   const companies = tops.slice(0, visibleCount).map((top, index) => ({
     name: top.name,
-    url: `https://mfoxa.com.ua/mfo/${encodeURIComponent(top.name.toLowerCase().replace(/\s+/g, "-"))}`,
+    url: `https://mfoxa.com.ua/mfo/${encodeURIComponent(
+      top.name.toLowerCase().replace(/\s+/g, "-")
+    )}`,
     ratingValue: 4.5,
     reviewCount: 100 + index * 10,
     position: index + 1,
   }));
+
   return (
     <>
-    <MfoListStructuredData companies={companies} />
-
+      <MfoListStructuredData companies={companies} />
       <Bread />
 
-      <div className="p-[10px] md:p-[30px] mb-[20px] sm:mb-[30px] md:mb-[50px] bg-white rounded-lg mx-[0px] md:mx-[20px] ">
+      <div className="p-[10px] md:p-[30px] mb-[20px] sm:mb-[30px] md:mb-[50px] bg-white rounded-lg mx-[0px] md:mx-[20px]">
         <h2
           className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
           style={{ fontFamily: "var(--Jakarta)" }}
         >
-          Рейтинг МФО Украины по отзывам клиентов
+          {mfo("title")}
         </h2>
         <p
           className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] leading-[138%] text-[#222]"
           style={{ fontFamily: "var(--Montserrat)" }}
         >
-          Подберите и оформите лучший для себя займ на срочную покупку или
-          хозяйственные нужды. Получение микрозайма от 1 000 до 100 000 рублей
-          через сервис «Займи.ру»
+          {mfo("subtitle")}
         </p>
       </div>
 
       {isMobile ? (
-        // === Mobile version (карточки) ===
         <div className="px-[0px] md:px-[20px] mb-[20px] flex flex-wrap gap-[20px]">
           {tops.slice(0, visibleCount).map((top, i) => (
             <div
@@ -134,14 +146,18 @@ const MfoPageClient: React.FC = () => {
                 />
                 <div className="grid grid-cols-2 gap-[16px]">
                   {ratings.map((item, index) => (
-                    <div key={index} className="flex gap-[10px] items-center">
+                    <div
+                      key={index}
+                      className="flex gap-[10px] items-center"
+                      aria-label={`${ratingsT(item.key)}: ${item.value}`}
+                    >
                       <CircleRating value={item.value} color={item.color} />
                       <div>
                         <p className="text-[11px] font-medium text-[#222]">
-                          {item.label}
+                          {ratingsT(item.key)}
                         </p>
                         <p className="text-[11px] text-[#9393a3] font-medium">
-                          12 место
+                          {mfo("rank", { rank: 12 })}
                         </p>
                       </div>
                     </div>
@@ -151,13 +167,12 @@ const MfoPageClient: React.FC = () => {
               <ButtonGreenBorder
                 className="mt-[20px]"
                 width="100%"
-                text="Подробнее"
+                text={mfo("readMore")}
               />
             </div>
           ))}
         </div>
       ) : (
-        // === Desktop version (таблица) ===
         <div className="p-[30px] mb-[50px] bg-white rounded-lg mx-[20px] mt-[30px]">
           {tops.slice(0, visibleCount).map((top, i) => (
             <React.Fragment key={i}>
@@ -170,12 +185,16 @@ const MfoPageClient: React.FC = () => {
                   alt="img"
                 />
                 <div className="flex flex-col gap-[8px]">
-                  <p className=" font-medium text-[15px] leading-[133%] text-[#222]">
-                    Оценки пользователей МФО {top.name}
+                  <p className="font-medium text-[15px] leading-[133%] text-[#222]">
+                    {mfo("ratingsTitle", { name: top.name })}
                   </p>
                   <div className="grid grid-cols-4 gap-[16px] text-black text-sm">
                     {ratings.map((item, index) => (
-                      <div key={index} className="flex items-center gap-[10px]">
+                      <div
+                        key={index}
+                        className="flex items-center gap-[10px]"
+                        aria-label={`${ratingsT(item.key)}: ${item.value}`}
+                      >
                         <CircleRating value={item.value} color={item.color} />
                         <div className="flex flex-col">
                           <span
@@ -187,7 +206,7 @@ const MfoPageClient: React.FC = () => {
                               color: "#222",
                             }}
                           >
-                            {item.label}
+                            {ratingsT(item.key)}
                           </span>
                           <p
                             style={{
@@ -198,7 +217,7 @@ const MfoPageClient: React.FC = () => {
                               color: "#9393a3",
                             }}
                           >
-                            12 место
+                            {mfo("rank", { rank: 12 })}
                           </p>
                         </div>
                       </div>
@@ -214,29 +233,46 @@ const MfoPageClient: React.FC = () => {
 
       {visibleCount < tops.length && (
         <div className="px-0 md:px-[20px]">
-          <ButtonGreenBorder
-            width="100%"
-            text="Показать еще"
-            className="mt-[20px] mb-[30px]"
-            onClick={handleShowMore}
-          />
+          <a href={`?count=${visibleCount + 3}`}>
+            <ButtonGreenBorder
+              width="100%"
+              text={mfo("showMore")}
+              className="mt-[20px] mb-[30px]"
+            />
+          </a>
         </div>
       )}
 
       <DetailsText />
       <OftenQuestions />
-      <InfoHelpful />
+      <InfoHelpful locale={locale} />
       <Questions />
       <div className="px-0 md:px-[20px]">
-        <p className=" font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
-          Дата добавления страницы 12.10.2025
+        <p
+          className="font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]"
+          aria-label="Дата додавання"
+        >
+          {dates.date_published
+            ?  mfo("dateAdded") + new Date(dates.date_published).toLocaleDateString("ru-RU", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            : mfo("dateAdded")}
         </p>
-        <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
-          Дата изменения страницы 12.10.2025
+        <p
+          className="font-medium text-[13px] leading-[138%] text-[#67677a]"
+          aria-label="Дата оновлення"
+        >
+           {dates.date_modified
+            ?  mfo("dateUpdated") + new Date(dates.date_modified).toLocaleDateString("ru-RU", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            : mfo("dateUpdated")}
         </p>
       </div>
     </>
   );
-};
-
-export default MfoPageClient;
+}

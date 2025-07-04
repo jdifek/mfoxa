@@ -1,77 +1,38 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface QuestionItem {
   name: string;
+  key: string;
   links: { label: string; url: string }[];
 }
 
-const questions: QuestionItem[] = [
-  {
-    name: "Популярные МФО",
-    links: Array(24).fill({
-      label: "moneyman",
-      url: "https://zaimi.ru/mfo/joymoney/",
-    }),
-  },
-  {
-    name: "Быстрая выплата",
-    links: Array(24).fill({
-      label: "moneyman",
-      url: "https://zaimi.ru/mfo/joymoney/",
-    }),
-  },
-  {
-    name: "Без залога",
-    links: Array(24).fill({
-      label: "moneyman",
-      url: "https://zaimi.ru/mfo/joymoney/",
-    }),
-  },
-  {
-    name: "Низкий процент",
-    links: Array(24).fill({
-      label: "moneyman",
-      url: "https://zaimi.ru/mfo/joymoney/",
-    }),
-  },
-  {
-    name: "На карту",
-    links: Array(24).fill({
-      label: "moneyman",
-      url: "https://zaimi.ru/mfo/joymoney/",
-    }),
-  },
-  {
-    name: "Круглосуточно",
-    links: Array(24).fill({
-      label: "moneyman",
-      url: "https://zaimi.ru/mfo/joymoney/",
-    }),
-  },
-  {
-    name: "Без отказа",
-    links: Array(24).fill({
-      label: "moneyman",
-      url: "https://zaimi.ru/mfo/joymoney/",
-    }),
-  },
-  {
-    name: "С любой КИ",
-    links: Array(24).fill({
-      label: "moneyman",
-      url: "https://zaimi.ru/mfo/joymoney/",
-    }),
-  },
-];
-
 const Questions: React.FC = () => {
+  const t = useTranslations("Questions");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleQuestion = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
+
+  const questions: QuestionItem[] = [
+    { key: "popular", name: t("popular"), links: [] },
+    { key: "fast", name: t("fast"), links: [] },
+    { key: "noCollateral", name: t("noCollateral"), links: [] },
+    { key: "lowRate", name: t("lowRate"), links: [] },
+    { key: "toCard", name: t("toCard"), links: [] },
+    { key: "roundClock", name: t("roundClock"), links: [] },
+    { key: "noRefusal", name: t("noRefusal"), links: [] },
+    { key: "badHistory", name: t("badHistory"), links: [] },
+  ].map((q) => ({
+    ...q,
+    links: Array(24).fill({
+      label: "moneyman",
+      url: "https://zaimi.ru/mfo/joymoney/",
+    }),
+  }));
 
   return (
     <div className="px-0 md:px-[20px]">

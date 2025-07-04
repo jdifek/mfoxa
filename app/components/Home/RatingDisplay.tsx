@@ -1,19 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
 import React from "react";
 
-const ratings = [
-  { label: "Скорость выдачи", value: 4.8, color: "#00BDA5" },
-  { label: "Прозрачные условия", value: 4.1, color: "#92C83E" },
-  { label: "Служба поддержки", value: 3.8, color: "#CC9B00" },
-  { label: "Удобство сайта", value: 2.8, color: "#EF3E4A" },
-];
-
-type CircleRatingProps = {
-  value: any;
-  color: any;
+type RatingData = {
+  label: string;
+  value: number;
 };
 
-const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
+type RatingDisplayProps = {
+  ratings: RatingData[];
+};
+
+const CircleRating: React.FC<{ value: number; color: string }> = ({ value, color }) => (
   <svg width="32" height="32" viewBox="0 0 50 50">
     <circle cx="25" cy="25" r="23" stroke="#eee" strokeWidth="2" fill="none" />
     <circle
@@ -36,17 +34,24 @@ const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
       fontWeight="bold"
       fill={color}
     >
-      {value}
+      {value.toFixed(1)}
     </text>
   </svg>
 );
 
-export default function RatingDisplay() {
+function getColor(value: number): string {
+  if (value >= 4.5) return "#00BDA5";
+  if (value >= 4) return "#92C83E";
+  if (value >= 3) return "#CC9B00";
+  return "#EF3E4A";
+}
+
+const RatingDisplay: React.FC<RatingDisplayProps> = ({ ratings }) => {
   return (
     <div className="grid grid-cols-2 gap-[10px] text-black text-sm">
       {ratings.map((item, index) => (
         <div key={index} className="flex items-center gap-[10px]">
-          <CircleRating value={item.value} color={item.color} />
+          <CircleRating value={item.value} color={getColor(item.value)} />
           <span
             style={{
               fontFamily: "var(--Montserrat)",
@@ -62,4 +67,6 @@ export default function RatingDisplay() {
       ))}
     </div>
   );
-}
+};
+
+export default RatingDisplay;

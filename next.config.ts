@@ -1,10 +1,14 @@
-import type { NextConfig } from "next";
+/* eslint-disable @typescript-eslint/no-require-imports */
 
-const nextConfig: NextConfig = {
+const withNextIntl = require("next-intl/plugin")("./app/i18n/request.ts");
+
+const nextConfig = {
   images: {
-    domains: ["via.placeholder.com"],
+    domains: [
+      "via.placeholder.com",
+      "mfo.qissseee.tech"
+    ],
   },
-
 };
 
-export default nextConfig;
+module.exports = withNextIntl(nextConfig);

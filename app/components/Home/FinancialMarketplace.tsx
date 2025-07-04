@@ -1,50 +1,58 @@
-"use client";
+// components/Home/FinancialMarketplace.tsx
 import Image from "next/image";
 import React from "react";
+import { getTranslations } from "next-intl/server";
 
-const categories = [
-  { title: "На карту", image: "Frame 137.svg" },
-  { title: "Под 0%", image: "Frame 137 (1).svg" },
-  { title: "Новые МФО", image: "Frame 137 (2).svg" },
-  { title: "Наличными", image: "Frame 137 (3).svg" },
-  { title: "С 18 лет", image: "Frame 137 (4).svg" },
-  { title: "24/7", image: "Frame 137 (5).svg" },
-  { title: "Пенсионерам", image: "Frame 137 (6).svg" },
-  { title: "С плохой кредитной историей", image: "Frame 137 (7).svg" },
-  { title: "Через BankID", image: "Frame 137 (8).svg" },
-];
+type FinancialMarketplaceProps = {
+  locale: string;
+};
 
-const FinancialMarketplace: React.FC = () => {
+const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({ locale }) => {
+  const t = await getTranslations({ locale, namespace: "FinancialMarketplace" });
+  const tc = await getTranslations({ locale, namespace: "FinancialMarketplace.categories" });
+
+  // Debug: Log translations and locale
+  console.log("FinancialMarketplace translations:", {
+    locale,
+    title: t("title"),
+    description: t("description"),
+    to_card: tc("to_card"),
+    zero_percent: tc("zero_percent"),
+    new_mfo: tc("new_mfo"),
+  });
+
+  const categories = [
+    { title: tc("to_card"), image: "/Frame 137.svg" },
+    { title: tc("zero_percent"), image: "/Frame 137 (1).svg" },
+    { title: tc("new_mfo"), image: "/Frame 137 (2).svg" },
+    { title: tc("cash"), image: "/Frame 137 (3).svg" },
+    { title: tc("from_18"), image: "/Frame 137 (4).svg" },
+    { title: tc("24_7"), image: "/Frame 137 (5).svg" },
+    { title: tc("pensioners"), image: "/Frame 137 (6).svg" },
+    { title: tc("bad_credit"), image: "/Frame 137 (7).svg" },
+    { title: tc("bank_id"), image: "/Frame 137 (8).svg" },
+  ];
+
   return (
     <section className="w-full mt-[20px] md:mt-[50px] px-[0px] md:px-[20px] mb-[30px] md:mb-[30px]">
       <h2
-        className="text-[20px] sm:text-[28px] md:text-[36px] 
-font-[700] leading-[100%] 
-text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
+        className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
         style={{ fontFamily: "var(--Jakarta)" }}
       >
-        Финансовый маркетплейс МФО в Украине
+        {t("title")}
       </h2>
       <p
-        className="
-    text-[11px] sm:text-[12px] md:text-[13px] 
-    font-[500] leading-[138%] 
-    text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]
-  "
+        className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] leading-[138%] text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
         style={{ fontFamily: "var(--Montserrat)" }}
       >
-        Подберите и оформите лучший для себя займ на срочную покупку или
-        хозяйственные нужды. Получение микрозайма от 1 000 до 100 000 рублей
-        через сервис «Займи.ру»
+        {t("description")}
       </p>
 
       <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
         {categories.map((item, index) => (
           <div
             key={index}
-            className={`bg-white p-2.5 rounded-lg  ${
-              index === 0 ? "md:col-span-2" : ""
-            }`}
+            className={`bg-white p-2.5 rounded-lg ${index === 0 ? "md:col-span-2" : ""}`}
             style={{
               fontFamily: "var(--Manrope)",
               fontWeight: 700,
@@ -52,7 +60,7 @@ text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
               lineHeight: "100%",
             }}
           >
-            {/* mobile layout */}
+            {/* Mobile layout */}
             <div className="flex flex-col items-center md:hidden">
               <Image
                 src={item.image}
@@ -71,9 +79,9 @@ text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
                   color: "#222",
                 }}
               >
-                {item.title === "С плохой кредитной историей" ? (
+                {item.title === tc("bad_credit") ? (
                   <>
-                    <span className="block md:hidden">С плохой КИ</span>
+                    <span className="block md:hidden">{tc("bad_credit_short")}</span>
                     <span className="hidden md:block">{item.title}</span>
                   </>
                 ) : (
@@ -82,7 +90,7 @@ text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
               </p>
             </div>
 
-            {/* desktop (md+) layout */}
+            {/* Desktop (md+) layout */}
             <div className="hidden md:flex flex-col h-full justify-between">
               <p className="mb-[10px] text-[#724dea]">{item.title}</p>
               <div className="flex justify-end">
@@ -91,7 +99,7 @@ text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
                   alt={item.title}
                   width={60}
                   height={60}
-                  className="mb-2 "
+                  className="mb-2"
                 />
               </div>
             </div>

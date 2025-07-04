@@ -2,31 +2,51 @@
 
 import { useState } from "react";
 
-const CalctTarifButtonsts = () => {
-  const [activeTariff, setActiveTariff] = useState("Новый");
+type Tariff = {
+  id: number;
+  name: string;
+  amount: string;
+  rate: string;
+  term_days: number;
+  // другие поля если нужны
+};
 
-  const tariffs = ["Новый", "Повторный", "Акция"];
+type Props = {
+  tariffs: Tariff[];
+  onSelect?: (tariff: Tariff) => void;
+};
+
+const CalctTarifButtonsts = ({ tariffs, onSelect }: Props) => {
+  const [activeTariffId, setActiveTariffId] = useState<number | null>(
+    tariffs.length > 0 ? tariffs[0].id : null
+  );
+
+  const handleClick = (tariff: Tariff) => {
+    setActiveTariffId(tariff.id);
+    if (onSelect) onSelect(tariff);
+  };
+
   return (
     <div className="flex mb-[10px] gap-[10px]">
-      {tariffs.map((el, i) => (
+      {tariffs.map((tariff) => (
         <div
-          onClick={() => setActiveTariff(el)} // меняем выбранный тариф при клике
-          key={i}
+          onClick={() => handleClick(tariff)}
+          key={tariff.id}
           style={{ fontFamily: "var(--Montserrat)" }}
           className={`px-[10px] py-[8px] rounded-[35px] h-[33px] flex items-center justify-center text-[11px] font-medium leading-[145%] text-center cursor-pointer
             ${
-              activeTariff === el
+              activeTariffId === tariff.id
                 ? "bg-[#724dea] text-white"
                 : "bg-[#d6d6f9] text-[#9393a3] hover:bg-[#b0a9f7] hover:text-[#724dea] transition-colors duration-200"
             }`}
         >
           <p
             className={`text-[12px] leading-[142%] font-medium ${
-              activeTariff === el ? "text-white" : "text-[#724dea]"
+              activeTariffId === tariff.id ? "text-white" : "text-[#724dea]"
             }`}
             style={{ fontFamily: "var(--Montserrat)" }}
           >
-            {el}
+            {tariff.name}
           </p>
         </div>
       ))}

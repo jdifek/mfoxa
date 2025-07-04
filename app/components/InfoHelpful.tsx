@@ -1,32 +1,54 @@
 import Image from "next/image";
 import React from "react";
+import { getTranslations } from "next-intl/server";
 
-const InfoHelpful: React.FC = () => {
+type InfoHelpfulProps = {
+  locale: string;
+};
+
+export default async function InfoHelpful({ locale }: InfoHelpfulProps) {
+  const t = await getTranslations({ locale, namespace: "infoHelpful" });
+
+  // Debug: Log translations and locale
+  console.log("InfoHelpful translations:", {
+    locale,
+    photoAlt: t("photoAlt"),
+    authorName: t("authorName"),
+    authorRole: t("authorRole"),
+    question: t("question"),
+    ratingText: t("ratingText"),
+  });
+
   return (
     <div className="px-0 md:px-[20px]">
       <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[30px] md:mb-[50px] bg-white rounded-lg mt-[30px] flex flex-col sm:flex-row sm:justify-between sm:items-center text-center sm:text-left gap-[20px] sm:gap-0">
-        {/* Автор */}
+        {/* Author */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-[10px] sm:gap-[20px] items-center">
-          <Image src={"/photo.svg"} alt="photo" width={60} height={60} />
+          <Image
+            src="/photo.svg"
+            alt={t("photoAlt")}
+            width={60}
+            height={60}
+          />
           <div className="flex flex-col gap-[5px] items-center sm:items-start">
-            <p className=" font-bold text-[20px] leading-[100%] text-[#222]">
-              Инна
+            <p className="font-bold text-[20px] leading-[100%] text-[#222]">
+              {t("authorName")}
             </p>
-            <p className=" font-medium text-[11px] leading-[145%] text-[#67677a]">
-              Автор страницы
+            <p className="font-medium text-[11px] leading-[145%] text-[#67677a]">
+              {t("authorRole")}
             </p>
           </div>
         </div>
 
-        {/* Оценка */}
+        {/* Rating */}
         <div className="flex flex-col gap-[10px] items-center sm:items-start">
-          <p className=" font-bold text-[20px] leading-[100%] text-[#222]">
-            Информация была полезна?
+          <p className="font-bold text-[20px] leading-[100%] text-[#222]">
+            {t("question")}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-[10px]">
             <div className="flex gap-[10px]">
-              {[1, 2, 3, 4].map((el, i) => (
+              {[1, 2, 3, 4].map((_, i) => (
                 <svg
                   key={i}
                   xmlns="http://www.w3.org/2000/svg"
@@ -55,14 +77,12 @@ const InfoHelpful: React.FC = () => {
               </svg>
             </div>
 
-            <p className=" font-medium text-[11px] leading-[145%] text-[#222]">
-              19 оценок, среднее 4,1 из 5
+            <p className="font-medium text-[11px] leading-[145%] text-[#222]">
+              {t("ratingText")}
             </p>
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default InfoHelpful;
+}

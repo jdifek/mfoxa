@@ -8,26 +8,33 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Review } from "@/app/services/HomeService";
 
-export const LastReviews: React.FC = () => {
+type Props = {
+  recent_reviews: Review[];
+};
+export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
+  const t = useTranslations("LastReviews");
   const paginationRef = useRef<HTMLDivElement | null>(null);
   const [isSwiperReady, setIsSwiperReady] = useState(false);
   const pathname = usePathname();
+
   useEffect(() => {
     if (paginationRef.current) {
-      setIsSwiperReady(true); // Устанавливаем готовность Swiper только после привязки paginationRef
+      setIsSwiperReady(true);
     }
   }, []);
 
   return (
-    <div className="w-full  mb-[30px] md:mb-[60px] px-[0px] md:px-[20px] relative">
+    <div className="w-full mb-[30px] md:mb-[60px] px-[0px] md:px-[20px] relative">
       <h2
         className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] md:mb-[30px]"
         style={{ fontFamily: "var(--Jakarta)" }}
       >
         {pathname.startsWith("/mfo/") && pathname.split("/").length === 3
-          ? "Отзывы МФО"
-          : "Последние отзывы на портале"}
+          ? t("sectionTitleMFO")
+          : t("sectionTitle")}
       </h2>
 
       <div className="relative">
@@ -35,7 +42,7 @@ export const LastReviews: React.FC = () => {
           <Swiper
             modules={[Navigation, Pagination]}
             pagination={{
-              el: paginationRef.current, // Пагинация привязывается к элементу
+              el: paginationRef.current,
               clickable: true,
               bulletClass: "swiper-pagination-bullet",
               bulletActiveClass: "swiper-pagination-bullet-active",
@@ -54,12 +61,12 @@ export const LastReviews: React.FC = () => {
               1024: { slidesPerView: 4, spaceBetween: 20 },
             }}
           >
-            {[1, 2, 3, 4, 5, 6, 7].map((el, index) => (
+            {recent_reviews.map((el, index) => (
               <SwiperSlide key={index} className="no-scrollbar">
-                <div className=" w-full rounded-lg bg-white p-[10px] md:p-[16px] shadow-md">
+                <div className="w-full rounded-lg bg-white p-[10px] md:p-[16px] shadow-md">
                   <div className="flex gap-[10px] mb-[14px]">
                     <Image
-                      src="/logo (1).svg"
+                      src={el.mfo.logo_url}
                       alt="logo"
                       width={34}
                       height={34}
@@ -69,13 +76,13 @@ export const LastReviews: React.FC = () => {
                         className="font-[700] text-[12px] leading-[142%] text-[#222]"
                         style={{ fontFamily: "var(--Montserrat)" }}
                       >
-                        SlonCredit
+                        {el.mfo.name}
                       </p>
                       <p
                         className="font-[700] text-[16px] leading-[100%] text-[#724dea]"
                         style={{ fontFamily: "var(--Manrope)" }}
                       >
-                        4,8 <span className="text-[#67677a]">из 5</span>
+                        {el.rating} <span className="text-[#67677a]">из 5</span>
                       </p>
                     </div>
                   </div>
@@ -83,7 +90,7 @@ export const LastReviews: React.FC = () => {
                     className="font-[700] text-[12px] md:text-[15px] leading-[142%] text-[#222] mb-[10px]"
                     style={{ fontFamily: "var(--Montserrat)" }}
                   >
-                    Инна
+                    {el.author_name}
                   </p>
                   <p
                     className="mb-[10px] text-[13px] md:text-[15px]"
@@ -94,13 +101,12 @@ export const LastReviews: React.FC = () => {
                       color: "#222",
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud
+                                      {el.review_text}
+
                   </p>
 
                   <p
-                    className=" text-[13px] w-max md:text-[15px] cursor-pointer underline text-[#6239e8] transition-colors duration-200 hover:text-[#9278ea]"
+                    className="text-[13px] w-max md:text-[15px] cursor-pointer underline text-[#6239e8] transition-colors duration-200 hover:text-[#9278ea]"
                     style={{
                       fontFamily: "var(--Montserrat)",
                       fontWeight: 500,
@@ -108,7 +114,7 @@ export const LastReviews: React.FC = () => {
                       textDecorationSkipInk: "none",
                     }}
                   >
-                    Показать полностью
+                    {t("showFull")}
                   </p>
                 </div>
               </SwiperSlide>
@@ -116,13 +122,11 @@ export const LastReviews: React.FC = () => {
           </Swiper>
         )}
 
-        {/* Кастомный контейнер для пагинации */}
         <div
           ref={paginationRef}
           className="custom-pagination absolute bottom-[-60px] left-1/2 transform -translate-x-1/2 z-10 flex gap-2"
         />
 
-        {/* Кнопка ВЛЕВО */}
         <button
           className="custom-prev cursor-pointer absolute bottom-[-50px] left-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-100 hover:shadow-md"
           aria-label="Prev"
@@ -143,7 +147,6 @@ export const LastReviews: React.FC = () => {
           </svg>
         </button>
 
-        {/* Кнопка ВПРАВО */}
         <button
           className="custom-next cursor-pointer absolute bottom-[-50px] right-0 z-10 bg-white border border-[#e3e3ea] rounded-full p-[10px] w-[32px] h-[32px] flex items-center justify-center shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-100 hover:shadow-md"
           aria-label="Next"
@@ -163,17 +166,17 @@ export const LastReviews: React.FC = () => {
           </svg>
         </button>
       </div>
+
       <ButtonGreenBorder
         link="/reviews"
         width={"100%"}
-        text="Все отзывы"
+        text={t("button")}
         className="mt-[70px]"
       />
 
-      {/* Стили для точного отображения 4 элементов и позиционирования пагинации */}
       <style jsx global>{`
         .swiper {
-          overflow-x: hidden; /* Убираем горизонтальный скролл */
+          overflow-x: hidden;
         }
         .swiper-slide {
           width: calc((1280px - 40px - 60px) / 4);
@@ -205,11 +208,11 @@ export const LastReviews: React.FC = () => {
           text-align: center;
           width: auto;
           display: inline-flex;
-          gap: 8px; /* Увеличил gap для лучшей видимости */
+          gap: 8px;
           z-index: 10;
         }
         .swiper-pagination-bullet {
-          width: 10px; /* Увеличил размер для видимости */
+          width: 10px;
           height: 10px;
           background: #e3e3ea;
           opacity: 1;

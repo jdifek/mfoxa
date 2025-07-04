@@ -1,49 +1,37 @@
 "use client";
+
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
+
+const QUESTIONS_COUNT = 5;
 
 const OftenQuestionsComponent: React.FC = () => {
-  const questionsMOK = [
-    {
-      name: "Частые вопросы Швидко Гроші",
-      content:
-        "Сайт рыбат екст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым для визуально-слухового восприятия.",
-    },
-    {
-      name: "Як перекласти фак?",
-      content: "Контент про быструю выплату.",
-    },
-    {
-      name: "Звідки пішов фак?",
-      content: "Контент про отсутствие залога.",
-    },
-    {
-      name: 'Як з\'явився жест "фак"?',
-      content: "Контент про низкий процент.",
-    },
-    {
-      name: "Що означає фак оф?",
-      content: "Контент про перевод на карту.",
-    },
-  ];
-
+  const t = useTranslations("faq");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleQuestion = (index: number) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
+    setOpenIndex(prev => (prev === index ? null : index));
   };
+
+  // Получаем вопросы из вложенного объекта questions
+  const questions = Array.from({ length: QUESTIONS_COUNT }).map((_, i) => ({
+    name: t(`questions.${i}.name`),
+    content: t(`questions.${i}.content`),
+  }));
+
   return (
     <>
       <h2
-        className="px-0 md:px-[20px] text-[20px] md:text-[36px] mt-[30px] md:mt-[50px]  font-[700] leading-[100%] text-[#222]  mb-[14px] sm:mb-[30px] md:mb-[50px]"
+        className="px-0 md:px-[20px] text-[20px] md:text-[36px] mt-[30px] md:mt-[50px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[30px] md:mb-[50px]"
         style={{ fontFamily: "var(--Jakarta)" }}
       >
-        Частые вопросы Швидко Гроші
+        {t("title")}
       </h2>
-      {questionsMOK.map((question, index) => {
-        const isOpen = openIndex === index;
 
+      {questions.map((question, index) => {
+        const isOpen = openIndex === index;
         return (
-          <div key={index} className=" px-0 md:px-[20px] ">
+          <div key={index} className="px-0 md:px-[20px]">
             <div className="w-full transition-all duration-200 ease-in-out hover:shadow-lg hover:bg-gray-100 mb-[10px] rounded-lg bg-white shadow-md">
               <div
                 className="flex justify-between items-center p-[16px] cursor-pointer"
@@ -63,8 +51,8 @@ const OftenQuestionsComponent: React.FC = () => {
                     <path
                       d="M1.77586 1.625L6 5.92325M6 5.92325L10.375 10.375M6 5.92325L1.625 10.375M6 5.92325L10.2241 1.62501"
                       stroke="#724DEA"
-                      stroke-width="2"
-                      stroke-linecap="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
                     />
                   </svg>
                 ) : (
@@ -78,8 +66,8 @@ const OftenQuestionsComponent: React.FC = () => {
                     <path
                       d="M1.84886 6.96437L7.8751 7.01677M7.8751 7.01677L14.1166 7.07104M7.8751 7.01677L7.92937 13.2582M7.8751 7.01677L7.8227 0.99054"
                       stroke="#724DEA"
-                      stroke-width="2"
-                      stroke-linecap="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
                     />
                   </svg>
                 )}

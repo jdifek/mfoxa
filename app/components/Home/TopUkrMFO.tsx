@@ -4,25 +4,29 @@ import Image from "next/image";
 import RatingDisplay from "./RatingDisplay";
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
+import { Mfo } from "@/app/services/HomeService";
 
-export const TopUkrMFO: React.FC = () => {
-  const tops = [
-    { name: "Швидко гроші", img: "/2.svg" },
-    { name: "Credit 7", img: "/1.svg" },
-    { name: "SLON Credit", img: "/3.svg" },
-    { name: "Moneyveo", img: "/4.svg" },
-    { name: "CreditPlus", img: "/4.svg" },
-    { name: "Miloan", img: "/6.svg" },
-    { name: "Moneyveo", img: "/4.svg" },
-    { name: "CreditPlus", img: "/4.svg" },
-    { name: "Miloan", img: "/6.svg" },
-  ];
+type TopUkrMFOProps = {
+  top_mfos: Mfo[];
+};
+
+export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
+  const t = useTranslations("TopUkrMFO");
 
   const [visibleCount, setVisibleCount] = useState(3);
 
   const handleShowMore = () => {
     setVisibleCount((prev) => prev + 3);
   };
+  const formatRating = (ratingStr: string | undefined) => {
+    if (!ratingStr) return ""; 
+    const rating = parseFloat(ratingStr);
+    if (isNaN(rating)) return "";
+  
+    return rating.toFixed(1).replace(".", ",");
+  };
+  
 
   return (
     <div className="w-full mt-[50px] px-[0px] md:px-[20px]">
@@ -30,25 +34,24 @@ export const TopUkrMFO: React.FC = () => {
         className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
         style={{ fontFamily: "var(--Jakarta)" }}
       >
-        ТОП украинских МФО по мнению заемщиков
+        {t("title")}
       </h2>
 
       <div
         className={clsx(
           "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[20px]",
-          visibleCount >= tops.length && "mb-[30px] md:mb-[50px]"
+          visibleCount >= top_mfos.length && "mb-[30px] md:mb-[50px]"
         )}
       >
-        {" "}
-        {tops.slice(0, visibleCount).map((top, index) => (
+        {top_mfos.slice(0, visibleCount).map((top, index) => (
           <div
             key={index}
-            className="h-[225px] w-full rounded-[20px] bg-white p-[16px] shadow-md"
+            className="w-full rounded-[20px] bg-white p-[16px] shadow-md"
           >
-            <header className="flex gap-[10px] items-center">
+            <header className="flex gap-[10px] items-center mb-[10px]">
               <Image
-                src={top.img}
-                alt=""
+                src={top.logo_url}
+                alt={top.name}
                 width={89}
                 height={50}
                 className="object-contain"
@@ -58,29 +61,62 @@ export const TopUkrMFO: React.FC = () => {
               </p>
             </header>
             <div className="mb-[10px] flex gap-[10px]">
-              <Image
-                src={"/Frame 163.svg"}
-                alt=""
-                width={74}
-                height={74}
-                className="object-contain"
+              <div className="relative w-[74px] h-[74px]">
+                <Image
+                  src="/Frame 163.png"
+                  alt="rating"
+                  width={74}
+                  height={74}
+                  className="object-contain"
+                />
+
+                {/* Контент поверх PNG */}
+                <div className="absolute inset-1 mt-2 flex flex-col items-center justify-center">
+                  <span className="text-[#82C600] text-[1
+                  5px] font-bold leading-none">
+                  {formatRating(String(top?.rating_average))}
+                  </span>
+                  <span className="text-black text-[10px] font-bold">
+                    {top?.rating_count} место
+                  </span>
+                </div>
+              </div>
+
+              <RatingDisplay
+                ratings={[
+                  {
+                    label: top.ratings.speed.label,
+                    value: top.ratings.speed.value,
+                  },
+                  {
+                    label: top.ratings.conditions.label,
+                    value: top.ratings.conditions.value,
+                  },
+                  {
+                    label: top.ratings.support.label,
+                    value: top.ratings.support.value,
+                  },
+                  {
+                    label: top.ratings.website.label,
+                    value: top.ratings.website.value,
+                  },
+                ]}
               />
-              <RatingDisplay />
             </div>
             <ButtonGreenBorder
               link="/mfo"
               className="mt-[20px]"
               width="100%"
-              text="Подробнее"
+              text={t("details")}
             />
           </div>
         ))}
       </div>
 
-      {visibleCount < tops.length && (
+      {visibleCount < top_mfos.length && (
         <div className="px-0 md:px-[20px]">
           <ButtonGreenBorder
-            text="Показать еще"
+            text={t("showMore")}
             width="100%"
             className="mt-[20px] md:mt-[40px] mb-[30px] md:mb-[50px]"
             onClick={handleShowMore}

@@ -1,12 +1,32 @@
-"use client"
+// components/Footer.tsx
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
+import { getTranslations } from "next-intl/server";
 
-const Footer: React.FC = () => {
-  const [language, setLanguage] = useState<"uk" | "ru">("uk");
+type FooterProps = {
+  locale: string;
+};
+
+const Footer: React.FC<FooterProps> = async ({ locale }) => {
+  const t = await getTranslations({ locale, namespace: "Footer" });
+
+  // Debug: Log translations and locale
+  console.log("Footer translations:", {
+    locale,
+    about: t("nav.about"),
+    description: t("description"),
+    copyright: t("copyright"),
+    ukrainian: t("language.ukrainian"),
+    russian: t("language.russian"),
+  });
 
   const socialIcons = ["71", "70", "69", "68", "67"];
+  const navLinks = [
+    { name: t("nav.about") || "Про нас", href: `/${locale}/about` },
+    { name: t("nav.contacts") || "Контакти", href: `/${locale}/contacts` },
+    { name: t("nav.sitemap") || "Карта сайту", href: `/${locale}/sitemap` },
+  ];
 
   return (
     <footer
@@ -19,52 +39,50 @@ const Footer: React.FC = () => {
       <div className="flex justify-between items-center mb-[20px] flex-col md:flex-row">
         <Image
           src={"/logo.svg"}
-          alt="Company logo"
+          alt={t("logoAlt") || "Company logo"}
           width={132}
           height={30}
           className="mb-[20px] md:mb-0"
         />
 
-        {/* НАВИГАЦИЯ */}
+        {/* Navigation */}
         <div className="flex gap-[20px] md:gap-[30px] mb-[20px] md:mb-0 flex-col md:flex-row">
-          {[
-            { name: "О нас", href: "/about" },
-            { name: "Контакты", href: "/contacts" },
-            { name: "Карта сайта", href: "/sitemap" },
-          ].map((el, i) => (
+          {navLinks.map((el, i) => (
             <Link href={el.href} key={i}>
-              <p className=" font-medium text-[14px] leading-[136%] text-center text-[#222] cursor-pointer hover:text-[#724dea] transition-colors duration-200">
+              <p className="font-medium text-[14px] leading-[136%] text-center text-[#222] cursor-pointer hover:text-[#724dea] transition-colors duration-200">
                 {el.name}
               </p>
             </Link>
           ))}
         </div>
 
-        {/* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ для мобильных */}
+        {/* Language Switcher for Mobile */}
         <div className="flex md:hidden mb-[20px] justify-center gap-[20px]">
-          <p
-            onClick={() => setLanguage("uk")}
-            className={` font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
-              language === "uk"
-                ? "text-[#724dea]"
-                : "text-[#9393a3] hover:text-[#724dea]"
-            }`}
-          >
-            Українська
-          </p>
-          <p
-            onClick={() => setLanguage("ru")}
-            className={` font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
-              language === "ru"
-                ? "text-[#724dea]"
-                : "text-[#9393a3] hover:text-[#724dea]"
-            }`}
-          >
-            Русский
-          </p>
+          <Link href="/ua">
+            <p
+              className={`font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
+                locale === "ua"
+                  ? "text-[#724dea]"
+                  : "text-[#9393a3] hover:text-[#724dea]"
+              }`}
+            >
+              {t("language.ukrainian") || "Українська"}
+            </p>
+          </Link>
+          <Link href="/ru">
+            <p
+              className={`font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
+                locale === "ru"
+                  ? "text-[#724dea]"
+                  : "text-[#9393a3] hover:text-[#724dea]"
+              }`}
+            >
+              {t("language.russian") || "Русский"}
+            </p>
+          </Link>
         </div>
 
-        {/* СОЦСЕТИ */}
+        {/* Social Icons */}
         <div className="flex gap-[10px] mb-[20px] md:mb-0 md:flex-row justify-center">
           {socialIcons.map((num) => (
             <a
@@ -73,11 +91,11 @@ const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer transform transition-transform duration-200 hover:scale-110"
-              aria-label="Social media link"
+              aria-label={t("socialIconAlt") || "Social media link"}
             >
               <Image
                 src={`/Frame ${num}.svg`}
-                alt="Social media icon"
+                alt={t("socialIconAlt") || "Social media icon"}
                 width={37}
                 height={37}
                 className="w-[30px] h-[30px] md:w-[37px] md:h-[37px]"
@@ -87,39 +105,40 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* ОПИСАНИЕ */}
-      <p className="mb-[20px]  font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
-        Ліцензія НБУ від 08.03.2024 р. на надання коштів та банківських металів
-        у кредит, безстрокова. Перший сервіс онлайн-кредитів в Україні, в якому
-        можна швидко отримати гроші на карту будь-якого українського банку.
+      {/* Description */}
+      <p className="mb-[20px] font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
+        {t("description") ||
+          "Ліцензія НБУ від 08.03.2024 р. на надання коштів та банківських металів у кредит, безстрокова. Перший сервіс онлайн-кредитів в Україні, в якому можна швидко отримати гроші на карту будь-якого українського банку."}
       </p>
 
-      {/* НИЖНЯЯ ЛИНИЯ */}
+      {/* Bottom Line */}
       <div className="hidden md:flex justify-between flex-col md:flex-row gap-[20px] md:gap-0">
-        <p className=" font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
-          © 2013-2025 ТОВ «МАНІВЕО ШВИДКА ФІНАНСОВА ДОПОМОГА».
+        <p className="font-medium text-[11px] leading-[145%] text-center text-[#67677a]">
+          {t("copyright") || "© 2013-2025 ТОВ «МАНІВЕО ШВИДКА ФІНАНСОВА ДОПОМОГА»."}
         </p>
         <div className="gap-[20px] flex flex-col md:flex-row justify-center">
-          <p
-            onClick={() => setLanguage("uk")}
-            className={` font-medium text-[14px] leading-[136%] cursor-pointer ${
-              language === "uk"
-                ? "text-[#724dea]"
-                : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"
-            }`}
-          >
-            Українська
-          </p>
-          <p
-            onClick={() => setLanguage("ru")}
-            className={` font-medium text-[14px] leading-[136%] cursor-pointer ${
-              language === "ru"
-                ? "text-[#724dea]"
-                : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"
-            }`}
-          >
-            Русский
-          </p>
+          <Link href="/ua">
+            <p
+              className={`font-medium text-[14px] leading-[136%] cursor-pointer ${
+                locale === "ua"
+                  ? "text-[#724dea]"
+                  : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"
+              }`}
+            >
+              {t("language.ukrainian") || "Українська"}
+            </p>
+          </Link>
+          <Link href="/ru">
+            <p
+              className={`font-medium text-[14px] leading-[136%] cursor-pointer ${
+                locale === "ru"
+                  ? "text-[#724dea]"
+                  : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"
+              }`}
+            >
+              {t("language.russian") || "Русский"}
+            </p>
+          </Link>
         </div>
       </div>
     </footer>
