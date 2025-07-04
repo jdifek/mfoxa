@@ -26,8 +26,21 @@ export type CreditOffer = {
   real_annual_rate: CreditRange;
 };
 
+export interface MfoCatalogOffer {
+  id: number;
+  client_type: "new" | "repeat";
+  amount_from: number;
+  amount_to: number;
+  term_from: number;
+  term_to: number;
+  rate: number;
+  real_annual_rate_from: number;
+  real_annual_rate_to: number;
+}
 export type Mfo = {
   id: number;
+  catalog_offers: MfoCatalogOffer[];
+
   slug: string;
   name: string;
   h1_title: string;
