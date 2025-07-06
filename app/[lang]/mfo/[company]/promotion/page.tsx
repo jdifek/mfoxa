@@ -99,7 +99,7 @@ export default async function Promotion({ params }: Props) {
 
   return (
     <>
-      <Bread />
+      <Bread  lang={lang as "ru" | "ua"}/>
       <div className="px-0 md:px-[20px]">
         <h2
           className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222]"

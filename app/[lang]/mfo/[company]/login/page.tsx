@@ -55,7 +55,7 @@ const Login: NextPage<Props> = async ({ params }) => {
 
   return (
     <>
-      <Bread />
+      <Bread  lang={lang as "ru" | "ua"}/>
       <div className="px-0 md:px-[20px]">
         <h1
           className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"

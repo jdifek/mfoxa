@@ -120,7 +120,7 @@ export default async function CatalogPage({ params }: PageProps) {
   return (
     <>
       <MicrodataCompany company={companySlug} />
-      <Bread />
+      <Bread lang={lang as "ua" | "ru"} />
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] md:p-[30px] sm:p-[20px] mb-[30px] md:mb-[50px] bg-white rounded-lg mt-[10px]">
           <div className="flex justify-between flex-col md:flex-row md:items-center">

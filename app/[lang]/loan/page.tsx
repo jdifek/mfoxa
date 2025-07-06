@@ -1,7 +1,7 @@
-
 import { Metadata } from "next";
 import LoanClientPage from "@/app/components/LoanClientPage";
 import { getTranslations } from "next-intl/server";
+import { catalogService } from "@/app/services/catalogService";
 
 export async function generateMetadata({
   params,
@@ -17,30 +17,30 @@ export async function generateMetadata({
   });
 
   return {
-    title: t("loans.title") || "Займы онлайн – взять микрозайм до 100 000 рублей | Займи.ру",
+    title:
+      t("loans.title") ||
+      "Займы онлайн – взять микрозайм до 100 000 рублей | Займи.ру",
     description:
       t("loans.description") ||
       "Оформите займ до 100 000 рублей на срочные нужды через Займи.ру. Быстро, удобно и безопасно. Сравните условия МФО и выберите лучшее предложение.",
     keywords: [
-      lang === "uk"
-        ? "позики онлайн"
-        : "займы онлайн",
+      lang === "uk" ? "позики онлайн" : "займы онлайн",
       "микрозайм",
       "МФО Украина",
-      lang === "uk"
-        ? "взяти позику"
-        : "взять займ",
+      lang === "uk" ? "взяти позику" : "взять займ",
       "быстрые займы",
     ],
     openGraph: {
-      title: t("loans.title") || "Займы онлайн – взять микрозайм до 100 000 рублей | Займи.ру",
+      title:
+        t("loans.title") ||
+        "Займы онлайн – взять микрозайм до 100 000 рублей | Займи.ру",
       description:
         t("loans.description") ||
         "Оформите займ до 100 000 рублей на срочные нужды через Займи.ру. Быстро, удобно и безопасно. Сравните условия МФО и выберите лучшее предложение.",
       url: "https://mfoxa.com.ua/loans",
       siteName: "Займи.ру",
       type: "website",
-    }
+    },
   };
 }
 
@@ -57,12 +57,11 @@ export default async function LoanPageWrapper({
   const { count } = await searchParams;
   const visibleCount = count ? parseInt(count, 10) : 3;
 
- 
+  const data = await catalogService.getAll({
+    lang: lang === "ua" ? "uk" : "ru",
+    type: "loan",
+  });
+  console.log(data, 'data');
 
-  return (
-    <LoanClientPage
-      visibleCount={visibleCount}
-      locale={lang}
-    />
-  );
+  return <LoanClientPage data={data} visibleCount={visibleCount} locale={lang} />;
 }

@@ -3,6 +3,7 @@ import axios from "axios";
 
 export interface MfoRating {
   value: number;
+  position: number;
   label: string;
 }
 
@@ -90,11 +91,17 @@ export interface MfoDetails {
   [key: string]: any;
 }
 
-export const getMfoDetails = async (slug: string, lang: "uk" | "ru" | "en" = "uk"): Promise<MfoDetails> => {
-  const response = await axios.get<MfoDetails>(`https://mfo.qissseee.tech/api/v1/mfos/${slug}`, {
-    params: {
-      lang,
-    },
-  });
+export const getMfoDetails = async (
+  slug: string,
+  lang: "uk" | "ru" | "en" = "uk"
+): Promise<MfoDetails> => {
+  const response = await axios.get<MfoDetails>(
+    `https://mfo.qissseee.tech/api/v1/mfos/${slug}`,
+    {
+      params: {
+        lang,
+      },
+    }
+  );
   return response.data;
 };

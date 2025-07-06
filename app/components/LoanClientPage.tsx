@@ -12,34 +12,43 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { getMFOs } from "../services/mfosService";
 import { MfoDetails } from "../services/getMfoDetailsService";
+import {
+  CatalogPageFull,
+  GetCatalogListResponse,
+} from "../services/catalogService";
 
 type LoanClientPageProps = {
   visibleCount: number;
   locale: string;
+  data: GetCatalogListResponse;
+  page?: CatalogPageFull;
 };
 
 const LoanClientPage: React.FC<LoanClientPageProps> = ({
   visibleCount,
   locale,
+  data,
+  page,
 }) => {
   const [currentVisibleCount, setVisibleCount] = useState(visibleCount);
   const [credits, setCredits] = useState<MfoDetails[]>([]);
   const t = useTranslations("Loans");
-  const options = locale === "ua"
-  ? [
-      { label: "За рейтингом ↓", value: "rating" },      // рейтинг по убыванию
-      { label: "За сумою ↑", value: "amount_asc" },      // сумма по возрастанию
-      { label: "За сумою ↓", value: "amount_desc" },     // сумма по убыванию
-      { label: "За ставкою ↑", value: "rate_asc" },      // ставка по возрастанию
-      { label: "За ставкою ↓", value: "rate_desc" },     // ставка по убыванию
-    ]
-  : [
-      { label: "По рейтингу ↓", value: "rating" },
-      { label: "По сумме ↑", value: "amount_asc" },
-      { label: "По сумме ↓", value: "amount_desc" },
-      { label: "По ставке ↑", value: "rate_asc" },
-      { label: "По ставке ↓", value: "rate_desc" },
-    ];
+  const options =
+    locale === "ua"
+      ? [
+          { label: "За рейтингом ↓", value: "rating" }, // рейтинг по убыванию
+          { label: "За сумою ↑", value: "amount_asc" }, // сумма по возрастанию
+          { label: "За сумою ↓", value: "amount_desc" }, // сумма по убыванию
+          { label: "За ставкою ↑", value: "rate_asc" }, // ставка по возрастанию
+          { label: "За ставкою ↓", value: "rate_desc" }, // ставка по убыванию
+        ]
+      : [
+          { label: "По рейтингу ↓", value: "rating" },
+          { label: "По сумме ↑", value: "amount_asc" },
+          { label: "По сумме ↓", value: "amount_desc" },
+          { label: "По ставке ↑", value: "rate_asc" },
+          { label: "По ставке ↓", value: "rate_desc" },
+        ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,23 +66,28 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
 
   return (
     <>
-      <Bread />
+      <Bread lang={locale as "ru" | "ua"} />
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px] md:mb-[30px] bg-white rounded-lg mt-[10px] md:mt-[30px]">
-          <h2 className="mb-[20px] font-bold text-[20px] md:text-[36px] leading-[100%] text-[#222]">
-            {t("title") || "Займы"}
-          </h2>
+          <h1 className="mb-[20px] font-bold text-[20px] md:text-[36px] leading-[100%] text-[#222]">
+            {page?.h1_title ? page.h1_title : t("title") || "Займы"}
+          </h1>
           <p className="font-medium text-[13px] md:text-[15px] leading-[133%] text-[#222]">
-            {t("description") ||
-              "Подберите и оформите лучший для себя займ на срочную покупку или хозяйственные нужды. Получение микрозайма от 1 000 до 100 000 рублей через сервис «Займи.ру»"}
+            {page?.description_under_title
+              ? page?.description_under_title
+              : t("description") ||
+                "Подберите и оформите лучший для себя займ на срочную покупку или хозяйственные нужды. Получение микрозайма от 1 000 до 100 000 рублей через сервис «Займи.ру»"}
           </p>
         </div>
       </div>
 
-      <AboutButtons locale={locale} />
+      <AboutButtons data={data} />
 
       <div className="px-0 md:px-[20px]">
-        <Dropdown options={options} endpoint="https://mfo.qissseee.tech/api/v1/mfos" />
+        <Dropdown
+          options={options}
+          endpoint="https://mfo.qissseee.tech/api/v1/mfos"
+        />
       </div>
 
       <div className="px-0 md:px-[20px] mb-5">

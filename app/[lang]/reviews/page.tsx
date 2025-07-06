@@ -12,15 +12,15 @@ export async function generateMetadata({
   const t = await getTranslations({ locale: lang, namespace: "Metadata" });
 
   return {
-    title: t("reviews.title") || "Отзывы об МФО Украины — Честные мнения клиентов",
+    title: t("reviewss.title") || "Отзывы об МФО Украины — Честные мнения клиентов",
     description:
-      t("reviews.description") ||
+      t("reviewss.description") ||
       "Читайте отзывы клиентов о микрофинансовых организациях Украины. Реальный опыт, оценки и советы от заемщиков.",
     keywords: ["отзывы МФО", "МФО Украина", "займы онлайн", "мнение клиентов"],
     openGraph: {
-      title: t("reviews.title") || "Отзывы об МФО Украины",
+      title: t("reviewss.title") || "Отзывы об МФО Украины",
       description:
-        t("reviews.description") ||
+        t("reviewss.description") ||
         "Узнайте, что говорят клиенты о микрокредитных компаниях Украины.",
       url: "https://mfoxa.com.ua/reviews",
       type: "website",

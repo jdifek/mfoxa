@@ -122,7 +122,7 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
           onClose={() => setIsModalOpen(false)}
         />
       )}
-      <Bread />
+      <Bread lang={locale as "ru" | "ua"} />
 
       <div className="px-0 md:px-[20px]">
         <h2
@@ -159,8 +159,8 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
       <div className="px-0 md:px-[20px]">
         <div className="flex gap-[10px] flex-row sm:justify-between items-center">
           <Dropdown
-mfoId={data?.data?.[0]?.mfo?.id ?? 0}
-endpoint="https://mfo.qissseee.tech/api/v1/questions"
+            mfoId={data?.data?.[0]?.mfo?.id ?? 0}
+            endpoint="https://mfo.qissseee.tech/api/v1/questions"
             options={options}
           />
 

@@ -159,7 +159,7 @@ export default function CompanyRewiwsClient({
 
   return (
     <>
-      <Bread />
+      <Bread lang={lang as "ru" | "ua"} />
 
       <div className="px-0 md:px-[20px]">
         <h2

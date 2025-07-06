@@ -10,6 +10,7 @@ import DetailsText from "../components/DetailsText";
 import Bread from "../components/Bread";
 import { MfoListStructuredData } from "../structured-data/MfoListStructuredData";
 import { PageDatesResponse } from "../services/PageDatesService";
+import { MfoDetails } from "../services/getMfoDetailsService";
 
 const ratings = [
   { key: "speed", value: 4.8, color: "#00BDA5" },
@@ -78,6 +79,7 @@ type MfoPageClientProps = {
   isMobile: boolean;
   locale: string;
   dates: PageDatesResponse;
+  data: MfoDetails[];
 };
 
 export default async function MfoPageClient({
@@ -86,6 +88,7 @@ export default async function MfoPageClient({
   isMobile,
   locale,
   dates,
+  data,
 }: MfoPageClientProps) {
   const { mfo, ratings: ratingsT } = translations;
 
@@ -98,11 +101,17 @@ export default async function MfoPageClient({
     reviewCount: 100 + index * 10,
     position: index + 1,
   }));
+  const formatRating = (ratingStr: string | undefined) => {
+    if (!ratingStr) return "";
+    const rating = parseFloat(ratingStr);
+    if (isNaN(rating)) return "";
 
+    return rating.toFixed(1).replace(".", ",");
+  };
   return (
     <>
       <MfoListStructuredData companies={companies} />
-      <Bread />
+      <Bread lang={locale as "ua" | "ru"} />
 
       <div className="p-[10px] md:p-[30px] mb-[20px] sm:mb-[30px] md:mb-[50px] bg-white rounded-lg mx-[0px] md:mx-[20px]">
         <h2
@@ -121,14 +130,14 @@ export default async function MfoPageClient({
 
       {isMobile ? (
         <div className="px-[0px] md:px-[20px] mb-[20px] flex flex-wrap gap-[20px]">
-          {tops.slice(0, visibleCount).map((top, i) => (
+          {data.slice(0, visibleCount).map((top, i) => (
             <div
               key={i}
               className="w-full rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md"
             >
               <header className="flex gap-[10px] items-center mb-[10px]">
                 <Image
-                  src={top.img}
+                  src={top.logo_url}
                   alt={top.name}
                   width={89}
                   height={50}
@@ -137,27 +146,44 @@ export default async function MfoPageClient({
                 <p className="text-[#222] font-bold text-[16px]">{top.name}</p>
               </header>
               <div className="flex gap-[10px]">
-                <Image
-                  src={"/Frame 163.svg"}
-                  alt=""
-                  width={10}
-                  height={10}
-                  style={{ height: "74px", width: "74px" }}
-                />
+                <div className="relative w-[74px] h-[74px]">
+                  <Image
+                    src="/Frame 163.png"
+                    alt="rating"
+                    width={74}
+                    height={74}
+                    className="object-contain"
+                  />
+
+                  {/* Контент поверх PNG */}
+                  <div className="absolute inset-1 mt-3 flex flex-col items-center justify-center">
+                    <span className="text-[#82C600] text-[15px] font-bold leading-none">
+                      {formatRating(String(top?.rating_average))}
+                    </span>
+                    <span className="text-black text-[10px] font-bold">
+                      {top?.rating_count} место
+                    </span>
+                  </div>
+                </div>
                 <div className="grid grid-cols-2 gap-[16px]">
-                  {ratings.map((item, index) => (
+                  {Object.entries(top.ratings).map(([key, rating], index) => (
                     <div
                       key={index}
                       className="flex gap-[10px] items-center"
-                      aria-label={`${ratingsT(item.key)}: ${item.value}`}
+                      aria-label={`${ratingsT(key)}: ${rating.value}`}
                     >
-                      <CircleRating value={item.value} color={item.color} />
+                      <CircleRating
+                        value={rating.value}
+                        color={
+                          ratings.find((r) => r.key === key)?.color || "#000"
+                        }
+                      />{" "}
                       <div>
                         <p className="text-[11px] font-medium text-[#222]">
-                          {ratingsT(item.key)}
+                          {rating.label ?? ratingsT(key)}
                         </p>
                         <p className="text-[11px] text-[#9393a3] font-medium">
-                          {mfo("rank", { rank: 12 })}
+                          {mfo("rank", { rank: rating.position })}
                         </p>
                       </div>
                     </div>
@@ -174,28 +200,45 @@ export default async function MfoPageClient({
         </div>
       ) : (
         <div className="p-[30px] mb-[50px] bg-white rounded-lg mx-[20px] mt-[30px]">
-          {tops.slice(0, visibleCount).map((top, i) => (
+          {data.slice(0, visibleCount).map((top, i) => (
             <React.Fragment key={i}>
               <div className="flex gap-[20px] items-center">
-                <Image
-                  className="w-[210px] h-[72px] object-contain"
-                  src={"/Frame 163.png"}
-                  width={210}
-                  height={72}
-                  alt="img"
-                />
+                <div className="relative w-[74px] h-[74px]">
+                  <Image
+                    src="/Frame 163.png"
+                    alt="rating"
+                    width={74}
+                    height={74}
+                    className="object-contain"
+                  />
+
+                  {/* Контент поверх PNG */}
+                  <div className="absolute inset-1 mt-3 flex flex-col items-center justify-center">
+                    <span className="text-[#82C600] text-[15px] font-bold leading-none">
+                      {formatRating(String(top?.rating_average))}
+                    </span>
+                    <span className="text-black text-[10px] font-bold">
+                      {top?.rating_count} место
+                    </span>
+                  </div>
+                </div>
                 <div className="flex flex-col gap-[8px]">
                   <p className="font-medium text-[15px] leading-[133%] text-[#222]">
                     {mfo("ratingsTitle", { name: top.name })}
                   </p>
                   <div className="grid grid-cols-4 gap-[16px] text-black text-sm">
-                    {ratings.map((item, index) => (
+                    {Object.entries(top.ratings).map(([key, rating], index) => (
                       <div
                         key={index}
                         className="flex items-center gap-[10px]"
-                        aria-label={`${ratingsT(item.key)}: ${item.value}`}
+                        aria-label={`${ratingsT(key)}: ${rating.value}`}
                       >
-                        <CircleRating value={item.value} color={item.color} />
+                        <CircleRating
+                          value={rating.value}
+                          color={
+                            ratings.find((r) => r.key === key)?.color || "#000"
+                          }
+                        />
                         <div className="flex flex-col">
                           <span
                             style={{
@@ -206,7 +249,7 @@ export default async function MfoPageClient({
                               color: "#222",
                             }}
                           >
-                            {ratingsT(item.key)}
+                            {rating.label ?? ratingsT(key)}
                           </span>
                           <p
                             style={{
@@ -217,7 +260,7 @@ export default async function MfoPageClient({
                               color: "#9393a3",
                             }}
                           >
-                            {mfo("rank", { rank: 12 })}
+                            {mfo("rank", { rank: rating.position })}
                           </p>
                         </div>
                       </div>
@@ -253,7 +296,8 @@ export default async function MfoPageClient({
           aria-label="Дата додавання"
         >
           {dates.date_published
-            ?  mfo("dateAdded") + new Date(dates.date_published).toLocaleDateString("ru-RU", {
+            ? mfo("dateAdded") +
+              new Date(dates.date_published).toLocaleDateString("ru-RU", {
                 day: "2-digit",
                 month: "2-digit",
                 year: "numeric",
@@ -264,8 +308,9 @@ export default async function MfoPageClient({
           className="font-medium text-[13px] leading-[138%] text-[#67677a]"
           aria-label="Дата оновлення"
         >
-           {dates.date_modified
-            ?  mfo("dateUpdated") + new Date(dates.date_modified).toLocaleDateString("ru-RU", {
+          {dates.date_modified
+            ? mfo("dateUpdated") +
+              new Date(dates.date_modified).toLocaleDateString("ru-RU", {
                 day: "2-digit",
                 month: "2-digit",
                 year: "numeric",

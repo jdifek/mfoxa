@@ -59,7 +59,7 @@ const ContactPage: React.FC<ContactPageProps> = async ({ params }) => {
   return (
     <>
       <ContactStructuredData />
-      <Bread />
+      <Bread lang={lang as 'ua' | 'ru'}/>
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px] sm:mb-[30px] md:mb-[50px] bg-white rounded-lg mt-[10px] md:mt-[30px]">
           <h2

@@ -25,7 +25,7 @@ const About: React.FC<AboutProps> = async ({ params }) => {
 
   return (
     <>
-      <Bread />
+      <Bread lang={lang as "ua" | "ru"} />
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[30px] sm:mb-[40px] md:mb-[50px] bg-white rounded-lg mt-[10px] md:mt-[30px]">
           <h2
@@ -34,9 +34,7 @@ const About: React.FC<AboutProps> = async ({ params }) => {
           >
             {t("team.title") || "Наша команда експертів"}
           </h2>
-          <p
-            className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] leading-[138%] text-[#222]"
-          >
+          <p className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] leading-[138%] text-[#222]">
             {t("team.description") ||
               "Маркетплейс mfoxa.com.ua створений командою професіоналів фінансової сфери..."}
           </p>
@@ -58,7 +56,8 @@ const About: React.FC<AboutProps> = async ({ params }) => {
                 />
                 <div className="flex flex-col gap-[5px]">
                   <h3 className="font-bold text-[16px] sm:md:text-[17px] md:text-[20px] leading-[100%] text-[#222]">
-                  {t("members.0.name") || "Бондаренко Ольга Владимировна"}                  </h3>
+                    {t("members.0.name") || "Бондаренко Ольга Владимировна"}{" "}
+                  </h3>
                   <p className="font-medium text-[11px] leading-[145%] text-[#67677a]">
                     {t("members.0.role") || "СЕО mfoxa.com.ua"}
                   </p>
@@ -66,27 +65,29 @@ const About: React.FC<AboutProps> = async ({ params }) => {
               </div>
               <hr className="mb-[10px]" />
               <p className="font-medium text-[11px] leading-[145%] text-[#67677a] mb-[10px]">
-              {t("members.0.educationLabel") || "Образование"}              </p>
+                {t("members.0.educationLabel") || "Образование"}{" "}
+              </p>
               <p className="mb-[10px] font-bold text-[14px] leading-[136%] text-[#222]">
-              {t("members.0.education") ||
-                "Магистр финансов и банковского дела, Киевский национальный экономический университет им. Вадима Гетьмана, 2012 г."}
-            </p>
+                {t("members.0.education") ||
+                  "Магистр финансов и банковского дела, Киевский национальный экономический университет им. Вадима Гетьмана, 2012 г."}
+              </p>
               <hr className="mb-[10px]" />
               <p className="font-medium text-[11px] leading-[145%] text-[#67677a] mb-[10px]">
-              {t("members.0.experienceLabel") || "Опыт работы"}
-            </p>
-            <p className="mb-[10px] font-bold text-[14px] leading-[136%] text-[#222]">
-              {t("members.0.experience") ||
-                "Более 10 лет опыта в банковском секторе Украины, работала в ПАО «ПриватБанк» на позиции старшего кредитного аналитика."}
-            </p>
+                {t("members.0.experienceLabel") || "Опыт работы"}
+              </p>
+              <p className="mb-[10px] font-bold text-[14px] leading-[136%] text-[#222]">
+                {t("members.0.experience") ||
+                  "Более 10 лет опыта в банковском секторе Украины, работала в ПАО «ПриватБанк» на позиции старшего кредитного аналитика."}
+              </p>
               <hr className="mb-[10px]" />
               <p className="font-medium text-[11px] leading-[145%] text-[#67677a] mb-[10px]">
-              {t("members.0.qualificationLabel") || "Дополнительная квалификация"}
-            </p>
-            <p className="font-bold text-[14px] leading-[136%] text-[#222]">
-              {t("members.0.qualification") ||
-                "Сертификат Национального банка Украины по программе «Кредитный риск и управление портфелем», № KR-2019-128 от 15.09.2019 г."}
-            </p>
+                {t("members.0.qualificationLabel") ||
+                  "Дополнительная квалификация"}
+              </p>
+              <p className="font-bold text-[14px] leading-[136%] text-[#222]">
+                {t("members.0.qualification") ||
+                  "Сертификат Национального банка Украины по программе «Кредитный риск и управление портфелем», № KR-2019-128 от 15.09.2019 г."}
+              </p>
             </div>
           ))}
         </div>

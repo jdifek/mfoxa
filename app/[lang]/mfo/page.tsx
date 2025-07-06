@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { headers } from "next/headers";
 import { UAParser } from "ua-parser-js";
 import { getPageDates } from "@/app/services/PageDatesService";
+import { getMFOs } from "@/app/services/mfosService";
 
 export async function generateMetadata({
   params,
@@ -52,7 +53,10 @@ export default async function MfoPage({
 
   // Получение переводов
   const mfoT = await getTranslations({ locale: lang, namespace: "MfoPage" });
-  const ratingsT = await getTranslations({ locale: lang, namespace: "RatingDisplay" });
+  const ratingsT = await getTranslations({
+    locale: lang,
+    namespace: "RatingDisplay",
+  });
 
   // Отладка: вывести переводы
   console.log(`MfoPage translations for lang: ${lang}`, {
@@ -67,15 +71,17 @@ export default async function MfoPage({
   const userAgent = headersList.get("user-agent") || "";
   const parser = new UAParser(userAgent);
   const isMobile = parser.getDevice().type === "mobile";
- 
+
   const dates = await getPageDates({ type: "mfo" });
 
-  console.log(dates, 'dates');
-  
+  console.log(dates, "dates");
+  const data = await getMFOs({ lang: lang === "ua" ? "uk" : "ru" });
+  console.log(data, "data.best_credits");
 
   return (
     <MfoPageClient
-    dates={dates}
+      dates={dates}
+      data={data}
       translations={{ mfo: mfoT, ratings: ratingsT }}
       visibleCount={visibleCount}
       isMobile={isMobile}

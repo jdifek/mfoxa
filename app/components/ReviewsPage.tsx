@@ -32,20 +32,19 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
     [t("sort.rating") || "По рейтингу" || "rating_desc"]: "rating_desc",
   };
   const options =
-  locale === "ua"
-    ? [
-        { label: "Спочатку нові", value: "newest" },
-        { label: "За корисністю", value: "helpful" },
-        { label: "За рейтингом ↓", value: "rating_desc" },
-        { label: "За рейтингом ↑", value: "rating_asc" },
-      ]
-    : [
-        { label: "Сначала новые", value: "newest" },
-        { label: "По полезности", value: "helpful" },
-        { label: "По рейтингу ↓", value: "rating_desc" },
-        { label: "По рейтингу ↑", value: "rating_asc" },
-      ];
-
+    locale === "ua"
+      ? [
+          { label: "Спочатку нові", value: "newest" },
+          { label: "За корисністю", value: "helpful" },
+          { label: "За рейтингом ↓", value: "rating_desc" },
+          { label: "За рейтингом ↑", value: "rating_asc" },
+        ]
+      : [
+          { label: "Сначала новые", value: "newest" },
+          { label: "По полезности", value: "helpful" },
+          { label: "По рейтингу ↓", value: "rating_desc" },
+          { label: "По рейтингу ↑", value: "rating_asc" },
+        ];
 
   const selectedSort = sortMap[selectedSortKey] || "newest";
 
@@ -56,6 +55,7 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
   return (
     <>
       <Bread />
+     
 
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px] sm:mb-[50px] md:mb-[50px] bg-white rounded-lg">
