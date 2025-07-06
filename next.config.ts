@@ -3,9 +3,9 @@
 const withNextIntl = require("next-intl/plugin")("./app/i18n/request.ts");
 
 const nextConfig = {
-  experimental: {
-    optimizeCss: false, // отключает lightningcss
-  },
+  // experimental: {
+  //   optimizeCss: false, // отключает lightningcss
+  // },
   images: {
     domains: [
       "via.placeholder.com",
