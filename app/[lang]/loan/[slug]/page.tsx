@@ -1,5 +1,6 @@
 import LoanClientPage from "@/app/components/LoanClientPage";
 import { catalogService } from "@/app/services/catalogService";
+import { getPageDates } from "@/app/services/PageDatesService";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
@@ -71,14 +72,19 @@ export default async function LoanDescription({
     slug,
     lang: lang === "ua" ? "uk" : "ru",
   });
+  const dates = await getPageDates({ type: "loans" });
+ 
+  console.log(dates, "dates");
 
-  console.log(res);
+  console.log(res, 'resres');
 
   return (
     <LoanClientPage
       page={res.page}
-      mfos={res.mfos}
+      faqs={res.page.faqs}
+      dates={dates}
       data={data}
+      slug={slug}
       visibleCount={visibleCount}
       locale={lang}
     />

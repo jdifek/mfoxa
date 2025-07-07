@@ -12,10 +12,14 @@ import { MfoDetails } from "../services/getMfoDetailsService";
 type CreditsListProps = {
   locale: string;
   visibleCount: number;
-  mfos?: MfoDetails[]
+  slug: string;
 };
 
-const CreditsList: React.FC<CreditsListProps> = ({ mfos,locale, visibleCount }) => {
+const CreditsList: React.FC<CreditsListProps> = ({
+  slug,
+  locale,
+  visibleCount,
+}) => {
   const t = useTranslations("Loans");
   const searchParams = useSearchParams();
   const [credits, setCredits] = useState<MfoDetails[]>([]);
@@ -30,7 +34,13 @@ const CreditsList: React.FC<CreditsListProps> = ({ mfos,locale, visibleCount }) 
       try {
         const data = await getMFOs({
           lang: locale === "ua" ? "uk" : "ru",
-          sort: sortParam as "rating" | "amount_asc" | "amount_desc" | "rate_asc" | "rate_desc",
+          catalog_page: slug,
+          sort: sortParam as
+            | "rating"
+            | "amount_asc"
+            | "amount_desc"
+            | "rate_asc"
+            | "rate_desc",
         });
         setCredits(data);
         console.log("CreditsList data:", data, "sort:", sortParam);
@@ -51,7 +61,7 @@ const CreditsList: React.FC<CreditsListProps> = ({ mfos,locale, visibleCount }) 
         <p>{t("noData") || "Нет доступных кредитов"}</p>
       ) : (
         <div className="flex justify-between flex-col gap-[20px] md:grid md:grid-cols-2 lg:grid-cols-3">
-{(mfos ?? credits.slice(0, visibleCount)).map((loan, index) => (
+          {(credits.slice(0, visibleCount)).map((loan, index) => (
             <div
               key={index}
               className="w-full h-auto rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
@@ -92,26 +102,36 @@ const CreditsList: React.FC<CreditsListProps> = ({ mfos,locale, visibleCount }) 
                   <div
                     key={i}
                     className={`border ${
-                      offer.client_type === "new" ? "border-[#00ba9e]" : "border-[#724DEA]"
+                      offer.client_type === "new"
+                        ? "border-[#00ba9e]"
+                        : "border-[#724DEA]"
                     } rounded-[8px] p-[7px] md:p-[12px]`}
                   >
                     <p
                       className={`text-[12px] font-bold ${
-                        offer.client_type === "new" ? "text-[#00ba9e]" : "text-[#724DEA]"
+                        offer.client_type === "new"
+                          ? "text-[#00ba9e]"
+                          : "text-[#724DEA]"
                       }`}
                     >
-                      {offer.client_type === "new" ? t("newLoan") : t("repeatLoan") || "-"}
+                      {offer.client_type === "new"
+                        ? t("newLoan")
+                        : t("repeatLoan") || "-"}
                     </p>
                     <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
                       <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">{t("amount") || "Сумма"}</p>
+                        <p className="text-[#67677a] font-medium">
+                          {t("amount") || "Сумма"}
+                        </p>
                         <p className="text-[#222] font-bold">
-                          {offer.amount_from ? `від ${offer.amount_from}` : "-"} до{" "}
-                          {offer.amount_to || "-"}
+                          {offer.amount_from ? `від ${offer.amount_from}` : "-"}{" "}
+                          до {offer.amount_to || "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">{t("term") || "Срок"}</p>
+                        <p className="text-[#67677a] font-medium">
+                          {t("term") || "Срок"}
+                        </p>
                         <p className="text-[#222] font-bold">
                           {offer.term_from && offer.term_to
                             ? `${offer.term_from} - ${offer.term_to} днів`
@@ -119,8 +139,12 @@ const CreditsList: React.FC<CreditsListProps> = ({ mfos,locale, visibleCount }) 
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">{t("rate") || "Ставка"}</p>
-                        <p className="text-[#222] font-bold">{offer.rate ? `${offer.rate}%` : "-"}</p>
+                        <p className="text-[#67677a] font-medium">
+                          {t("rate") || "Ставка"}
+                        </p>
+                        <p className="text-[#222] font-bold">
+                          {offer.rate ? `${offer.rate}%` : "-"}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -133,21 +157,30 @@ const CreditsList: React.FC<CreditsListProps> = ({ mfos,locale, visibleCount }) 
                     </p>
                     <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
                       <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">{t("amount") || "Сумма"}</p>
+                        <p className="text-[#67677a] font-medium">
+                          {t("amount") || "Сумма"}
+                        </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.amount?.formatted ?? "-"}
+                          {loan.credit_offers.repeat_client.amount?.formatted ??
+                            "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">{t("term") || "Срок"}</p>
+                        <p className="text-[#67677a] font-medium">
+                          {t("term") || "Срок"}
+                        </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.term?.formatted ?? "-"}
+                          {loan.credit_offers.repeat_client.term?.formatted ??
+                            "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">{t("rate") || "Ставка"}</p>
+                        <p className="text-[#67677a] font-medium">
+                          {t("rate") || "Ставка"}
+                        </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.rate?.formatted ?? "-"}
+                          {loan.credit_offers.repeat_client.rate?.formatted ??
+                            "-"}
                         </p>
                       </div>
                     </div>
@@ -156,7 +189,9 @@ const CreditsList: React.FC<CreditsListProps> = ({ mfos,locale, visibleCount }) 
 
                 <div className="space-y-[10px] text-[12px] text-[#9393a3]">
                   <div className="flex justify-between">
-                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">РРС</p>
+                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                      РРС
+                    </p>
                     <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
                       {loan.quick_info?.rpc_range ?? "-"}
                     </p>
@@ -219,7 +254,7 @@ const CreditsList: React.FC<CreditsListProps> = ({ mfos,locale, visibleCount }) 
                   href={`/mfo/${loan.slug}`}
                   className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out whitespace-nowrap flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
                 >
-               {t("getMoney") || "Получить деньги"}
+                  {t("getMoney") || "Получить деньги"}
                 </Link>
               </footer>
             </div>

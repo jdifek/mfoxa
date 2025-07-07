@@ -11,9 +11,12 @@ import { useTranslations } from "next-intl";
 import {
   GetCatalogListResponse,
   CatalogPageFull,
+  FaqItem,
 } from "../services/catalogService";
 import CreditsList from "./CreditsList";
 import { MfoDetails } from "../services/getMfoDetailsService";
+import { PageDatesResponse } from "../services/PageDatesService";
+import InfoHelpfulClient from "./InfoHelpfulClient";
 
 type LoanClientPageProps = {
   visibleCount: number;
@@ -21,17 +24,24 @@ type LoanClientPageProps = {
   data: GetCatalogListResponse;
   page?: CatalogPageFull;
   mfos?: MfoDetails[];
+  dates: PageDatesResponse;
+  slug: string
+  faqs: FaqItem[]
 };
 
 const LoanClientPage: React.FC<LoanClientPageProps> = ({
   visibleCount,
   locale,
   data,
+  dates,
   page,
-  mfos,
+  slug,
+  faqs
 }) => {
   const [currentVisibleCount, setVisibleCount] = useState(visibleCount);
   const t = useTranslations("Loans");
+  console.log(faqs);
+  
   const options =
     locale === "ua"
       ? [
@@ -52,6 +62,8 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
   const handleShowMore = () => {
     setVisibleCount((prev) => prev + 3);
   };
+
+  console.log(data, "data");
 
   return (
     <>
@@ -76,30 +88,45 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
       </div>
 
       <CreditsList
-        mfos={mfos}
+      slug={slug}
         locale={locale}
         visibleCount={currentVisibleCount}
       />
 
-      {currentVisibleCount < (data.data.length || 100) && (
-        <div className="px-0 mb-5 md:px-[20px]">
-          <ButtonGreenBorder
-            text={t("showMore") || "Показать еще"}
-            width="100%"
-            className="sm:!w-[256px]"
-            onClick={handleShowMore}
-          />
-        </div>
-      )}
-
+      <div className="px-0 mb-5 md:px-[20px]">
+        <ButtonGreenBorder
+          text={t("showMore") || "Показать еще"}
+          width="100%"
+          className="sm:!w-[256px]"
+          onClick={handleShowMore}
+        />
+      </div>
       <OftenQuestions />
+      <InfoHelpfulClient  />
+
       <Questions />
       <div className="px-0 md:px-[20px]">
-        <p className="font-medium text-[13px] leading-[138%] mt-[30px] text-[#67677a]">
-          {t("metadata.addedDate") || "Дата добавления страницы 12.10.2025"}
+        <p className="font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+          {dates?.date_published
+            ? t("metadata.addedDate") +
+              " " +
+              new Date(dates.date_published).toLocaleDateString("ru-RU", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            : t("metadata.addedDate")}
         </p>
         <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
-          {t("metadata.updatedDate") || "Дата изменения страницы 12.10.2025"}
+          {dates?.date_modified
+            ? t("metadata.updatedDate") +
+              " " +
+              new Date(dates?.date_modified).toLocaleDateString("ru-RU", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            : t("metadata.updatedDate")}
         </p>
       </div>
     </>
