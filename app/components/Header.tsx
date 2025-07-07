@@ -4,7 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  lang: string;
+}
+
+export const Header: React.FC<HeaderProps> = ({ lang }) => {
   const [showLangMenu, setShowLangMenu] = useState(false);
 
   const toggleLangMenu = () => {
@@ -32,17 +36,32 @@ export const Header: React.FC = () => {
 
       <div className="relative">
         <button onClick={toggleLangMenu}>
-          <Image src="/Frame 108.svg" alt="language toggle" width={24} height={24} />
+          <Image
+            src="/Frame 108.svg"
+            alt="language toggle"
+            width={24}
+            height={24}
+          />
         </button>
 
         {showLangMenu && (
           <div className="absolute -bottom-20 right-4 w-fit p-[10px] rounded-[6px] border-b border-gray-200 bg-white shadow-md flex flex-col gap-[11px] z-50">
-            <button className="text-[16px] leading-[24px] font-bold text-[#724DEA]">
+            <Link
+              href="/ua"
+              className={`text-[16px] leading-[24px] font-bold ${
+              lang === "ua" ? "text-[#724DEA]" : "text-[#9393A3]"
+              }`}
+            >
               Українська
-            </button>
-            <button className="text-[16px] leading-[24px] font-bold text-[#9393A3]">
+            </Link>
+            <Link
+              href="/ru"
+              className={`text-[16px] leading-[24px] font-bold ${
+              lang === "ru" ? "text-[#724DEA]" : "text-[#9393A3]"
+              }`}
+            >
               Русский
-            </button>
+            </Link>
           </div>
         )}
       </div>

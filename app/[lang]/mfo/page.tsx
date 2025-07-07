@@ -76,7 +76,7 @@ export default async function MfoPage({
 
   console.log(dates, "dates");
   const data = await getMFOs({ lang: lang === "ua" ? "uk" : "ru" });
-  console.log(data, "data.best_credits");
+  console.log(data, " data.best_credits");
 
   return (
     <MfoPageClient

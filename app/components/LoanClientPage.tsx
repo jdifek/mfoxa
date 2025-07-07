@@ -53,7 +53,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       const data = await getMFOs({ lang: locale === "ua" ? "uk" : "ru" });
-      console.log(data, "data.best_credits");
+      console.log(data, "getMFOs data.best_credits");
 
       setCredits(data);
     };
