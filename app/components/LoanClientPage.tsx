@@ -26,7 +26,7 @@ type LoanClientPageProps = {
   mfos?: MfoDetails[];
   dates: PageDatesResponse;
   slug: string
-  faqs: FaqItem[]
+  faqs?: FaqItem[]
 };
 
 const LoanClientPage: React.FC<LoanClientPageProps> = ({
