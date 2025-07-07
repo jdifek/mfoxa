@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
+import { MfoDetails } from "./getMfoDetailsService";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://mfo.qissseee.tech";
 
@@ -53,7 +54,7 @@ export interface GetCatalogBySlugResponse {
   };
   message: string;
   page: CatalogPageFull
-
+mfos: MfoDetails[]
 }
 
 interface GetCatalogParams {

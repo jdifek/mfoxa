@@ -77,6 +77,7 @@ export default async function LoanDescription({
   return (
     <LoanClientPage
       page={res.page}
+      mfos={res.mfos}
       data={data}
       visibleCount={visibleCount}
       locale={lang}
