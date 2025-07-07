@@ -54,8 +54,7 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
 
   return (
     <>
-      <Bread />
-     
+      <Bread lang={locale as "ua" | "ru"} />
 
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px] sm:mb-[50px] md:mb-[50px] bg-white rounded-lg">
