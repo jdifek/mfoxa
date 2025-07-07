@@ -78,7 +78,7 @@ export default async function Layout({
         <NextIntlClientProvider locale={lang} messages={messages}>
           <StructuredData />
           <Header lang={lang}/>
-          <div className="px-[10px] min-h-[65vh] max-w-[1440px] mx-auto md:px-[50px] lg:px-[100px] pb-[20px] md:pb-[40px] lg:pb-[50px]">
+          <div className="px-[10px] min-h-[65vh] max-w-[1440px] mx-auto md:px-[50px] lg:px-[100px] pb-[20px] md:pb-[40px] lg:pb-[50px] bg-[#ebebf9]">
             {children}
           </div>
           <Footer locale={lang} />{" "}
