@@ -4,6 +4,7 @@ import AboutButtons from "@/app/components/AboutButtons";
 import Bread from "@/app/components/Bread";
 import type { NextPage } from "next";
 import { getMfoDetails } from "@/app/services/getMfoDetailsService";
+import { MicrodataLogin } from "@/app/structured-data/MicrodataLogin";
 
 interface Props {
   params: Promise<{ lang: string; company: string }>;
@@ -55,6 +56,13 @@ const Login: NextPage<Props> = async ({ params }) => {
 
   return (
     <>
+    <MicrodataLogin
+        title={data.login_page?.meta_title || t("title", { company: data.name })}
+        description={data.login_page?.meta_description || t("description", { company: data.name })}
+        companyName={data.name || t(`company.${companySlug}.name`)}
+        companySlug={companySlug}
+        locale={lang as 'ua' | 'ru'}
+      />
       <Bread  lang={lang as "ru" | "ua"}/>
       <div className="px-0 md:px-[20px]">
         <h1

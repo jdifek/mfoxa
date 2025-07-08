@@ -12,7 +12,7 @@ import { MfoDetails } from "../services/getMfoDetailsService";
 type CreditsListProps = {
   locale: string;
   visibleCount: number;
-  slug: string;
+  slug?: string;
 };
 
 const CreditsList: React.FC<CreditsListProps> = ({
@@ -34,7 +34,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
       try {
         const data = await getMFOs({
           lang: locale === "ua" ? "uk" : "ru",
-          catalog_page: slug,
+          ...(slug ? { catalog_page: slug } : {}),
           sort: sortParam as
             | "rating"
             | "amount_asc"

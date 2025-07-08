@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import LoanClientPage from "@/app/components/LoanClientPage";
 import { getTranslations } from "next-intl/server";
 import { catalogService } from "@/app/services/catalogService";
+import { MicrodataLoanCatalog } from "@/app/structured-data/MicrodataLoanCatalog";
 
 export async function generateMetadata({
   params,
@@ -61,7 +62,12 @@ export default async function LoanPageWrapper({
     lang: lang === "ua" ? "uk" : "ru",
     type: "loan",
   });
-  console.log(data, 'data');
+  console.log(data, "data");
 
-  return <LoanClientPage data={data} visibleCount={visibleCount} locale={lang} />;
+  return (
+    <>
+      <MicrodataLoanCatalog data={data} locale={lang as "ua" | "ru"} />
+      <LoanClientPage data={data} visibleCount={visibleCount} locale={lang} />
+    </>
+  );
 }

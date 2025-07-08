@@ -115,6 +115,7 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
 
   return (
     <>
+     
       {data?.data && data?.data?.length > 0 && (
         <QapModal
           mfoId={data.data[0].mfo?.id || 0}

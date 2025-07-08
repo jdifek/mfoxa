@@ -7,6 +7,7 @@ import Bread from "@/app/components/Bread";
 import { getMfoDetails } from "@/app/services/getMfoDetailsService";
 import { Key } from "react";
 import { getPageDates } from "@/app/services/PageDatesService";
+import { MicrodataPromocodes } from "@/app/structured-data/MicrodataPromocodes";
 
 interface Props {
   params: Promise<{ lang: string; company: string }>;
@@ -99,7 +100,13 @@ export default async function Promotion({ params }: Props) {
 
   return (
     <>
-      <Bread  lang={lang as "ru" | "ua"}/>
+      <MicrodataPromocodes
+        promocodes={promocodes}
+        companyName={data.name || t(`company.${companySlug}.name`)}
+        companySlug={companySlug}
+        locale={lang as "ua" | "ru"}
+      />
+      <Bread lang={lang as "ru" | "ua"} />
       <div className="px-0 md:px-[20px]">
         <h2
           className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222]"

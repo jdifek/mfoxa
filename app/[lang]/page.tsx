@@ -8,6 +8,7 @@ import DetailsText from "../components/DetailsText";
 import Questions from "../components/Home/Questions";
 import { getTranslations } from "next-intl/server";
 import { getHomeData, LangType } from "../services/HomeService";
+import { MicrodataHome } from "../structured-data/MicrodataHome";
 
 export async function generateMetadata({
   params,
@@ -62,13 +63,16 @@ export default async function Home({
   const homeData = await getHomeData(lang as LangType);
   console.log("Home data from service:", homeData);
   return (
+    <>
+    <MicrodataHome locale={lang as 'ru' | 'ua'} homeData={homeData} />
     <div>
       <FinancialMarketplace locale={lang} />
-      <BestLoans best_credits={homeData.best_credits}/>
+      <BestLoans best_credits={homeData.best_credits} />
       <TopUkrMFO top_mfos={homeData.top_mfos} />
-      <LastReviews recent_reviews={homeData.recent_reviews}/>
+      <LastReviews recent_reviews={homeData.recent_reviews} />
       <DetailsText />
       <Questions />
     </div>
+  </>
   );
 }

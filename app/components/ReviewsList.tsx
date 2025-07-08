@@ -4,13 +4,16 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { getReviews, SortType } from "../services/reviewService";
 import { useTranslations } from "next-intl";
+import { MicrodataAllReviews } from "../structured-data/MicrodataAllReviews";
 
 type Review = {
   id: number;
-  mfo: { name: string; logo_url: string };
+  mfo: { name: string; logo_url: string, slug: string };
   rating: number;
   author_name: string;
   review_text: string;
+  created_at: string;
+
 };
 
 type ReviewsListProps = {
@@ -22,6 +25,7 @@ type ReviewsListProps = {
 const ReviewsList: React.FC<ReviewsListProps> = ({
   reviewsCount,
   selectedSortKey,
+  locale
 }) => {
   const t = useTranslations("ReviewsPage");
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -42,6 +46,8 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
       try {
         const data = await getReviews({ page: 1, sort: selectedSort });
         setReviews(data.data);
+        console.log(data.data);
+        
       } catch (error) {
         console.error("Ошибка загрузки отзывов:", error);
       } finally {
@@ -52,6 +58,8 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
   }, [selectedSort]);
 
   return (
+    <>
+    <MicrodataAllReviews reviews={reviews} locale={locale as 'ru' | 'ua'} />
     <div className="px-0 md:px-[20px]">
       {loading ? (
         <p>Загрузка...</p>
@@ -93,6 +101,7 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
         </div>
       )}
     </div>
+    </>
   );
 };
 

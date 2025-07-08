@@ -1,6 +1,7 @@
 import LoanClientPage from "@/app/components/LoanClientPage";
 import { catalogService } from "@/app/services/catalogService";
 import { getPageDates } from "@/app/services/PageDatesService";
+import { MicrodataLoanCatalog } from "@/app/structured-data/MicrodataLoanCatalog";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
@@ -79,14 +80,17 @@ export default async function LoanDescription({
   console.log(res, 'resres');
 
   return (
-    <LoanClientPage
-      page={res.page}
-      faqs={res.page.faqs}
-      dates={dates}
-      data={data}
-      slug={slug}
-      visibleCount={visibleCount}
-      locale={lang}
-    />
+    <>
+      <MicrodataLoanCatalog data={data} locale={lang as 'ua' | 'ru'} slug={slug} />
+      <LoanClientPage
+        page={res.page}
+        faqs={res.page.faqs}
+        dates={dates}
+        data={data}
+        slug={slug}
+        visibleCount={visibleCount}
+        locale={lang}
+      />
+    </>
   );
 }

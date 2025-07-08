@@ -16,6 +16,7 @@ import {
 import ReviewModal from "./Modals/ReviewModal";
 import AnswerQap from "./Modals/AnswerQap";
 import { PageDatesResponse } from "../services/PageDatesService";
+import { MicrodataReviews } from "../structured-data/MicrodataReviews";
 
 const reviews = Array(12)
   .fill(null)
@@ -159,6 +160,12 @@ export default function CompanyRewiwsClient({
 
   return (
     <>
+    <MicrodataReviews
+        reviewsData={data}
+        companyName={data?.mfo?.name || t(`company.${slug}.name`)}
+        companySlug={slug}
+        locale={lang as 'ua' | 'ru'}
+      />
       <Bread lang={lang as "ru" | "ua"} />
 
       <div className="px-0 md:px-[20px]">

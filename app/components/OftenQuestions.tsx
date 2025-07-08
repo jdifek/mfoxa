@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
+import { FAQPage } from "@/app/structured-data/FAQPage";
 
 const QUESTIONS_COUNT = 5;
 
@@ -13,7 +14,6 @@ const OftenQuestionsComponent: React.FC = () => {
     setOpenIndex(prev => (prev === index ? null : index));
   };
 
-  // Получаем вопросы из вложенного объекта questions
   const questions = Array.from({ length: QUESTIONS_COUNT }).map((_, i) => ({
     name: t(`questions.${i}.name`),
     content: t(`questions.${i}.content`),
@@ -27,7 +27,6 @@ const OftenQuestionsComponent: React.FC = () => {
       >
         {t("title")}
       </h2>
-
       {questions.map((question, index) => {
         const isOpen = openIndex === index;
         return (
@@ -81,6 +80,7 @@ const OftenQuestionsComponent: React.FC = () => {
           </div>
         );
       })}
+      <FAQPage namespace="faq" />
     </>
   );
 };

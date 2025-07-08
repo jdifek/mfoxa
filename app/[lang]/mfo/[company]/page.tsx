@@ -14,6 +14,8 @@ import { MicrodataCompany } from "@/app/structured-data/MicrodataCompany";
 import { getTranslations } from "next-intl/server";
 import { getMfoDetails } from "@/app/services/getMfoDetailsService";
 import { getPageDates } from "@/app/services/PageDatesService";
+import { MicrodataCalculator } from "@/app/structured-data/MicrodataCalculator";
+import { MicrodataLoanOrCredit } from "@/app/structured-data/MicrodataLoanOrCredit";
 
 export const dynamic = "force-dynamic";
 
@@ -382,7 +384,14 @@ export default async function CatalogPage({ params }: PageProps) {
             <p className="font-medium mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
               {t("selectTariff")}
             </p>
+            <MicrodataLoanOrCredit
+              tariffs={data.tariffs}
+              companyName={data.name || t(`company.${companySlug}.name`)}
+              companySlug={companySlug}
+              locale={lang as 'ru' | 'ua'}
+            />
             <CalctTarifButtonsts tariffs={data.tariffs} />
+            <MicrodataCalculator companyName={data.name || t(`company.${companySlug}.name`)} locale={lang as "ru" | "ua"} />
             <Calculator tariffs={data.tariffs} />
 
             <p

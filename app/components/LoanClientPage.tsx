@@ -24,9 +24,9 @@ type LoanClientPageProps = {
   data: GetCatalogListResponse;
   page?: CatalogPageFull;
   mfos?: MfoDetails[];
-  dates: PageDatesResponse;
-  slug: string
-  faqs?: FaqItem[]
+  dates?: PageDatesResponse;
+  slug?: string;
+  faqs?: FaqItem[];
 };
 
 const LoanClientPage: React.FC<LoanClientPageProps> = ({
@@ -36,12 +36,12 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
   dates,
   page,
   slug,
-  faqs
+  faqs,
 }) => {
   const [currentVisibleCount, setVisibleCount] = useState(visibleCount);
   const t = useTranslations("Loans");
   console.log(faqs);
-  
+
   const options =
     locale === "ua"
       ? [
@@ -88,7 +88,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
       </div>
 
       <CreditsList
-      slug={slug}
+        slug={slug}
         locale={locale}
         visibleCount={currentVisibleCount}
       />
@@ -102,7 +102,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
         />
       </div>
       <OftenQuestions />
-      <InfoHelpfulClient  />
+      <InfoHelpfulClient />
 
       <Questions />
       <div className="px-0 md:px-[20px]">

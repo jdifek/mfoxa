@@ -1,5 +1,7 @@
 import QapClient from "@/app/components/QapClient";
 import { getPageDates } from "@/app/services/PageDatesService";
+import { getQuestions } from "@/app/services/questionsService";
+import { MicrodataQAP } from "@/app/structured-data/MicrodataQAP";
 import { Metadata } from "next";
 
 interface Props {
@@ -47,11 +49,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Qap({ params }: Props) {
-  const { company, lang} = await params;
+  const { company, lang } = await params;
   const slug = decodeURIComponent(company || "sgroshi");
 
   const dates = slug
     ? await getPageDates({ type: "questions", mfo_slug: slug })
     : null;
-  return <QapClient company={company} dates={dates} locale={lang}/>;
+    const questions = await getQuestions({
+      page: 1,
+      per_page: 10,
+      mfo_slug: slug,
+      sort: "newest",
+    });
+  return (
+    <>
+      <MicrodataQAP questions={questions.data} locale={lang as 'ua' | 'ru'} />
+      <QapClient company={company} dates={dates} locale={lang} />
+    </>
+  );
 }
