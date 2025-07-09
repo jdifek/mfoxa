@@ -1,14 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
-import { Category, fetchPageLinks, PageLinksResponse } from "@/app/services/pageLinks";
-
-interface QuestionItem {
-  name: string;
-  key: string;
-  links: { label: string; url: string }[];
-}
+import { useLocale } from "next-intl";
+import { Category, fetchPageLinks } from "@/app/services/pageLinks";
 
 const Questions: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
