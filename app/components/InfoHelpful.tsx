@@ -1,12 +1,14 @@
 import Image from "next/image";
 import React from "react";
 import { getTranslations } from "next-intl/server";
+import { AuthorRandomResponse } from "../services/authorsService";
 
 type InfoHelpfulProps = {
   locale: string;
+  randomAuthor: AuthorRandomResponse
 };
 
-export default async function InfoHelpful({ locale }: InfoHelpfulProps) {
+export default async function InfoHelpful({ locale, randomAuthor }: InfoHelpfulProps) {
   const t = await getTranslations({ locale, namespace: "infoHelpful" });
 
   // Debug: Log translations and locale
@@ -25,17 +27,18 @@ export default async function InfoHelpful({ locale }: InfoHelpfulProps) {
         {/* Author */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-[10px] sm:gap-[20px] items-center">
           <Image
-            src="/photo.svg"
+                    src={randomAuthor?.data?.avatar || "/photo.svg"}
+
             alt={t("photoAlt")}
             width={60}
             height={60}
           />
           <div className="flex flex-col gap-[5px] items-center sm:items-start">
-            <p className="font-bold text-[20px] leading-[100%] text-[#222]">
-              {t("authorName")}
+          <p className="font-bold text-[20px] leading-[100%] text-[#222]">
+              {randomAuthor?.data?.name || t("authorName")}
             </p>
             <p className="font-medium text-[11px] leading-[145%] text-[#67677a]">
-              {t("authorRole")}
+              {randomAuthor?.data?.role || t("authorRole")}
             </p>
           </div>
         </div>
@@ -78,7 +81,7 @@ export default async function InfoHelpful({ locale }: InfoHelpfulProps) {
             </div>
 
             <p className="font-medium text-[11px] leading-[145%] text-[#222]">
-              {t("ratingText")}
+            {randomAuthor?.data?.rating?.total_ratings + t("ratingTextTotalRatings") + randomAuthor?.data?.rating?.average + t("ratingTextAverage")}
             </p>
           </div>
         </div>

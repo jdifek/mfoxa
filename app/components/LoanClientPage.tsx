@@ -17,6 +17,7 @@ import CreditsList from "./CreditsList";
 import { MfoDetails } from "../services/getMfoDetailsService";
 import { PageDatesResponse } from "../services/PageDatesService";
 import InfoHelpfulClient from "./InfoHelpfulClient";
+import { AuthorRandomResponse } from "../services/authorsService";
 
 type LoanClientPageProps = {
   visibleCount: number;
@@ -27,6 +28,7 @@ type LoanClientPageProps = {
   dates?: PageDatesResponse;
   slug?: string;
   faqs?: FaqItem[];
+  randomAuthor: AuthorRandomResponse
 };
 
 const LoanClientPage: React.FC<LoanClientPageProps> = ({
@@ -37,6 +39,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
   page,
   slug,
   faqs,
+  randomAuthor
 }) => {
   const [currentVisibleCount, setVisibleCount] = useState(visibleCount);
   const t = useTranslations("Loans");
@@ -102,7 +105,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
         />
       </div>
       <OftenQuestions />
-      <InfoHelpfulClient />
+      <InfoHelpfulClient randomAuthor={randomAuthor}/>
 
       <Questions />
       <div className="px-0 md:px-[20px]">

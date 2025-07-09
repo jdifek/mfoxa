@@ -11,6 +11,7 @@ import Bread from "../components/Bread";
 import { MfoListStructuredData } from "../structured-data/MfoListStructuredData";
 import { PageDatesResponse } from "../services/PageDatesService";
 import { MfoDetails } from "../services/getMfoDetailsService";
+import { AuthorRandomResponse } from "../services/authorsService";
 
 const ratings = [
   { key: "speed", value: 4.8, color: "#00BDA5" },
@@ -80,6 +81,7 @@ type MfoPageClientProps = {
   locale: string;
   dates: PageDatesResponse;
   data: MfoDetails[];
+  randomAuthor: AuthorRandomResponse
 };
 
 export default async function MfoPageClient({
@@ -89,6 +91,7 @@ export default async function MfoPageClient({
   locale,
   dates,
   data,
+  randomAuthor
 }: MfoPageClientProps) {
   const { mfo, ratings: ratingsT } = translations;
 
@@ -288,7 +291,7 @@ export default async function MfoPageClient({
 
       <DetailsText />
       <OftenQuestions />
-      <InfoHelpful locale={locale} />
+      <InfoHelpful randomAuthor={randomAuthor} locale={locale} />
       <Questions />
       <div className="px-0 md:px-[20px]">
         <p

@@ -6,11 +6,13 @@ import Dropdown from "../ui/Dropdown";
 import Bread from "../components/Bread";
 import { getTranslations } from "next-intl/server";
 import ReviewsList from "./ReviewsList";
+import { AuthorRandomResponse } from "../services/authorsService";
 
 type ReviewsClientProps = {
   locale: string;
   reviewsCount: number;
   selectedSortKey: string; // из URL
+  randomAuthor: AuthorRandomResponse
 };
 
 const MAX_REVIEWS = 24;
@@ -20,6 +22,7 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
   locale,
   reviewsCount,
   selectedSortKey,
+  randomAuthor
 }) => {
   const t = await getTranslations({ locale, namespace: "ReviewsPage" });
 
@@ -101,7 +104,7 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
         </div>
       )}
       <OftenQuestions />
-      <InfoHelpful locale={locale} />
+      <InfoHelpful randomAuthor={randomAuthor} locale={locale} />
       <Questions />
     </>
   );

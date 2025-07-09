@@ -3,27 +3,32 @@
 import Image from "next/image";
 import React from "react";
 import { useTranslations } from "next-intl";
-
-export default function InfoHelpfulClient() {
+import { AuthorRandomResponse } from "../services/authorsService";
+type InfoHelpfulClientProps = {
+  randomAuthor?: AuthorRandomResponse
+}
+export default function InfoHelpfulClient({ randomAuthor }: InfoHelpfulClientProps) {
   const t = useTranslations('infoHelpful');
 
+  console.log(randomAuthor, 'ewewew');
+  
   return (
     <div className="px-0 md:px-[20px]">
       <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[30px] md:mb-[50px] bg-white rounded-lg mt-[30px] flex flex-col sm:flex-row sm:justify-between sm:items-center text-center sm:text-left gap-[20px] sm:gap-0">
         {/* Author */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-[10px] sm:gap-[20px] items-center">
           <Image
-            src="/photo.svg"
+            src={randomAuthor?.data?.avatar || "/photo.svg"}
             alt={t("photoAlt")}
             width={60}
             height={60}
           />
           <div className="flex flex-col gap-[5px] items-center sm:items-start">
             <p className="font-bold text-[20px] leading-[100%] text-[#222]">
-              {t("authorName")}
+              {randomAuthor?.data?.name || t("authorName")}
             </p>
             <p className="font-medium text-[11px] leading-[145%] text-[#67677a]">
-              {t("authorRole")}
+              {randomAuthor?.data?.role || t("authorRole")}
             </p>
           </div>
         </div>
@@ -66,7 +71,7 @@ export default function InfoHelpfulClient() {
             </div>
 
             <p className="font-medium text-[11px] leading-[145%] text-[#222]">
-              {t("ratingText")}
+            {randomAuthor?.data?.rating?.total_ratings + t("ratingTextTotalRatings") + randomAuthor?.data?.rating?.average + t("ratingTextAverage")}
             </p>
           </div>
         </div>

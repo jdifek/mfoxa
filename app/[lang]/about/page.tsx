@@ -3,6 +3,7 @@ import Bread from "@/app/components/Bread";
 import Image from "next/image";
 import React from "react";
 import { getTranslations } from "next-intl/server";
+import authorsService from "@/app/services/authorsService";
 
 type AboutProps = {
   params: Promise<{ lang: string }>;
@@ -23,6 +24,10 @@ const About: React.FC<AboutProps> = async ({ params }) => {
     addedDate: t("metadata.addedDate"),
   });
 
+  const {data} = await authorsService.getAllAuthors(lang === 'ua' ? 'uk' : 'ru')
+
+  console.log(data, 'daaaa');
+  
   return (
     <>
       <Bread lang={lang as "ua" | "ru"} />
@@ -42,24 +47,24 @@ const About: React.FC<AboutProps> = async ({ params }) => {
       </div>
       <div className="px-0 md:px-[20px]">
         <div className="flex flex-col sm:flex-row sm:flex-wrap gap-[20px]">
-          {[1, 2, 3].map((_, i) => (
+          {data.map((author, i) => (
             <div
               key={i}
               className="bg-white p-[10px] sm:p-[20px] md:p-[30px] rounded-lg flex-1"
             >
               <div className="flex gap-[10px] mb-[10px]">
                 <Image
-                  src={"/photo.svg"}
+                  src={author.avatar}
                   alt={t("members.0.photoAlt") || "Фото Ольга Бондаренко"}
                   width={64}
                   height={64}
                 />
                 <div className="flex flex-col gap-[5px]">
                   <h3 className="font-bold text-[16px] sm:md:text-[17px] md:text-[20px] leading-[100%] text-[#222]">
-                    {t("members.0.name") || "Бондаренко Ольга Владимировна"}{" "}
+                  {author.name}
                   </h3>
                   <p className="font-medium text-[11px] leading-[145%] text-[#67677a]">
-                    {t("members.0.role") || "СЕО mfoxa.com.ua"}
+                    {author.role}
                   </p>
                 </div>
               </div>
@@ -68,16 +73,14 @@ const About: React.FC<AboutProps> = async ({ params }) => {
                 {t("members.0.educationLabel") || "Образование"}{" "}
               </p>
               <p className="mb-[10px] font-bold text-[14px] leading-[136%] text-[#222]">
-                {t("members.0.education") ||
-                  "Магистр финансов и банковского дела, Киевский национальный экономический университет им. Вадима Гетьмана, 2012 г."}
+                {author.education}
               </p>
               <hr className="mb-[10px]" />
               <p className="font-medium text-[11px] leading-[145%] text-[#67677a] mb-[10px]">
                 {t("members.0.experienceLabel") || "Опыт работы"}
               </p>
               <p className="mb-[10px] font-bold text-[14px] leading-[136%] text-[#222]">
-                {t("members.0.experience") ||
-                  "Более 10 лет опыта в банковском секторе Украины, работала в ПАО «ПриватБанк» на позиции старшего кредитного аналитика."}
+                {author.work_experience}
               </p>
               <hr className="mb-[10px]" />
               <p className="font-medium text-[11px] leading-[145%] text-[#67677a] mb-[10px]">
@@ -85,8 +88,7 @@ const About: React.FC<AboutProps> = async ({ params }) => {
                   "Дополнительная квалификация"}
               </p>
               <p className="font-bold text-[14px] leading-[136%] text-[#222]">
-                {t("members.0.qualification") ||
-                  "Сертификат Национального банка Украины по программе «Кредитный риск и управление портфелем», № KR-2019-128 от 15.09.2019 г."}
+                {author.additional_qualification}
               </p>
             </div>
           ))}

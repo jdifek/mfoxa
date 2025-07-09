@@ -2,6 +2,7 @@
 import { Metadata } from "next";
 import ReviewsClient from "@/app/components/ReviewsPage";
 import { getTranslations } from "next-intl/server";
+import authorsService from "@/app/services/authorsService";
 
 export async function generateMetadata({
   params,
@@ -39,9 +40,11 @@ export default async function ReviewsPageWrapper({
   const { count, sort } = await searchParams;
   const reviewsCount = count ? parseInt(count, 10) : 8;
 
+  const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');  
 
   return (
     <ReviewsClient
+    randomAuthor={randomAuthor}
       locale={lang}
       reviewsCount={reviewsCount}
       selectedSortKey={sort || ""}

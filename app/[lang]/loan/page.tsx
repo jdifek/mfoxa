@@ -3,6 +3,7 @@ import LoanClientPage from "@/app/components/LoanClientPage";
 import { getTranslations } from "next-intl/server";
 import { catalogService } from "@/app/services/catalogService";
 import { MicrodataLoanCatalog } from "@/app/structured-data/MicrodataLoanCatalog";
+import authorsService from "@/app/services/authorsService";
 
 export async function generateMetadata({
   params,
@@ -63,11 +64,14 @@ export default async function LoanPageWrapper({
     type: "loan",
   });
   console.log(data, "data");
+  const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');
 
+  console.log(randomAuthor, 'randomAuthor');
+  
   return (
     <>
       <MicrodataLoanCatalog data={data} locale={lang as "ua" | "ru"} />
-      <LoanClientPage data={data} visibleCount={visibleCount} locale={lang} />
+      <LoanClientPage data={data} randomAuthor={randomAuthor} visibleCount={visibleCount} locale={lang} />
     </>
   );
 }

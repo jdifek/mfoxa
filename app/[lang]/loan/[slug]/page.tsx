@@ -1,4 +1,5 @@
 import LoanClientPage from "@/app/components/LoanClientPage";
+import authorsService from "@/app/services/authorsService";
 import { catalogService } from "@/app/services/catalogService";
 import { getPageDates } from "@/app/services/PageDatesService";
 import { MicrodataLoanCatalog } from "@/app/structured-data/MicrodataLoanCatalog";
@@ -68,22 +69,19 @@ export default async function LoanDescription({
     lang: lang === "ua" ? "uk" : "ru",
     type: "loan",
   });
-  console.log(data, "data");
   const res = await catalogService.getBySlug({
     slug,
     lang: lang === "ua" ? "uk" : "ru",
   });
   const dates = await getPageDates({ type: "loans" });
- 
-  console.log(dates, "dates");
-
-  console.log(res, 'resres');
+  const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');  
 
   return (
     <>
       <MicrodataLoanCatalog data={data} locale={lang as 'ua' | 'ru'} slug={slug} />
       <LoanClientPage
         page={res.page}
+        randomAuthor={randomAuthor}
         faqs={res.page.faqs}
         dates={dates}
         data={data}

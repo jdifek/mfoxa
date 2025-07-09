@@ -6,6 +6,7 @@ import { headers } from "next/headers";
 import { UAParser } from "ua-parser-js";
 import { getPageDates } from "@/app/services/PageDatesService";
 import { getMFOs } from "@/app/services/mfosService";
+import authorsService from "@/app/services/authorsService";
 
 export async function generateMetadata({
   params,
@@ -77,9 +78,12 @@ export default async function MfoPage({
   console.log(dates, "dates");
   const data = await getMFOs({ lang: lang === "ua" ? "uk" : "ru" });
   console.log(data, " data.best_credits");
+  const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');  
 
   return (
     <MfoPageClient
+    randomAuthor={randomAuthor}
+
       dates={dates}
       data={data}
       translations={{ mfo: mfoT, ratings: ratingsT }}

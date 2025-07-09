@@ -40,6 +40,7 @@ export interface CatalogPageFull {
 export interface FaqItem {
   question: string;
   answer: string;
+  id: number
 }
 
 export interface PageLink {

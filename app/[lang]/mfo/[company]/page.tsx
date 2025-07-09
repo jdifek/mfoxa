@@ -480,7 +480,7 @@ export default async function CatalogPage({ params }: PageProps) {
         </div>
       </div>
 
-      <OftenQuestions />
+      <OftenQuestions faqs={data.faqs} company={data.name}/>
       <div className="h-[30px]"></div>
       {/* <LastReviews /> */}
       <DetailsText />

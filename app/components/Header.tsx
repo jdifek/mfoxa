@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
 interface HeaderProps {
@@ -14,6 +15,14 @@ export const Header: React.FC<HeaderProps> = ({ lang }) => {
   const toggleLangMenu = () => {
     setShowLangMenu((prev) => !prev);
   };
+  const pathname = usePathname();
+
+const getLangHref = (targetLang: string) => {
+  const segments = pathname.split("/");
+  segments[1] = targetLang; // заменяем язык
+  return segments.join("/") || "/";
+};
+
 
   return (
     <header className="bg-white w-full h-[50px] flex items-center justify-between px-[10px] sm:px-[120px]">
@@ -46,22 +55,24 @@ export const Header: React.FC<HeaderProps> = ({ lang }) => {
 
         {showLangMenu && (
           <div className="absolute -bottom-20 right-4 w-fit p-[10px] rounded-[6px] border-b border-gray-200 bg-white shadow-md flex flex-col gap-[11px] z-50">
-            <Link
-              href="/ua"
-              className={`text-[16px] leading-[24px] font-bold ${
-              lang === "ua" ? "text-[#724DEA]" : "text-[#9393A3]"
-              }`}
-            >
-              Українська
-            </Link>
-            <Link
-              href="/ru"
-              className={`text-[16px] leading-[24px] font-bold ${
-              lang === "ru" ? "text-[#724DEA]" : "text-[#9393A3]"
-              }`}
-            >
-              Русский
-            </Link>
+           <Link
+  href={getLangHref("ua")}
+  className={`text-[16px] leading-[24px] font-bold ${
+    lang === "ua" ? "text-[#724DEA]" : "text-[#9393A3]"
+  }`}
+>
+  Українська
+</Link>
+
+<Link
+  href={getLangHref("ru")}
+  className={`text-[16px] leading-[24px] font-bold ${
+    lang === "ru" ? "text-[#724DEA]" : "text-[#9393A3]"
+  }`}
+>
+  Русский
+</Link>
+
           </div>
         )}
       </div>

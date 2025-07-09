@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { Category, fetchPageLinks, PageLinksResponse } from "@/app/services/pageLinks";
 
 interface QuestionItem {
   name: string;
@@ -10,33 +11,33 @@ interface QuestionItem {
 }
 
 const Questions: React.FC = () => {
-  const t = useTranslations("Questions");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [questions, setQuestions] = useState<Category[] | null>(null);
+  const locale = useLocale(); 
 
   const toggleQuestion = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
-  const questions: QuestionItem[] = [
-    { key: "popular", name: t("popular"), links: [] },
-    { key: "fast", name: t("fast"), links: [] },
-    { key: "noCollateral", name: t("noCollateral"), links: [] },
-    { key: "lowRate", name: t("lowRate"), links: [] },
-    { key: "toCard", name: t("toCard"), links: [] },
-    { key: "roundClock", name: t("roundClock"), links: [] },
-    { key: "noRefusal", name: t("noRefusal"), links: [] },
-    { key: "badHistory", name: t("badHistory"), links: [] },
-  ].map((q) => ({
-    ...q,
-    links: Array(24).fill({
-      label: "moneyman",
-      url: "https://zaimi.ru/mfo/joymoney/",
-    }),
-  }));
+  useEffect(() => {
+    async function loadLinks() {
+      try {
+        const data = await fetchPageLinks(locale === 'ua' ? 'uk' : 'ru');
+        // обработка данных, например, установка в состояние
+        console.log(data);
+        setQuestions(data.data)
+      } catch (error) {
+        console.error('Error fetching page links:', error);
+      }
+    }
+  
+    loadLinks();
+  }, []);
+  
 
   return (
     <div className="px-0 md:px-[20px]">
-      {questions.map((question, index) => {
+      {questions && questions.map((question, index) => {
         const isOpen = openIndex === index;
 
         return (
@@ -49,7 +50,7 @@ const Questions: React.FC = () => {
               onClick={() => toggleQuestion(index)}
             >
               <p className="font-bold text-[14px] leading-[136%] text-[#222]">
-                {question.name}
+                {question.title}
               </p>
               {isOpen ? (
                 <svg
@@ -102,7 +103,7 @@ const Questions: React.FC = () => {
                       color: "#00ba9e",
                     }}
                   >
-                    {link.label}
+                    {link.title}
                   </Link>
                 ))}
               </div>
