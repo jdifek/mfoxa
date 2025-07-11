@@ -8,18 +8,24 @@ import { routesMap } from "../config/routesMap";
 export const AboutButtonsComponent = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const t = useTranslations("aboutButtons");
+  const t = useTranslations("AboutButtons");
 
-  // Связка ключей с путями и переводами
-  const keys = Object.keys(routesMap);
+  const keys = Object.keys(routesMap); // ['about', 'reviews', ...]
   const [activeKey, setActiveKey] = useState("about");
 
   useEffect(() => {
-    const matched = Object.entries(routesMap).find(([, path]) =>
-      pathname.endsWith(path)
+    const currentPath = pathname;
+    const matchedEntry = Object.entries(routesMap).find(([, path]) =>
+      currentPath.endsWith(path) && path !== ""
     );
-    setActiveKey(matched?.[0] || "about");
+  
+    if (matchedEntry) {
+      setActiveKey(matchedEntry[0]);
+    } else {
+      setActiveKey("about"); // если ничего не найдено — считаем "about"
+    }
   }, [pathname]);
+  
 
   const handleButtonClick = (key: string) => {
     const basePath = pathname.replace(/\/(reviews|promotion|qap|login)$/, "");
@@ -30,13 +36,12 @@ export const AboutButtonsComponent = () => {
   return (
     <div className="px-0 md:px-[20px]">
       <div className="flex gap-[10px] w-full my-[30px] md:my-[50px] overflow-x-auto no-scrollbar">
-        {keys.map((key, index) => {
+        {keys.map((key) => {
           const isActive = activeKey === key;
-          const label = t(key); // локализованный текст
 
           return (
             <button
-              key={index}
+              key={key}
               onClick={() => handleButtonClick(key)}
               className={`cursor-pointer whitespace-nowrap rounded-[35px] p-[8px_10px] sm:p-[10px_12px] md:p-[14px_20px] flex items-center justify-center font-medium text-[15px] leading-[133%] ${
                 isActive
@@ -46,7 +51,7 @@ export const AboutButtonsComponent = () => {
                   : "bg-[#fff] text-[#000000]"
               }`}
             >
-              {label}
+              {t(key)}
             </button>
           );
         })}
