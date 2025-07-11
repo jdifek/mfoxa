@@ -299,7 +299,7 @@ export default async function CatalogPage({ params }: PageProps) {
             ))}
           </div>
 
-          <div className="p-[10px] md:p-[30px] sm:p-[20px] w-full md:w-1/2 md:mb-[50px] bg-white rounded-lg mb-[20px]">
+          <div className="p-[10px] md:p-[30px] md:mt-[10px] sm:p-[20px] w-full md:w-1/2 md:mb-[50px] bg-white rounded-lg mb-[20px]">
             <h2
               className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
               style={{ fontFamily: "var(--Jakarta)" }}

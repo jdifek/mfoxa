@@ -51,7 +51,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
       }
     };
     fetchData();
-  }, [locale, sortParam]);
+  }, [locale, sortParam, slug]);
 
   return (
     <div className="px-0 md:px-[20px] mb-5">
