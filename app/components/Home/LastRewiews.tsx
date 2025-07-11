@@ -10,6 +10,7 @@ import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Review } from "@/app/services/HomeService";
+import Link from "next/link";
 
 type Props = {
   recent_reviews: Review[];
@@ -63,7 +64,7 @@ export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
           >
             {recent_reviews.map((el, index) => (
               <SwiperSlide key={index} className="no-scrollbar">
-                <div className="w-full rounded-lg bg-white p-[10px] md:p-[16px] shadow-md">
+                <div className="w-full rounded-lg bg-white p-[10px] h-[243px] md:p-[16px] shadow-md">
                   <div className="flex gap-[10px] mb-[14px]">
                     <Image
                       src={el.mfo.logo_url}
@@ -105,6 +106,7 @@ export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
 
                   </p>
 
+<Link href={`/mfo/${el.mfo.slug}/reviews`}>
                   <p
                     className="text-[13px] w-max md:text-[15px] cursor-pointer underline text-[#6239e8] transition-colors duration-200 hover:text-[#9278ea]"
                     style={{
@@ -116,6 +118,7 @@ export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
                   >
                     {t("showFull")}
                   </p>
+</Link>
                 </div>
               </SwiperSlide>
             ))}

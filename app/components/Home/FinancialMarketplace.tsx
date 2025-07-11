@@ -22,15 +22,15 @@ const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({ local
   });
 
   const categories = [
-    { title: tc("to_card"), image: "/Frame 137.svg" },
-    { title: tc("zero_percent"), image: "/Frame 137 (1).svg" },
-    { title: tc("new_mfo"), image: "/Frame 137 (2).svg" },
-    { title: tc("cash"), image: "/Frame 137 (3).svg" },
-    { title: tc("from_18"), image: "/Frame 137 (4).svg" },
-    { title: tc("24_7"), image: "/Frame 137 (5).svg" },
-    { title: tc("pensioners"), image: "/Frame 137 (6).svg" },
-    { title: tc("bad_credit"), image: "/Frame 137 (7).svg" },
-    { title: tc("bank_id"), image: "/Frame 137 (8).svg" },
+    { title: tc("to_card"), image: "/Frame 137.png" },
+    { title: tc("zero_percent"), image: "/Frame 137 (1).png" },
+    { title: tc("new_mfo"), image: "/Frame 137 (2).png" },
+    { title: tc("cash"), image: "/Frame 137 (3).png" },
+    { title: tc("from_18"), image: "/Frame 137 (4).png" },
+    { title: tc("24_7"), image: "/Frame 137 (5).png" },
+    { title: tc("pensioners"), image: "/Frame 137 (6).png" },
+    { title: tc("bad_credit"), image: "/Frame 137 (7).png" },
+    { title: tc("bank_id"), image: "/Frame 137 (8).png" },
   ];
 
   return (

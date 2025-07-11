@@ -5,6 +5,7 @@ import Image from "next/image";
 import { getReviews, SortType } from "../services/reviewService";
 import { useTranslations } from "next-intl";
 import { MicrodataAllReviews } from "../structured-data/MicrodataAllReviews";
+import Link from "next/link";
 
 type Review = {
   id: number;
@@ -93,9 +94,12 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
               <p className="mb-[10px] text-[13px] md:text-[15px] font-[500] text-[#222] leading-[138%]">
                 {review.review_text}
               </p>
+              <Link href={`/mfo/${review.mfo.slug}/reviews`}>
+
               <p className="underline cursor-pointer w-max text-[13px] md:text-[15px] text-[#6239e8] hover:text-[#9278ea]">
                 {t("showFull")}
               </p>
+              </Link>
             </div>
           ))}
         </div>

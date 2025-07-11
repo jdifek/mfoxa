@@ -117,7 +117,7 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
         <div className="px-0 md:px-[20px]">
           <ButtonGreenBorder
             text={t("showMore")}
-            link="/loan"
+            link="/mfo"
             width="100%"
             className="mt-[20px] md:mt-[40px] mb-[30px] md:mb-[50px]"
             onClick={handleShowMore}

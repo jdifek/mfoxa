@@ -3,7 +3,7 @@
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { Mfo } from "@/app/services/HomeService";
 
@@ -12,14 +12,7 @@ type Props = {
 };
 
 const BestLoans: React.FC<Props> = ({ best_credits }) => {
-  const [visibleCount, setVisibleCount] = useState<number>(3);
   const t = useTranslations("BestLoans");
-
-  const handleShowMore = () => {
-    setVisibleCount((prev) => prev + 3);
-  };
-
-  
 
   if (!best_credits || best_credits.length === 0) return null;
 
@@ -34,7 +27,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
         </h2>
 
         <div className="flex justify-between flex-col gap-[20px] md:grid md:grid-cols-2 lg:grid-cols-3 ">
-          {best_credits.slice(0, visibleCount).map((loan, index) => (
+          {best_credits.slice(0, 6).map((loan, index) => (
             <div
               key={index}
               className="w-full h-auto rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
@@ -73,7 +66,6 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
               </header>
 
               <main className="flex flex-col gap-[10px]">
-                {/* Новый клиент */}
                 {loan.credit_offers?.new_client && (
                   <div className="border border-[#00ba9e] rounded-[8px] p-[7px] md:p-[12px] ">
                     <p className="text-[#00ba9e] text-[12px] font-bold">
@@ -85,8 +77,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("amount")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.new_client.amount?.formatted ??
-                            "-"}
+                          {loan.credit_offers.new_client.amount?.formatted ?? "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
@@ -109,7 +100,6 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                   </div>
                 )}
 
-                {/* Повторный клиент */}
                 {loan.credit_offers?.repeat_client && (
                   <div className="border border-[#724DEA] rounded-[8px] p-[7px] md:p-[12px] ">
                     <p className="text-[#724DEA] text-[12px] font-bold">
@@ -121,8 +111,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("amount")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.amount?.formatted ??
-                            "-"}
+                          {loan.credit_offers.repeat_client.amount?.formatted ?? "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
@@ -130,8 +119,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("term")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.term?.formatted ??
-                            "-"}
+                          {loan.credit_offers.repeat_client.term?.formatted ?? "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
@@ -139,15 +127,13 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("rate")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.rate?.formatted ??
-                            "-"}
+                          {loan.credit_offers.repeat_client.rate?.formatted ?? "-"}
                         </p>
                       </div>
                     </div>
                   </div>
                 )}
 
-                {/* Детали */}
                 <div className="space-y-[10px] text-[12px] text-[#9393a3]">
                   <div className="flex justify-between">
                     <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
@@ -223,15 +209,16 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
         </div>
       </div>
 
+      {best_credits.length > 6 && (
         <div className="mt-[20px] flex justify-center">
           <ButtonGreenBorder
             text={t("showMore")}
             link="/loan"
             width="100%"
             className="sm:!w-[256px]"
-            onClick={handleShowMore}
           />
         </div>
+      )}
     </>
   );
 };
