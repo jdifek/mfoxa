@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import LoanClientPage from "@/app/components/LoanClientPage";
 import authorsService from "@/app/services/authorsService";
 import { catalogService } from "@/app/services/catalogService";
@@ -69,13 +70,26 @@ export default async function LoanDescription({
     lang: lang === "ua" ? "uk" : "ru",
     type: "loan",
   });
-  const res = await catalogService.getBySlug({
-    slug,
-    lang: lang === "ua" ? "uk" : "ru",
-  });
+  let res;
+
+  try {
+    res = await catalogService.getBySlug({
+      slug,
+      lang: lang === "ua" ? "uk" : "ru",
+    });
+  } catch (error: any) {
+    console.error("❌ Ошибка получения по slug:", slug);
+    console.error("Axios message:", error.message);
+    console.error("Axios response:", error?.response?.data || "Нет ответа");
+  
+    throw new Error(`Ошибка при запросе catalogService.getBySlug: ${error.message}`);
+  }
   const dates = await getPageDates({ type: "loans" });
   const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');  
 
+  if (!res) {
+    throw new Error(`Не удалось получить страницу по slug: ${slug}`);
+  }
   return (
     <>
       <MicrodataLoanCatalog data={data} locale={lang as 'ua' | 'ru'} slug={slug} />

@@ -86,6 +86,8 @@ export const catalogService = {
       `${API_URL}/api/v1/catalog/${slug}`,
       { params }
     );
+    
+    
     return response.data;
   },
 };
