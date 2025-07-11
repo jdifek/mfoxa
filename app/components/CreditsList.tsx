@@ -90,9 +90,13 @@ const CreditsList: React.FC<CreditsListProps> = ({
                       {loan.rating_average ?? "-"}
                       <span className="text-[#67677a]">/5</span>
                     </p>
+                    <Link href={`/mfo/${loan.slug}/reviews`}>
+
                     <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
                       {loan.rating_count ?? 0} {t("reviews") || "отзывов"}
                     </p>
+                    </Link>
+
                   </div>
                 </div>
               </header>
@@ -217,7 +221,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
                   <hr />
                   <div>
                     <Link
-                      href={`/mfo/${loan.slug ?? ""}`}
+                      href={loan.basic_characteristics_pdf_url || ''}
                       className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
                       style={{
                         fontFamily: "var(--Montserrat)",
@@ -230,8 +234,9 @@ const CreditsList: React.FC<CreditsListProps> = ({
                   <hr />
                   <div>
                     <Link
-                      href={`/loan`}
-                      className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
+                    
+                    href={loan.user_warning_pdf_url || ''}
+                    className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
                       style={{
                         fontFamily: "var(--Montserrat)",
                         textDecorationSkipInk: "none",
@@ -251,7 +256,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
                   className="flex-1"
                 />
                 <Link
-                  href={`/mfo/${loan.slug}`}
+                  href={`${loan.get_money_button_url}`}
                   className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out whitespace-nowrap flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
                 >
                   {t("getMoney") || "Получить деньги"}

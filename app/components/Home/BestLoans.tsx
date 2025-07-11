@@ -19,6 +19,8 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
     setVisibleCount((prev) => prev + 3);
   };
 
+  
+
   if (!best_credits || best_credits.length === 0) return null;
 
   return (
@@ -61,9 +63,11 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                       {loan.rating_average ?? "-"}
                       <span className="text-[#67677a]">/5</span>
                     </p>
-                    <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
-                      {loan.rating_count ?? 0} {t("reviews")}
-                    </p>
+                    <Link href={`/mfo/${loan.slug}/reviews`}>
+                      <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
+                        {loan.rating_count ?? 0} {t("reviews")}
+                      </p>
+                    </Link>
                   </div>
                 </div>
               </header>
@@ -81,7 +85,8 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("amount")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.new_client.amount?.formatted ?? "-"}
+                          {loan.credit_offers.new_client.amount?.formatted ??
+                            "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
@@ -116,7 +121,8 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("amount")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.amount?.formatted ?? "-"}
+                          {loan.credit_offers.repeat_client.amount?.formatted ??
+                            "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
@@ -124,7 +130,8 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("term")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.term?.formatted ?? "-"}
+                          {loan.credit_offers.repeat_client.term?.formatted ??
+                            "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
@@ -132,7 +139,8 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("rate")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.rate?.formatted ?? "-"}
+                          {loan.credit_offers.repeat_client.rate?.formatted ??
+                            "-"}
                         </p>
                       </div>
                     </div>
@@ -142,21 +150,27 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                 {/* Детали */}
                 <div className="space-y-[10px] text-[12px] text-[#9393a3]">
                   <div className="flex justify-between">
-                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">РРС</p>
+                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                      РРС
+                    </p>
                     <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
                       {loan.quick_info?.rpc_range ?? "-"}
                     </p>
                   </div>
                   <hr />
                   <div className="flex justify-between">
-                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">Юр. лицо</p>
+                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                      Юр. лицо
+                    </p>
                     <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
                       {loan.legal_entity ?? "-"}
                     </p>
                   </div>
                   <hr />
                   <div className="flex justify-between">
-                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">Лицензия НБУ</p>
+                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                      Лицензия НБУ
+                    </p>
                     <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
                       {loan.nbu_license ?? "-"}
                     </p>
@@ -164,7 +178,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                   <hr />
                   <div>
                     <Link
-                      href={`/mfo/${loan.slug ?? ""}`}
+                      href={loan.basic_characteristics_pdf_url || ""}
                       className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
                       style={{
                         fontFamily: "var(--Montserrat)",
@@ -177,7 +191,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                   <hr />
                   <div>
                     <Link
-                      href={`/loan`}
+                      href={loan.user_warning_pdf_url || ""}
                       className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
                       style={{
                         fontFamily: "var(--Montserrat)",
@@ -192,14 +206,14 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
 
               <footer className="mt-[10px] flex sm:flex-row gap-[10px] items-center justify-between flex-wrap">
                 <ButtonGreenBorder
-                  link="/loan"
+                  link={`/mfo/${loan.slug}`}
                   width="100%"
                   text={t("details")}
                   className="flex-1"
                 />
                 <Link
-                      href={`/loan`}
-                      className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out whitespace-nowrap flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
+                  href={loan.get_money_button_url || ''}
+                  className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out whitespace-nowrap flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
                 >
                   {t("getMoney")}
                 </Link>
@@ -209,16 +223,15 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
         </div>
       </div>
 
-      {visibleCount < best_credits.length && (
         <div className="mt-[20px] flex justify-center">
           <ButtonGreenBorder
             text={t("showMore")}
+            link="/loan"
             width="100%"
             className="sm:!w-[256px]"
             onClick={handleShowMore}
           />
         </div>
-      )}
     </>
   );
 };

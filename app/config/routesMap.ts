@@ -1,7 +1,7 @@
 export const routesMap: Record<string, string> = {
+  "О компании": "", 
   "Отзывы": "/reviews",
   "% Промокоды": "/promotion",
-  "Частые вопросы": "/qap",
   "Личный кабинет": "/login",
-  "О компании": "", 
+  "Частые вопросы": "/qap",
 };

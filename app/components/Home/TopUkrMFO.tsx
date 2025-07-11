@@ -20,13 +20,12 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
     setVisibleCount((prev) => prev + 3);
   };
   const formatRating = (ratingStr: string | undefined) => {
-    if (!ratingStr) return ""; 
+    if (!ratingStr) return "";
     const rating = parseFloat(ratingStr);
     if (isNaN(rating)) return "";
-  
+
     return rating.toFixed(1).replace(".", ",");
   };
-  
 
   return (
     <div className="w-full mt-[50px] px-[0px] md:px-[20px]">
@@ -72,9 +71,11 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
 
                 {/* Контент поверх PNG */}
                 <div className="absolute inset-1 mt-2 flex flex-col items-center justify-center">
-                  <span className="text-[#82C600] text-[1
-                  5px] font-bold leading-none">
-                  {formatRating(String(top?.rating_average))}
+                  <span
+                    className="text-[#82C600] text-[1
+                  5px] font-bold leading-none"
+                  >
+                    {formatRating(String(top?.rating_average))}
                   </span>
                   <span className="text-black text-[10px] font-bold">
                     {top?.rating_count} место
@@ -104,7 +105,7 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
               />
             </div>
             <ButtonGreenBorder
-              link="/mfo"
+              link={`/mfo/${top.slug}`}
               className="mt-[20px]"
               width="100%"
               text={t("details")}
@@ -113,16 +114,15 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
         ))}
       </div>
 
-      {visibleCount < top_mfos.length && (
         <div className="px-0 md:px-[20px]">
           <ButtonGreenBorder
             text={t("showMore")}
+            link="/loan"
             width="100%"
             className="mt-[20px] md:mt-[40px] mb-[30px] md:mb-[50px]"
             onClick={handleShowMore}
           />
         </div>
-      )}
     </div>
   );
 };

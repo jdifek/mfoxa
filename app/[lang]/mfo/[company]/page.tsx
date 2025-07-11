@@ -257,14 +257,14 @@ export default async function CatalogPage({ params }: PageProps) {
             {t("usefulMaterials")}
           </p>
           <Link
-            href={t("termsLink")}
+            href={data.basic_characteristics_pdf_url || t("termsLink")}
             className="block w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
           >
             {t("termsText")}
           </Link>
           <Link
-            href={t("warningLink")}
-            className="w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
+                    href={data.user_warning_pdf_url || ''}
+                    className="w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
           >
             {t("warningText")}
           </Link>
