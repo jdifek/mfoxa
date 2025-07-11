@@ -34,6 +34,8 @@ export type Mfo = {
   meta_description: string;
   legal_entity: string;
   nbu_license: string;
+  basic_characteristics_pdf_url: string;
+  user_warning_pdf_url: string;
   rating_average: number;
   rating_count: number;
   rating_trust_score: number;
