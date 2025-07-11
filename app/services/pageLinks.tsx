@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 
 const API_BASE = `${process.env.NEXT_PUBLIC_API_URL || "https://mfo.qissseee.tech"}/api/v1/page-links`;
