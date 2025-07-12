@@ -21,19 +21,19 @@ const CalctTarifButtonsts = ({ tariffs, onSelect }: Props) => {
     tariffs.length > 0 ? tariffs[0].id : null
   );
 
-  const activeTariff = tariffs.find((t) => t.id === activeTariffId) || tariffs[0];
+  // const activeTariff = tariffs.find((t) => t.id === activeTariffId) || tariffs[0];
 
   const handleClick = (tariff: Tariff) => {
     setActiveTariffId(tariff.id);
     if (onSelect) onSelect(tariff);
   };
 
-  const amount = parseFloat(activeTariff.amount);
-  const rate = parseFloat(activeTariff.rate); // дневной %
-  const days = activeTariff.term_days;
+  // const amount = parseFloat(activeTariff.amount);
+  // const rate = parseFloat(activeTariff.rate); // дневной %
+  // const days = activeTariff.term_days;
 
-  const interest = (amount * (rate / 100)) * days;
-  const total = amount + interest;
+  // const interest = (amount * (rate / 100)) * days;
+  // const total = amount + interest;
 
   return (
     <div className="p-4 max-w-xl mx-auto text-sm font-sans">
@@ -64,7 +64,7 @@ const CalctTarifButtonsts = ({ tariffs, onSelect }: Props) => {
       </div>
 
       {/* Расчёт по выбранному тарифу */}
-      <div className="bg-[#f5f5fc] p-4 rounded-lg shadow-md space-y-2 text-sm text-gray-800">
+      {/* <div className="bg-[#f5f5fc] p-4 rounded-lg shadow-md space-y-2 text-sm text-gray-800">
         <div>
           <strong>Сумма займа:</strong> {amount.toFixed(2)} грн
         </div>
@@ -90,7 +90,7 @@ const CalctTarifButtonsts = ({ tariffs, onSelect }: Props) => {
             Перейти на сайт
           </a>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
