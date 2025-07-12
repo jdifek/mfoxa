@@ -1,26 +1,35 @@
-"use client";
-
+'use client'
 import React, { useState } from "react";
 
-const DetailsText = () => {
+type DetailsTextProps = {
+  html?: string;
+};
+
+const DetailsText: React.FC<DetailsTextProps> = ({ html }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpanded = () => {
     setIsExpanded((prev) => !prev);
   };
 
-  const fullText =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud quis nostrud Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud";
-
+  const fullHtml = html ?? "";
   const previewCharCount = 300;
-  const shouldTruncate = fullText.length > previewCharCount;
-  const displayedText = isExpanded || !shouldTruncate
-    ? fullText
-    : fullText.slice(0, previewCharCount) + "...";
+
+  const getTruncatedHtml = (htmlString: string) => {
+    const div = document.createElement("div");
+    div.innerHTML = htmlString;
+    const textContent = div.textContent || "";
+    return textContent.slice(0, previewCharCount) + "...";
+  };
+
+  const shouldTruncate = fullHtml.length > previewCharCount;
+  const displayedContent = isExpanded || !shouldTruncate
+    ? fullHtml
+    : getTruncatedHtml(fullHtml);
 
   return (
     <div className="px-0 md:px-[20px]">
-      <p
+      <div
         className="mb-[10px] text-[13px] md:text-[15px]"
         style={{
           fontFamily: "var(--Montserrat)",
@@ -28,9 +37,8 @@ const DetailsText = () => {
           lineHeight: "138%",
           color: "#222",
         }}
-      >
-        {displayedText}
-      </p>
+        dangerouslySetInnerHTML={{ __html: displayedContent }}
+      />
 
       {shouldTruncate && (
         <p

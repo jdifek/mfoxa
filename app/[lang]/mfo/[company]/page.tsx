@@ -15,6 +15,7 @@ import { getMfoDetails } from "@/app/services/getMfoDetailsService";
 import { getPageDates } from "@/app/services/PageDatesService";
 import { MicrodataCalculator } from "@/app/structured-data/MicrodataCalculator";
 import { MicrodataLoanOrCredit } from "@/app/structured-data/MicrodataLoanOrCredit";
+import DetailsText from "@/app/components/DetailsText";
 
 export const dynamic = "force-dynamic";
 
@@ -482,7 +483,10 @@ export default async function CatalogPage({ params }: PageProps) {
         </div>
       </div>
       <OftenQuestions faqs={data.faqs} company={data.name} />
+
+
       <div className="h-[30px]"></div>
+      <DetailsText html={data.seo_text}/>
       {/* <LastReviews recent_reviews={data.recent_reviews || []} /> <DetailsText /> */}
       <div className="px-0 md:px-[20px]">
         {data.created_at && (
