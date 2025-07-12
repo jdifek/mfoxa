@@ -56,7 +56,7 @@ export default function CompanyRewiwsClient({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openReplyId, setOpenReplyId] = useState<number | null>(null);
   const [data, setData] = useState<ReviewsApiResponse | null>(null);
-  const [visibleCount, setVisibleCount] = useState(10);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const formatRating = (ratingStr: string | undefined) => {
     if (!ratingStr) return "";

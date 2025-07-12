@@ -69,7 +69,7 @@ export default function AnswerQap({
         author_name: name,
         review_text: text,
       });
-      toast.success("Ответ успешно отправлен!");
+      toast.success("Ответ успешно отправлен и отправлен на модерацию!");
       onClose();
       setName("");
       setText("");

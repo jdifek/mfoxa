@@ -163,14 +163,16 @@ export default async function CatalogPage({ params }: PageProps) {
                     {data.rating_average || t("rating.value")}
                     <span className="text-[#67677a]">/5</span>
                   </p>
+                  <Link href={`/mfo/${data.slug}/reviews`}>
                   <p className="font-medium text-[13px] leading-[138%] underline underline-offset-2 text-right text-[#00ba9e] hover:text-[#009e88] hover:underline-offset-4 transition-all duration-200 cursor-pointer">
                     {data.rating_count + " " + t("rating.reviews")}
                   </p>
+                  </Link>
                 </div>
               </div>
             </div>
             <Link
-              href={data.redirect_url || "/"}
+              href={data.get_money_button_url || "/"}
               className="block bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out mb-[20px] md:mb-0 whitespace-nowrap h-[40px] w-full md:w-[200px] text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer"
             >
               {t("getMoney")}
@@ -242,7 +244,7 @@ export default async function CatalogPage({ params }: PageProps) {
                 {t("website")}
               </p>
               <Link
-                href={t("websiteValue")}
+                href={data.official_website}
                 className="w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
                 style={{ textDecorationSkipInk: "none" }}
               >

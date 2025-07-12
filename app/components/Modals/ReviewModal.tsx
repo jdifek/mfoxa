@@ -104,7 +104,7 @@ export default function ReviewModal({
         support_rating: support,
         website_rating: website,
       });
-      toast.success("Отзыв отправлен успешно!");
+      toast.success("Отзыв отправлен и отправлен на модерацию!");
       onClose();
     } catch (error) {
       toast.error("Ошибка при отправке отзыва.");
