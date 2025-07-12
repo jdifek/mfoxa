@@ -1,16 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
 
 type Tariff = {
   id: number;
   name: string;
-  amount: string;
-  rate: string;
+  amount: string; // будет преобразовано в число
+  rate: string;   // процент в день
   term_days: number;
-  real_annual_rate: string;
-  get_money_url: string;
+  get_money_url?: string;
 };
 
 type Props = {
@@ -19,42 +17,32 @@ type Props = {
 };
 
 const CalctTarifButtonsts = ({ tariffs, onSelect }: Props) => {
-  const t = useTranslations("Catalog");
   const [activeTariffId, setActiveTariffId] = useState<number | null>(
     tariffs.length > 0 ? tariffs[0].id : null
   );
+
+  const activeTariff = tariffs.find((t) => t.id === activeTariffId) || tariffs[0];
 
   const handleClick = (tariff: Tariff) => {
     setActiveTariffId(tariff.id);
     if (onSelect) onSelect(tariff);
   };
 
+  const amount = parseFloat(activeTariff.amount);
+  const rate = parseFloat(activeTariff.rate); // дневной %
+  const days = activeTariff.term_days;
+
+  const interest = (amount * (rate / 100)) * days;
+  const total = amount + interest;
+
   return (
-    <div className="flex mb-[10px] gap-[10px]">
-      {tariffs.map((tariff) => (
-        <div
-          key={tariff.id}
-          itemScope
-          itemType="https://schema.org/LoanOrCredit"
-        >
-          <meta itemProp="name" content={tariff.name} />
-          <div itemProp="amount" itemScope itemType="https://schema.org/MonetaryAmount">
-            <meta itemProp="currency" content="UAH" />
-            <span itemProp="value">{tariff.amount}</span>
-          </div>
-          <span itemProp="interestRate">{tariff.rate}</span>
-          <div itemProp="loanTerm" itemScope itemType="https://schema.org/QuantitativeValue">
-            <span itemProp="value">{tariff.term_days}</span>
-            <meta itemProp="unitText" content="DAY" />
-          </div>
-          <div itemProp="provider" itemScope itemType="https://schema.org/FinancialService">
-            <span itemProp="name">{tariff.name}</span>
-          </div>
-          <meta itemProp="description" content={tariff.name} />
-          <span itemProp="annualPercentageRate">{tariff.real_annual_rate}</span>
-          <a itemProp="url" href={tariff.get_money_url}>{t("getMoney")}</a>
+    <div className="p-4 max-w-xl mx-auto text-sm font-sans">
+      {/* Кнопки тарифов */}
+      <div className="flex mb-[10px] gap-[10px]">
+        {tariffs.map((tariff) => (
           <div
             onClick={() => handleClick(tariff)}
+            key={tariff.id}
             style={{ fontFamily: "var(--Montserrat)" }}
             className={`px-[10px] py-[8px] rounded-[35px] h-[33px] flex items-center justify-center text-[11px] font-medium leading-[145%] text-center cursor-pointer
               ${
@@ -72,8 +60,37 @@ const CalctTarifButtonsts = ({ tariffs, onSelect }: Props) => {
               {tariff.name}
             </p>
           </div>
+        ))}
+      </div>
+
+      {/* Расчёт по выбранному тарифу */}
+      <div className="bg-[#f5f5fc] p-4 rounded-lg shadow-md space-y-2 text-sm text-gray-800">
+        <div>
+          <strong>Сумма займа:</strong> {amount.toFixed(2)} грн
         </div>
-      ))}
+        <div>
+          <strong>Ставка:</strong> {rate.toFixed(2)}% в день
+        </div>
+        <div>
+          <strong>Срок:</strong> {days} дней
+        </div>
+        <div>
+          <strong>Проценты:</strong> {interest.toFixed(2)} грн
+        </div>
+        <div>
+          <strong>К возврату:</strong> {total.toFixed(2)} грн
+        </div>
+
+        {activeTariff.get_money_url && (
+          <a
+            href={activeTariff.get_money_url}
+            target="_blank"
+            className="inline-block mt-4 px-4 py-2 bg-[#724dea] text-white rounded-md text-sm hover:bg-[#5f3ed3] transition"
+          >
+            Перейти на сайт
+          </a>
+        )}
+      </div>
     </div>
   );
 };

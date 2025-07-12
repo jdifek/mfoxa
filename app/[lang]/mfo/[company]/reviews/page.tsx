@@ -1,4 +1,5 @@
 import CompanyRewiwsClient from "@/app/components/CompanyRewiwsClient";
+import { getMfoDetails } from "@/app/services/getMfoDetailsService";
 import { getPageDates } from "@/app/services/PageDatesService";
 import { Metadata } from "next";
 
@@ -48,6 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://mfoxa.com.ua/${lang}/mfo/${slug}/reviews`,
       siteName: "MFoxa",
       type: "website",
+      images: [`https://mfoxa.com.ua/og-${slug}-reviews.jpg`]
     },
     alternates: {
       canonical: `https://mfoxa.com.ua/${lang}/mfo/${slug}/reviews`,
@@ -58,9 +60,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CompanyReviewsPage({ params }: Props) {
   const { company, lang } = await params;
   const companySlug = decodeURIComponent(company || "sgroshi");
-
+  const { data } = await getMfoDetails(companySlug, lang === "ua" ? "uk" : "ru");
   const dates = companySlug
   ? await getPageDates({ type: "reviews", mfo_slug:companySlug })
   : null;
-  return <CompanyRewiwsClient lang={lang} slug={companySlug} dates={dates} />;
+  return <CompanyRewiwsClient lang={lang} mfoData={data} slug={companySlug} dates={dates} />;
 }
