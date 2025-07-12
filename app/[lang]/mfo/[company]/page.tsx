@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
-import DetailsText from "@/app/components/DetailsText";
 import OftenQuestions from "@/app/components/OftenQuestions";
 import Link from "next/link";
 import AboutButtons from "@/app/components/AboutButtons";
