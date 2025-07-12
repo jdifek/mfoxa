@@ -1,32 +1,27 @@
-// app/structured-data/FAQPage.tsx
-import { useTranslations } from "next-intl";
-
-const QUESTIONS_COUNT = 5;
+import Script from "next/script";
+import { FaqItem } from "@/app/services/catalogService";
 
 type FAQPageProps = {
-  namespace: string;
+  faqs: FaqItem[];
 };
 
-export const FAQPage = ({ namespace }: FAQPageProps) => {
-  const t = useTranslations(namespace);
-
-  const questions = Array.from({ length: QUESTIONS_COUNT }).map((_, i) => ({
-    name: t(`questions.${i}.name`),
-    content: t(`questions.${i}.content`),
-  }));
-
+export const FAQPage = ({ faqs }: FAQPageProps) => {
   const faqData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: questions.map((question) => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      name: question.name,
+      name: faq.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: question.content,
-      },
-    })),
+        text: faq.answer
+      }
+    }))
   };
 
-  return <script type="application/ld+json">{JSON.stringify(faqData)}</script>;
+  return (
+    <Script id="faq-schema" type="application/ld+json">
+      {JSON.stringify(faqData, null, 2)}
+    </Script>
+  );
 };

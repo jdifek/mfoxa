@@ -1,39 +1,43 @@
-'use client';
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import Script from "next/script";
 
-export const MicrodataCompany = ({ company }: { company: string }) => {
-  const isSgroshi = company === "sgroshi";
+type MicrodataCompanyProps = {
+  company: string;
+  data: any; // Замените на тип MfoDetails из getMfoDetailsService
+};
 
-  const data = {
+export const MicrodataCompany = ({ company, data }: MicrodataCompanyProps) => {
+  const companySchema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: isSgroshi ? "Швидко Гроші" : "Название компании",
+    "@type": "FinancialService",
+    name: data.legal_entity || (company === "sgroshi" ? "Швидко Гроші" : "Название компании"),
     url: `https://mfoxa.com.ua/mfo/${company}`,
-    logo: "https://mfoxa.com.ua/logo.png",
+    logo: data.logo_url || "https://mfoxa.com.ua/logo.png",
+    identifier: data.nbu_license || "Не указана",
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+38 (063) 178-64-56",
+      telephone: data.phone || "+38 (063) 178-64-56",
+      email: data.email || "support@mfoxa.com.ua",
       contactType: "customer service",
       areaServed: "UA",
       availableLanguage: ["Ukrainian", "Russian"]
     },
     address: {
       "@type": "PostalAddress",
-      streetAddress: "ул. Прживальского 19б, стр. 17а",
+      streetAddress: data.legal_address || "ул. Прживальского 19б, стр. 17а",
       addressLocality: "Киев",
       addressCountry: "UA"
     },
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "119"
+      ratingValue: data.rating_average?.toString() || "4.8",
+      reviewCount: data.rating_count?.toString() || "119"
     }
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+    <Script id="company-schema" type="application/ld+json">
+      {JSON.stringify(companySchema, null, 2)}
+    </Script>
   );
 };

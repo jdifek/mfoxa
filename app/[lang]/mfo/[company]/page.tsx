@@ -16,6 +16,7 @@ import { getMfoDetails } from "@/app/services/getMfoDetailsService";
 import { getPageDates } from "@/app/services/PageDatesService";
 import { MicrodataCalculator } from "@/app/structured-data/MicrodataCalculator";
 import { MicrodataLoanOrCredit } from "@/app/structured-data/MicrodataLoanOrCredit";
+import { LastReviews } from "@/app/components/Home/LastRewiews";
 
 export const dynamic = "force-dynamic";
 
@@ -121,8 +122,7 @@ export default async function CatalogPage({ params }: PageProps) {
 
   return (
     <>
-      <MicrodataCompany company={companySlug} />
-      <Bread lang={lang as "ua" | "ru"} />
+<MicrodataCompany company={companySlug} data={data} />      <Bread lang={lang as "ua" | "ru"} />
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] md:p-[30px] sm:p-[20px] mb-[30px] md:mb-[50px] bg-white rounded-lg mt-[10px]">
           <div className="flex justify-between flex-col md:flex-row md:items-center">
@@ -136,9 +136,9 @@ export default async function CatalogPage({ params }: PageProps) {
                 />
               </div>
               <div className="flex flex-col">
-                <p className="font-bold text-[16px] md:text-[30px] leading-[100%] mb-[10px] text-[#222]">
+                <h1 className="font-bold text-[16px] md:text-[30px] leading-[100%] mb-[10px] text-[#222]">
                   {data.name || t(`company.${companySlug}.name`)}
-                </p>
+                </h1>
                 <div className="flex gap-[5px] items-center">
                   <div className="flex">
                     {[1, 2, 3, 4, 5].map((_, i) => (
@@ -263,14 +263,13 @@ export default async function CatalogPage({ params }: PageProps) {
             {t("termsText")}
           </Link>
           <Link
-                    href={data.user_warning_pdf_url || ''}
-                    className="w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
+            href={data.user_warning_pdf_url || ""}
+            className="w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
           >
             {t("warningText")}
           </Link>
         </div>
       </div>
-
       <AboutButtons />
       <TermsOfRegistration mfo={data} />
       <div className="px-0 md:px-[20px]">
@@ -388,10 +387,13 @@ export default async function CatalogPage({ params }: PageProps) {
               tariffs={data.tariffs}
               companyName={data.name || t(`company.${companySlug}.name`)}
               companySlug={companySlug}
-              locale={lang as 'ru' | 'ua'}
+              locale={lang as "ru" | "ua"}
             />
             <CalctTarifButtonsts tariffs={data.tariffs} />
-            <MicrodataCalculator companyName={data.name || t(`company.${companySlug}.name`)} locale={lang as "ru" | "ua"} />
+            <MicrodataCalculator
+              companyName={data.name || t(`company.${companySlug}.name`)}
+              locale={lang as "ru" | "ua"}
+            />
             <Calculator tariffs={data.tariffs} />
 
             <p
@@ -479,17 +481,16 @@ export default async function CatalogPage({ params }: PageProps) {
           </div>
         </div>
       </div>
-
-      <OftenQuestions faqs={data.faqs} company={data.name}/>
+      <OftenQuestions faqs={data.faqs} company={data.name} />
       <div className="h-[30px]"></div>
-      {/* <LastReviews /> */}
-      <DetailsText />
+      <LastReviews recent_reviews={data.recent_reviews || []} /> <DetailsText />
       <div className="px-0 md:px-[20px]">
         {data.created_at && (
           <p className="font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
-          
             {dates?.date_published
-              ? t("metadata.addedDate") + ' ' +  new Date(dates.date_published).toLocaleDateString("ru-RU", {
+              ? t("metadata.addedDate") +
+                " " +
+                new Date(dates.date_published).toLocaleDateString("ru-RU", {
                   day: "2-digit",
                   month: "2-digit",
                   year: "numeric",
@@ -497,21 +498,17 @@ export default async function CatalogPage({ params }: PageProps) {
               : t("metadata.addedDate")}
           </p>
         )}
-                    <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
+        <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
           {dates?.date_modified
-
-          ? t("metadata.updatedDate") +
-            " " +
-            new Date(dates?.date_modified).toLocaleDateString("ru-RU", {
-              day: "2-digit",
-              month: "2-digit",
-              year: "numeric",
-            })
-          : t("metadata.updatedDate")}
-          </p>
-
-        
-        
+            ? t("metadata.updatedDate") +
+              " " +
+              new Date(dates?.date_modified).toLocaleDateString("ru-RU", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            : t("metadata.updatedDate")}
+        </p>
       </div>
     </>
   );

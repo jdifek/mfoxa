@@ -27,7 +27,7 @@ const OftenQuestionsComponent: React.FC<OftenQuestionsProps> = ({
         className="px-0 md:px-[20px] text-[20px] md:text-[36px] mt-[30px] md:mt-[50px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[30px] md:mb-[50px]"
         style={{ fontFamily: "var(--Jakarta)" }}
       >
-        {t("title") + (company ? ` ${company}` : '')}
+        {t("title") + (company ? ` ${company}` : "")}
       </h2>
       {faqs &&
         faqs.map((question, index) => {
@@ -83,7 +83,7 @@ const OftenQuestionsComponent: React.FC<OftenQuestionsProps> = ({
             </div>
           );
         })}
-      <FAQPage namespace="faq" />
+      <FAQPage faqs={faqs || []} />{" "}
     </>
   );
 };

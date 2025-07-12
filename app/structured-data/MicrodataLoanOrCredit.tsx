@@ -1,13 +1,12 @@
-// app/structured-data/MicrodataLoanOrCredit.tsx
 import Script from "next/script";
 
 interface Tariff {
   id: number;
   name: string;
-  amount: string; // "100.00"
-  rate: string; // "5.00"
+  amount: string;
+  rate: string;
   term_days: number;
-  real_annual_rate: string; // "1.00"
+  real_annual_rate: string;
   get_money_url: string;
 }
 
@@ -18,7 +17,7 @@ type MicrodataLoanOrCreditProps = {
   locale: "ru" | "ua";
 };
 
-export const MicrodataLoanOrCredit = ({ tariffs, companyName }: MicrodataLoanOrCreditProps) => {
+export const MicrodataLoanOrCredit = ({ tariffs, companyName, companySlug, locale }: MicrodataLoanOrCreditProps) => {
   const loanOrCreditSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -28,25 +27,27 @@ export const MicrodataLoanOrCredit = ({ tariffs, companyName }: MicrodataLoanOrC
       item: {
         "@type": "LoanOrCredit",
         name: tariff.name,
+        description: tariff.name,
         amount: {
           "@type": "MonetaryAmount",
           currency: "UAH",
-          value: tariff.amount,
+          value: tariff.amount
         },
         interestRate: tariff.rate,
         loanTerm: {
           "@type": "QuantitativeValue",
           value: tariff.term_days,
-          unitText: "DAY",
+          unitText: "DAY"
         },
         provider: {
-          "@type": "Organization",
+          "@type": "FinancialService",
           name: companyName,
+          url: `https://mfoxa.com.ua/${locale}/mfo/${companySlug}`
         },
         annualPercentageRate: tariff.real_annual_rate,
-        url: tariff.get_money_url,
-      },
-    })),
+        url: tariff.get_money_url
+      }
+    }))
   };
 
   return (
