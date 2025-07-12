@@ -28,7 +28,7 @@ type LoanClientPageProps = {
   dates?: PageDatesResponse;
   slug?: string;
   faqs?: FaqItem[];
-  randomAuthor: AuthorRandomResponse
+  randomAuthor: AuthorRandomResponse;
 };
 
 const LoanClientPage: React.FC<LoanClientPageProps> = ({
@@ -39,7 +39,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
   page,
   slug,
   faqs,
-  randomAuthor
+  randomAuthor,
 }) => {
   const [currentVisibleCount, setVisibleCount] = useState(visibleCount);
   const t = useTranslations("Loans");
@@ -104,8 +104,8 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
           onClick={handleShowMore}
         />
       </div>
-      <OftenQuestions />
-      <InfoHelpfulClient randomAuthor={randomAuthor}/>
+      {faqs && faqs.length > 0 ? <OftenQuestions faqs={faqs} /> : <OftenQuestions/>}
+      <InfoHelpfulClient randomAuthor={randomAuthor} />
 
       <Questions />
       <div className="px-0 md:px-[20px]">

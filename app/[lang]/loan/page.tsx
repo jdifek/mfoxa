@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { catalogService } from "@/app/services/catalogService";
 import { MicrodataLoanCatalog } from "@/app/structured-data/MicrodataLoanCatalog";
 import authorsService from "@/app/services/authorsService";
+import { FaqsService } from "@/app/services/FaqService";
 
 export async function generateMetadata({
   params,
@@ -67,11 +68,13 @@ export default async function LoanPageWrapper({
   const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');
 
   console.log(randomAuthor, 'randomAuthor');
+  const faqs = await FaqsService.getFaqs({ page_name: "loan" });
+  
   
   return (
     <>
       <MicrodataLoanCatalog data={data} locale={lang as "ua" | "ru"} />
-      <LoanClientPage data={data} randomAuthor={randomAuthor} visibleCount={visibleCount} locale={lang} />
+      <LoanClientPage faqs={faqs} data={data} randomAuthor={randomAuthor} visibleCount={visibleCount} locale={lang} />
     </>
   );
 }

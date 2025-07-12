@@ -12,6 +12,7 @@ import { MfoListStructuredData } from "../structured-data/MfoListStructuredData"
 import { PageDatesResponse } from "../services/PageDatesService";
 import { MfoDetails } from "../services/getMfoDetailsService";
 import { AuthorRandomResponse } from "../services/authorsService";
+import { FaqsResponse } from "../services/FaqService";
 
 const ratings = [
   { key: "speed", value: 4.8, color: "#00BDA5" },
@@ -82,6 +83,7 @@ type MfoPageClientProps = {
   dates: PageDatesResponse;
   data: MfoDetails[];
   randomAuthor: AuthorRandomResponse
+  faqs: FaqsResponse
 };
 
 export default async function MfoPageClient({
@@ -91,7 +93,8 @@ export default async function MfoPageClient({
   locale,
   dates,
   data,
-  randomAuthor
+  randomAuthor,
+  faqs
 }: MfoPageClientProps) {
   const { mfo, ratings: ratingsT } = translations;
 
@@ -290,7 +293,7 @@ export default async function MfoPageClient({
       )}
 
       <DetailsText />
-      <OftenQuestions />
+      {faqs && faqs.length > 0 ? <OftenQuestions faqs={faqs} /> : <OftenQuestions/>}
       <InfoHelpful randomAuthor={randomAuthor} locale={locale} />
       <Questions />
       <div className="px-0 md:px-[20px]">

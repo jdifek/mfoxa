@@ -59,12 +59,27 @@ export interface CreateReviewParams {
   support_rating: number;
   website_rating: number;
 }
-
+export interface ReviewStatisticsResponse {
+  total_reviews: number;
+  total_mfos: number;
+}
 // Ответ от API на POST /reviews
 interface CreateReviewResponse {
   message: string;
   review: Review;
 }
+export const getReviewStatistics = async (): Promise<ReviewStatisticsResponse> => {
+  try {
+    const response = await axios.get<ReviewStatisticsResponse>(
+      "https://mfo.qissseee.tech/api/v1/reviews/statistics"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("getReviewStatistics error:", error);
+    throw new Error("Failed to fetch review statistics");
+  }
+};
+
 export const getReviews = async (
   params: GetReviewsParams = {}
 ): Promise<ReviewsApiResponse> => {

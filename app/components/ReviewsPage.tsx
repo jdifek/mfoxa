@@ -7,12 +7,16 @@ import Bread from "../components/Bread";
 import { getTranslations } from "next-intl/server";
 import ReviewsList from "./ReviewsList";
 import { AuthorRandomResponse } from "../services/authorsService";
+import { ReviewStatisticsResponse } from "../services/reviewService";
+import { FaqsResponse } from "../services/FaqService";
 
 type ReviewsClientProps = {
   locale: string;
   reviewsCount: number;
   selectedSortKey: string; // из URL
   randomAuthor: AuthorRandomResponse
+  stats: ReviewStatisticsResponse
+  faqs: FaqsResponse
 };
 
 const MAX_REVIEWS = 24;
@@ -22,7 +26,9 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
   locale,
   reviewsCount,
   selectedSortKey,
-  randomAuthor
+  randomAuthor,
+  stats,
+  faqs
 }) => {
   const t = await getTranslations({ locale, namespace: "ReviewsPage" });
 
@@ -64,7 +70,7 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
           <div className="flex gap-[40px] mt-[20px]">
             <div className="flex flex-col">
               <p className="font-bold text-[20px] sm:text-[28px] md:text-[36px] leading-[100%] text-[#222]">
-                {t("companiesCount") || "188"}
+                {stats.total_mfos ?? "188"}
               </p>
               <p className="font-medium text-[11px] leading-[145%] text-[#222]">
                 {t("companies") || "Компаний"}
@@ -72,7 +78,7 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
             </div>
             <div className="flex flex-col">
               <p className="font-bold text-[20px] sm:text-[28px] md:text-[36px] leading-[100%] text-[#222]">
-                {t("reviewsCount") || "53 690"}
+                {stats.total_reviews ?? "53 690"}
               </p>
               <p className="font-medium text-[11px] leading-[145%] text-[#222]">
                 {t("reviews") || "Отзывов"}
@@ -103,7 +109,7 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
           </a>
         </div>
       )}
-      <OftenQuestions />
+      {faqs && faqs.length > 0 ? <OftenQuestions faqs={faqs} /> : <OftenQuestions/>}
       <InfoHelpful randomAuthor={randomAuthor} locale={locale} />
       <Questions />
     </>

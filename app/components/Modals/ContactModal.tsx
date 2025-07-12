@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { createQuestion } from "@/app/services/questionsService";
+import { ContactsService } from "@/app/services/contactsService";
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import toast from "react-hot-toast";
@@ -7,7 +8,6 @@ import toast from "react-hot-toast";
 type ReviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  mfoId: number;
 };
 
 const Checkbox = ({
@@ -35,7 +35,7 @@ const Checkbox = ({
   </div>
 );
 
-export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
+export default function ContactModal({ isOpen, onClose }: ReviewModalProps) {
   const [agreePolicy, setAgreePolicy] = useState(false);
   const [notifyReply, setNotifyReply] = useState(false);
   const [name, setName] = useState("");
@@ -56,18 +56,18 @@ export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
 
     try {
       setIsSubmitting(true);
-      await createQuestion({
-        mfo_id: mfoId,
-        author_name: name,
-        author_email: email,
-        question_text: text,
-      });
+      await ContactsService.sendContactForm({
+        name,
+        email,
+        message: text,
+        notifications_enabled: notifyReply,
+        privacy_accepted: true
+      })
       toast.success("Вопрос успешно отправлен!");
       onClose();
       setName("");
       setEmail("");
       setText("");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const errorMessage = error?.message || "Ошибка при отправке вопроса.";
       toast.error(errorMessage);
@@ -89,7 +89,7 @@ export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
             className="font-bold text-[20px] text-[#222]"
             style={{ fontFamily: "var(--second-family)" }}
           >
-            Задать свой вопрос
+            Написать нам
           </h2>
           <button
             onClick={onClose}
@@ -131,7 +131,7 @@ export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
         <button
           onClick={handleSubmit}
           disabled={isSubmitting}
-          className="bg-[#00ba9e]  cursor-pointer text-white font-bold text-[14px] rounded-[8px] px-[16px] py-[9.5px] w-full text-center mb-[14px] disabled:opacity-50"
+          className="bg-[#00ba9e] cursor-pointer text-white font-bold text-[14px] rounded-[8px] px-[16px] py-[9.5px] w-full text-center mb-[14px] disabled:opacity-50"
         >
           {isSubmitting ? "Отправка..." : "Отправить"}
         </button>

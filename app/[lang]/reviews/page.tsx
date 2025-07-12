@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import ReviewsClient from "@/app/components/ReviewsPage";
 import { getTranslations } from "next-intl/server";
 import authorsService from "@/app/services/authorsService";
+import { getReviewStatistics } from "@/app/services/reviewService";
+import { FaqsService } from "@/app/services/FaqService";
 
 export async function generateMetadata({
   params,
@@ -41,9 +43,13 @@ export default async function ReviewsPageWrapper({
   const reviewsCount = count ? parseInt(count, 10) : 8;
 
   const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');  
+  const stats = await getReviewStatistics();
+  const faqs = await FaqsService.getFaqs({ page_name: "reviews" });
 
   return (
     <ReviewsClient
+    stats={stats}
+    faqs={faqs}
     randomAuthor={randomAuthor}
       locale={lang}
       reviewsCount={reviewsCount}

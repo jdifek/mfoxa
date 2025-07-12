@@ -23,7 +23,32 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
   const offers = mfo?.catalog_offers;
   const creditTypes = Object.entries(offers);
 
-  console.log(mfo);
+  const getClientTypeClass = (type: string) => {
+    switch (type) {
+      case "new":
+        return "bg-[#e2ffe6] text-[#00ba9e] w-[60px] h-[22px] font-medium text-[11px] leading-[145%] px-[10px] py-[3px] rounded-[8px] font-[var(--font-family)]";
+      case "repeat":
+        return "bg-[#f5f5ff] text-[#724dea] w-[87px] h-[22px] font-medium text-[11px] leading-[145%] px-[10px] py-[3px] rounded-[8px] font-[var(--font-family)]";
+      case "sale":
+        return "bg-[#ffece2] text-[#f22a52] w-[57px] h-[22px] font-medium text-[11px] leading-[145%] px-[10px] py-[3px] rounded-[8px] font-[var(--font-family)]";
+      default:
+        return "bg-gray-200 text-gray-700 px-[10px] py-[3px] rounded-[8px] text-[11px]";
+    }
+  };
+  
+  const getClientTypeLabel = (type: string) => {
+    switch (type) {
+      case "new":
+        return "Новый";
+      case "repeat":
+        return "Повторный";
+      case "sale":
+        return "Акция";
+      default:
+        return "Неизвестно";
+    }
+  };
+  
 
   return (
     <>
@@ -75,13 +100,14 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
 
                         <hr className="mb-[16px]" />
                         <div className="flex justify-between">
-                          <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
-                            {t("tariff")}
-                          </p>
-                          <div className="rounded-[8px] px-[10px] py-[3px] w-max h-[25px] bg-[#e2ffe6] text-[#00ba9e] font-medium text-[14px]">
-                            {offer.client_type}
-                          </div>
-                        </div>
+  <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
+    {t("tariff")}
+  </p>
+  <div className={getClientTypeClass(offer.client_type)}>
+    {getClientTypeLabel(offer.client_type)}
+  </div>
+</div>
+
                         <hr className="mb-[16px]" />
 
                         {["amount", "term", "rate", "rrs"].map((key, i) => {
