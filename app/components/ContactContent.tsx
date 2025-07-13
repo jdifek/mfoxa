@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import ContactModal from "./Modals/ContactModal";
 
-export default function ContactContent() {
+type ContactContentProps = {
+  settings: Record<string, string> | undefined
+}
+export default function ContactContent({ settings }: ContactContentProps) {
   const t = useTranslations("Contacts"); // ключ неймспейса, как в JSON
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -17,7 +20,7 @@ export default function ContactContent() {
               {t("addressLabel") || "Адрес"}
             </p>
             <p className="font-bold text-[14px] sm:text-[16px] md:text-[18px] leading-[133%] text-[#222]">
-              {t("address") || "61174, Харьковская обл., город Харьков, ул. Архитекторов 32"}
+              {settings?.address || t("address") || "61174, Харьковская обл., город Харьков, ул. Архитекторов 32"}
             </p>
             <hr />
           </div>
@@ -27,7 +30,7 @@ export default function ContactContent() {
               {t("emailLabel") || "Email"}
             </p>
             <p className="font-bold text-[14px] sm:text-[16px] md:text-[18px] leading-[133%] text-[#222]">
-              {t("email") || "admin@mfoxa.com.ua"}
+              {settings?.email || t("email") || "admin@mfoxa.com.ua"}
             </p>
             <hr />
           </div>
@@ -37,7 +40,7 @@ export default function ContactContent() {
               {t("phoneLabel") || "Телефон"}
             </p>
             <p className="font-bold text-[14px] sm:text-[16px] md:text-[18px] leading-[133%] text-[#222]">
-              {t("phone") || "+38 (093) 000-00-00"}
+              {settings?.phone || t("phone") || "+38 (093) 000-00-00"}
             </p>
             <hr />
           </div>
@@ -54,7 +57,7 @@ export default function ContactContent() {
         <div className="w-full h-[300px] overflow-hidden rounded-lg">
           <iframe
             src={`https://maps.google.com/maps?q=${encodeURIComponent(
-              t("mapQuery") || "Архитекторов 32, Харьков"
+`${settings?.latitude || "50.4504"},${settings?.longitude || "30.5234"}`
             )}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
             width="100%"
             height="100%"

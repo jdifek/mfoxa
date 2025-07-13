@@ -11,6 +11,7 @@ export interface CatalogPage {
   type: "credit" | "loan" | string;
   button_name: string;
   meta_title: string;
+  color: string;
   meta_description: string;
   h1_title: string;
   description_under_title: string;

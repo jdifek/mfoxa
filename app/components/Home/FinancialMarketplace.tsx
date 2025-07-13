@@ -5,9 +5,10 @@ import { getTranslations } from "next-intl/server";
 
 type FinancialMarketplaceProps = {
   locale: string;
+  settings: Record<string, string> | undefined
 };
 
-const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({ locale }) => {
+const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({ locale, settings }) => {
   const t = await getTranslations({ locale, namespace: "FinancialMarketplace" });
   const tc = await getTranslations({ locale, namespace: "FinancialMarketplace.categories" });
 
@@ -39,13 +40,13 @@ const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({ local
         className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
         style={{ fontFamily: "var(--Jakarta)" }}
       >
-        {t("title")}
+        {settings?.main_page_title || t("title")}
       </h2>
       <p
         className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] leading-[138%] text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
         style={{ fontFamily: "var(--Montserrat)" }}
       >
-        {t("description")}
+        {settings?.main_page_description  || t("description")}
       </p>
 
       <div className="grid grid-cols-3 md:grid-cols-5 gap-2">

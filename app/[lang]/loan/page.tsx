@@ -5,6 +5,7 @@ import { catalogService } from "@/app/services/catalogService";
 import { MicrodataLoanCatalog } from "@/app/structured-data/MicrodataLoanCatalog";
 import authorsService from "@/app/services/authorsService";
 import { FaqsService } from "@/app/services/FaqService";
+import settingsService from "@/app/services/settingsService";
 
 export async function generateMetadata({
   params,
@@ -70,11 +71,20 @@ export default async function LoanPageWrapper({
   console.log(randomAuthor, 'randomAuthor');
   const faqs = await FaqsService.getFaqs({ page_name: "loan" });
   
-  
+  let getAllSettings;
+
+  try {
+    getAllSettings = await settingsService.getSettingsByGroup(
+      "seo",
+      lang === "ua" ? "uk" : "ru"
+    );
+  } catch (error) {
+    console.error("Ошибка при получении настроек:", error);
+  }
   return (
     <>
       <MicrodataLoanCatalog data={data} locale={lang as "ua" | "ru"} />
-      <LoanClientPage faqs={faqs} data={data} randomAuthor={randomAuthor} visibleCount={visibleCount} locale={lang} />
+      <LoanClientPage faqs={faqs} getAllSettings={getAllSettings} data={data} randomAuthor={randomAuthor} visibleCount={visibleCount} locale={lang} />
     </>
   );
 }

@@ -18,6 +18,7 @@ import { MfoDetails } from "../services/getMfoDetailsService";
 import { PageDatesResponse } from "../services/PageDatesService";
 import InfoHelpfulClient from "./InfoHelpfulClient";
 import { AuthorRandomResponse } from "../services/authorsService";
+import { SettingsGroupResponse } from "../services/settingsService";
 
 type LoanClientPageProps = {
   visibleCount: number;
@@ -29,6 +30,7 @@ type LoanClientPageProps = {
   slug?: string;
   faqs?: FaqItem[];
   randomAuthor: AuthorRandomResponse;
+  getAllSettings: SettingsGroupResponse | undefined
 };
 
 const LoanClientPage: React.FC<LoanClientPageProps> = ({
@@ -40,6 +42,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
   slug,
   faqs,
   randomAuthor,
+  getAllSettings
 }) => {
   const [currentVisibleCount, setVisibleCount] = useState(visibleCount);
   const t = useTranslations("Loans");
@@ -66,7 +69,6 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
     setVisibleCount((prev) => prev + 3);
   };
 
-  console.log(data, "data");
 
   return (
     <>

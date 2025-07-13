@@ -46,7 +46,7 @@ export const AboutButtonsComponent = () => {
                 isActive
                   ? "bg-[#d6d6f9] text-[#724dea]"
                   : key === "promotion"
-                  ? "bg-[#fff] text-[#00ba9e]"
+                  ? "bg-[#e3fffb] text-[#00ba9e]"
                   : "bg-[#fff] text-[#000000]"
               }`}
             >

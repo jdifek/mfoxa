@@ -9,6 +9,7 @@ import Questions from "../components/Home/Questions";
 import { getTranslations } from "next-intl/server";
 import { getHomeData, LangType } from "../services/HomeService";
 import { MicrodataHome } from "../structured-data/MicrodataHome";
+import settingsService from "../services/settingsService";
 
 export async function generateMetadata({
   params,
@@ -16,6 +17,11 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
+
+  const getAllSettingsMeta = await settingsService.getSettingsByGroup(
+    "seo",
+    lang === "ua" ? "uk" : "ru"
+  );
   const t = await getTranslations({ locale: lang, namespace: "Metadata" });
 
   console.log(`Home Metadata: Loaded for lang: ${lang}`, {
@@ -24,8 +30,10 @@ export async function generateMetadata({
   });
 
   return {
-    title: t("home.title"),
-    description: t("home.description"),
+    title: getAllSettingsMeta.settings.main_page_meta_title || t("home.title"),
+    description:
+      getAllSettingsMeta.settings.main_page_meta_description ||
+      t("home.description"),
     keywords: [
       "займы онлайн",
       "МФО Украина",
@@ -61,18 +69,30 @@ export default async function Home({
   console.log(`Home: Rendering for lang: ${lang}`);
 
   const homeData = await getHomeData(lang as LangType);
+  let getAllSettings;
+
+  try {
+    getAllSettings = await settingsService.getSettingsByGroup(
+      "seo",
+      lang === "ua" ? "uk" : "ru"
+    );
+  } catch (error) {
+    console.error("Ошибка при получении настроек:", error);
+  }
+  console.log("getAllSettings:", getAllSettings);
   console.log("Home data from service:", homeData);
   return (
     <>
-    <MicrodataHome locale={lang as 'ru' | 'ua'} homeData={homeData} />
-    <div>
-      <FinancialMarketplace locale={lang} />
-      <BestLoans best_credits={homeData.best_credits} />
-      <TopUkrMFO top_mfos={homeData.top_mfos} />
-      <LastReviews recent_reviews={homeData.recent_reviews} />
-      <DetailsText />
-      <Questions />
-    </div>
-  </>
+      <MicrodataHome locale={lang as "ru" | "ua"} homeData={homeData} />
+      <div>
+        <FinancialMarketplace locale={lang}  settings={getAllSettings?.settings}/>
+        <BestLoans best_credits={homeData.best_credits} />
+        <TopUkrMFO top_mfos={homeData.top_mfos} />
+        <LastReviews recent_reviews={homeData.recent_reviews} />
+        <DetailsText         html={getAllSettings?.settings.main_page_text}
+        />
+        <Questions />
+      </div>
+    </>
   );
 }

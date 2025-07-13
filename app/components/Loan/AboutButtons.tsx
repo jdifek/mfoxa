@@ -17,6 +17,11 @@ export const AboutButtons = ({ data }: AboutButtonsProps) => {
     }
   };
 
+  const textColorMap: Record<string, string> = {
+    black: "text-black",
+    red: "text-red-500",
+    teal: "text-teal-500",
+  };
   return (
     <div className="w-full no-scrollbar overflow-x-auto px-0 md:px-[20px]">
       <div className="flex gap-[10px]">
@@ -26,7 +31,7 @@ export const AboutButtons = ({ data }: AboutButtonsProps) => {
             <button
               key={index}
               onClick={() => handleButtonClick(key.slug)}
-              className={`cursor-pointer whitespace-nowrap rounded-[35px] p-[8px_14px] flex items-center justify-center font-medium text-[15px] leading-[133%]
+              className={`cursor-pointer whitespace-nowrap ${textColorMap[key.color] || "text-black"} rounded-[35px] p-[8px_14px] flex items-center justify-center font-medium text-[15px] leading-[133%]
                 ${isActive ? "bg-[#d6d6f9] text-[#724dea]" : "bg-[#fff] text-[#000000]"}`}
             >
               {key.button_name}

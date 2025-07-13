@@ -5,6 +5,9 @@ import { ContactStructuredData } from "../../structured-data/ContactStructuredDa
 import { getTranslations } from "next-intl/server";
 import ContactContent from "@/app/components/ContactContent";
 import { getPageDates } from "@/app/services/PageDatesService";
+import settingsService from "@/app/services/settingsService";
+
+
 
 export const metadata: Metadata = {
   title: "Контакты MFoxa | Свяжитесь с нами",
@@ -42,6 +45,18 @@ const ContactPage = async ({ params }: ContactPageProps) => {
   const t = await getTranslations({ locale: lang, namespace: "Contacts" });
   const dates = await getPageDates({ type: "contacts" });
 
+  let getAllSettings;
+
+  try {
+    getAllSettings = await settingsService.getSettingsByGroup(
+      "contacts",
+      lang === "ua" ? "uk" : "ru"
+    );
+  } catch (error) {
+    console.error("Ошибка при получении настроек:", error);
+  }
+
+  
   return (
     <>
       <ContactStructuredData />
@@ -65,7 +80,7 @@ const ContactPage = async ({ params }: ContactPageProps) => {
       </div>
 
       {/* Клиентский компонент с состоянием */}
-      <ContactContent />
+      <ContactContent settings={getAllSettings?.settings}/>
 
       <div className="px-0 md:px-[20px]">
         <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">

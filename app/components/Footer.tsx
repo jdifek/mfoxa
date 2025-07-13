@@ -4,7 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import settingsService from "../services/settingsService";
 
 type FooterProps = {
   locale: string;
@@ -13,6 +14,8 @@ type FooterProps = {
 const Footer: React.FC<FooterProps> = ({ locale }) => {
   const pathname = usePathname();
   const t = useTranslations("Footer");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [settings, setSettings] = useState<any>();
 
   const getLangHref = (targetLang: string) => {
     const segments = pathname.split("/");
@@ -27,8 +30,27 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
     { name: t("nav.sitemap"), href: `/${locale}/sitemap` },
   ];
 
+  useEffect(() => {
+    const getall = async () => {
+      try {
+        const { settings } = await settingsService.getSettingsByGroup(
+          "social",
+          locale === "ua" ? "uk" : "ru"
+        );
+
+        setSettings(settings);
+      } catch (error) {
+        console.error("Ошибка при получении настроек:", error);
+      }
+    };
+    getall();
+  });
+
   return (
-    <footer className="px-[10px] md:px-[100px] pt-[30px] md:pt-[50px] pb-[10px] md:pb-[20px]" style={{ textAlign: "center", backgroundColor: "#fff" }}>
+    <footer
+      className="px-[10px] md:px-[100px] pt-[30px] md:pt-[50px] pb-[10px] md:pb-[20px]"
+      style={{ textAlign: "center", backgroundColor: "#fff" }}
+    >
       <div className="flex justify-between items-center mb-[20px] flex-col md:flex-row">
         <Image
           src="/logo.svg"
@@ -51,12 +73,24 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
         {/* Языковой переключатель для мобильных */}
         <div className="flex md:hidden mb-[20px] justify-center gap-[20px]">
           <Link href={getLangHref("ua")}>
-            <p className={`font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${locale === "ua" ? "text-[#724dea]" : "text-[#9393a3] hover:text-[#724dea]"}`}>
+            <p
+              className={`font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
+                locale === "ua"
+                  ? "text-[#724dea]"
+                  : "text-[#9393a3] hover:text-[#724dea]"
+              }`}
+            >
               {t("language.ukrainian")}
             </p>
           </Link>
           <Link href={getLangHref("ru")}>
-            <p className={`font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${locale === "ru" ? "text-[#724dea]" : "text-[#9393a3] hover:text-[#724dea]"}`}>
+            <p
+              className={`font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
+                locale === "ru"
+                  ? "text-[#724dea]"
+                  : "text-[#9393a3] hover:text-[#724dea]"
+              }`}
+            >
               {t("language.russian")}
             </p>
           </Link>
@@ -94,12 +128,24 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
         </p>
         <div className="gap-[20px] flex flex-col md:flex-row justify-center">
           <Link href={getLangHref("ua")}>
-            <p className={`font-medium text-[14px] leading-[136%] cursor-pointer ${locale === "ua" ? "text-[#724dea]" : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"}`}>
+            <p
+              className={`font-medium text-[14px] leading-[136%] cursor-pointer ${
+                locale === "ua"
+                  ? "text-[#724dea]"
+                  : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"
+              }`}
+            >
               {t("language.ukrainian")}
             </p>
           </Link>
           <Link href={getLangHref("ru")}>
-            <p className={`font-medium text-[14px] leading-[136%] cursor-pointer ${locale === "ru" ? "text-[#724dea]" : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"}`}>
+            <p
+              className={`font-medium text-[14px] leading-[136%] cursor-pointer ${
+                locale === "ru"
+                  ? "text-[#724dea]"
+                  : "text-[#9393a3] hover:text-[#724dea] transition-colors duration-200"
+              }`}
+            >
               {t("language.russian")}
             </p>
           </Link>
