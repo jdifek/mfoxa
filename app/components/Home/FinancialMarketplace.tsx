@@ -5,12 +5,21 @@ import { getTranslations } from "next-intl/server";
 
 type FinancialMarketplaceProps = {
   locale: string;
-  settings: Record<string, string> | undefined
+  settings: Record<string, string> | undefined;
 };
 
-const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({ locale, settings }) => {
-  const t = await getTranslations({ locale, namespace: "FinancialMarketplace" });
-  const tc = await getTranslations({ locale, namespace: "FinancialMarketplace.categories" });
+const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({
+  locale,
+  settings,
+}) => {
+  const t = await getTranslations({
+    locale,
+    namespace: "FinancialMarketplace",
+  });
+  const tc = await getTranslations({
+    locale,
+    namespace: "FinancialMarketplace.categories",
+  });
 
   // Debug: Log translations and locale
   console.log("FinancialMarketplace translations:", {
@@ -46,14 +55,16 @@ const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({ local
         className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] leading-[138%] text-[#222] mb-[20px] sm:mb-[25px] md:mb-[30px]"
         style={{ fontFamily: "var(--Montserrat)" }}
       >
-        {settings?.main_page_description  || t("description")}
+        {settings?.main_page_description || t("description")}
       </p>
 
       <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
         {categories.map((item, index) => (
           <div
             key={index}
-            className={`bg-white p-2.5 rounded-lg ${index === 0 ? "md:col-span-2" : ""}`}
+            className={`bg-white p-2.5 rounded-lg ${
+              index === 0 ? "md:col-span-2" : ""
+            }`}
             style={{
               fontFamily: "var(--Manrope)",
               fontWeight: 700,
@@ -82,7 +93,9 @@ const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({ local
               >
                 {item.title === tc("bad_credit") ? (
                   <>
-                    <span className="block md:hidden">{tc("bad_credit_short")}</span>
+                    <span className="block md:hidden">
+                      {tc("bad_credit_short")}
+                    </span>
                     <span className="hidden md:block">{item.title}</span>
                   </>
                 ) : (
@@ -98,7 +111,7 @@ const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({ local
                 <Image
                   src={item.image}
                   alt={item.title}
-                  width={60}
+                  width={item.title === tc("bank_id") ? 100 : 60}
                   height={60}
                   className="mb-2"
                 />

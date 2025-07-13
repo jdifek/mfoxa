@@ -26,7 +26,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
           {t("title")}
         </h2>
 
-        <div className="flex justify-between flex-col gap-[20px] md:grid md:grid-cols-2 lg:grid-cols-3 ">
+        <div className="flex justify-between flex-col gap-[20px] md:grid md:grid-cols-2 lg:grid-cols-3">
           {best_credits.slice(0, 6).map((loan, index) => (
             <div
               key={index}
@@ -36,9 +36,8 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                 <Image
                   src={loan.logo_url || "/placeholder-logo.svg"}
                   alt={loan.name}
-                  height={50}
-                  width={50}
-                  className="w-[89px] h-[50px] object-contain"
+                  width={100}
+                  height={100}
                 />
                 <div className="flex flex-col gap-[5px]">
                   <p className="text-[#222] font-bold text-[16px] leading-[100%]">
@@ -77,7 +76,8 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("amount")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.new_client.amount?.formatted ?? "-"}
+                          {loan.credit_offers.new_client.amount?.formatted ??
+                            "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
@@ -111,7 +111,8 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("amount")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.amount?.formatted ?? "-"}
+                          {loan.credit_offers.repeat_client.amount?.formatted ??
+                            "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
@@ -119,7 +120,8 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("term")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.term?.formatted ?? "-"}
+                          {loan.credit_offers.repeat_client.term?.formatted ??
+                            "-"}
                         </p>
                       </div>
                       <div className="flex flex-col text-[12px]">
@@ -127,7 +129,8 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                           {t("rate")}
                         </p>
                         <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.rate?.formatted ?? "-"}
+                          {loan.credit_offers.repeat_client.rate?.formatted ??
+                            "-"}
                         </p>
                       </div>
                     </div>
@@ -198,7 +201,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                   className="flex-1"
                 />
                 <Link
-                  href={loan.get_money_button_url || ''}
+                  href={loan.get_money_button_url || ""}
                   className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out whitespace-nowrap flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
                 >
                   {t("getMoney")}
