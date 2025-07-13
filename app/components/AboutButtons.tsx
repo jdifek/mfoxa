@@ -15,17 +15,16 @@ export const AboutButtonsComponent = () => {
 
   useEffect(() => {
     const currentPath = pathname;
-    const matchedEntry = Object.entries(routesMap).find(([, path]) =>
-      currentPath.endsWith(path) && path !== ""
+    const matchedEntry = Object.entries(routesMap).find(
+      ([, path]) => currentPath.endsWith(path) && path !== ""
     );
-  
+
     if (matchedEntry) {
       setActiveKey(matchedEntry[0]);
     } else {
       setActiveKey("about"); // если ничего не найдено — считаем "about"
     }
   }, [pathname]);
-  
 
   const handleButtonClick = (key: string) => {
     const basePath = pathname.replace(/\/(reviews|promotion|qap|login)$/, "");

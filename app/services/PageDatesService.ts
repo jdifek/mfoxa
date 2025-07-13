@@ -3,12 +3,22 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://mfo.qissseee.tech";
 
 export interface PageDatesResponse {
   date_published: string; // ISO 8601
-  date_modified: string;  // ISO 8601
+  date_modified: string; // ISO 8601
   type: string;
 }
 
 export async function getPageDates(params: {
-  type: "home" | "questions" | "reviews" | "catalog" | "loans" | "credits" | "mfo" | "promocodes";
+  type:
+    | "home"
+    | "questions"
+    | "reviews"
+    | "catalog"
+    | "loans"
+    | "credits"
+    | "mfo"
+    | "promocodes"
+    | "about"
+    | "contacts";
   mfo_id?: number;
   mfo_slug?: string;
   category?: string;

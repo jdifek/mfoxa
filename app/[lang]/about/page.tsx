@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { getTranslations } from "next-intl/server";
 import authorsService from "@/app/services/authorsService";
+import { getPageDates } from "@/app/services/PageDatesService";
 
 type AboutProps = {
   params: Promise<{ lang: string }>;
@@ -24,10 +25,14 @@ const About: React.FC<AboutProps> = async ({ params }) => {
     addedDate: t("metadata.addedDate"),
   });
 
-  const {data} = await authorsService.getAllAuthors(lang === 'ua' ? 'uk' : 'ru')
+  const { data } = await authorsService.getAllAuthors(
+    lang === "ua" ? "uk" : "ru"
+  );
 
-  console.log(data, 'daaaa');
-  
+  const dates = await getPageDates({ type: "about" });
+
+  console.log(data, "daaaa");
+
   return (
     <>
       <Bread lang={lang as "ua" | "ru"} />
@@ -61,7 +66,7 @@ const About: React.FC<AboutProps> = async ({ params }) => {
                 />
                 <div className="flex flex-col gap-[5px]">
                   <h3 className="font-bold text-[16px] sm:md:text-[17px] md:text-[20px] leading-[100%] text-[#222]">
-                  {author.name}
+                    {author.name}
                   </h3>
                   <p className="font-medium text-[11px] leading-[145%] text-[#67677a]">
                     {author.role}
@@ -104,10 +109,16 @@ const About: React.FC<AboutProps> = async ({ params }) => {
       </div>
       <div className="px-0 md:px-[20px]">
         <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
-          {t("metadata.addedDate") || "Дата додавання сторінки 12.10.2025"}
+          {t("metadata.addedDate") +
+            ": " +
+            new Date(dates.date_published).toLocaleDateString("ru-RU") ||
+            "Дата додавання сторінки 12.10.2025"}
         </p>
         <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
-          {t("metadata.updatedDate") || "Дата зміни сторінки 12.10.2025"}
+          {t("metadata.updatedDate") +
+            ": " +
+            new Date(dates.date_modified).toLocaleDateString("ru-RU") ||
+            "Дата зміни сторінки 12.10.2025"}
         </p>
       </div>
     </>

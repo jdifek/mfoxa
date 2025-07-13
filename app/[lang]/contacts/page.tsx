@@ -4,8 +4,7 @@ import Bread from "../../components/Bread";
 import { ContactStructuredData } from "../../structured-data/ContactStructuredData";
 import { getTranslations } from "next-intl/server";
 import ContactContent from "@/app/components/ContactContent";
-
-
+import { getPageDates } from "@/app/services/PageDatesService";
 
 export const metadata: Metadata = {
   title: "Контакты MFoxa | Свяжитесь с нами",
@@ -41,6 +40,7 @@ type ContactPageProps = {
 const ContactPage = async ({ params }: ContactPageProps) => {
   const { lang } = params;
   const t = await getTranslations({ locale: lang, namespace: "Contacts" });
+  const dates = await getPageDates({ type: "contacts" });
 
   return (
     <>
@@ -69,10 +69,16 @@ const ContactPage = async ({ params }: ContactPageProps) => {
 
       <div className="px-0 md:px-[20px]">
         <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
-          {t("metadata.addedDate") || "Дата добавления страницы 12.10.2025"}
+          {t("metadata.addedDate") +
+            ": " +
+            new Date(dates.date_published).toLocaleDateString("ru-RU") ||
+            "Дата добавления страницы 12.10.2025"}
         </p>
         <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
-          {t("metadata.updatedDate") || "Дата изменения страницы 12.10.2025"}
+          {t("metadata.updatedDate") +
+            ": " +
+            new Date(dates.date_modified).toLocaleDateString("ru-RU") ||
+            "Дата изменения страницы 12.10.2025"}
         </p>
       </div>
     </>
