@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Link from "next/link";
@@ -14,7 +15,6 @@ type FooterProps = {
 const Footer: React.FC<FooterProps> = ({ locale }) => {
   const pathname = usePathname();
   const t = useTranslations("Footer");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [settings, setSettings] = useState<any>();
 
   const getLangHref = (targetLang: string) => {
@@ -23,7 +23,14 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
     return segments.join("/") || "/";
   };
 
-  const socialIcons = ["71", "70", "69", "68", "67"];
+  const socialIcons = [
+    { id: "71", key: "instagram_url", name: "Instagram" },
+    { id: "70", key: "facebook_url", name: "Facebook" },
+    { id: "69", key: "pinterest_url", name: "Pinterest" },
+    { id: "68", key: "twitter_url", name: "Twitter" },
+    { id: "67", key: "tiktok_url", name: "TikTok" },
+  ];
+
   const navLinks = [
     { name: t("nav.about"), href: `/${locale}/about` },
     { name: t("nav.contacts"), href: `/${locale}/contacts` },
@@ -37,14 +44,14 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
           "social",
           locale === "ua" ? "uk" : "ru"
         );
-
+        console.log(settings, "settingssettings");
         setSettings(settings);
       } catch (error) {
         console.error("Ошибка при получении настроек:", error);
       }
     };
     getall();
-  });
+  }, [locale]); // Added locale as a dependency to refetch if locale changes
 
   return (
     <footer
@@ -97,18 +104,18 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
         </div>
 
         <div className="flex gap-[10px] mb-[20px] md:mb-0 md:flex-row justify-center">
-          {socialIcons.map((num) => (
+          {socialIcons.map((icon) => (
             <a
-              key={num}
-              href="#"
+              key={icon.id}
+              href={settings?.[icon.key] || "#"} // Use URL from settings or fallback to "#"
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer transform transition-transform duration-200 hover:scale-110"
-              aria-label={t("socialIconAlt")}
+              aria-label={`${t("socialIconAlt")} ${icon.name}`} // Improved accessibility
             >
               <Image
-                src={`/Frame ${num}.svg`}
-                alt={t("socialIconAlt")}
+                src={`/Frame ${icon.id}.svg`}
+                alt={`${t("socialIconAlt")} ${icon.name}`} // Improved accessibility
                 width={37}
                 height={37}
                 className="w-[30px] h-[30px] md:w-[37px] md:h-[37px]"
