@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 import authorsService from "@/app/services/authorsService";
 import { getReviewStatistics } from "@/app/services/reviewService";
 import { FaqsService } from "@/app/services/FaqService";
+import settingsService from "@/app/services/settingsService";
 
 export async function generateMetadata({
   params,
@@ -13,10 +14,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const t = await getTranslations({ locale: lang, namespace: "Metadata" });
+  let getAllSettings;
 
+  try {
+    getAllSettings = await settingsService.getSettingsByGroup(
+      "reviews_page",
+      lang === "ua" ? "uk" : "ru"
+    );
+  } catch (error) {
+    console.error("Ошибка при получении настроек:", error);
+  }
   return {
-    title: t("reviewss.title") || "Отзывы об МФО Украины — Честные мнения клиентов",
+    title:  getAllSettings?.settings.reviews_page_meta_title || t("reviewss.title") || "Отзывы об МФО Украины — Честные мнения клиентов",
     description:
+    getAllSettings?.settings.reviews_page_meta_description  || 
       t("reviewss.description") ||
       "Читайте отзывы клиентов о микрофинансовых организациях Украины. Реальный опыт, оценки и советы от заемщиков.",
     keywords: ["отзывы МФО", "МФО Украина", "займы онлайн", "мнение клиентов"],
@@ -45,10 +56,21 @@ export default async function ReviewsPageWrapper({
   const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');  
   const stats = await getReviewStatistics();
   const faqs = await FaqsService.getFaqs({ page_name: "reviews" });
+  let getAllSettings;
 
+  try {
+    getAllSettings = await settingsService.getSettingsByGroup(
+      "reviews_page",
+      lang === "ua" ? "uk" : "ru"
+    );
+  } catch (error) {
+    console.error("Ошибка при получении настроек:", error);
+  }
+  
   return (
     <ReviewsClient
     stats={stats}
+    getAllSettings={getAllSettings}
     faqs={faqs}
     randomAuthor={randomAuthor}
       locale={lang}

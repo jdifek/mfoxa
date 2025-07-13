@@ -5,6 +5,7 @@ import React from "react";
 import { getTranslations } from "next-intl/server";
 import authorsService from "@/app/services/authorsService";
 import { getPageDates } from "@/app/services/PageDatesService";
+import settingsService from "@/app/services/settingsService";
 
 type AboutProps = {
   params: Promise<{ lang: string }>;
@@ -14,7 +15,17 @@ const About: React.FC<AboutProps> = async ({ params }) => {
   const { lang } = await params;
 
   const t = await getTranslations({ locale: lang, namespace: "About" });
+  let getAllSettings;
 
+  try {
+    getAllSettings = await settingsService.getSettingsByGroup(
+      "about_page",
+      lang === "ua" ? "uk" : "ru"
+    );
+  } catch (error) {
+    console.error("Ошибка при получении настроек:", error);
+  }
+  
   // Debug: Log translations
   console.log("About translations:", {
     lang,
@@ -38,14 +49,14 @@ const About: React.FC<AboutProps> = async ({ params }) => {
       <Bread lang={lang as "ua" | "ru"} />
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[30px] sm:mb-[40px] md:mb-[50px] bg-white rounded-lg mt-[10px] md:mt-[30px]">
-          <h2
+          <h1
             className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
             style={{ fontFamily: "var(--Jakarta)" }}
           >
-            {t("team.title") || "Наша команда експертів"}
-          </h2>
+            {getAllSettings?.settings.about_page_title || t("team.title") || "Наша команда експертів"}
+          </h1>
           <p className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] leading-[138%] text-[#222]">
-            {t("team.description") ||
+            {getAllSettings?.settings.about_page_description ||  t("team.description") ||
               "Маркетплейс mfoxa.com.ua створений командою професіоналів фінансової сфери..."}
           </p>
         </div>
@@ -102,7 +113,7 @@ const About: React.FC<AboutProps> = async ({ params }) => {
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] bg-white rounded-lg h-[100px] mb-[30px] sm:mb-[50px] mt-[30px] sm:mt-[50px]">
           <p className="font-medium text-[13px] sm:text-[14px] md:text-[14px] leading-[133%] text-[#222]">
-            {t("training.text") ||
+            {getAllSettings?.settings.about_page_text || t("training.text") ||
               "Наші експерти регулярно проходять підвищення кваліфікації та навчання..."}
           </p>
         </div>

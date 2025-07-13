@@ -9,6 +9,7 @@ import ReviewsList from "./ReviewsList";
 import { AuthorRandomResponse } from "../services/authorsService";
 import { ReviewStatisticsResponse } from "../services/reviewService";
 import { FaqsResponse } from "../services/FaqService";
+import { SettingsGroupResponse } from "../services/settingsService";
 
 type ReviewsClientProps = {
   locale: string;
@@ -17,6 +18,7 @@ type ReviewsClientProps = {
   randomAuthor: AuthorRandomResponse
   stats: ReviewStatisticsResponse
   faqs: FaqsResponse
+ getAllSettings: SettingsGroupResponse | undefined
 };
 
 const MAX_REVIEWS = 24;
@@ -28,7 +30,8 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
   selectedSortKey,
   randomAuthor,
   stats,
-  faqs
+  faqs,
+  getAllSettings
 }) => {
   const t = await getTranslations({ locale, namespace: "ReviewsPage" });
 
@@ -53,17 +56,18 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
 
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px] sm:mb-[50px] md:mb-[50px] bg-white rounded-lg">
-          <h2
+          <h1
             className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
             style={{ fontFamily: "var(--Jakarta)" }}
           >
-            {t("title") || "Все отзывы об МФО Украины"}
-          </h2>
+    
+    {getAllSettings?.settings.reviews_page_title || t("title") || "Все отзывы об МФО Украины"}
+          </h1>
           <p
             className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] leading-[138%] text-[#222]"
             style={{ fontFamily: "var(--Montserrat)" }}
           >
-            {t("description") ||
+            {getAllSettings?.settings.reviews_page_description || t("description") ||
               "Клиенты микрокредитной компании «Екапуста» получают доступ в личный кабинет. Это сервис, через который можно управлять займом, оплачивать его, переносить даты возврата. ЛК работает бесплатно и доступен везде, где есть выход в интернет."}
           </p>
 

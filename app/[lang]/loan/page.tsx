@@ -14,7 +14,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const t = await getTranslations({ locale: lang, namespace: "Metadata" });
+  let getAllSettings;
 
+  try {
+    getAllSettings = await settingsService.getSettingsByGroup(
+      "loan_page",
+      lang === "ua" ? "uk" : "ru"
+    );
+  } catch (error) {
+    console.error("Ошибка при получении настроек:", error);
+  }
   console.log(`Metadata loaded for lang: ${lang}`, {
     title: t("loans.title"),
     description: t("loans.description"),
@@ -22,9 +31,11 @@ export async function generateMetadata({
 
   return {
     title:
+    getAllSettings?.settings.loan_page_meta_title ||
       t("loans.title") ||
       "Займы онлайн – взять микрозайм до 100 000 рублей | Займи.ру",
     description:
+    getAllSettings?.settings.loan_page_meta_description ||
       t("loans.description") ||
       "Оформите займ до 100 000 рублей на срочные нужды через Займи.ру. Быстро, удобно и безопасно. Сравните условия МФО и выберите лучшее предложение.",
     keywords: [
@@ -75,7 +86,7 @@ export default async function LoanPageWrapper({
 
   try {
     getAllSettings = await settingsService.getSettingsByGroup(
-      "seo",
+      "loan_page",
       lang === "ua" ? "uk" : "ru"
     );
   } catch (error) {

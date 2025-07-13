@@ -8,6 +8,7 @@ import { getPageDates } from "@/app/services/PageDatesService";
 import { getMFOs } from "@/app/services/mfosService";
 import authorsService from "@/app/services/authorsService";
 import { FaqsService } from "@/app/services/FaqService";
+import settingsService from "@/app/services/settingsService";
 
 export async function generateMetadata({
   params,
@@ -16,6 +17,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const t = await getTranslations({ locale: lang, namespace: "Metadata" });
+  let getAllSettings;
+
+  try {
+    getAllSettings = await settingsService.getSettingsByGroup(
+      "mfo_page",
+      lang === "ua" ? "uk" : "ru"
+    );
+  } catch (error) {
+    console.error("Ошибка при получении настроек:", error);
+  }
+console.log(getAllSettings,'getAllSettings');
 
   console.log(`Metadata loaded for lang: ${lang}`, {
     title: t("home.title"),
@@ -23,8 +35,8 @@ export async function generateMetadata({
   });
 
   return {
-    title: t("home.title"),
-    description: t("home.description"),
+    title: getAllSettings?.settings.mfo_page_meta_title ||  t("home.title"),
+    description: getAllSettings?.settings.description ||  t("home.description"),
     keywords: [
       "МФО Украина",
       "отзывы МФО",
@@ -81,10 +93,21 @@ export default async function MfoPage({
   console.log(data, " data.best_credits");
   const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');  
   const faqs = await FaqsService.getFaqs({ page_name: "reviews" });
+  let getAllSettings;
+
+  try {
+    getAllSettings = await settingsService.getSettingsByGroup(
+      "mfo_page",
+      lang === "ua" ? "uk" : "ru"
+    );
+  } catch (error) {
+    console.error("Ошибка при получении настроек:", error);
+  }
 
   return (
     <MfoPageClient
     randomAuthor={randomAuthor}
+    getAllSettings={getAllSettings}
     faqs={faqs}
       dates={dates}
       data={data}

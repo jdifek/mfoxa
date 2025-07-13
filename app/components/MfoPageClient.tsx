@@ -13,6 +13,7 @@ import { PageDatesResponse } from "../services/PageDatesService";
 import { MfoDetails } from "../services/getMfoDetailsService";
 import { AuthorRandomResponse } from "../services/authorsService";
 import { FaqsResponse } from "../services/FaqService";
+import { SettingsGroupResponse } from "../services/settingsService";
 
 const ratings = [
   { key: "speed", value: 4.8, color: "#00BDA5" },
@@ -84,6 +85,7 @@ type MfoPageClientProps = {
   data: MfoDetails[];
   randomAuthor: AuthorRandomResponse
   faqs: FaqsResponse
+  getAllSettings: SettingsGroupResponse | undefined
 };
 
 export default async function MfoPageClient({
@@ -94,7 +96,8 @@ export default async function MfoPageClient({
   dates,
   data,
   randomAuthor,
-  faqs
+  faqs,
+  getAllSettings
 }: MfoPageClientProps) {
   const { mfo, ratings: ratingsT } = translations;
 
@@ -120,17 +123,17 @@ export default async function MfoPageClient({
       <Bread lang={locale as "ua" | "ru"} />
 
       <div className="p-[10px] md:p-[30px] mb-[20px] sm:mb-[30px] md:mb-[50px] bg-white rounded-lg mx-[0px] md:mx-[20px]">
-        <h2
+        <h1
           className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
           style={{ fontFamily: "var(--Jakarta)" }}
         >
-          {mfo("title")}
-        </h2>
+          {getAllSettings?.settings.mfo_page_title || mfo("title")}
+        </h1>
         <p
           className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] leading-[138%] text-[#222]"
           style={{ fontFamily: "var(--Montserrat)" }}
         >
-          {mfo("subtitle")}
+          {getAllSettings?.settings.mfo_page_description  || mfo("subtitle")}
         </p>
       </div>
 
@@ -292,7 +295,7 @@ export default async function MfoPageClient({
         </div>
       )}
 
-      <DetailsText />
+      <DetailsText html={getAllSettings?.settings.mfo_page_text }/>
       {faqs && faqs.length > 0 ? <OftenQuestions faqs={faqs} /> : <OftenQuestions/>}
       <InfoHelpful randomAuthor={randomAuthor} locale={locale} />
       <Questions />
