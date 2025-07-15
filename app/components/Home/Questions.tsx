@@ -79,7 +79,7 @@ const Questions: React.FC = () => {
               )}
             </div>
             {isOpen && (
-              <div className="px-[16px] pb-[16px] grid grid-cols-2 gap-[10px] sm:grid-cols-5 sm:gap-[10px]">
+              <div className="px-[16px] pb-[16px] grid grid-cols-2 gap-[10px] sm:grid-cols-4 sm:gap-[10px]">
                 {question.links.map((link, linkIndex) => (
                  <Link
                  key={linkIndex}

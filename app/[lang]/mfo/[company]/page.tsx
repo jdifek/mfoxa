@@ -18,6 +18,8 @@ import { MicrodataLoanOrCredit } from "@/app/structured-data/MicrodataLoanOrCred
 import DetailsText from "@/app/components/DetailsText";
 import { ScrollReset } from "@/app/components/ScrollReset";
 import ClientOnly from "@/app/components/ClientOnly";
+import { LastReviews } from "@/app/components/Home/LastRewiews";
+import { getHomeData, LangType } from "@/app/services/HomeService";
 
 export const dynamic = "force-dynamic";
 
@@ -71,6 +73,7 @@ export default async function CatalogPage({ params }: PageProps) {
   const { lang, company } = await params;
   const companySlug = decodeURIComponent(company || "sgroshi");
   const locale = lang;
+  const homeData = await getHomeData(lang as LangType );
 
   const t = await getTranslations({ locale: lang, namespace: "Catalog" });
   const { data } = await getMfoDetails(
@@ -487,6 +490,8 @@ export default async function CatalogPage({ params }: PageProps) {
           </div>
         </div>
       </div>
+      <LastReviews recent_reviews={homeData.recent_reviews} />
+
       <OftenQuestions faqs={data.faqs} company={data.name} />
 
 
