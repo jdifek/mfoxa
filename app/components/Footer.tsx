@@ -79,7 +79,7 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
 
         {/* Языковой переключатель для мобильных */}
         <div className="flex md:hidden mb-[20px] justify-center gap-[20px]">
-          <Link href={getLangHref("ua")}>
+          <Link scroll={false} href={getLangHref("ua")}>
             <p
               className={`font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
                 locale === "ua"
@@ -90,7 +90,7 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
               {t("language.ukrainian")}
             </p>
           </Link>
-          <Link href={getLangHref("ru")}>
+          <Link scroll={false} href={getLangHref("ru")}>
             <p
               className={`font-medium text-[14px] leading-[136%] cursor-pointer transition-colors duration-200 ${
                 locale === "ru"
@@ -134,7 +134,7 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
           {t("copyright")}
         </p>
         <div className="gap-[20px] flex flex-col md:flex-row justify-center">
-          <Link href={getLangHref("ua")}>
+          <Link scroll={false} href={getLangHref("ua")}>
             <p
               className={`font-medium text-[14px] leading-[136%] cursor-pointer ${
                 locale === "ua"
@@ -145,7 +145,7 @@ const Footer: React.FC<FooterProps> = ({ locale }) => {
               {t("language.ukrainian")}
             </p>
           </Link>
-          <Link href={getLangHref("ru")}>
+          <Link scroll={false} href={getLangHref("ru")}>
             <p
               className={`font-medium text-[14px] leading-[136%] cursor-pointer ${
                 locale === "ru"

@@ -79,26 +79,27 @@ const Questions: React.FC = () => {
               )}
             </div>
             {isOpen && (
-              <div className="px-[16px] pb-[16px] grid grid-cols-2 gap-[10px] sm:grid-cols-6 sm:gap-[10px]">
+              <div className="px-[16px] pb-[16px] grid grid-cols-2 gap-[10px] sm:grid-cols-5 sm:gap-[10px]">
                 {question.links.map((link, linkIndex) => (
-                  <Link
-                    key={linkIndex}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className=""
-                    style={{
-                      fontFamily: "var(--Montserrat)",
-                      fontWeight: 500,
-                      fontSize: "13px",
-                      lineHeight: "138%",
-                      textDecoration: "underline",
-                      textDecorationSkipInk: "none",
-                      color: "#00ba9e",
-                    }}
-                  >
-                    {link.title}
-                  </Link>
+                 <Link
+                 key={linkIndex}
+                 href={link.url}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="truncate"
+                 style={{
+                   fontFamily: "var(--Montserrat)",
+                   fontWeight: 500,
+                   fontSize: "13px",
+                   lineHeight: "138%",
+                   textDecoration: "underline",
+                   textDecorationSkipInk: "none",
+                   color: "#00ba9e",
+                 }}
+               >
+                 {link.title}
+               </Link>
+               
                 ))}
               </div>
             )}
