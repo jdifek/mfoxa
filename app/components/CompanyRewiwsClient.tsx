@@ -162,7 +162,7 @@ export default function CompanyRewiwsClient({
       </div>
       <AboutButtons />
       <div className="px-0 md:px-[20px]">
-        <div className="flex flex-col md:flex-row items-center justify-between md:mb-[20px] mb-[10px] sm:mb-[40px] mt-[30px] w-full rounded-lg bg-white p-[20px] shadow-md">
+        <div className="flex flex-col md:flex-row items-center justify-between md:mb-[20px] mb-[10px] sm:mb-[40px] mt-[30px] w-full rounded-lg bg-white border border-[#724dea] p-[20px] shadow-md">
           <div className="flex gap-[14px] sm:gap-[16px] md:gap-[20px] items-center mb-4 md:mb-0">
             {data?.mfo?.logo_url ? (
               <Image
