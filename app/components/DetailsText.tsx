@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from "react";
 
 type DetailsTextProps = {
@@ -15,10 +15,12 @@ const DetailsText: React.FC<DetailsTextProps> = ({ html }) => {
   const fullHtml = html ?? "";
   const previewCharCount = 300;
 
+  const getTextFromHTML = (html: string) => {
+    return html.replace(/<[^>]*>?/gm, ''); // Простое удаление тегов
+  };
+
   const getTruncatedHtml = (htmlString: string) => {
-    const div = document.createElement("div");
-    div.innerHTML = htmlString;
-    const textContent = div.textContent || "";
+    const textContent = getTextFromHTML(htmlString);
     return textContent.slice(0, previewCharCount) + "...";
   };
 
