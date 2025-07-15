@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { createReview } from "@/app/services/reviewService";
 import React, { useState } from "react";
@@ -106,9 +107,9 @@ export default function ReviewModal({
       });
       toast.success("Отзыв отправлен и отправлен на модерацию!");
       onClose();
-    } catch (error) {
-      toast.error("Ошибка при отправке отзыва.");
-      console.error(error);
+    }  catch (error: any) {
+      const errorMessage = error?.message || "Ошибка при отправке отзыва.";
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -120,8 +121,7 @@ export default function ReviewModal({
     <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center">
       <div
         style={{ scrollbarWidth: "none" }}
-        className="bg-white w-[335px] h-[100vh] overflow-y-auto rounded-[8px] border border-[#ebebf9] p-[14px] relative scroll-hidden"
-      >
+        className="bg-white w-[335px] max-h-[calc(100vh-40px)] overflow-y-auto rounded-[8px] border border-[#ebebf9] p-[14px] relative"       >
         <div className="flex justify-between items-center mb-[14px]">
           <h2
             className="font-bold text-[20px] text-[#222]"

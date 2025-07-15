@@ -12,7 +12,7 @@ type BreadProps = {
 
 const translations: Record<string, { ru: string; ua: string }> = {
   loan: { ru: "Займы", ua: "Позики" },
-  mfo: { ru: "МФО", ua: "МФО" },
+  mfo: { ru: "Рейтинг МФО", ua: "Рейтинг МФО" },
   reviews: { ru: "Отзывы", ua: "Відгуки" },
   contacts: { ru: "Контакты", ua: "Контакти" },
   promotion: { ru: "Акции", ua: "Акції" },
