@@ -71,7 +71,7 @@ export default async function LoanPageWrapper({
 }: LoanPageProps) {
   const { lang } = await params;
   const { count } = await searchParams;
-  const visibleCount = count ? parseInt(count, 10) : 3;
+  const visibleCount = count ? parseInt(count, 10) : 6;
 
   const data = await catalogService.getAll({
     lang: lang === "ua" ? "uk" : "ru",

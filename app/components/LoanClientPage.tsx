@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import ButtonGreenBorder from "../ui/ButtonGreenBorder";
 import OftenQuestions from "../components/OftenQuestions";
 import Questions from "../components/Home/Questions";
 import Dropdown from "../ui/Dropdown";
@@ -100,16 +99,11 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
         slug={slug}
         locale={locale}
         visibleCount={currentVisibleCount}
+        handleShowMore={handleShowMore}
       />
 
-      <div className="px-0 mb-5 md:px-[20px]">
-        <ButtonGreenBorder
-          text={t("showMore") || "Показать еще"}
-          width="100%"
-          className="sm:!w-[256px]"
-          onClick={handleShowMore}
-        />
-      </div>
+
+     
       {homeData && <LastReviews recent_reviews={homeData.recent_reviews} />}
      
 

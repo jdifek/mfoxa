@@ -13,12 +13,14 @@ type CreditsListProps = {
   locale: string;
   visibleCount: number;
   slug?: string;
+  handleShowMore: () => void;
 };
 
 const CreditsList: React.FC<CreditsListProps> = ({
   slug,
   locale,
   visibleCount,
+  handleShowMore,
 }) => {
   const t = useTranslations("Loans");
   const searchParams = useSearchParams();
@@ -54,219 +56,231 @@ const CreditsList: React.FC<CreditsListProps> = ({
   }, [locale, sortParam, slug]);
 
   return (
-    <div className="px-0 md:px-[20px] mb-5">
-      {loading ? (
-        <p>{t("loading") || "Загрузка..."}</p>
-      ) : credits.length === 0 ? (
-        <p>{t("noData") || "Нет доступных кредитов"}</p>
-      ) : (
-        <div className="flex justify-between flex-col gap-[20px] md:grid md:grid-cols-2 lg:grid-cols-3">
-          {(credits.slice(0, visibleCount)).map((loan, index) => (
-            <div
-              key={index}
-              className="w-full h-auto rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
-            >
-              <header className="flex gap-[10px] items-center mb-[10px]">
-                <Image
-                  src={loan.logo_url || "/placeholder-logo.svg"}
-                  alt={loan.name || "MFO"}
-                  height={50}
-                  width={50}
-                  className="w-[89px] h-[50px] object-contain"
-                />
-                <div className="flex flex-col gap-[5px]">
-                  <p className="text-[#222] font-bold text-[16px] leading-[100%]">
-                    {loan.name || "-"}
-                  </p>
-                  <div className="flex items-center gap-[5px]">
-                    <Image
-                      src="/Frame 5.svg"
-                      height={14}
-                      width={14}
-                      alt="star"
-                      className="w-[14px] h-[14px]"
-                    />
-                    <p className="text-[13px] text-[#222] font-medium leading-[138%]">
-                      {loan.rating_average ?? "-"}
-                      <span className="text-[#67677a]">/5</span>
+    <>
+      <div className="px-0 md:px-[20px] mb-5">
+        {loading ? (
+          <p>{t("loading") || "Загрузка..."}</p>
+        ) : credits.length === 0 ? (
+          <p>{t("noData") || "Нет доступных кредитов"}</p>
+        ) : (
+          <div className="flex justify-between flex-col gap-[20px] md:grid md:grid-cols-2 lg:grid-cols-3">
+            {credits.slice(0, visibleCount).map((loan, index) => (
+              <div
+                key={index}
+                className="w-full h-auto rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
+              >
+                <header className="flex gap-[10px] items-center mb-[10px]">
+                  <Image
+                    src={loan.logo_url || "/placeholder-logo.svg"}
+                    alt={loan.name || "MFO"}
+                    height={50}
+                    width={50}
+                    className="w-[89px] h-[50px] object-contain"
+                  />
+                  <div className="flex flex-col gap-[5px]">
+                    <p className="text-[#222] font-bold text-[16px] leading-[100%]">
+                      {loan.name || "-"}
                     </p>
-                    <Link href={`/${locale}/mfo/${loan.slug}/reviews`}>
-
-                    <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
-                      {loan.rating_count ?? 0} {t("reviews") || "отзывов"}
-                    </p>
-                    </Link>
-
+                    <div className="flex items-center gap-[5px]">
+                      <Image
+                        src="/Frame 5.svg"
+                        height={14}
+                        width={14}
+                        alt="star"
+                        className="w-[14px] h-[14px]"
+                      />
+                      <p className="text-[13px] text-[#222] font-medium leading-[138%]">
+                        {loan.rating_average ?? "-"}
+                        <span className="text-[#67677a]">/5</span>
+                      </p>
+                      <Link href={`/${locale}/mfo/${loan.slug}/reviews`}>
+                        <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
+                          {loan.rating_count ?? 0} {t("reviews") || "отзывов"}
+                        </p>
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </header>
+                </header>
 
-              <main className="flex flex-col gap-[10px]">
-                {loan.catalog_offers?.map((offer, i) => (
-                  <div
-                    key={i}
-                    className={`border ${
-                      offer.client_type === "new"
-                        ? "border-[#00ba9e]"
-                        : "border-[#724DEA]"
-                    } rounded-[8px] p-[7px] md:p-[12px]`}
-                  >
-                    <p
-                      className={`text-[12px] font-bold ${
+                <main className="flex flex-col gap-[10px]">
+                  {loan.catalog_offers?.map((offer, i) => (
+                    <div
+                      key={i}
+                      className={`border ${
                         offer.client_type === "new"
-                          ? "text-[#00ba9e]"
-                          : "text-[#724DEA]"
-                      }`}
+                          ? "border-[#00ba9e]"
+                          : "border-[#724DEA]"
+                      } rounded-[8px] p-[7px] md:p-[12px]`}
                     >
-                      {offer.client_type === "new"
-                        ? t("newLoan")
-                        : t("repeatLoan") || "-"}
-                    </p>
-                    <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
-                      <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">
-                          {t("amount") || "Сумма"}
-                        </p>
-                        <p className="text-[#222] font-bold">
-                          {offer.amount_from ? `від ${offer.amount_from}` : "-"}{" "}
-                          до {offer.amount_to || "-"}
-                        </p>
-                      </div>
-                      <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">
-                          {t("term") || "Срок"}
-                        </p>
-                        <p className="text-[#222] font-bold">
-                          {offer.term_from && offer.term_to
-                            ? `${offer.term_from} - ${offer.term_to} днів`
-                            : "-"}
-                        </p>
-                      </div>
-                      <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">
-                          {t("rate") || "Ставка"}
-                        </p>
-                        <p className="text-[#222] font-bold">
-                          {offer.rate ? `${offer.rate}%` : "-"}
-                        </p>
+                      <p
+                        className={`text-[12px] font-bold ${
+                          offer.client_type === "new"
+                            ? "text-[#00ba9e]"
+                            : "text-[#724DEA]"
+                        }`}
+                      >
+                        {offer.client_type === "new"
+                          ? t("newLoan")
+                          : t("repeatLoan") || "-"}
+                      </p>
+                      <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
+                        <div className="flex flex-col text-[12px]">
+                          <p className="text-[#67677a] font-medium">
+                            {t("amount") || "Сумма"}
+                          </p>
+                          <p className="text-[#222] font-bold">
+                            {offer.amount_from
+                              ? `від ${offer.amount_from}`
+                              : "-"}{" "}
+                            до {offer.amount_to || "-"}
+                          </p>
+                        </div>
+                        <div className="flex flex-col text-[12px]">
+                          <p className="text-[#67677a] font-medium">
+                            {t("term") || "Срок"}
+                          </p>
+                          <p className="text-[#222] font-bold">
+                            {offer.term_from && offer.term_to
+                              ? `${offer.term_from} - ${offer.term_to} днів`
+                              : "-"}
+                          </p>
+                        </div>
+                        <div className="flex flex-col text-[12px]">
+                          <p className="text-[#67677a] font-medium">
+                            {t("rate") || "Ставка"}
+                          </p>
+                          <p className="text-[#222] font-bold">
+                            {offer.rate ? `${offer.rate}%` : "-"}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
 
-                {loan.credit_offers?.repeat_client && (
-                  <div className="border border-[#724DEA] rounded-[8px] p-[7px] md:p-[12px]">
-                    <p className="text-[#724DEA] text-[12px] font-bold">
-                      {t("repeatLoan") || "Повторный кредит"}
-                    </p>
-                    <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
-                      <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">
-                          {t("amount") || "Сумма"}
-                        </p>
-                        <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.amount?.formatted ??
-                            "-"}
-                        </p>
-                      </div>
-                      <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">
-                          {t("term") || "Срок"}
-                        </p>
-                        <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.term?.formatted ??
-                            "-"}
-                        </p>
-                      </div>
-                      <div className="flex flex-col text-[12px]">
-                        <p className="text-[#67677a] font-medium">
-                          {t("rate") || "Ставка"}
-                        </p>
-                        <p className="text-[#222] font-bold">
-                          {loan.credit_offers.repeat_client.rate?.formatted ??
-                            "-"}
-                        </p>
+                  {loan.credit_offers?.repeat_client && (
+                    <div className="border border-[#724DEA] rounded-[8px] p-[7px] md:p-[12px]">
+                      <p className="text-[#724DEA] text-[12px] font-bold">
+                        {t("repeatLoan") || "Повторный кредит"}
+                      </p>
+                      <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
+                        <div className="flex flex-col text-[12px]">
+                          <p className="text-[#67677a] font-medium">
+                            {t("amount") || "Сумма"}
+                          </p>
+                          <p className="text-[#222] font-bold">
+                            {loan.credit_offers.repeat_client.amount
+                              ?.formatted ?? "-"}
+                          </p>
+                        </div>
+                        <div className="flex flex-col text-[12px]">
+                          <p className="text-[#67677a] font-medium">
+                            {t("term") || "Срок"}
+                          </p>
+                          <p className="text-[#222] font-bold">
+                            {loan.credit_offers.repeat_client.term?.formatted ??
+                              "-"}
+                          </p>
+                        </div>
+                        <div className="flex flex-col text-[12px]">
+                          <p className="text-[#67677a] font-medium">
+                            {t("rate") || "Ставка"}
+                          </p>
+                          <p className="text-[#222] font-bold">
+                            {loan.credit_offers.repeat_client.rate?.formatted ??
+                              "-"}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                <div className="space-y-[10px] text-[12px] text-[#9393a3]">
-                  <div className="flex justify-between">
-                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
-                      РРС
-                    </p>
-                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
-                      {loan.quick_info?.rpc_range ?? "-"}
-                    </p>
+                  <div className="space-y-[10px] text-[12px] text-[#9393a3]">
+                    <div className="flex justify-between">
+                      <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                        РРС
+                      </p>
+                      <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                        {loan.quick_info?.rpc_range ?? "-"}
+                      </p>
+                    </div>
+                    <hr />
+                    <div className="flex justify-between">
+                      <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                        Юр. лицо
+                      </p>
+                      <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                        {loan.legal_entity ?? "-"}
+                      </p>
+                    </div>
+                    <hr />
+                    <div className="flex justify-between">
+                      <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                        Лицензия НБУ
+                      </p>
+                      <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
+                        {loan.nbu_license ?? "-"}
+                      </p>
+                    </div>
+                    <hr />
+                    <div>
+                      <Link
+                        href={loan.basic_characteristics_pdf_url || ""}
+                        className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
+                        style={{
+                          fontFamily: "var(--Montserrat)",
+                          textDecorationSkipInk: "none",
+                        }}
+                      >
+                        {t("termsLink") || "Условия"}
+                      </Link>
+                    </div>
+                    <hr />
+                    <div>
+                      <Link
+                        href={loan.user_warning_pdf_url || ""}
+                        className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
+                        style={{
+                          fontFamily: "var(--Montserrat)",
+                          textDecorationSkipInk: "none",
+                        }}
+                      >
+                        {t("warningLink") || "Предупреждение"}
+                      </Link>
+                    </div>
                   </div>
-                  <hr />
-                  <div className="flex justify-between">
-                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
-                      Юр. лицо
-                    </p>
-                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
-                      {loan.legal_entity ?? "-"}
-                    </p>
-                  </div>
-                  <hr />
-                  <div className="flex justify-between">
-                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
-                      Лицензия НБУ
-                    </p>
-                    <p className="text-[10px] font-medium leading-[120%] text-[#9393a3]">
-                      {loan.nbu_license ?? "-"}
-                    </p>
-                  </div>
-                  <hr />
-                  <div>
-                    <Link
-                      href={loan.basic_characteristics_pdf_url || ''}
-                      className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
-                      style={{
-                        fontFamily: "var(--Montserrat)",
-                        textDecorationSkipInk: "none",
-                      }}
-                    >
-                      {t("termsLink") || "Условия"}
-                    </Link>
-                  </div>
-                  <hr />
-                  <div>
-                    <Link
-                    
-                    href={loan.user_warning_pdf_url || ''}
-                    className="underline text-[10px] font-medium leading-[120%] text-[#00ba9e]"
-                      style={{
-                        fontFamily: "var(--Montserrat)",
-                        textDecorationSkipInk: "none",
-                      }}
-                    >
-                      {t("warningLink") || "Предупреждение"}
-                    </Link>
-                  </div>
-                </div>
-              </main>
+                </main>
 
-              <footer className="mt-[10px] flex sm:flex-row gap-[10px] items-center justify-between flex-wrap">
-                <ButtonGreenBorder
-                  link={`/${locale}/mfo/${loan.slug}`}
-                  width="100%"
-                  text={t("details") || "Подробности"}
-                  className="flex-1"
-                />
-                <Link
-                  href={`${loan.get_money_button_url}`}
-                  className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out whitespace-nowrap flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
-                >
-                  {t("getMoney") || "Получить деньги"}
-                </Link>
-              </footer>
-            </div>
-          ))}
-        </div>
+                <footer className="mt-[10px] flex sm:flex-row gap-[10px] items-center justify-between flex-wrap">
+                  <ButtonGreenBorder
+                    link={`/${locale}/mfo/${loan.slug}`}
+                    width="100%"
+                    text={t("details") || "Подробности"}
+                    className="flex-1"
+                  />
+                  <Link
+                    href={`${loan.get_money_button_url}`}
+                    className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out whitespace-nowrap flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
+                  >
+                    {t("getMoney") || "Получить деньги"}
+                  </Link>
+                </footer>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      {credits.length > visibleCount && (
+
+      <div className="px-0 mb-5 md:px-[20px]">
+        <ButtonGreenBorder
+          text={t("showMore") || "Показать еще"}
+          width="100%"
+          className="sm:!w-[256px]"
+          onClick={handleShowMore}
+        />
+      </div>
       )}
-    </div>
+    </>
   );
 };
 
