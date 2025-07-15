@@ -44,11 +44,15 @@ export const AboutButtonsComponent = () => {
               onClick={() => handleButtonClick(key)}
               className={`cursor-pointer whitespace-nowrap rounded-[35px] p-[8px_10px] sm:p-[10px_12px] md:p-[14px_20px] flex items-center justify-center font-medium text-[15px] leading-[133%] ${
                 isActive
-                  ? "bg-[#d6d6f9] text-[#724dea]"
+                  ? key === "promotion"
+                    ? "bg-[#e3fffb] text-[#00ba9e]"
+                    : "bg-[#d6d6f9] text-[#724dea]"
                   : key === "promotion"
-                  ? "bg-[#e3fffb] text-[#00ba9e]"
-                  : "bg-[#fff] text-[#000000]"
+                    ? "bg-[#fff] text-[#00ba9e]"
+                    : "bg-[#fff] text-[#000000]"
               }`}
+                            
+              
             >
               {t(key)}
             </button>

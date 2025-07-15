@@ -273,7 +273,7 @@ export default function CompanyRewiwsClient({
                 isOpen={openReplyId === review.id}
                 onClose={closeAnswerModal}
               />
-              <div className="p-[10px] md:p-[30px] bg-white rounded-lg mt-[10px]" itemScope itemType="https://schema.org/Review">
+              <div className=" border-[1px] border-[#d6d6f9] p-[10px] md:p-[30px] bg-white rounded-lg mt-[10px]" itemScope itemType="https://schema.org/Review">
                 <meta itemProp="datePublished" content={review.created_at} />
                 <div itemProp="author" itemScope itemType="https://schema.org/Person">
                   <meta itemProp="name" content={review.author_name || "Аноним"} />

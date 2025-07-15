@@ -69,7 +69,7 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
           {reviews.slice(0, reviewsCount).map((review) => (
             <div
               key={review.id}
-              className="w-full rounded-lg  h-[243px] bg-white p-[16px] shadow-md"
+              className="w-full  border-[1px] border-[#d6d6f9] rounded-lg  h-[243px] bg-white p-[16px] shadow-md"
             >
               <div className="flex gap-[10px] mb-[14px]">
                 <Image
