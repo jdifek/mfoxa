@@ -131,14 +131,12 @@ export default function CompanyRewiwsClient({
     fetchReviews();
   }, [slug]);
 
-  const ratingsColors = {
-    speed: "#00BDA5",
-    conditions: "#92C83E",
-    support: "#CC9B00",
-    website: "#EF3E4A",
+  const getColor = (value: number): string => {
+    if (value >= 4.5) return "#00BDA5";
+    if (value >= 4) return "#92C83E";
+    if (value >= 3) return "#CC9B00";
+    return "#EF3E4A";
   };
-  const getColorForKey = (key: string) =>
-    ratingsColors[key as keyof typeof ratingsColors] || "#000";
 
   const handleVote = async (id: number, type: "helpful" | "not_helpful") => {
     if (!data) return;
@@ -197,7 +195,7 @@ export default function CompanyRewiwsClient({
       </div>
       <AboutButtons />
       <div className="px-0 md:px-[20px]">
-        <div className="flex flex-col md:flex-row items-center justify-between md:mb-[20px] mb-[10px] sm:mb-[40px] mt-[30px] w-full rounded-lg bg-white border border-[#724dea] p-[20px] shadow-md">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between md:mb-[20px] mb-[10px] sm:mb-[40px] mt-[30px] w-full rounded-lg bg-white border border-[#724dea] p-[20px] shadow-md gap-[10px]">
           <div className="flex gap-[14px] sm:gap-[16px] md:gap-[20px] items-center mb-4 md:mb-0">
             {data?.mfo?.logo_url ? (
               <Image
@@ -228,44 +226,35 @@ export default function CompanyRewiwsClient({
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-[10px] items-center w-full md:w-auto">
-            <div className="relative w-[74px] h-[74px]">
-              <Image
-                src="/Frame 163.png"
-                alt="rating"
-                width={74}
-                height={74}
-                className="object-contain"
-              />
-              <div className="absolute inset-1 mt-2 flex flex-col items-center justify-center">
-                <span
-                  className={`${getRatingColor(
-                    String(data?.mfo?.rating_average ?? 0)
-                  )} text-[15px] font-bold leading-none`}
-                >
-                  {formatRating(String(data?.mfo?.rating_average ?? 0))}
-                </span>
-                <span className="text-black text-[10px] font-bold">
-                  {data?.mfo?.rating_count} место
-                </span>
-              </div>
-            </div>
-            <div className="flex flex-col gap-[8px] w-full">
-              <p className="font-bold text-[12px] text-start text-nowrap sm:text-[14px] md:text-[16px] leading-[100%] text-[#222]">
-                {t("ratingsTitle", {
-                  company: data?.mfo?.name || t(`company.${slug}.name`),
-                })}
-              </p>
-              <div className="grid grid-cols-[auto_1fr] md:grid-cols-4 gap-[10px] md:gap-[14px] items-center">
-                <div className="md:hidden flex justify-center">
-                  <Image
-                    src="/Frame 163 (1).png"
-                    alt={t("ratingIconAlt")}
-                    width={50}
-                    height={50}
-                    className="w-[50px] h-[50px]"
-                  />
+            <div className="flex gap-[8px] w-full items-center">
+              <div className="relative w-[74px] h-[74px]">
+                <Image
+                  src="/Frame 163.png"
+                  alt="rating"
+                  width={74}
+                  height={74}
+                  className="object-contain"
+                />
+                <div className="absolute inset-1 mt-3 flex flex-col items-center justify-center">
+                  <span
+                    className={`${getRatingColor(
+                      String(data?.mfo?.rating_average ?? 0)
+                    )} text-[15px] font-bold leading-none`}
+                  >
+                    {formatRating(String(data?.mfo?.rating_average ?? 0))}
+                  </span>
+                  <span className="text-black text-[10px] font-bold">
+                    {data?.mfo?.rating_count} место
+                  </span>
                 </div>
-                <div className="grid grid-cols-2 gap-[10px] md:contents">
+              </div>
+              <div className="flex flex-col gap-[10px] md:gap-[14px]">
+                <p className="font-bold text-[12px] text-start text-nowrap sm:text-[14px] md:text-[16px] leading-[100%] text-[#222]">
+                  {t("ratingsTitle", {
+                    company: data?.mfo?.name || t(`company.${slug}.name`),
+                  })}
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-[10px] md:gap-[14px] items-center">
                   {data?.mfo?.ratings &&
                     Object.entries(data.mfo.ratings).map(
                       ([key, rating], index) => (
@@ -275,7 +264,7 @@ export default function CompanyRewiwsClient({
                         >
                           <CircleRating
                             value={rating.value}
-                            color={getColorForKey(key)}
+                            color={getColor(rating.value)}
                           />
                           <span
                             className="font-medium text-[11px] leading-[145%] text-[#222]"

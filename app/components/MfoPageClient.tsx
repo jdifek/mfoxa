@@ -271,7 +271,7 @@ export default async function MfoPageClient({
                           alt={`rating-place-${place}`}
                           width={74}
                           height={74}
-                          className="object-contain !w-[60px] md:!w-[80px]"
+                          className="object-contain !w-[60px] md:!w-[70px]"
                         />
                         <div className="flex flex-col justify-center items-center">
                           <span
