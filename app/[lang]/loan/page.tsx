@@ -6,6 +6,7 @@ import { MicrodataLoanCatalog } from "@/app/structured-data/MicrodataLoanCatalog
 import authorsService from "@/app/services/authorsService";
 import { FaqsService } from "@/app/services/FaqService";
 import settingsService from "@/app/services/settingsService";
+import { getHomeData, LangType } from "@/app/services/HomeService";
 
 export async function generateMetadata({
   params,
@@ -92,10 +93,12 @@ export default async function LoanPageWrapper({
   } catch (error) {
     console.error("Ошибка при получении настроек:", error);
   }
+  const homeData = await getHomeData(lang as LangType );
+
   return (
     <>
       <MicrodataLoanCatalog data={data} locale={lang as "ua" | "ru"} />
-      <LoanClientPage faqs={faqs} getAllSettings={getAllSettings} data={data} randomAuthor={randomAuthor} visibleCount={visibleCount} locale={lang} />
+      <LoanClientPage homeData={homeData} faqs={faqs} getAllSettings={getAllSettings} data={data} randomAuthor={randomAuthor} visibleCount={visibleCount} locale={lang} />
     </>
   );
 }

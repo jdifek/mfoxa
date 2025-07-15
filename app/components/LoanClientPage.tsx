@@ -20,9 +20,12 @@ import InfoHelpfulClient from "./InfoHelpfulClient";
 import { AuthorRandomResponse } from "../services/authorsService";
 import { SettingsGroupResponse } from "../services/settingsService";
 import DetailsText from "./DetailsText";
+import { LastReviews } from "./Home/LastRewiews";
+import { HomeData } from "../services/HomeService";
 
 type LoanClientPageProps = {
   visibleCount: number;
+  homeData: HomeData
   locale: string;
   data: GetCatalogListResponse;
   page?: CatalogPageFull;
@@ -41,6 +44,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
   dates,
   slug,
   faqs,
+  homeData,
   randomAuthor,
   getAllSettings
 }) => {
@@ -106,8 +110,10 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
           onClick={handleShowMore}
         />
       </div>
-      {faqs && faqs.length > 0 ? <OftenQuestions faqs={faqs} /> : <OftenQuestions/>}
+      <LastReviews recent_reviews={homeData.recent_reviews} />
+
       <DetailsText html={getAllSettings?.settings.loan_page_text} />
+      {faqs && faqs.length > 0 ? <OftenQuestions faqs={faqs} /> : <OftenQuestions/>}
       <InfoHelpfulClient randomAuthor={randomAuthor} />
 
       <Questions />
