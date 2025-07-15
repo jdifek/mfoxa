@@ -13,7 +13,29 @@ type Props = {
 
 const BestLoans: React.FC<Props> = ({ best_credits }) => {
   const t = useTranslations("BestLoans");
-  const locale = useLocale(); // ✅ добавь это
+  const locale = useLocale();
+
+  const renderStars = (rating: number | null | undefined) => {
+    if (!rating) return null;
+
+    const starCount = Math.floor(rating);
+    const stars = [];
+
+    for (let i = 0; i < starCount && i < 5; i++) {
+      stars.push(
+        <Image
+          key={i}
+          src="/Frame 5.svg"
+          height={14}
+          width={14}
+          alt="star"
+          className="w-[14px] h-[14px]"
+        />
+      );
+    }
+
+    return stars;
+  };
 
   if (!best_credits || best_credits.length === 0) return null;
 
@@ -44,18 +66,16 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                   <p className="text-[#222] font-bold text-[16px] leading-[100%]">
                     {loan.name}
                   </p>
-                  <div className="flex items-center gap-[5px]">
-                    <Image
-                      src="/Frame 5.svg"
-                      height={14}
-                      width={14}
-                      alt="star"
-                      className="w-[14px] h-[14px]"
-                    />
-                    <p className="text-[13px] text-[#222] font-medium leading-[138%]">
-                      {loan.rating_average ?? "-"}
-                      <span className="text-[#67677a]">/5</span>
-                    </p>
+                  <div className="flex items-center gap-[5px] flex-wrap">
+                    <div className="flex gap-[5px]">
+                      <div className="flex items-center gap-[2px]">
+                        {renderStars(loan.rating_average)}
+                      </div>
+                      <p className="text-[13px] text-[#222] font-medium leading-[138%]">
+                        {loan.rating_average ?? "-"}
+                        <span className="text-[#67677a]">/5</span>
+                      </p>
+                    </div>
                     <Link href={`/${locale}/mfo/${loan.slug}/reviews`}>
                       <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
                         {loan.rating_count ?? 0} {t("reviews")}

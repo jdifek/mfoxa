@@ -13,7 +13,7 @@ type TopUkrMFOProps = {
 
 export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
   const t = useTranslations("TopUkrMFO");
-  const lang = useLocale()
+  const lang = useLocale();
 
   const [visibleCount, setVisibleCount] = useState(3);
 
@@ -26,6 +26,25 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
     if (isNaN(rating)) return "";
 
     return rating.toFixed(1).replace(".", ",");
+  };
+
+  const getRatingColor = (ratingStr: string | undefined) => {
+    if (!ratingStr) return "text-gray-500";
+    const rating = parseFloat(ratingStr);
+    if (isNaN(rating)) return "text-gray-500";
+
+    if (rating >= 0 && rating <= 1) return "text-red-900"; // dark red
+    if (rating === 2) return "text-red-600"; // red
+    if (rating === 3) return "text-orange-500"; // orange
+    if (rating === 4) return "text-green-600"; // green
+    if (rating === 5) return "text-green-500"; // bright green
+
+    if (rating > 1 && rating < 2) return "text-red-700";
+    if (rating > 2 && rating < 3) return "text-red-500";
+    if (rating > 3 && rating < 4) return "text-orange-400";
+    if (rating > 4 && rating < 5) return "text-green-500";
+
+    return "text-green-500";
   };
 
   return (
@@ -73,8 +92,9 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
                 {/* Контент поверх PNG */}
                 <div className="absolute inset-1 mt-2 flex flex-col items-center justify-center">
                   <span
-                    className="text-[#82C600] text-[1
-                  5px] font-bold leading-none"
+                    className={`${getRatingColor(
+                      String(top?.rating_average)
+                    )} text-[15px] font-bold leading-none`}
                   >
                     {formatRating(String(top?.rating_average))}
                   </span>
@@ -115,15 +135,15 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
         ))}
       </div>
 
-        <div className="px-0">
-          <ButtonGreenBorder
-            text={t("showMore")}
-            link={`/${lang}/mfo`}
-            width="100%"
-            className="mt-[20px] md:mt-[40px] mb-[30px] md:mb-[50px]"
-            onClick={handleShowMore}
-          />
-        </div>
+      <div className="px-0">
+        <ButtonGreenBorder
+          text={t("showMore")}
+          link={`/${lang}/mfo`}
+          width="100%"
+          className="mt-[20px] md:mt-[40px] mb-[30px] md:mb-[50px]"
+          onClick={handleShowMore}
+        />
+      </div>
     </div>
   );
 };

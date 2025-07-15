@@ -8,7 +8,12 @@ import Dropdown from "@/app/ui/Dropdown";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { getReviews, markReviewHelpful, markReviewNotHelpful, ReviewsApiResponse } from "../services/reviewService";
+import {
+  getReviews,
+  markReviewHelpful,
+  markReviewNotHelpful,
+  ReviewsApiResponse,
+} from "../services/reviewService";
 import ReviewModal from "./Modals/ReviewModal";
 import AnswerQap from "./Modals/AnswerQap";
 import { PageDatesResponse } from "../services/PageDatesService";
@@ -35,7 +40,15 @@ const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
       transform="rotate(-90 25 25)"
       strokeLinecap="round"
     />
-    <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontSize="14" fontWeight="bold" fill={color}>
+    <text
+      x="50%"
+      y="50%"
+      dominantBaseline="middle"
+      textAnchor="middle"
+      fontSize="14"
+      fontWeight="bold"
+      fill={color}
+    >
       {value}
     </text>
   </svg>
@@ -63,6 +76,25 @@ export default function CompanyRewiwsClient({
     const rating = parseFloat(ratingStr);
     if (isNaN(rating)) return "";
     return rating.toFixed(1).replace(".", ",");
+  };
+
+  const getRatingColor = (ratingStr: string | undefined) => {
+    if (!ratingStr) return "text-gray-500";
+    const rating = parseFloat(ratingStr);
+    if (isNaN(rating)) return "text-gray-500";
+
+    if (rating >= 0 && rating <= 1) return "text-red-900"; // dark red
+    if (rating === 2) return "text-red-600"; // red
+    if (rating === 3) return "text-orange-500"; // orange
+    if (rating === 4) return "text-green-600"; // green
+    if (rating === 5) return "text-green-500"; // bright green
+
+    if (rating > 1 && rating < 2) return "text-red-700";
+    if (rating > 2 && rating < 3) return "text-red-500";
+    if (rating > 3 && rating < 4) return "text-orange-400";
+    if (rating > 4 && rating < 5) return "text-green-500";
+
+    return "text-green-500"; // default for ratings above 5
   };
 
   const handleLoadMore = () => {
@@ -111,7 +143,8 @@ export default function CompanyRewiwsClient({
   const handleVote = async (id: number, type: "helpful" | "not_helpful") => {
     if (!data) return;
     try {
-      const voteFn = type === "helpful" ? markReviewHelpful : markReviewNotHelpful;
+      const voteFn =
+        type === "helpful" ? markReviewHelpful : markReviewNotHelpful;
       const response = await voteFn(id);
       const updatedReviews = data.data.map((review) => {
         if (review.id === id) {
@@ -157,7 +190,9 @@ export default function CompanyRewiwsClient({
           className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[14px] sm:mb-[25px] md:mb-[30px]"
           style={{ fontFamily: "var(--Jakarta)" }}
         >
-          {t("title", { company: data?.mfo?.name || t(`company.${slug}.name`) })}
+          {t("title", {
+            company: data?.mfo?.name || t(`company.${slug}.name`),
+          })}
         </h1>
       </div>
       <AboutButtons />
@@ -202,7 +237,11 @@ export default function CompanyRewiwsClient({
                 className="object-contain"
               />
               <div className="absolute inset-1 mt-2 flex flex-col items-center justify-center">
-                <span className="text-[#82C600] text-[15px] font-bold leading-none">
+                <span
+                  className={`${getRatingColor(
+                    String(data?.mfo?.rating_average ?? 0)
+                  )} text-[15px] font-bold leading-none`}
+                >
                   {formatRating(String(data?.mfo?.rating_average ?? 0))}
                 </span>
                 <span className="text-black text-[10px] font-bold">
@@ -212,7 +251,9 @@ export default function CompanyRewiwsClient({
             </div>
             <div className="flex flex-col gap-[8px] w-full">
               <p className="font-bold text-[12px] text-start text-nowrap sm:text-[14px] md:text-[16px] leading-[100%] text-[#222]">
-                {t("ratingsTitle", { company: data?.mfo?.name || t(`company.${slug}.name`) })}
+                {t("ratingsTitle", {
+                  company: data?.mfo?.name || t(`company.${slug}.name`),
+                })}
               </p>
               <div className="grid grid-cols-[auto_1fr] md:grid-cols-4 gap-[10px] md:gap-[14px] items-center">
                 <div className="md:hidden flex justify-center">
@@ -226,14 +267,25 @@ export default function CompanyRewiwsClient({
                 </div>
                 <div className="grid grid-cols-2 gap-[10px] md:contents">
                   {data?.mfo?.ratings &&
-                    Object.entries(data.mfo.ratings).map(([key, rating], index) => (
-                      <div key={key} className="flex items-center gap-[6px] md:gap-[10px]">
-                        <CircleRating value={rating.value} color={getColorForKey(key)} />
-                        <span className="font-medium text-[11px] leading-[145%] text-[#222]" style={{ maxWidth: "70px" }}>
-                          {t(`ratings.${index}.label`)}
-                        </span>
-                      </div>
-                    ))}
+                    Object.entries(data.mfo.ratings).map(
+                      ([key, rating], index) => (
+                        <div
+                          key={key}
+                          className="flex items-center gap-[6px] md:gap-[10px]"
+                        >
+                          <CircleRating
+                            value={rating.value}
+                            color={getColorForKey(key)}
+                          />
+                          <span
+                            className="font-medium text-[11px] leading-[145%] text-[#222]"
+                            style={{ maxWidth: "70px" }}
+                          >
+                            {t(`ratings.${index}.label`)}
+                          </span>
+                        </div>
+                      )
+                    )}
                 </div>
               </div>
             </div>
@@ -273,25 +325,68 @@ export default function CompanyRewiwsClient({
                 isOpen={openReplyId === review.id}
                 onClose={closeAnswerModal}
               />
-              <div className=" border-[1px] border-[#d6d6f9] p-[10px] md:p-[30px] bg-white rounded-lg mt-[10px]" itemScope itemType="https://schema.org/Review">
+              <div
+                className=" border-[1px] border-[#d6d6f9] p-[10px] md:p-[30px] bg-white rounded-lg mt-[10px]"
+                itemScope
+                itemType="https://schema.org/Review"
+              >
                 <meta itemProp="datePublished" content={review.created_at} />
-                <div itemProp="author" itemScope itemType="https://schema.org/Person">
-                  <meta itemProp="name" content={review.author_name || "Аноним"} />
+                <div
+                  itemProp="author"
+                  itemScope
+                  itemType="https://schema.org/Person"
+                >
+                  <meta
+                    itemProp="name"
+                    content={review.author_name || "Аноним"}
+                  />
                 </div>
-                <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
-                  <meta itemProp="ratingValue" content={String(review.rating || 0)} />
+                <div
+                  itemProp="reviewRating"
+                  itemScope
+                  itemType="https://schema.org/Rating"
+                >
+                  <meta
+                    itemProp="ratingValue"
+                    content={String(review.rating || 0)}
+                  />
                   <meta itemProp="bestRating" content="5" />
                   <meta itemProp="worstRating" content="1" />
                 </div>
-                <div itemProp="itemReviewed" itemScope itemType="https://schema.org/FinancialService">
-                  <meta itemProp="name" content={data?.mfo?.name || t(`company.${slug}.name`)} />
-                  <meta itemProp="url" content={`https://mfoxa.com.ua/${lang}/mfo/${slug}`} />
+                <div
+                  itemProp="itemReviewed"
+                  itemScope
+                  itemType="https://schema.org/FinancialService"
+                >
+                  <meta
+                    itemProp="name"
+                    content={data?.mfo?.name || t(`company.${slug}.name`)}
+                  />
+                  <meta
+                    itemProp="url"
+                    content={`https://mfoxa.com.ua/${lang}/mfo/${slug}`}
+                  />
                 </div>
                 {review.admin_response && (
-                  <div itemProp="comment" itemScope itemType="https://schema.org/Comment">
+                  <div
+                    itemProp="comment"
+                    itemScope
+                    itemType="https://schema.org/Comment"
+                  >
                     <meta itemProp="text" content={review.admin_response} />
-                    <div itemProp="author" itemScope itemType="https://schema.org/Organization">
-                      <meta itemProp="name" content={review.admin_response_author || data?.mfo?.name || t(`company.${slug}.name`)} />
+                    <div
+                      itemProp="author"
+                      itemScope
+                      itemType="https://schema.org/Organization"
+                    >
+                      <meta
+                        itemProp="name"
+                        content={
+                          review.admin_response_author ||
+                          data?.mfo?.name ||
+                          t(`company.${slug}.name`)
+                        }
+                      />
                     </div>
                   </div>
                 )}
@@ -322,7 +417,13 @@ export default function CompanyRewiwsClient({
                 </div>
                 <p
                   className="mb-[10px]"
-                  style={{ fontFamily: "var(--Montserrat)", fontWeight: 500, fontSize: "13px", lineHeight: "138%", color: "#222" }}
+                  style={{
+                    fontFamily: "var(--Montserrat)",
+                    fontWeight: 500,
+                    fontSize: "13px",
+                    lineHeight: "138%",
+                    color: "#222",
+                  }}
                   itemProp="reviewBody"
                 >
                   {review.review_text}
@@ -330,12 +431,27 @@ export default function CompanyRewiwsClient({
                 {review.admin_response && (
                   <div className="rounded-lg p-2.5 w-full mb-[10px] bg-[#ebebf9]">
                     <div className="flex gap-[10px]">
-                      <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.4 3.96692H1V10.3669H4.2V13.5669H7.4V3.96692Z" stroke="#724DEA" strokeWidth="2" />
-                        <path d="M15 3.96692H8.6V10.3669H11.8V13.5669H15V3.96692Z" stroke="#724DEA" strokeWidth="2" />
+                      <svg
+                        width="16"
+                        height="17"
+                        viewBox="0 0 16 17"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.4 3.96692H1V10.3669H4.2V13.5669H7.4V3.96692Z"
+                          stroke="#724DEA"
+                          strokeWidth="2"
+                        />
+                        <path
+                          d="M15 3.96692H8.6V10.3669H11.8V13.5669H15V3.96692Z"
+                          stroke="#724DEA"
+                          strokeWidth="2"
+                        />
                       </svg>
                       <p className="font-bold text-[13px] leading-[138%] text-[#724dea]">
-                        {review.admin_response_author || t(`reviews.${i}.replyUser`)}
+                        {review.admin_response_author ||
+                          t(`reviews.${i}.replyUser`)}
                       </p>
                     </div>
                     <p className="ml-[26px] font-medium text-[13px] sm:text-[15px] leading-[133%] text-[#222]">
@@ -386,7 +502,7 @@ export default function CompanyRewiwsClient({
           />
         </div>
       )}
-     
+
       {data && data.mfo && <TermsOfRegistration mfo={data.mfo} />}
       <div className="px-0 md:px-[20px]">
         <p className="font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">

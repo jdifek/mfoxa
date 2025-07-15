@@ -26,13 +26,20 @@ export const AboutButtons = ({ data }: AboutButtonsProps) => {
     <div className="w-full no-scrollbar overflow-x-auto px-0 md:px-[20px]">
       <div className="flex gap-[10px]">
         {data.data.map((key, index) => {
+          console.log(key, "key");
           const isActive = pathname.includes(key.slug); // подсветка по текущему URL
           return (
             <button
               key={index}
               onClick={() => handleButtonClick(key.slug)}
-              className={`cursor-pointer whitespace-nowrap ${textColorMap[key.color] || "text-black"} rounded-[35px] p-[8px_14px] flex items-center justify-center font-medium text-[15px] leading-[133%]
-                ${isActive ? "bg-[#d6d6f9] text-[#724dea]" : "bg-[#fff] text-[#000000]"}`}
+              className={`cursor-pointer whitespace-nowrap ${
+                textColorMap[key.color] || "text-black"
+              } rounded-[35px] p-[8px_14px] flex items-center justify-center font-medium text-[15px] leading-[133%]
+                ${
+                  isActive
+                    ? "bg-[#d6d6f9] text-[#724dea]"
+                    : "bg-[#fff] text-[#000000]"
+                }`}
             >
               {key.button_name}
             </button>

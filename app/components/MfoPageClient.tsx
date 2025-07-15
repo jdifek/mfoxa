@@ -15,12 +15,12 @@ import { AuthorRandomResponse } from "../services/authorsService";
 import { FaqsResponse } from "../services/FaqService";
 import { SettingsGroupResponse } from "../services/settingsService";
 
-const ratings = [
-  { key: "speed", value: 4.8, color: "#00BDA5" },
-  { key: "transparency", value: 4.1, color: "#92C83E" },
-  { key: "support", value: 3.8, color: "#CC9B00" },
-  { key: "usability", value: 2.8, color: "#EF3E4A" },
-];
+function getColor(value: number): string {
+  if (value >= 4.5) return "#00BDA5";
+  if (value >= 4) return "#92C83E";
+  if (value >= 3) return "#CC9B00";
+  return "#EF3E4A";
+}
 
 const tops = [
   { name: "Швидко гроші", img: "/2.svg" },
@@ -118,6 +118,25 @@ export default async function MfoPageClient({
 
     return rating.toFixed(1).replace(".", ",");
   };
+
+  const getRatingColor = (ratingStr: string | undefined) => {
+    if (!ratingStr) return "text-gray-500";
+    const rating = parseFloat(ratingStr);
+    if (isNaN(rating)) return "text-gray-500";
+
+    if (rating >= 0 && rating <= 1) return "text-red-900";
+    if (rating === 2) return "text-red-600";
+    if (rating === 3) return "text-orange-500";
+    if (rating === 4) return "text-green-600";
+    if (rating === 5) return "text-green-500";
+
+    if (rating > 1 && rating < 2) return "text-red-700";
+    if (rating > 2 && rating < 3) return "text-red-500";
+    if (rating > 3 && rating < 4) return "text-orange-400";
+    if (rating > 4 && rating < 5) return "text-green-500";
+
+    return "text-green-500";
+  };
   return (
     <>
       <MfoListStructuredData companies={companies} />
@@ -177,7 +196,11 @@ export default async function MfoPageClient({
 
                     {/* Контент поверх PNG */}
                     <div className="absolute inset-1 mt-2 md:mt-3 flex flex-col items-center justify-center">
-                      <span className="text-[#82C600] text-[20px] font-bold leading-none">
+                      <span
+                        className={`${getRatingColor(
+                          String(top?.rating_average)
+                        )} text-[20px] font-bold leading-none`}
+                      >
                         {formatRating(String(top?.rating_average))}
                       </span>
                       <span className="text-black text-[10px] font-bold">
@@ -194,9 +217,7 @@ export default async function MfoPageClient({
                       >
                         <CircleRating
                           value={rating.value}
-                          color={
-                            ratings.find((r) => r.key === key)?.color || "#000"
-                          }
+                          color={getColor(rating.value)}
                         />{" "}
                         <div>
                           <p className="text-[11px] font-medium text-[#222]">
@@ -253,7 +274,11 @@ export default async function MfoPageClient({
                           className="object-contain !w-[60px] md:!w-[80px]"
                         />
                         <div className="flex flex-col justify-center items-center">
-                          <span className="text-[#82C600] gap-1 text-[15px] font-bold leading-none">
+                          <span
+                            className={`${getRatingColor(
+                              String(top?.rating_average)
+                            )} gap-1 text-[15px] font-bold leading-none`}
+                          >
                             {formatRating(String(top?.rating_average))}
                           </span>
                           <span className="text-black text-[10px] font-bold">
@@ -276,10 +301,7 @@ export default async function MfoPageClient({
                             >
                               <CircleRating
                                 value={rating.value}
-                                color={
-                                  ratings.find((r) => r.key === key)?.color ||
-                                  "#000"
-                                }
+                                color={getColor(rating.value)}
                               />
                               <div className="flex flex-col">
                                 <span
