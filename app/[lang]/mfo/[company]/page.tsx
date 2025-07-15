@@ -169,7 +169,7 @@ export default async function CatalogPage({ params }: PageProps) {
                     {data.rating_average || t("rating.value")}
                     <span className="text-[#67677a]">/5</span>
                   </p>
-                  <Link href={`/mfo/${data.slug}/reviews`}>
+                  <Link href={`/${lang}/mfo/${data.slug}/reviews`}>
                   <p className="font-medium text-[13px] leading-[138%] underline underline-offset-2 text-right text-[#00ba9e] hover:text-[#009e88] hover:underline-offset-4 transition-all duration-200 cursor-pointer">
                     {data.rating_count + " " + t("rating.reviews")}
                   </p>

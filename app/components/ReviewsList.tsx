@@ -94,7 +94,7 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
               <p className="mb-[10px] text-[13px] md:text-[15px] font-[500] text-[#222] leading-[138%]">
                 {review.review_text}
               </p>
-              <Link href={`/mfo/${review.mfo.slug}/reviews`}>
+              <Link href={`/${locale}/mfo/${review.mfo.slug}/reviews`}>
 
               <p className="underline cursor-pointer w-max text-[13px] md:text-[15px] text-[#6239e8] hover:text-[#9278ea]">
                 {t("showFull")}

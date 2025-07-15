@@ -4,7 +4,7 @@ import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Mfo } from "@/app/services/HomeService";
 
 type Props = {
@@ -13,6 +13,7 @@ type Props = {
 
 const BestLoans: React.FC<Props> = ({ best_credits }) => {
   const t = useTranslations("BestLoans");
+  const locale = useLocale(); // ✅ добавь это
 
   if (!best_credits || best_credits.length === 0) return null;
 
@@ -55,7 +56,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                       {loan.rating_average ?? "-"}
                       <span className="text-[#67677a]">/5</span>
                     </p>
-                    <Link href={`/mfo/${loan.slug}/reviews`}>
+                    <Link href={`/${locale}/mfo/${loan.slug}/reviews`}>
                       <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
                         {loan.rating_count ?? 0} {t("reviews")}
                       </p>
@@ -195,7 +196,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
 
               <footer className="mt-[10px] flex sm:flex-row gap-[10px] items-center justify-between flex-wrap">
                 <ButtonGreenBorder
-                  link={`/mfo/${loan.slug}`}
+                  link={`/${locale}/mfo/${loan.slug}`}
                   width="100%"
                   text={t("details")}
                   className="flex-1"

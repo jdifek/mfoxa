@@ -4,7 +4,7 @@ import Image from "next/image";
 import RatingDisplay from "./RatingDisplay";
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import clsx from "clsx";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Mfo } from "@/app/services/HomeService";
 
 type TopUkrMFOProps = {
@@ -13,6 +13,7 @@ type TopUkrMFOProps = {
 
 export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
   const t = useTranslations("TopUkrMFO");
+  const lang = useLocale()
 
   const [visibleCount, setVisibleCount] = useState(3);
 
@@ -105,7 +106,7 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
               />
             </div>
             <ButtonGreenBorder
-              link={`/mfo/${top.slug}`}
+              link={`/${lang}/mfo/${top.slug}`}
               className="mt-[20px]"
               width="100%"
               text={t("details")}
@@ -117,7 +118,7 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
         <div className="px-0">
           <ButtonGreenBorder
             text={t("showMore")}
-            link="/mfo"
+            link={`/${lang}/mfo`}
             width="100%"
             className="mt-[20px] md:mt-[40px] mb-[30px] md:mb-[50px]"
             onClick={handleShowMore}

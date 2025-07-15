@@ -49,7 +49,7 @@ const Bread = ({ lang }: BreadProps) => {
       className="p-[10px] md:pl-[20px] my-[10px] flex gap-[9px] text-[#222] text-[12px] font-medium leading-[142%]"
       style={{ fontFamily: "var(--Montserrat)" }}
     >
-      <Link href="/">
+      <Link href={`/${lang}`}>
         <svg
           width="16"
           height="16"

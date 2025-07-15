@@ -90,7 +90,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
                       {loan.rating_average ?? "-"}
                       <span className="text-[#67677a]">/5</span>
                     </p>
-                    <Link href={`/mfo/${loan.slug}/reviews`}>
+                    <Link href={`/${locale}/mfo/${loan.slug}/reviews`}>
 
                     <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
                       {loan.rating_count ?? 0} {t("reviews") || "отзывов"}
@@ -250,7 +250,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
 
               <footer className="mt-[10px] flex sm:flex-row gap-[10px] items-center justify-between flex-wrap">
                 <ButtonGreenBorder
-                  link={`/mfo/${loan.slug}`}
+                  link={`/${locale}/mfo/${loan.slug}`}
                   width="100%"
                   text={t("details") || "Подробности"}
                   className="flex-1"

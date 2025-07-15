@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import ButtonGreenBorder from "@/app/ui/ButtonGreenBorder";
 import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Review } from "@/app/services/HomeService";
 import Link from "next/link";
 
@@ -14,6 +14,7 @@ type Props = {
 export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
   const t = useTranslations("LastReviews");
   const pathname = usePathname();
+  const lang = useLocale()
 
   const title = pathname.startsWith("/mfo/") && pathname.split("/").length === 3
     ? t("sectionTitleMFO")
@@ -78,7 +79,7 @@ export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
               {el.review_text}
             </p>
 
-            <Link href={`/mfo/${el.mfo.slug}/reviews`}>
+            <Link href={`/${lang}/mfo/${el.mfo.slug}/reviews`}>
               <p
                 className="text-[13px] w-max md:text-[15px] cursor-pointer underline text-[#6239e8] transition-colors duration-200 hover:text-[#9278ea]"
                 style={{
@@ -96,7 +97,7 @@ export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
       </div>
 
       <ButtonGreenBorder
-        link="/reviews"
+        link={`/${lang}/reviews`}
         width={"100%"}
         text={t("button")}
         className="mt-[40px] sm:mt-[60px]"

@@ -211,7 +211,7 @@ export default async function MfoPageClient({
                   </div>
                 </div>
                 <ButtonGreenBorder
-                  link={`/mfo/${top.slug}`}
+                  link={`/${locale}/mfo/${top.slug}`}
                   className="mt-[20px]"
                   width="100%"
                   text={mfo("details")}
@@ -313,7 +313,7 @@ export default async function MfoPageClient({
                   </div>
                   <div className="w-full md:w-1/5 lg:w-1/7">
                     <ButtonGreenBorder
-                      link={`/mfo/${top.slug}`}
+                      link={`/${locale}/mfo/${top.slug}`}
                       className="mt-[20px]"
                       width="100%"
                       text={mfo("details")}
