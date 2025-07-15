@@ -139,7 +139,7 @@ export default async function MfoPageClient({
       </div>
 
       {isMobile ? (
-        <div className="px-[0px] md:px-[20px] mb-[20px] flex flex-wrap gap-[20px]">
+        <div className=" mx-[0px] md:mx-[20px] px-[0px] md:px-[20px] mb-[20px] flex flex-wrap gap-[20px]">
           {data.slice(0, visibleCount).map((top, i) => {
             const place = i + 1;
 
@@ -221,14 +221,14 @@ export default async function MfoPageClient({
           })}
         </div>
       ) : (
-        <div className="p-[10px] md:p-[30px] mb-[50px] bg-white rounded-lg mx-0md:mx-[20px] mt-[30px]">
+        <div className=" mx-[0px] md:mx-[20px] p-[10px] md:p-[30px] mb-[50px] bg-white rounded-lg mx-0md:mx-[20px] mt-[30px]">
           {data.slice(0, visibleCount).map((top, i) => {
             const place = i + 1;
 
-            let medalSrc = "/Frame 171.png"; // gold by default
-            if (place === 1) medalSrc = "/Frame 166 (1).png";
-            if (place === 2) medalSrc = "/Frame 167.png";
-            else if (place === 3) medalSrc = "/Frame 169.png";
+            let medalSrc = "/Frame 171.png";
+            if (place === 1) medalSrc = "/Frame%20166%20(1).svg";
+            if (place === 2) medalSrc = "/Frame 167.svg";
+            else if (place === 3) medalSrc = "/Frame 169.svg";
 
             return (
               <React.Fragment key={i}>
