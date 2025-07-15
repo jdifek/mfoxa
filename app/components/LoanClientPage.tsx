@@ -25,7 +25,7 @@ import { HomeData } from "../services/HomeService";
 
 type LoanClientPageProps = {
   visibleCount: number;
-  homeData: HomeData
+  homeData?: HomeData
   locale: string;
   data: GetCatalogListResponse;
   page?: CatalogPageFull;
@@ -110,7 +110,8 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
           onClick={handleShowMore}
         />
       </div>
-      <LastReviews recent_reviews={homeData.recent_reviews} />
+      {homeData && <LastReviews recent_reviews={homeData.recent_reviews} />}
+     
 
       <DetailsText html={getAllSettings?.settings.loan_page_text} />
       {faqs && faqs.length > 0 ? <OftenQuestions faqs={faqs} /> : <OftenQuestions/>}

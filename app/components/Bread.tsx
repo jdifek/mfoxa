@@ -12,13 +12,15 @@ type BreadProps = {
 
 const translations: Record<string, { ru: string; ua: string }> = {
   loan: { ru: "Займы", ua: "Позики" },
-  mfo: { ru: "Рейтинг МФО", ua: "Рейтинг МФО" },
   reviews: { ru: "Отзывы", ua: "Відгуки" },
   contacts: { ru: "Контакты", ua: "Контакти" },
   promotion: { ru: "Акции", ua: "Акції" },
   qap: { ru: "Вопросы", ua: "Питання" },
   catalog: { ru: "Каталог МФО", ua: "Каталог МФО" },
+  mfo: { ru: "Рейтинг МФО", ua: "Рейтинг МФО" }, // 👈 добавь это
+
 };
+
 
 const Bread = ({ lang }: BreadProps) => {
   const pathname = usePathname();
@@ -32,14 +34,23 @@ const Bread = ({ lang }: BreadProps) => {
   }, [pathname]);
   const breadcrumbs = useMemo(() => {
     let href = `/${lang}`;
-    return segments.map((segment) => {
+    return segments.map((segment, index) => {
       href += `/${segment}`;
-      const label = translations[segment]?.[lang] || decodeURIComponent(segment);
+      const isMfoRoot = segment === "mfo" && segments.length > index + 1;
+      const label =
+      segment === "mfo"
+        ? segments.length === 1
+          ? translations["mfo"]?.[lang] // ✅ "/mfo" => "Рейтинг МФО"
+          : translations["loan"]?.[lang] // ✅ "/mfo/xxx" => "Позики"
+        : translations[segment]?.[lang] || decodeURIComponent(segment);
+        
       return {
         label,
-        href: segment === "mfo" ? `/${lang}/loan` : href,
-      };    });
+        href: isMfoRoot ? `/${lang}/loan` : href,
+      };
+    });
   }, [segments, lang]);
+  
   
 
   return (
