@@ -142,7 +142,8 @@ export default async function MfoPageClient({
           {data.slice(0, visibleCount).map((top, i) => {
             const place = i + 1;
 
-            let medalSrc = "/Frame 163.png"; // золото по умолчанию
+            let medalSrc = "/Frame 170.png"; // золото по умолчанию
+            if (place === 1) medalSrc = "/Frame 163.png";
             if (place === 2) medalSrc = "/Silver.png";
             else if (place === 3) medalSrc = "/Bronze.png";
 
@@ -222,7 +223,8 @@ export default async function MfoPageClient({
           {data.slice(0, visibleCount).map((top, i) => {
             const place = i + 1;
 
-            let medalSrc = "/Frame 166 (1).png"; // gold by default
+            let medalSrc = "/Frame 171.png"; // gold by default
+            if (place === 1) medalSrc = "/Frame 166 (1).png";
             if (place === 2) medalSrc = "/Frame 167.png";
             else if (place === 3) medalSrc = "/Frame 169.png";
 
