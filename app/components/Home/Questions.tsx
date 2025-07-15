@@ -86,7 +86,7 @@ const Questions: React.FC = () => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-max"
+                    className=""
                     style={{
                       fontFamily: "var(--Montserrat)",
                       fontWeight: 500,

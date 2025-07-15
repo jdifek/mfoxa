@@ -114,7 +114,7 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
         ))}
       </div>
 
-        <div className="px-0 md:px-[20px]">
+        <div className="px-0">
           <ButtonGreenBorder
             text={t("showMore")}
             link="/mfo"
