@@ -88,7 +88,7 @@ export default function AnswerQap({
     <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center">
       <div
         style={{ scrollbarWidth: "none" }}
-        className="bg-white w-[335px] h-[480px] overflow-y-auto rounded-[8px] border border-[#ebebf9] p-[14px] relative scroll-hidden"
+        className="bg-white w-[335px]  h-[100vh] overflow-y-auto rounded-[8px] border border-[#ebebf9] p-[14px] relative scroll-hidden"
       >
         <div className="flex justify-between items-center mb-[14px]">
           <div className="flex gap-2 mb-[14px]">

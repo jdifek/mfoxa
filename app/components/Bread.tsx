@@ -35,8 +35,10 @@ const Bread = ({ lang }: BreadProps) => {
     return segments.map((segment) => {
       href += `/${segment}`;
       const label = translations[segment]?.[lang] || decodeURIComponent(segment);
-      return { label, href };
-    });
+      return {
+        label,
+        href: segment === "mfo" ? `/${lang}/loan` : href,
+      };    });
   }, [segments, lang]);
   
 

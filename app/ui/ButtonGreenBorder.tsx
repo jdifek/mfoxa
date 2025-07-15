@@ -30,7 +30,8 @@ const ButtonGreenBorder: React.FC<ButtonGreenBorderProps> = ({
   };
 
   return link ? (
-    <Link onClick={onClick} href={link} className={commonClasses} style={style}>
+    
+    <Link   scroll={true} onClick={onClick} href={link} className={commonClasses} style={style}>
       {text}
     </Link>
   ) : (

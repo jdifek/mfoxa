@@ -16,6 +16,7 @@ import { getPageDates } from "@/app/services/PageDatesService";
 import { MicrodataCalculator } from "@/app/structured-data/MicrodataCalculator";
 import { MicrodataLoanOrCredit } from "@/app/structured-data/MicrodataLoanOrCredit";
 import DetailsText from "@/app/components/DetailsText";
+import { ScrollReset } from "@/app/components/ScrollReset";
 
 export const dynamic = "force-dynamic";
 
@@ -121,6 +122,8 @@ export default async function CatalogPage({ params }: PageProps) {
 
   return (
     <>
+          <ScrollReset />
+
 <MicrodataCompany company={companySlug} data={data} />      <Bread lang={lang as "ua" | "ru"} />
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] md:p-[30px] sm:p-[20px] mb-[30px] md:mb-[50px] bg-white rounded-lg mt-[10px]">
