@@ -9,11 +9,12 @@ import settingsService from "@/app/services/settingsService";
 
 
 export async function generateMetadata({ params }: ContactPageProps): Promise<Metadata> {
-  const lang = params.lang === "ua" ? "uk" : "ru";
+  const { lang } = await params;
+
 
   let metaSettings;
   try {
-    const res = await settingsService.getSettingsByGroup("contacts_page", lang);
+    const res = await settingsService.getSettingsByGroup("contacts_page", lang === "ua" ? "uk" : "ru");
     metaSettings = res.settings;
   } catch (e) {
     console.error("Ошибка загрузки мета-настроек contacts_page:", e);
@@ -43,11 +44,11 @@ export async function generateMetadata({ params }: ContactPageProps): Promise<Me
 
 
 type ContactPageProps = {
-  params: { lang: string };
+  params: Promise<{ lang: string }>
 };
 
 const ContactPage = async ({ params }: ContactPageProps) => {
-  const { lang } = params;
+  const { lang } = await params;
   const t = await getTranslations({ locale: lang, namespace: "Contacts" });
   const dates = await getPageDates({ type: "contacts" });
 
