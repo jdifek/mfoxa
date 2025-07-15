@@ -163,7 +163,8 @@
   "rank": "Рейтинг: {rank}",
   "ratingsTitle": "Рейтинг компании {name}",
   "dateAdded": "Дата добавления: ",
-  "dateUpdated": "Обновлено: "
+  "dateUpdated": "Обновлено: ",
+  "details": "Подробнее"
 },
   "Questions": {
     "popular": "Популярные МФО",

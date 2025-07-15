@@ -77,7 +77,7 @@ const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({
               <Image
                 src={item.image}
                 alt={item.title}
-                width={50}
+                width={item.title === tc("bank_id") ? 80 : 50}
                 height={50}
                 className="mb-[10px] h-[50px]"
               />

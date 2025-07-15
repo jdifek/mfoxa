@@ -46,6 +46,7 @@ const CircleRating: React.FC<CircleRatingProps> = ({ value, color }) => (
     viewBox="0 0 50 50"
     role="img"
     aria-label={`Rating: ${value}`}
+    className="w-8 h-8 flex-shrink-0 min-w-[32px] min-h-[32px]"
   >
     <circle cx="25" cy="25" r="23" stroke="#eee" strokeWidth="2" fill="none" />
     <circle
@@ -164,19 +165,19 @@ export default async function MfoPageClient({
                     {top.name}
                   </p>
                 </header>
-                <div className="flex gap-[10px]">
+                <div className="flex items-center gap-[10px]">
                   <div className="relative w-[74px] h-[74px]">
                     <Image
                       src={medalSrc}
                       alt={`rating-place-${place}`}
                       width={74}
                       height={74}
-                      className="object-contain"
+                      className="object-contain w-[74px] h-[74px] flex-shrink-0 min-w-[74px] min-h-[74px]"
                     />
 
                     {/* Контент поверх PNG */}
-                    <div className="absolute inset-1 mt-3 flex flex-col items-center justify-center">
-                      <span className="text-[#82C600] text-[15px] font-bold leading-none">
+                    <div className="absolute inset-1 mt-2 md:mt-3 flex flex-col items-center justify-center">
+                      <span className="text-[#82C600] text-[20px] font-bold leading-none">
                         {formatRating(String(top?.rating_average))}
                       </span>
                       <span className="text-black text-[10px] font-bold">
@@ -201,25 +202,26 @@ export default async function MfoPageClient({
                           <p className="text-[11px] font-medium text-[#222]">
                             {rating.label ?? ratingsT(key)}
                           </p>
-                          <p className="text-[11px] text-[#9393a3] font-medium">
+                          {/* <p className="text-[11px] text-[#9393a3] font-medium">
                             {mfo("rank", { rank: rating.position })}
-                          </p>
+                          </p> */}
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
                 <ButtonGreenBorder
+                  link={`/mfo/${top.slug}`}
                   className="mt-[20px]"
                   width="100%"
-                  text={mfo("readMore")}
+                  text={mfo("details")}
                 />
               </div>
             );
           })}
         </div>
       ) : (
-        <div className="p-[30px] mb-[50px] bg-white rounded-lg mx-[20px] mt-[30px]">
+        <div className="p-[10px] md:p-[30px] mb-[50px] bg-white rounded-lg mx-0md:mx-[20px] mt-[30px]">
           {data.slice(0, visibleCount).map((top, i) => {
             const place = i + 1;
 
@@ -230,82 +232,92 @@ export default async function MfoPageClient({
 
             return (
               <React.Fragment key={i}>
-                <div className="flex gap-[20px] items-center">
-                  <div className="relative w-[210px] h-[74px]">
-                    <Image
-                      src={medalSrc}
-                      alt={`rating-place-${place}`}
-                      width={74}
-                      height={74}
-                      className="object-contain !w-[210px]"
-                    />
-
-                    {/* Контент поверх PNG */}
-                    <div className="absolute inset-1 mt-3  gap-2 flex items-center justify-center">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-[20px]">
+                  <div className="flex gap-[10px] sm:gap-[20px] items-center">
+                    <div className="relative w-[150px] md:w-[210px]">
                       <Image
-                        src={top.logo_url}
+                        src={medalSrc}
                         alt={`rating-place-${place}`}
                         width={74}
                         height={74}
-                        className="object-contain  !w-[80px]"
+                        className="w-[150px] md:w-[210px] h-[120px] lg:h-[80px]"
                       />
-                      <div className="flex flex-col">
-                        <span className="text-[#82C600] gap-1 text-[15px] font-bold leading-none">
-                          {formatRating(String(top?.rating_average))}
-                        </span>
-                        <span className="text-black text-[10px] font-bold">
-                          {place} место
-                        </span>
+
+                      {/* Контент поверх PNG */}
+                      <div className="absolute inset-1 mt-3 gap-2 flex items-center justify-center lg:flex-row flex-col">
+                        <Image
+                          src={top.logo_url}
+                          alt={`rating-place-${place}`}
+                          width={74}
+                          height={74}
+                          className="object-contain !w-[60px] md:!w-[80px]"
+                        />
+                        <div className="flex flex-col justify-center items-center">
+                          <span className="text-[#82C600] gap-1 text-[15px] font-bold leading-none">
+                            {formatRating(String(top?.rating_average))}
+                          </span>
+                          <span className="text-black text-[10px] font-bold">
+                            {place} место
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-[8px]">
+                      <p className="font-medium text-[15px] leading-[133%] text-[#222]">
+                        {mfo("ratingsTitle", { name: top.name })}
+                      </p>
+                      <div className="grid lg:grid-cols-4 grid-cols-2 gap-[10px] md:gap-[16px] text-black text-sm">
+                        {Object.entries(top.ratings).map(
+                          ([key, rating], index) => (
+                            <div
+                              key={index}
+                              className="flex items-center gap-[10px]"
+                              aria-label={`${ratingsT(key)}: ${rating.value}`}
+                            >
+                              <CircleRating
+                                value={rating.value}
+                                color={
+                                  ratings.find((r) => r.key === key)?.color ||
+                                  "#000"
+                                }
+                              />
+                              <div className="flex flex-col">
+                                <span
+                                  style={{
+                                    fontFamily: "var(--Montserrat)",
+                                    fontWeight: 500,
+                                    fontSize: "11px",
+                                    lineHeight: "145%",
+                                    color: "#222",
+                                  }}
+                                >
+                                  {rating.label ?? ratingsT(key)}
+                                </span>
+                                <p
+                                  style={{
+                                    fontFamily: "var(--Montserrat)",
+                                    fontWeight: 500,
+                                    fontSize: "11px",
+                                    lineHeight: "145%",
+                                    color: "#9393a3",
+                                  }}
+                                >
+                                  {mfo("rank", { rank: rating.position })}
+                                </p>
+                              </div>
+                            </div>
+                          )
+                        )}
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-[8px]">
-                    <p className="font-medium text-[15px] leading-[133%] text-[#222]">
-                      {mfo("ratingsTitle", { name: top.name })}
-                    </p>
-                    <div className="grid grid-cols-4 gap-[16px] text-black text-sm">
-                      {Object.entries(top.ratings).map(
-                        ([key, rating], index) => (
-                          <div
-                            key={index}
-                            className="flex items-center gap-[10px]"
-                            aria-label={`${ratingsT(key)}: ${rating.value}`}
-                          >
-                            <CircleRating
-                              value={rating.value}
-                              color={
-                                ratings.find((r) => r.key === key)?.color ||
-                                "#000"
-                              }
-                            />
-                            <div className="flex flex-col">
-                              <span
-                                style={{
-                                  fontFamily: "var(--Montserrat)",
-                                  fontWeight: 500,
-                                  fontSize: "11px",
-                                  lineHeight: "145%",
-                                  color: "#222",
-                                }}
-                              >
-                                {rating.label ?? ratingsT(key)}
-                              </span>
-                              <p
-                                style={{
-                                  fontFamily: "var(--Montserrat)",
-                                  fontWeight: 500,
-                                  fontSize: "11px",
-                                  lineHeight: "145%",
-                                  color: "#9393a3",
-                                }}
-                              >
-                                {mfo("rank", { rank: rating.position })}
-                              </p>
-                            </div>
-                          </div>
-                        )
-                      )}
-                    </div>
+                  <div className="w-full md:w-1/5 lg:w-1/7">
+                    <ButtonGreenBorder
+                      link={`/mfo/${top.slug}`}
+                      className="mt-[20px]"
+                      width="100%"
+                      text={mfo("details")}
+                    />
                   </div>
                 </div>
                 <hr className="mt-[14px] mb-[20px]" />

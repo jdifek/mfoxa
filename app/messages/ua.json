@@ -311,7 +311,8 @@
     "rank": "Рейтинг: {rank}",
     "ratingsTitle": "Рейтинг компанії {name}",
     "dateAdded": "Дата додавання: ",
-    "dateUpdated": "Оновлено: "
+    "dateUpdated": "Оновлено: ",
+    "details": "Детальніше"
   },
   "ReviewsPage": {
     "title": "Всі відгуки про МФО України",
