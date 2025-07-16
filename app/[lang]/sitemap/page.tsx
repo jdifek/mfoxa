@@ -3,6 +3,7 @@
 import sitemapService, { SitemapEntry } from "@/app/services/sitemapService";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import settingsService from "@/app/services/settingsService";
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -17,11 +18,21 @@ export default async function SitemapPage({ params }: Props) {
   const alphabet = Object.keys(sitemap.categories).sort((a, b) =>
     a.localeCompare(b, lang)
   );
+  let getAllSettings;
+
+  try {
+    getAllSettings = await settingsService.getSettingsByGroup(
+      "sitemap_page",
+      lang === "ua" ? "uk" : "ru"
+    );
+  } catch (error) {
+    console.error("Ошибка при получении настроек:", error);
+  }
 
   return (
     <main className="px-4 md:px-20 py-10">
       <h1 className="text-black text-3xl md:text-5xl font-bold mb-6 text-center">
-        {t("title")}
+        {getAllSettings?.settings.main_page_title || t("title")}
       </h1>
       {alphabet.map((letter) => (
         <div key={letter} className="mb-8">
@@ -36,11 +47,7 @@ export default async function SitemapPage({ params }: Props) {
                   <h3 className="font-bold text-lg">{item.title}</h3>
                 </Link>
                 <p className="text-sm text-gray-600">{item.description}</p>
-                {item.rating && (
-                  <p className="text-xs text-yellow-500 mt-1">
-                    ⭐ {item.rating} ({item.rating_count})
-                  </p>
-                )}
+              
               </li>
             ))}
           </ul>

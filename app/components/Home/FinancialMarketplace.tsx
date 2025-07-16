@@ -61,17 +61,18 @@ const FinancialMarketplace: React.FC<FinancialMarketplaceProps> = async ({
       <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
         {categories.map((item, index) => (
           <div
-            key={index}
-            className={`bg-white p-2.5 rounded-lg ${
-              index === 0 ? "md:col-span-2" : ""
-            }`}
-            style={{
-              fontFamily: "var(--Manrope)",
-              fontWeight: 700,
-              fontSize: "16px",
-              lineHeight: "100%",
-            }}
-          >
+          key={index}
+          className={`bg-white p-2.5 rounded-lg transition-colors duration-200 hover:bg-[#f8f6f6] cursor-pointer ${
+            index === 0 ? "md:col-span-2" : ""
+          }`}
+          style={{
+            fontFamily: "var(--Manrope)",
+            fontWeight: 700,
+            fontSize: "16px",
+            lineHeight: "100%",
+          }}
+        >
+        
             {/* Mobile layout */}
             <div className="flex flex-col items-center md:hidden">
               <Image

@@ -16,6 +16,7 @@ export type SettingsGroup =
   | 'mfo_page'
   | 'reviews_page'
   | 'about_page'
+  | 'sitemap_page'
   | 'contacts_page';
 
 export interface SiteSettingsResponse {
