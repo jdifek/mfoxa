@@ -160,7 +160,7 @@ export default async function CatalogPage({ params }: PageProps) {
                         <path
                           d="M7 1.99988L8.5716 6.83676H13.6574L9.5429 9.82612L11.1145 14.663L7 11.6736L2.8855 14.663L4.4571 9.82612L0.342604 6.83676H5.4284L7 1.99988Z"
                           fill={
-                            i < Math.round(Number(data.rating_average))
+                            i < Math.floor(Number(data.rating_average))
                               ? "#00BA9E"
                               : "#E6E6EB"
                           }
