@@ -21,7 +21,8 @@ import ClientOnly from "@/app/components/ClientOnly";
 import { LastReviews } from "@/app/components/Home/LastRewiews";
 import { getHomeData, LangType } from "@/app/services/HomeService";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 interface PageProps {
   params: Promise<{ lang: string; company: string }>;
