@@ -7,6 +7,7 @@ import authorsService from "@/app/services/authorsService";
 import { FaqsService } from "@/app/services/FaqService";
 import settingsService from "@/app/services/settingsService";
 import { getHomeData, LangType } from "@/app/services/HomeService";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -61,7 +62,7 @@ export async function generateMetadata({
 }
 
 type LoanPageProps = {
-  params: Promise<{ lang: string }>;
+  params: Promise<{ lang: string, credit: string}>;
   searchParams: Promise<{ count?: string }>;
 };
 
@@ -69,7 +70,7 @@ export default async function LoanPageWrapper({
   params,
   searchParams,
 }: LoanPageProps) {
-  const { lang } = await params;
+  const { lang, credit } = await params;
   const { count } = await searchParams;
   const visibleCount = count ? parseInt(count, 10) : 6;
 
@@ -94,7 +95,10 @@ export default async function LoanPageWrapper({
     console.error("Ошибка при получении настроек:", error);
   }
   const homeData = await getHomeData(lang as LangType );
-
+  const RESERVED_SLUGS = ["credit"]; // список slug'ов, которые НЕ должны вести на динамическую страницу
+  if (RESERVED_SLUGS.includes(credit)) {
+    notFound();
+  }
   return (
     <>
       <MicrodataLoanCatalog data={data} locale={lang as "ua" | "ru"} />
