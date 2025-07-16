@@ -35,6 +35,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
       setLoading(true);
       try {
         const data = await getMFOs({
+          type: 'credit',
           lang: locale === "ua" ? "uk" : "ru",
           ...(slug ? { catalog_page: slug } : {}),
           sort: sortParam as
