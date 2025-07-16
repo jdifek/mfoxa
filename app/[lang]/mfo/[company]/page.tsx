@@ -144,7 +144,7 @@ export default async function CatalogPage({ params }: PageProps) {
               </div>
               <div className="flex flex-col">
                 <h1 className="font-bold text-[16px] md:text-[30px] leading-[100%] mb-[10px] text-[#222]">
-                  {data.name || t(`company.${companySlug}.name`)}
+                  {data?.name || 'name'}
                 </h1>
                 <div className="flex gap-[5px] items-center">
                   <div className="flex">
@@ -190,7 +190,7 @@ export default async function CatalogPage({ params }: PageProps) {
 
           <h2 className="mb-[14px] md:mb-[30px] font-bold text-[20px] md:text-[36px] leading-[100%] text-[#222]">
             {t("about", {
-              company: data.name || t(`company.${companySlug}.name`),
+              company: data.name || 'name',
             })}
           </h2>
           <hr className="mb-[14px] md:mb-[30px]" />
@@ -424,7 +424,7 @@ export default async function CatalogPage({ params }: PageProps) {
               style={{ fontFamily: "var(--Jakarta)" }}
             >
               {t("repaymentMethodsСompany", {
-                company: data.name || t(`company.${companySlug}.name`),
+                company: data?.name || 'name',
               })}
             </h2>
             {data.payment_methods

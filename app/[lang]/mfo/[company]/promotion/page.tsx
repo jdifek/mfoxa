@@ -128,11 +128,12 @@ export default async function Promotion({ params }: Props) {
                 description: any;
                 valid_until: string | undefined;
                 redirect_url: any;
+                image_url: any;
               }) => (
                 <div key={promo.id} className="p-[30px] bg-white rounded-lg">
                   <div className="flex gap-[10px] sm:gap-[15px] md:gap-[20px]">
                     <Image
-                      src={promo?.mfo?.logo_url || "/default-logo.png"}
+                      src={promo?.image_url || "/default-logo.png"}
                       alt={promo?.mfo?.name || companyName}
                       width={100}
                       height={100}
