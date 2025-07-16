@@ -367,6 +367,8 @@ export default function CompanyRewiwsClient({
                     alt={t("reviewLogoAlt")}
                     width={34}
                     height={34}
+                    className="rounded-full"
+
                   />
                   <div className="flex flex-col">
                     <p
