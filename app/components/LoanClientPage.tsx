@@ -47,7 +47,6 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
   faqs,
   homeData,
   randomAuthor,
-  dataBySlug,
   getAllSettings,
   page
 }) => {
