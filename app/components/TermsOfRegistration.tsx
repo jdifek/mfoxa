@@ -78,7 +78,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                   slidesPerGroup={1}
                   className="pb-[100px] max-w-[1280px] mx-auto"
                   breakpoints={{
-                    320: { slidesPerView: 1.1, spaceBetween: 10 },
+                    320: { slidesPerView: 2, spaceBetween: 10 },   // ✅ теперь на телефоне 2 карточки
                     640: { slidesPerView: 2, spaceBetween: 20 },
                     1024: { slidesPerView: 3, spaceBetween: 20 },
                   }}

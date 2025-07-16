@@ -21,7 +21,6 @@ type ReviewsClientProps = {
  getAllSettings: SettingsGroupResponse | undefined
 };
 
-const MAX_REVIEWS = 24;
 const INCREMENT = 8;
 
 const ReviewsClient: React.FC<ReviewsClientProps> = async ({
@@ -102,17 +101,18 @@ const ReviewsClient: React.FC<ReviewsClientProps> = async ({
         reviewsCount={reviewsCount}
         selectedSortKey={selectedSortKey}
       />
-      {reviewsCount < MAX_REVIEWS && (
-        <div className="px-0 md:px-[20px]">
-          <a href={`?count=${reviewsCount + INCREMENT}`}>
-            <ButtonGreenBorder
-              text={t("showMore") || "Показать еще"}
-              className="mt-[20px] mx-auto"
-              width="256px"
-            />
-          </a>
-        </div>
-      )}
+     {(stats.total_reviews ?? 0) > reviewsCount && (
+  <div className="px-0 md:px-[20px]">
+    <a href={`?count=${reviewsCount + INCREMENT}`}>
+      <ButtonGreenBorder
+        text={t("showMore") || "Показать еще"}
+        className="mt-[20px] mx-auto"
+        width="256px"
+      />
+    </a>
+  </div>
+)}
+
       {faqs && faqs.length > 0 ? <OftenQuestions faqs={faqs} /> : <OftenQuestions/>}
       <InfoHelpful randomAuthor={randomAuthor} locale={locale} />
       <Questions />

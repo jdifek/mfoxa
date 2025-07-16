@@ -51,7 +51,7 @@ export default async function ReviewsPageWrapper({
 }) {
   const { lang } = await params;
   const { count, sort } = await searchParams;
-  const reviewsCount = count ? parseInt(count, 10) : 8;
+  const reviewsCount = count ? parseInt(count, 10) : 16;
 
   const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');  
   const stats = await getReviewStatistics();

@@ -96,7 +96,7 @@ export default async function Promotion({ params }: Props) {
     mfo_slug: companySlug,
   });
 
-  console.log(dates);
+  console.log(promocodes, 'promocodes');
 
   return (
     <>

@@ -380,7 +380,7 @@ export default async function CatalogPage({ params }: PageProps) {
       </div>
       <div className="px-0 md:px-[20px]">
         <div className="flex flex-col md:flex-row w-full gap-[20px]">
-          <div className="p-[10px] flex-col gap-[20px] md:p-[30px] sm:p-[20px] w-full md:w-1/2 mb-[0px] md:mb-[50px] bg-white rounded-lg">
+          <div className="p-[10px] flex-col gap-[20px] md:p-[30px] sm:p-[20px] w-full md:w-1/2  bg-white rounded-lg">
             <h2
               className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
               style={{ fontFamily: "var(--Jakarta)" }}
@@ -418,7 +418,7 @@ export default async function CatalogPage({ params }: PageProps) {
               {t("getMoney")}
             </Link>
           </div>
-          <div className="p-[10px] md:p-[30px] sm:p-[20px] mb-[0px] md:mb-[50px] w-full md:w-1/2 bg-white rounded-lg">
+          <div className="p-[10px] md:p-[30px] sm:p-[20px]  w-full md:w-1/2 bg-white rounded-lg">
             <h2
               className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
               style={{ fontFamily: "var(--Jakarta)" }}
@@ -490,9 +490,10 @@ export default async function CatalogPage({ params }: PageProps) {
           </div>
         </div>
       </div>
+      <OftenQuestions faqs={data.faqs} company={data.name} />
+      <div className="mb-[30px] md:mb-[50px]"></div>
       <LastReviews recent_reviews={homeData.recent_reviews} />
 
-      <OftenQuestions faqs={data.faqs} company={data.name} />
 
 
       <div className="h-[30px]"></div>

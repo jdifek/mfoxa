@@ -63,7 +63,7 @@ export default async function MfoPage({
 }) {
   const { lang } = await params;
   const { count } = await searchParams;
-  const visibleCount = count ? parseInt(count, 10) : 3;
+  const visibleCount = count ? parseInt(count, 10) : 10;
 
   // Получение переводов
   const mfoT = await getTranslations({ locale: lang, namespace: "MfoPage" });

@@ -132,7 +132,7 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
       <Bread lang={locale as "ru" | "ua"} />
 
       <div className="px-0 md:px-[20px]">
-        <h1 className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] text-[#222] mb-[30px]" style={{ fontFamily: "var(--Jakarta)" }}>
+        <h1 className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]" style={{ fontFamily: "var(--Jakarta)" }}>
           {typeof data?.data?.[0]?.mfo?.name === "string"
             ? t("pageTitle") + " " + data.data[0].mfo.name
             : t("pageTitle")}
@@ -142,8 +142,8 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
       <AboutButtons />
 
       <div className="px-0 md:px-[20px]">
-        <div className="md:mb-[20px] mb-[10px] mt-[30px] w-full rounded-lg bg-white p-[20px] shadow-md">
-          <h2 className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] text-[#222] mb-[30px]" style={{ fontFamily: "var(--Jakarta)" }}>{t("headerTitle")}</h2>
+        <div className="md:mb-[20px] mb-[10px] mt-[30px] w-full rounded-lg bg-white p-[10px] md:p-[20px] shadow-md">
+          <h2 className="text-[20px] sm:text-[28px] md:text-[36px] font-[700] text-[#222] mb-[10px] md:mb-[30px]" style={{ fontFamily: "var(--Jakarta)" }}>{t("headerTitle")}</h2>
           <p className="text-[11px] sm:text-[12px] md:text-[13px] font-[500] text-[#222]" style={{ fontFamily: "var(--Montserrat)" }}>{t("description")}</p>
         </div>
       </div>
