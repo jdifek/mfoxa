@@ -20,7 +20,11 @@
     "showMore": "Показати ще"
   },
   "Sitemap": {
-    "title": "Карта сайту"
+    "title": "Карта сайту",
+    "metadata": {
+      "addedDate": "Дата добавления страницы ",
+      "updatedDate": "Дата изменения страницы "
+    }
   },
   "RatingDisplay": {
     

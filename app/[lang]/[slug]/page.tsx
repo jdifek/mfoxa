@@ -119,6 +119,7 @@ export default async function LoanDescription({
   }
 
   console.log(res.page, 'resres');
+
   
   return (
     <>

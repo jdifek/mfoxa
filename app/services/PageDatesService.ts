@@ -15,6 +15,7 @@ export async function getPageDates(params: {
     | "catalog"
     | "loans"
     | "credits"
+    | "sitemap"
     | "mfo"
     | "promocodes"
     | "about"

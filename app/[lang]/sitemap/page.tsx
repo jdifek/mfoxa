@@ -4,6 +4,7 @@ import sitemapService, { SitemapEntry } from "@/app/services/sitemapService";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import settingsService from "@/app/services/settingsService";
+import { getPageDates } from "@/app/services/PageDatesService";
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -12,7 +13,9 @@ type Props = {
 export default async function SitemapPage({ params }: Props) {
   const { lang } = await params;
   
-  const t = await getTranslations({ locale: lang, namespace: "Sitemap" });
+  console.log(lang, 'lang');
+  
+  const t = await getTranslations({ locale: lang ==='ua' ? 'ru' : 'ua', namespace: "Sitemap" });
   const sitemap = await sitemapService.getSitemap(lang === 'ua' ? 'uk' : 'ru');
 
   const alphabet = Object.keys(sitemap.categories).sort((a, b) =>
@@ -28,6 +31,8 @@ export default async function SitemapPage({ params }: Props) {
   } catch (error) {
     console.error("Ошибка при получении настроек:", error);
   }
+  const dates = await getPageDates({ type: "sitemap" });
+
 
   return (
     <main className="px-4 md:px-20 py-10">
@@ -53,6 +58,31 @@ export default async function SitemapPage({ params }: Props) {
           </ul>
         </div>
       ))}
+
+<div className="px-0 md:px-[20px]">
+        <p className="font-medium text-[13px] mt-[50px] leading-[138%] text-[#67677a]">
+          {dates?.date_published
+            ? t("metadata.addedDate") +
+              " " +
+              new Date(dates.date_published).toLocaleDateString("ru-RU", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            : t("metadata.addedDate")}
+        </p>
+        <p className="font-medium text-[13px] leading-[138%] text-[#67677a]">
+          {dates?.date_modified
+            ? t("metadata.updatedDate") +
+              " " +
+              new Date(dates?.date_modified).toLocaleDateString("ru-RU", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            : t("metadata.updatedDate")}
+        </p>
+      </div>
     </main>
   );
 }
