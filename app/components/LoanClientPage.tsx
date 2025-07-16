@@ -11,6 +11,7 @@ import {
   GetCatalogListResponse,
   CatalogPageFull,
   FaqItem,
+  GetCatalogBySlugResponse,
 } from "../services/catalogService";
 import CreditsList from "./CreditsList";
 import { MfoDetails } from "../services/getMfoDetailsService";
@@ -34,6 +35,7 @@ type LoanClientPageProps = {
   faqs?: FaqItem[];
   randomAuthor: AuthorRandomResponse;
   getAllSettings: SettingsGroupResponse | undefined
+  dataBySlug?: GetCatalogBySlugResponse
 };
 
 const LoanClientPage: React.FC<LoanClientPageProps> = ({
@@ -45,7 +47,9 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
   faqs,
   homeData,
   randomAuthor,
-  getAllSettings
+  dataBySlug,
+  getAllSettings,
+  page
 }) => {
   const [currentVisibleCount, setVisibleCount] = useState(visibleCount);
   const t = useTranslations("Loans");
@@ -79,10 +83,14 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px] md:mb-[30px] bg-white rounded-lg mt-[10px] md:mt-[30px]">
           <h1 className="mb-[20px] font-bold text-[20px] md:text-[36px] leading-[100%] text-[#222]">
-            {getAllSettings?.settings.loan_page_title ? getAllSettings?.settings.loan_page_title : t("title") || "Займы"}
+          {page?.h1_title 
+  ? page.h1_title 
+  : getAllSettings?.settings.loan_page_title 
+    ? getAllSettings.settings.loan_page_title 
+    : t("title") || "Займы"}
           </h1>
           <p className="font-medium text-[13px] md:text-[15px] leading-[133%] text-[#222]">
-            {getAllSettings?.settings.loan_page_description ||
+            {page?.h1_title  || getAllSettings?.settings.loan_page_description ||
               t("description") ||
               "Подберите и оформите лучший для себя займ на срочную покупку или хозяйственные нужды. Получение микрозайма принять 1 000 до 100 000 рублей через сервис «Займи.ру»"}
           </p>
