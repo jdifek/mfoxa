@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import LoanClientPage from "@/app/components/LoanClientPage";
+import CreditClientPage from "@/app/components/CreditClientPage";
 import authorsService from "@/app/services/authorsService";
 import { catalogService } from "@/app/services/catalogService";
 import { getPageDates } from "@/app/services/PageDatesService";
@@ -123,7 +123,7 @@ export default async function LoanDescription({
   return (
     <>
       <MicrodataLoanCatalog data={data} locale={lang as 'ua' | 'ru'} slug={slug} />
-      <LoanClientPage
+      <CreditClientPage
         page={res.page}
         getAllSettings={getAllSettings}
         randomAuthor={randomAuthor}
