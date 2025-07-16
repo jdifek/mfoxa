@@ -11,7 +11,10 @@ type RatingDisplayProps = {
   ratings: RatingData[];
 };
 
-const CircleRating: React.FC<{ value: number; color: string }> = ({ value, color }) => (
+const CircleRating: React.FC<{ value: number; color: string }> = ({
+  value,
+  color,
+}) => (
   <svg width="32" height="32" viewBox="0 0 50 50">
     <circle cx="25" cy="25" r="23" stroke="#eee" strokeWidth="2" fill="none" />
     <circle
@@ -39,12 +42,14 @@ const CircleRating: React.FC<{ value: number; color: string }> = ({ value, color
   </svg>
 );
 
-function getColor(value: number): string {
-  if (value >= 4.5) return "#00BDA5";
-  if (value >= 4) return "#92C83E";
-  if (value >= 3) return "#CC9B00";
-  return "#EF3E4A";
-}
+const getColor = (value: number): string => {
+  if (value >= 0 && value < 1) return "#8B0000";
+  if (value >= 1 && value < 2) return "#FF0000";
+  if (value >= 2 && value < 3) return "#ffde33";
+  if (value >= 3 && value < 4) return "#FFA500";
+  if (value >= 4 && value <= 5) return "#00FF00";
+  return "#8B0000";
+};
 
 const RatingDisplay: React.FC<RatingDisplayProps> = ({ ratings }) => {
   return (

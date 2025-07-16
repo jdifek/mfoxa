@@ -15,12 +15,14 @@ import { AuthorRandomResponse } from "../services/authorsService";
 import { FaqsResponse } from "../services/FaqService";
 import { SettingsGroupResponse } from "../services/settingsService";
 
-function getColor(value: number): string {
-  if (value >= 4.5) return "#00BDA5";
-  if (value >= 4) return "#92C83E";
-  if (value >= 3) return "#CC9B00";
-  return "#EF3E4A";
-}
+const getColor = (value: number): string => {
+  if (value >= 0 && value < 1) return "#8B0000";
+  if (value >= 1 && value < 2) return "#FF0000";
+  if (value >= 2 && value < 3) return "#ffde33";
+  if (value >= 3 && value < 4) return "#FFA500";
+  if (value >= 4 && value <= 5) return "#00FF00";
+  return "#8B0000";
+};
 
 const tops = [
   { name: "Швидко гроші", img: "/2.svg" },
@@ -119,24 +121,6 @@ export default async function MfoPageClient({
     return rating.toFixed(1).replace(".", ",");
   };
 
-  const getRatingColor = (ratingStr: string | undefined) => {
-    if (!ratingStr) return "text-gray-500";
-    const rating = parseFloat(ratingStr);
-    if (isNaN(rating)) return "text-gray-500";
-
-    if (rating >= 0 && rating <= 1) return "text-red-900";
-    if (rating === 2) return "text-red-600";
-    if (rating === 3) return "text-orange-500";
-    if (rating === 4) return "text-green-600";
-    if (rating === 5) return "text-green-500";
-
-    if (rating > 1 && rating < 2) return "text-red-700";
-    if (rating > 2 && rating < 3) return "text-red-500";
-    if (rating > 3 && rating < 4) return "text-orange-400";
-    if (rating > 4 && rating < 5) return "text-green-500";
-
-    return "text-green-500";
-  };
   return (
     <>
       <MfoListStructuredData companies={companies} />
@@ -197,9 +181,8 @@ export default async function MfoPageClient({
                     {/* Контент поверх PNG */}
                     <div className="absolute inset-1 mt-2 md:mt-3 flex flex-col items-center justify-center">
                       <span
-                        className={`${getRatingColor(
-                          String(top?.rating_average)
-                        )} text-[20px] font-bold leading-none`}
+                        style={{ color: getColor(top?.rating_average) }}
+                        className="text-[20px] font-bold leading-none"
                       >
                         {formatRating(String(top?.rating_average))}
                       </span>
@@ -275,9 +258,8 @@ export default async function MfoPageClient({
                         />
                         <div className="flex flex-col justify-center items-center">
                           <span
-                            className={`${getRatingColor(
-                              String(top?.rating_average)
-                            )} gap-1 text-[15px] font-bold leading-none`}
+                            style={{ color: getColor(top?.rating_average) }}
+                            className="gap-1 text-[15px] font-bold leading-none"
                           >
                             {formatRating(String(top?.rating_average))}
                           </span>
