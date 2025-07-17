@@ -13,7 +13,7 @@ const nextConfig = {
 		return config;
 	},
 	images: {
-		domains: ["via.placeholder.com", "mfo.qissseee.tech"],
+		domains: ["via.placeholder.com", "mfo.qissseee.tech", 'mfo.webalchemy.fun'],
 	},
 	reactStrictMode: false,
 };
