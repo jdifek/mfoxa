@@ -86,8 +86,6 @@ export default async function Promotion({ params }: Props) {
     lang === "ua" ? "uk" : "ru"
   );
 
-  console.log(data);
-
   const companyName = tCompany(`${companySlug}.name`);
   const promocodes = data?.promocodes ?? [];
 

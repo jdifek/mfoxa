@@ -52,8 +52,6 @@ const Login: NextPage<Props> = async ({ params }) => {
     lang === "ua" ? "uk" : "ru"
   );
 
-  console.log(data, "data");
-
   return (
     <>
     <MicrodataLogin

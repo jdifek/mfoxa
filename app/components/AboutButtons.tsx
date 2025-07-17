@@ -29,6 +29,8 @@ export const AboutButtonsComponent = () => {
 	}, [pathname]);
 
 	const handleButtonClick = (key: string) => {
+		if (key === activeKey) return;
+
 		const basePath = pathname.replace(
 			/\/(reviews|promotion|qap|login)$/,
 			""
@@ -36,7 +38,7 @@ export const AboutButtonsComponent = () => {
 		const subPath = routesMap[key] ?? "";
 		const targetPath = `${basePath}${subPath}`;
 
-    setLoadingKey(key);
+		setLoadingKey(key);
 		router.push(targetPath);
 	};
 

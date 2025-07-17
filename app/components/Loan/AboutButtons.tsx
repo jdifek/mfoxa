@@ -15,10 +15,12 @@ export const AboutButtons = ({ data }: AboutButtonsProps) => {
 	const [loadingSlug, setLoadingSlug] = useState<string | null>(null);
 
 	const handleButtonClick = (slug?: string) => {
-		if (slug) {
-			setLoadingSlug(slug);
-			router.push(`/${slug}`);
-		}
+		if (!slug) return;
+
+		if (pathname.endsWith(`/${slug}`)) return;
+
+		setLoadingSlug(slug);
+		router.push(`/${slug}`);
 	};
 
 	const textColorMap: Record<string, string> = {
