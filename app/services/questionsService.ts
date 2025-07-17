@@ -44,7 +44,7 @@ export type QuestionsQueryParams = {
 };
 
 // export async function getQuestions(params: QuestionsQueryParams = {}): Promise<QuestionsResponse> {
-//   const response = await axios.get<QuestionsResponse>(`https://mfo.qissseee.tech/api/v1/questions`, {
+//   const response = await axios.get<QuestionsResponse>(`https://mfo.webalchemy.fun/api/v1/questions`, {
 //     params,
 //   });
 //   return response.data;
@@ -53,7 +53,7 @@ export type QuestionsQueryParams = {
 export async function getQuestions(
 	params: QuestionsQueryParams = {}
 ): Promise<QuestionsResponse> {
-	const url = new URL("https://mfo.qissseee.tech/api/v1/questions");
+	const url = new URL("https://mfo.webalchemy.fun/api/v1/questions");
 	Object.entries(params).forEach(([key, value]) => {
 		if (value !== undefined) {
 			url.searchParams.append(key, String(value));
@@ -77,7 +77,7 @@ export async function getQuestions(
 export const helpfulQuestions = async (id: number) => {
 	try {
 		const response = await axios.post(
-			`https://mfo.qissseee.tech/api/v1/questions/${id}/helpful`
+			`https://mfo.webalchemy.fun/api/v1/questions/${id}/helpful`
 		);
 		return response.data;
 	} catch (error) {
@@ -89,7 +89,7 @@ export const helpfulQuestions = async (id: number) => {
 export const notHelpfulQuestions = async (id: number) => {
 	try {
 		const response = await axios.post(
-			`https://mfo.qissseee.tech/api/v1/questions/${id}/not-helpful`
+			`https://mfo.webalchemy.fun/api/v1/questions/${id}/not-helpful`
 		);
 		return response.data;
 	} catch (error) {
@@ -115,7 +115,7 @@ export const createQuestion = async (
 ): Promise<CreateQuestionResponse> => {
 	try {
 		const response = await axios.post<CreateQuestionResponse>(
-			"https://mfo.qissseee.tech/api/v1/questions",
+			"https://mfo.webalchemy.fun/api/v1/questions",
 			data
 		);
 		return response.data;

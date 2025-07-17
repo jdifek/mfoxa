@@ -19,7 +19,7 @@ export class ContactsService {
   static async sendContactForm(data: ContactFormParams): Promise<ContactFormResponse> {
     try {
       const response = await axios.post<ContactFormResponse>(
-        "https://mfo.qissseee.tech/api/v1/contacts",
+        "https://mfo.webalchemy.fun/api/v1/contacts",
         data
       );
       return response.data;

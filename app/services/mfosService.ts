@@ -98,7 +98,7 @@ export type MfoParams = {
 export const getMFOs = async (params: MfoParams = {}): Promise<MfoDetails[]> => {
   try {
     const response = await axios.get<{ data: MfoDetails[] }>(
-      "https://mfo.qissseee.tech/api/v1/mfos",
+      "https://mfo.webalchemy.fun/api/v1/mfos",
       { params }
     );
     return response.data.data;

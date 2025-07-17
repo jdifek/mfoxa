@@ -71,7 +71,7 @@ export const getReviewStatistics =
 	async (): Promise<ReviewStatisticsResponse> => {
 		try {
 			const response = await axios.get<ReviewStatisticsResponse>(
-				"https://mfo.qissseee.tech/api/v1/reviews/statistics"
+				"https://mfo.webalchemy.fun/api/v1/reviews/statistics"
 			);
 			return response.data;
 		} catch (error) {
@@ -85,7 +85,7 @@ export const getReviewStatistics =
 // ): Promise<ReviewsApiResponse> => {
 //   try {
 //     const response = await axios.get<ReviewsApiResponse>(
-//       "https://mfo.qissseee.tech/api/v1/reviews",
+//       "https://mfo.webalchemy.fun/api/v1/reviews",
 //       { params }
 //     );
 //     return response.data;
@@ -98,7 +98,7 @@ export const getReviewStatistics =
 export const getReviews = async (
 	params: GetReviewsParams = {}
 ): Promise<ReviewsApiResponse> => {
-	const url = new URL("https://mfo.qissseee.tech/api/v1/reviews");
+	const url = new URL("https://mfo.webalchemy.fun/api/v1/reviews");
 	Object.entries(params).forEach(([key, value]) => {
 		if (value !== undefined) {
 			url.searchParams.append(key, String(value));
@@ -125,7 +125,7 @@ export const createReview = async (
 ): Promise<CreateReviewResponse> => {
 	try {
 		const response = await axios.post<CreateReviewResponse>(
-			"https://mfo.qissseee.tech/api/v1/reviews",
+			"https://mfo.webalchemy.fun/api/v1/reviews",
 			data
 		);
 		return response.data;
@@ -164,7 +164,7 @@ export const createReviewReply = async (
 ): Promise<CreateReviewReplyResponse> => {
 	try {
 		const response = await axios.post<CreateReviewReplyResponse>(
-			"https://mfo.qissseee.tech/api/v1/reviews/reply",
+			"https://mfo.webalchemy.fun/api/v1/reviews/reply",
 			data
 		);
 		return response.data;
@@ -186,7 +186,7 @@ export const markReviewHelpful = async (
 ): Promise<ReviewVoteResponse> => {
 	try {
 		const response = await axios.post<ReviewVoteResponse>(
-			`https://mfo.qissseee.tech/api/v1/reviews/${id}/helpful`
+			`https://mfo.webalchemy.fun/api/v1/reviews/${id}/helpful`
 		);
 		return response.data;
 	} catch (error) {
@@ -201,7 +201,7 @@ export const markReviewNotHelpful = async (
 ): Promise<ReviewVoteResponse> => {
 	try {
 		const response = await axios.post<ReviewVoteResponse>(
-			`https://mfo.qissseee.tech/api/v1/reviews/${id}/not-helpful`
+			`https://mfo.webalchemy.fun/api/v1/reviews/${id}/not-helpful`
 		);
 		return response.data;
 	} catch (error) {

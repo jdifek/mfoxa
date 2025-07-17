@@ -2,7 +2,7 @@
 import axios from "axios";
 import { MfoDetails } from "./getMfoDetailsService";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://mfo.qissseee.tech";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://mfo.webalchemy.fun";
 
 // Тип для элемента каталога
 export interface CatalogPage {

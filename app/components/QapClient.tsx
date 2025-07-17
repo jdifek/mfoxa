@@ -152,7 +152,7 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
         <div className="flex gap-[10px] flex-row sm:justify-between items-center">
           <Dropdown
             mfoId={data?.data?.[0]?.mfo?.id ?? 0}
-            endpoint="https://mfo.qissseee.tech/api/v1/questions"
+            endpoint="https://mfo.webalchemy.fun/api/v1/questions"
             options={options}
           />
 

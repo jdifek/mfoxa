@@ -28,7 +28,7 @@ export class FaqsService {
   static async getFaqs(params: GetFaqsParams): Promise<FaqsResponse> {
     try {
       const response = await axios.get<FaqsResponse>(
-        "https://mfo.qissseee.tech/api/v1/faqs",
+        "https://mfo.webalchemy.fun/api/v1/faqs",
         { params }
       );
       return response.data;

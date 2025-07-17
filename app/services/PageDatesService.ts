@@ -1,5 +1,5 @@
 // import axios from "axios";
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://mfo.qissseee.tech";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://mfo.webalchemy.fun";
 
 export interface PageDatesResponse {
   date_published: string; // ISO 8601

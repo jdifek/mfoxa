@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Базовый URL из .env
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://mfo.qissseee.tech';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://mfo.webalchemy.fun';
 
 // Типы
 export type Language = 'uk' | 'ru' | 'en';

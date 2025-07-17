@@ -102,7 +102,7 @@ export type LangType = "ru" | "ua";
 
 //   try {
 //     const response = await axios.get<HomeData>(
-//       `https://mfo.qissseee.tech/api/v1/home?lang=${apiLang}`
+//       `https://mfo.webalchemy.fun/api/v1/home?lang=${apiLang}`
 //     );
 
 //     return response.data;
@@ -116,7 +116,7 @@ export const getHomeData = async (lang: LangType): Promise<HomeData> => {
 	const apiLang = lang === "ua" ? "uk" : "ru";
 
 	const res = await fetch(
-		`https://mfo.qissseee.tech/api/v1/home?lang=${apiLang}`,
+		`https://mfo.webalchemy.fun/api/v1/home?lang=${apiLang}`,
 		{
 			next: {
 				revalidate: 60,

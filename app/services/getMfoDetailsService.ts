@@ -96,7 +96,7 @@ export interface MfoDetails {
 // 	lang: "uk" | "ru" | "en" = "uk"
 // ): Promise<MfoDetails> => {
 // 	const response = await axios.get<MfoDetails>(
-// 		`https://mfo.qissseee.tech/api/v1/mfos/${slug}`,
+// 		`https://mfo.webalchemy.fun/api/v1/mfos/${slug}`,
 // 		{
 // 			params: {
 // 				lang,
@@ -111,7 +111,7 @@ export const getMfoDetails = async (
 	lang: "uk" | "ru" | "en" = "uk"
 ): Promise<MfoDetails> => {
 	const res = await fetch(
-		`https://mfo.qissseee.tech/api/v1/mfos/${slug}?lang=${lang}`,
+		`https://mfo.webalchemy.fun/api/v1/mfos/${slug}?lang=${lang}`,
 		{
 			next: {
 				revalidate: 60,

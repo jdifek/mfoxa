@@ -266,7 +266,7 @@ export default function CompanyRewiwsClient({
       <div className="px-0 md:px-[20px]">
         <div className="flex gap-[10px] justify-between items-center">
           <Dropdown
-            endpoint="https://mfo.qissseee.tech/api/v1/reviews"
+            endpoint="https://mfo.webalchemy.fun/api/v1/reviews"
             mfoId={data?.mfo.id}
             options={options}
           />
