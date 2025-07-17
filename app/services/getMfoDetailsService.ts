@@ -116,7 +116,6 @@ export const getMfoDetails = async (
 			next: {
 				revalidate: 60,
 			},
-			cache: "force-cache",
 		}
 	);
 
