@@ -103,7 +103,10 @@ const CreditsList: React.FC<CreditsListProps> = ({
                 </header>
 
                 <main className="flex flex-col gap-[10px]">
-                  {loan.catalog_offers?.map((offer, i) => (
+                  {loan.catalog_offers?.filter(
+    (offer) =>
+      offer.client_type === "new" || offer.client_type === "repeat"
+  ).map((offer, i) => (
                     <div
                       key={i}
                       className={`border ${
