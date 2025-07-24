@@ -9,6 +9,7 @@ type ReviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
   mfoId: number;
+  mfoName: string;
 };
 
 const Star = ({ active }: { active: boolean }) => (
@@ -56,10 +57,10 @@ export default function ReviewModal({
   isOpen,
   onClose,
   mfoId,
+  mfoName,
 }: ReviewModalProps) {
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [agreePolicy, setAgreePolicy] = useState(false);
-  const [notifyReply, setNotifyReply] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [text, setText] = useState("");
@@ -107,7 +108,7 @@ export default function ReviewModal({
       });
       toast.success("Отзыв отправлен и отправлен на модерацию!");
       onClose();
-    }  catch (error: any) {
+    } catch (error: any) {
       const errorMessage = error?.message || "Ошибка при отправке отзыва.";
       toast.error(errorMessage);
     } finally {
@@ -121,13 +122,14 @@ export default function ReviewModal({
     <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center">
       <div
         style={{ scrollbarWidth: "none" }}
-        className="bg-white w-[335px] max-h-[calc(100vh-40px)] overflow-y-auto rounded-[8px] border border-[#ebebf9] p-[14px] relative"       >
+        className="bg-white text-black w-[335px] max-h-[calc(100vh-40px)] overflow-y-auto rounded-[8px] border border-[#ebebf9] p-[14px] relative"
+      >
         <div className="flex justify-between items-center mb-[14px]">
           <h2
             className="font-bold text-[20px] text-[#222]"
             style={{ fontFamily: "var(--second-family)" }}
           >
-            Написать отзыв Швидко Гроші
+            Написать отзыв {mfoName}
           </h2>
           <button
             onClick={onClose}
@@ -148,7 +150,7 @@ export default function ReviewModal({
           className="font-medium text-[13px] text-[#222] mb-[14px]"
           style={{ fontFamily: "var(--font-family)" }}
         >
-          Оцените Швидко Гроші
+          Оцените {mfoName}
         </p>
 
         {ratingFields.map((title) => (
@@ -181,18 +183,23 @@ export default function ReviewModal({
             >
               {label}
             </p>
-            <input
-              value={label === "Имя" ? name : label === "E-mail" ? email : text}
-              onChange={(e) => {
-                const val = e.target.value;
-                if (label === "Имя") setName(val);
-                else if (label === "E-mail") setEmail(val);
-                else setText(val);
-              }}
-              className={`border border-[#e0e0e0] rounded-[6px] px-3 py-2 w-[307px] ${
-                label === "Отзыв" ? "h-[119px]" : "h-[40px]"
-              } bg-white`}
-            />
+            {label === "Отзыв" ? (
+              <textarea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className="border border-[#e0e0e0] rounded-[6px] px-3 py-2 w-[307px] h-[119px] bg-white resize-none"
+              />
+            ) : (
+              <input
+                value={label === "Имя" ? name : email}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (label === "Имя") setName(val);
+                  else setEmail(val);
+                }}
+                className="border border-[#e0e0e0] rounded-[6px] px-3 py-2 w-[307px] h-[40px] bg-white"
+              />
+            )}
           </div>
         ))}
 
@@ -218,22 +225,6 @@ export default function ReviewModal({
           >
             Я принимаю условия обработки персональных данных, указанных
             в Политике конфиденциальности
-          </p>
-        </div>
-
-        <div
-          className="flex items-start gap-[8px] mb-[14px] cursor-pointer"
-          onClick={() => setNotifyReply(!notifyReply)}
-        >
-          <Checkbox
-            checked={notifyReply}
-            onChange={() => setNotifyReply(!notifyReply)}
-          />
-          <p
-            className="flex-1 text-[12px] text-[#222] font-medium leading-[142%]"
-            style={{ fontFamily: "var(--font-family)" }}
-          >
-            Хочу получать уведомления об ответах
           </p>
         </div>
       </div>

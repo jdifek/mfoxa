@@ -35,7 +35,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
         return "bg-gray-200 text-gray-700 px-[10px] py-[3px] rounded-[8px] text-[11px]";
     }
   };
-  
+
   const getClientTypeLabel = (type: string) => {
     switch (type) {
       case "new":
@@ -48,11 +48,10 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
         return "Неизвестно";
     }
   };
-  
 
   return (
     <>
-{offers.length > 0 && (
+      {offers.length > 0 && (
         <div className="px-0 md:px-[20px]">
           <div className="w-full mt-[20px] md:mt-[50px] mb-[92px] px-[0px] md:relative">
             <h2 className="text-[20px] sm:text-[28px] md:text-[36px] font-bold leading-none text-[#222] mb-5 sm:mb-6 md:mb-7">
@@ -78,7 +77,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                   slidesPerGroup={1}
                   className="pb-[100px] max-w-[1280px] mx-auto"
                   breakpoints={{
-                    320: { slidesPerView: 2, spaceBetween: 10 },   // ✅ теперь на телефоне 2 карточки
+                    320: { slidesPerView: 2, spaceBetween: 10 }, // ✅ теперь на телефоне 2 карточки
                     640: { slidesPerView: 2, spaceBetween: 20 },
                     1024: { slidesPerView: 3, spaceBetween: 20 },
                   }}
@@ -100,13 +99,15 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
 
                         <hr className="mb-[16px]" />
                         <div className="flex justify-between">
-  <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
-    {t("tariff")}
-  </p>
-  <div className={getClientTypeClass(offer.client_type)}>
-    {getClientTypeLabel(offer.client_type)}
-  </div>
-</div>
+                          <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
+                            {t("tariff")}
+                          </p>
+                          <div
+                            className={getClientTypeClass(offer.client_type)}
+                          >
+                            {getClientTypeLabel(offer.client_type)}
+                          </div>
+                        </div>
 
                         <hr className="mb-[16px]" />
 
@@ -141,7 +142,6 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                           href={
                             mfo?.apply_url || mfo?.get_money_button_url || "#"
                           }
-                          target="_blank"
                           rel="noopener noreferrer"
                           className="bg-[#00ba9e] hover:bg-[#009d85] block mx-auto h-[40px] w-full text-white font-bold text-[13px] rounded-[8px] px-[17px] md:px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer"
                         >

@@ -24,7 +24,7 @@ import { HomeData } from "../services/HomeService";
 
 type CreditClientPageProps = {
   visibleCount: number;
-  homeData?: HomeData
+  homeData?: HomeData;
   locale: string;
   data: GetCatalogListResponse;
   page?: CatalogPageFull;
@@ -33,8 +33,8 @@ type CreditClientPageProps = {
   slug?: string;
   faqs?: FaqItem[];
   randomAuthor: AuthorRandomResponse;
-  getAllSettings: SettingsGroupResponse | undefined
-  dataBySlug?: GetCatalogBySlugResponse
+  getAllSettings: SettingsGroupResponse | undefined;
+  dataBySlug?: GetCatalogBySlugResponse;
 };
 
 const CreditClientPage: React.FC<CreditClientPageProps> = ({
@@ -46,7 +46,7 @@ const CreditClientPage: React.FC<CreditClientPageProps> = ({
   homeData,
   randomAuthor,
   getAllSettings,
-  page
+  page,
 }) => {
   const [currentVisibleCount, setVisibleCount] = useState(visibleCount);
   const t = useTranslations("Loans");
@@ -73,24 +73,30 @@ const CreditClientPage: React.FC<CreditClientPageProps> = ({
     setVisibleCount((prev) => prev + 3);
   };
 
-
   return (
     <>
       <Bread lang={locale as "ru" | "ua"} />
       <div className="px-0 md:px-[20px]">
         <div className="p-[10px] sm:p-[20px] md:p-[30px] mb-[20px] md:mb-[30px] bg-white rounded-lg mt-[10px] md:mt-[30px]">
           <h1 className="mb-[20px] font-bold text-[20px] md:text-[36px] leading-[100%] text-[#222]">
-          {page?.h1_title 
-  ? page.h1_title 
-  : getAllSettings?.settings.loan_page_title 
-    ? getAllSettings.settings.loan_page_title 
-    : t("title") || "Займы"}
+            {page?.h1_title
+              ? page.h1_title
+              : getAllSettings?.settings.loan_page_title
+              ? getAllSettings.settings.loan_page_title
+              : t("title") || "Займы"}
           </h1>
-          <p className="font-medium text-[13px] md:text-[15px] leading-[133%] text-[#222]">
-            {page?.h1_title  || getAllSettings?.settings.loan_page_description ||
-              t("description") ||
-              "Подберите и оформите лучший для себя займ на срочную покупку или хозяйственные нужды. Получение микрозайма принять 1 000 до 100 000 рублей через сервис «Займи.ру»"}
-          </p>
+          {page?.description_under_title ? (
+            <div
+              className="font-medium text-[13px] md:text-[15px] leading-[133%] text-[#222]"
+              dangerouslySetInnerHTML={{ __html: page.description_under_title }}
+            />
+          ) : (
+            <p className="font-medium text-[13px] md:text-[15px] leading-[133%] text-[#222]">
+              {getAllSettings?.settings.loan_page_description ||
+                t("description") ||
+                "Подберите и оформите лучший для себя займ на срочную покупку или хозяйственные нужды. Получение микрозайма принять 1 000 до 100 000 рублей через сервис «Займи.ру»"}
+            </p>
+          )}
         </div>
       </div>
 
@@ -105,13 +111,14 @@ const CreditClientPage: React.FC<CreditClientPageProps> = ({
         handleShowMore={handleShowMore}
       />
 
-
-     
       {homeData && <LastReviews recent_reviews={homeData.recent_reviews} />}
-     
 
       <DetailsText html={getAllSettings?.settings.loan_page_text} />
-      {faqs && faqs.length > 0 ? <OftenQuestions faqs={faqs} /> : <OftenQuestions/>}
+      {faqs && faqs.length > 0 ? (
+        <OftenQuestions faqs={faqs} />
+      ) : (
+        <OftenQuestions />
+      )}
       <InfoHelpfulClient randomAuthor={randomAuthor} />
 
       <Questions />

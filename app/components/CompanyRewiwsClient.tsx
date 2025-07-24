@@ -278,6 +278,7 @@ export default function CompanyRewiwsClient({
           </div>
           {data?.mfo?.id && (
             <ReviewModal
+              mfoName={data?.mfo?.name}
               mfoId={data?.mfo?.id}
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
@@ -368,7 +369,6 @@ export default function CompanyRewiwsClient({
                     width={34}
                     height={34}
                     className="rounded-full"
-
                   />
                   <div className="flex flex-col">
                     <p

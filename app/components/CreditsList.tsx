@@ -27,6 +27,12 @@ const CreditsList: React.FC<CreditsListProps> = ({
   const [credits, setCredits] = useState<MfoDetails[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const formatAmount = (amount: string | number | null | undefined): string => {
+    if (!amount) return "-";
+    const amountStr = amount.toString();
+    return amountStr.replace(/\.00$/, "");
+  };
+
   // Получаем параметр сортировки из URL или используем значение по умолчанию
   const sortParam = searchParams.get("sort") || "rating";
 
@@ -103,76 +109,80 @@ const CreditsList: React.FC<CreditsListProps> = ({
                 </header>
 
                 <main className="flex flex-col gap-[10px]">
-                  {loan.catalog_offers?.filter(
-    (offer) =>
-      offer.client_type === "new" || offer.client_type === "repeat"
-  ).map((offer, i) => (
-                    <div
-                      key={i}
-                      className={`border ${
-                        offer.client_type === "new"
-                          ? "border-[#00ba9e]"
-                          : "border-[#724DEA]"
-                      } rounded-[8px] p-[7px] md:p-[12px]`}
-                    >
-                      <p
-                        className={`text-[12px] font-bold ${
+                  {loan.catalog_offers
+                    ?.filter(
+                      (offer) =>
+                        offer.client_type === "new" ||
+                        offer.client_type === "repeat"
+                    )
+                    .map((offer, i) => (
+                      <div
+                        key={i}
+                        className={`border ${
                           offer.client_type === "new"
-                            ? "text-[#00ba9e]"
-                            : "text-[#724DEA]"
-                        }`}
+                            ? "border-[#00ba9e]"
+                            : "border-[#724DEA]"
+                        } rounded-[8px] p-[7px] md:p-[12px]`}
                       >
-                        {offer.client_type === "new"
-                          ? t("newLoan")
-                          : t("repeatLoan") || "-"}
-                      </p>
-                      <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
-                        <div className="flex flex-col text-[12px]">
-                          <p className="text-[#67677a] font-medium">
-                            {t("amount") || "Сумма"}
-                          </p>
-                          <p className="text-[#222] font-bold">
-                            {offer.amount_from
-                              ? `від ${offer.amount_from}`
-                              : "-"}{" "}
-                            до {offer.amount_to || "-"}
-                          </p>
-                        </div>
-                        <div className="flex flex-col text-[12px]">
-                          <p className="text-[#67677a] font-medium">
-                            {t("term") || "Срок"}
-                          </p>
-                          <p className="text-[#222] font-bold">
-                            {offer.term_from && offer.term_to
-                              ? `${offer.term_from} - ${offer.term_to} днів`
-                              : "-"}
-                          </p>
-                        </div>
-                        <div className="flex flex-col text-[12px]">
-                          <p className="text-[#67677a] font-medium">
-                            {t("rate") || "Ставка"}
-                          </p>
-                          <p className="text-[#222] font-bold">
-                            {offer.rate ? `${offer.rate}%` : "-"}
-                          </p>
+                        <p
+                          className={`text-[12px] font-bold ${
+                            offer.client_type === "new"
+                              ? "text-[#00ba9e]"
+                              : "text-[#724DEA]"
+                          }`}
+                        >
+                          {offer.client_type === "new"
+                            ? t("newLoan")
+                            : t("repeatLoan") || "-"}
+                        </p>
+                        <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center items-center gap-[10px] text-center">
+                          <div className="flex flex-col text-[12px]">
+                            <p className="text-[#67677a] font-medium">
+                              {t("amount") || "Сумма"}
+                            </p>
+                            <p className="text-[#222] font-bold">
+                              {offer.amount_from
+                                ? `від ${formatAmount(offer.amount_from)}`
+                                : "-"}{" "}
+                              до {formatAmount(offer.amount_to)}
+                            </p>
+                          </div>
+                          <div className="flex flex-col text-[12px]">
+                            <p className="text-[#67677a] font-medium">
+                              {t("term") || "Срок"}
+                            </p>
+                            <p className="text-[#222] font-bold">
+                              {offer.term_from && offer.term_to
+                                ? `${offer.term_from} - ${offer.term_to} днів`
+                                : "-"}
+                            </p>
+                          </div>
+                          <div className="flex flex-col text-[12px]">
+                            <p className="text-[#67677a] font-medium">
+                              {t("rate") || "Ставка"}
+                            </p>
+                            <p className="text-[#222] font-bold">
+                              {offer.rate ? `${offer.rate}%` : "-"}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
 
                   {loan.credit_offers?.repeat_client && (
                     <div className="border border-[#724DEA] rounded-[8px] p-[7px] md:p-[12px]">
                       <p className="text-[#724DEA] text-[12px] font-bold">
                         {t("repeatLoan") || "Повторный кредит"}
                       </p>
-                      <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center gap-[10px] text-center">
+                      <div className="border-t border-[#e0e0e0] mt-[10px] pt-[10px] flex justify-center items-center gap-[10px] text-center">
                         <div className="flex flex-col text-[12px]">
                           <p className="text-[#67677a] font-medium">
                             {t("amount") || "Сумма"}
                           </p>
                           <p className="text-[#222] font-bold">
-                            {loan.credit_offers.repeat_client.amount
-                              ?.formatted ?? "-"}
+                            {formatAmount(
+                              loan.credit_offers.repeat_client.amount?.formatted
+                            )}
                           </p>
                         </div>
                         <div className="flex flex-col text-[12px]">
@@ -233,6 +243,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
                           fontFamily: "var(--Montserrat)",
                           textDecorationSkipInk: "none",
                         }}
+                        target="_blank"
                       >
                         {t("termsLink") || "Условия"}
                       </Link>
@@ -246,6 +257,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
                           fontFamily: "var(--Montserrat)",
                           textDecorationSkipInk: "none",
                         }}
+                        target="_blank"
                       >
                         {t("warningLink") || "Предупреждение"}
                       </Link>
@@ -273,15 +285,14 @@ const CreditsList: React.FC<CreditsListProps> = ({
         )}
       </div>
       {credits.length > visibleCount && (
-
-      <div className="px-0 mb-5 md:px-[20px]">
-        <ButtonGreenBorder
-          text={t("showMore") || "Показать еще"}
-          width="100%"
-          className="sm:!w-[256px]"
-          onClick={handleShowMore}
-        />
-      </div>
+        <div className="px-0 mb-5 md:px-[20px]">
+          <ButtonGreenBorder
+            text={t("showMore") || "Показать еще"}
+            width="100%"
+            className="sm:!w-[256px]"
+            onClick={handleShowMore}
+          />
+        </div>
       )}
     </>
   );

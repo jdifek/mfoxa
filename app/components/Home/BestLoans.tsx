@@ -194,6 +194,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                         fontFamily: "var(--Montserrat)",
                         textDecorationSkipInk: "none",
                       }}
+                      target="_blank"
                     >
                       {t("termsLink")}
                     </Link>
@@ -207,6 +208,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                         fontFamily: "var(--Montserrat)",
                         textDecorationSkipInk: "none",
                       }}
+                      target="_blank"
                     >
                       {t("warningLink")}
                     </Link>
