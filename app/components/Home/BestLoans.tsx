@@ -225,6 +225,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                 />
                 <Link
                   href={loan.get_money_button_url || ""}
+                  target="_blank"
                   className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out whitespace-nowrap flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
                 >
                   {t("getMoney")}

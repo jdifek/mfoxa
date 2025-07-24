@@ -143,6 +143,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                             mfo?.apply_url || mfo?.get_money_button_url || "#"
                           }
                           rel="noopener noreferrer"
+                          target="_blank"
                           className="bg-[#00ba9e] hover:bg-[#009d85] block mx-auto h-[40px] w-full text-white font-bold text-[13px] rounded-[8px] px-[17px] md:px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer"
                         >
                           {t("getMoney")}

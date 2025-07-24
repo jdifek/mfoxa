@@ -188,6 +188,7 @@ export default async function CatalogPage({ params }: PageProps) {
             </div>
             <Link
               href={data.get_money_button_url || "/"}
+              target="_blank"
               className="block bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out mb-[20px] md:mb-0 whitespace-nowrap h-[40px] w-full md:w-[200px] text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer"
             >
               {t("getMoney")}
@@ -260,6 +261,7 @@ export default async function CatalogPage({ params }: PageProps) {
               </p>
               <Link
                 href={data.official_website}
+                target="_blank"
                 className="w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
                 style={{ textDecorationSkipInk: "none" }}
               >
@@ -280,6 +282,7 @@ export default async function CatalogPage({ params }: PageProps) {
           </Link>
           <Link
             href={data.user_warning_pdf_url || ""}
+            target="_blank"
             className="w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
           >
             {t("warningText")}
@@ -420,6 +423,7 @@ export default async function CatalogPage({ params }: PageProps) {
             </p>
             <Link
               href={data.redirect_url || "/"}
+              target="_blank"
               className="block bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out mx-auto h-[40px] w-full text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer"
             >
               {t("getMoney")}
