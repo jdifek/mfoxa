@@ -292,7 +292,7 @@ export default async function CatalogPage({ params }: PageProps) {
         <div className="flex flex-col md:flex-row w-full gap-[20px]">
           <div className="p-[10px] md:p-[30px] sm:p-[20px] w-full md:w-1/2 mb-[0px] md:mb-[50px] bg-white rounded-lg mt-[10px]">
             <h2
-              className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+              className="text-[20px] md:text-[28px] font-[700] leading-[100%] text-[#222] mb-[30px]"
               style={{ fontFamily: "var(--Jakarta)" }}
             >
               {t("borrowerRequirements", {
@@ -316,7 +316,7 @@ export default async function CatalogPage({ params }: PageProps) {
 
           <div className="p-[10px] md:p-[30px] md:mt-[10px] sm:p-[20px] w-full md:w-1/2 md:mb-[50px] bg-white rounded-lg mb-[20px]">
             <h2
-              className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+              className="text-[20px] md:text-[28px] font-[700] leading-[100%] text-[#222] mb-[30px]"
               style={{ fontFamily: "var(--Jakarta)" }}
             >
               {t("moneyMethodsCompany", {
@@ -389,7 +389,7 @@ export default async function CatalogPage({ params }: PageProps) {
         <div className="flex flex-col md:flex-row w-full gap-[20px]">
           <div className="p-[10px] flex-col gap-[20px] md:p-[30px] sm:p-[20px] w-full md:w-1/2  bg-white rounded-lg">
             <h2
-              className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+              className="text-[20px] md:text-[28px] font-[700] leading-[100%] text-[#222] mb-[30px]"
               style={{ fontFamily: "var(--Jakarta)" }}
             >
               {t("calculatorCompany", {
@@ -427,7 +427,7 @@ export default async function CatalogPage({ params }: PageProps) {
           </div>
           <div className="p-[10px] md:p-[30px] sm:p-[20px]  w-full md:w-1/2 bg-white rounded-lg">
             <h2
-              className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+              className="text-[20px] md:text-[28px] font-[700] leading-[100%] text-[#222] mb-[30px]"
               style={{ fontFamily: "var(--Jakarta)" }}
             >
               {t("repaymentMethodsСompany", {

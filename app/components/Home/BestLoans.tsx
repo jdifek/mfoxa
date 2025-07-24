@@ -43,7 +43,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
     <>
       <div className="w-full px-[0px] md:px-[20px]">
         <h2
-          className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+          className="text-[20px] md:text-[28px] font-[700] leading-[100%] text-[#222] mb-[30px]"
           style={{ fontFamily: "var(--Jakarta)" }}
         >
           {t("title")}
