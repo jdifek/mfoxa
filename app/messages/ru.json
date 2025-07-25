@@ -478,7 +478,7 @@
     }
   },
   "terms": {
-  "title": "Условия оформления займа в ",
+  "title": "Тарифы",
   "tariff": "Тариф",
   "new": "Новый",
   "amount": "Сумма",
@@ -527,13 +527,16 @@
       "citizenship": "Гражданство",
       "citizenshipValue": "Украина",
       "collateral": "Залог",
-      "collateralValue": "не требуется",
+      "collateralValue": "требуется",
+      "collateralValueNo": "не требуется",
       "guarantor": "Поручитель",
-      "guarantorValue": "не требуется",
+      "guarantorValue": "требуется",
+      "guarantorValueNo": "не требуется",
       "employment": "Официальное трудоустройство",
-      "employmentValue": "не требуется"
+      "employmentValue": "требуется",
+      "employmentValueNo": "не требуется"
     },
-    "moneyMethodsСompany": "Способы получения денег {company}",
+    "moneyMethodsCompany": "Способы получения денег {company}",
     "moneyMethods": {
       "cash": "Наличными в центре выдачи",
       "card": "На карту любого банка",
@@ -541,7 +544,7 @@
       "novaPay": "NovaPay / Нова Пошта (наличные или на карту NovaPay)",
       "transfers": "Денежные переводы (Western Union / RIA / MoneyGram)"
     },
-    "calculatorСompany": "Калькулятор процентов {company}",
+    "calculatorCompany": "Калькулятор процентов {company}",
     "selectTariff": "Выберите тариф",
     "calculator": {
       "borrow": "Вы берете",

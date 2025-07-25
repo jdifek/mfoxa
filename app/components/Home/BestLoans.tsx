@@ -43,7 +43,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
     <>
       <div className="w-full px-[0px] md:px-[20px]">
         <h2
-          className="text-[20px] md:text-[36px] font-[700] leading-[100%] text-[#222] mb-[30px]"
+          className="text-[20px] md:text-[28px] font-[700] leading-[100%] text-[#222] mb-[30px]"
           style={{ fontFamily: "var(--Jakarta)" }}
         >
           {t("title")}
@@ -194,6 +194,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                         fontFamily: "var(--Montserrat)",
                         textDecorationSkipInk: "none",
                       }}
+                      target="_blank"
                     >
                       {t("termsLink")}
                     </Link>
@@ -207,6 +208,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                         fontFamily: "var(--Montserrat)",
                         textDecorationSkipInk: "none",
                       }}
+                      target="_blank"
                     >
                       {t("warningLink")}
                     </Link>
@@ -223,6 +225,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                 />
                 <Link
                   href={loan.get_money_button_url || ""}
+                  target="_blank"
                   className="bg-[#00ba9e] hover:bg-[#009d85] transition-all duration-200 ease-in-out whitespace-nowrap flex-1 text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer"
                 >
                   {t("getMoney")}

@@ -143,13 +143,16 @@
       "citizenship": "Громадянство",
       "citizenshipValue": "Україна",
       "collateral": "Застава",
-      "collateralValue": "не потрібна",
+      "collateralValue": "потрібна",
+      "collateralValueNo": "не потрібна",
       "guarantor": "Поручитель",
-      "guarantorValue": "не потрібен",
+      "guarantorValue": "потрібен",
+      "guarantorValueNo": "не потрібен",
       "employment": "Офіційне працевлаштування",
-      "employmentValue": "не потрібне"
+      "employmentValue": "потрібне",
+      "employmentValueNo": "не потрібне"
     },
-    "moneyMethodsСompany": "Способи отримання грошей {company}",
+    "moneyMethodsCompany": "Способи отримання грошей {company}",
     "moneyMethods": {
       "cash": "Готівкою в центрі видачі",
       "card": "На карту будь-якого банку",
@@ -157,7 +160,7 @@
       "novaPay": "NovaPay / Нова Пошта (готівкою або на карту NovaPay)",
       "transfers": "Грошові перекази (Western Union / RIA / MoneyGram)"
     },
-    "calculatorСompany": "Калькулятор відсотків {company}",
+    "calculatorCompany": "Калькулятор відсотків {company}",
     "selectTariff": "Оберіть тариф",
     "calculator": {
       "borrow": "Ви берете",
@@ -384,7 +387,7 @@
 }
 ,
 "terms": {
-  "title": "Умови оформлення позики в ",
+  "title": "Тарифи",
   "tariff": "Тариф",
   "new": "Новий",
   "amount": "Сума",
