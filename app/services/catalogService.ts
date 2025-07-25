@@ -84,7 +84,7 @@ export const catalogService = {
     ...params
   }: GetCatalogBySlugParams): Promise<GetCatalogBySlugResponse> {
     const response = await axios.get<GetCatalogBySlugResponse>(
-      `${API_URL}/api/v1/catalog/${slug}`,
+      `${API_URL}/api/v1/catalog/loan/${slug}`,
       { params }
     );
     

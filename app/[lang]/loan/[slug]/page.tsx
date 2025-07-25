@@ -96,7 +96,7 @@ export default async function LoanDescription({
     });
   } catch (error: any) {
     console.error("❌ Ошибка получения по slug:", slug);
-    console.error("Axios message:", error.message);
+    console.error("Axios message:", error);
     console.error("Axios response:", error?.response?.data || "Нет ответа");
   
     throw new Error(`Ошибка при запросе catalogService.getBySlug: ${error.message}`);
