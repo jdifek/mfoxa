@@ -9,18 +9,43 @@ import Link from "next/link";
 
 type Props = {
   recent_reviews: Review[];
+  companyName?: string;
+  companySlug?: string;
 };
 
-export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
+export const LastReviews: React.FC<Props> = ({
+  recent_reviews,
+  companyName,
+  companySlug,
+}) => {
   const t = useTranslations("LastReviews");
   const pathname = usePathname();
-  const lang = useLocale()
+  const lang = useLocale();
 
-  const title = pathname.startsWith("/mfo/") && pathname.split("/").length === 3
+  const filteredReviews = companySlug
+    ? recent_reviews.filter((review) => review.mfo.slug === companySlug)
+    : recent_reviews;
+
+  const title = companyName
+    ? t("lastMfoReviews", { company: companyName })
+    : pathname.startsWith("/mfo/") && pathname.split("/").length === 3
     ? t("sectionTitleMFO")
     : t("sectionTitle");
 
-  const displayedReviews = recent_reviews.slice(0, 4);
+  const displayedReviews = filteredReviews
+    .sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    )
+    .slice(0, 4);
+
+  const buttonLink = companySlug
+    ? `/${lang}/mfo/${companySlug}/reviews`
+    : `/${lang}/reviews`;
+
+  if (displayedReviews.length === 0) {
+    return null;
+  }
 
   return (
     <div className="w-full mb-[30px] md:mb-[60px] px-[0px] md:px-[20px]">
@@ -38,12 +63,7 @@ export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
             className="w-full rounded-lg bg-white p-[10px] h-[243px] md:p-[16px] shadow-md"
           >
             <div className="flex gap-[10px] mb-[14px]">
-              <Image
-                src={el.mfo.logo_url}
-                alt="logo"
-                width={34}
-                height={34}
-              />
+              <Image src={el.mfo.logo_url} alt="logo" width={34} height={34} />
               <div className="flex flex-col">
                 <p
                   className="font-[700] text-[12px] leading-[142%] text-[#222]"
@@ -97,7 +117,7 @@ export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
       </div>
 
       <ButtonGreenBorder
-        link={`/${lang}/mfo/${displayedReviews[0].mfo.slug}/reviews`}
+        link={buttonLink}
         width={"100%"}
         text={t("button")}
         className="mt-[40px] sm:mt-[60px]"

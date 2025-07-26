@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import CalctTarifButtonsts from "../CalctTarifButtons";
 
 interface Tariff {
   id: number;
@@ -14,23 +15,32 @@ interface Tariff {
 
 interface CalculatorProps {
   tariffs: Tariff[];
+  selectedTariff?: Tariff | null;
 }
 
-const Calculator = ({ tariffs }: CalculatorProps) => {
-  const [amount, setAmount] = useState(50000);
-  const [days, setDays] = useState(31);
-  const [selectedTariffId] = useState(
-    tariffs.length > 0 ? tariffs[0].id : null
+const Calculator = ({ tariffs, selectedTariff }: CalculatorProps) => {
+  const activeTariff =
+    selectedTariff || (tariffs.length > 0 ? tariffs[0] : null);
+
+  const [amount, setAmount] = useState(() =>
+    activeTariff ? parseFloat(activeTariff.amount) : 50000
+  );
+  const [days, setDays] = useState(() =>
+    activeTariff ? activeTariff.term_days : 31
   );
 
-  const selectedTariff = tariffs.find((t) => t.id === selectedTariffId) ?? null;
+  useEffect(() => {
+    if (activeTariff) {
+      setAmount(parseFloat(activeTariff.amount));
+      setDays(activeTariff.term_days);
+    }
+  }, [activeTariff]);
 
-  // Пример простой формулы возврата (замени на свою логику, если нужно)
   const repay = useMemo(() => {
-    if (!selectedTariff) return 0;
-    const rate = parseFloat(selectedTariff.rate);
-    return amount + (amount * rate) / 100;
-  }, [amount, selectedTariff]);
+    if (!activeTariff) return 0;
+    const rate = parseFloat(activeTariff.rate);
+    return amount + (amount * rate * days) / 100;
+  }, [amount, days, activeTariff]);
 
   return (
     <>
@@ -93,7 +103,7 @@ const Calculator = ({ tariffs }: CalculatorProps) => {
           <input
             type="range"
             min="7"
-            max="31"
+            max="180"
             step="1"
             value={days}
             onChange={(e) => setDays(Number(e.target.value))}
@@ -114,36 +124,61 @@ const Calculator = ({ tariffs }: CalculatorProps) => {
         </div>
         <hr className="mb-[16px]" />
         <div className="flex justify-between">
-
-        <p className="font-medium mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
-          Повертаєте
-        </p>
-        <p className="font-medium text-[14px] leading-[136%] text-right text-[#222]">
-          {repay.toLocaleString("ru-RU", { maximumFractionDigits: 2 })}₴
-        </p>
+          <p className="font-medium mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
+            Повертаєте
+          </p>
+          <p className="font-medium text-[14px] leading-[136%] text-right text-[#222]">
+            {repay.toLocaleString("ru-RU", { maximumFractionDigits: 2 })}₴
+          </p>
         </div>
         <hr className="mb-[16px]" />
         <div className="flex justify-between">
-
-        <p className="font-medium mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
-          Ставка
-        </p>
-        <p className="font-medium text-[14px] leading-[136%] text-right text-[#222]">
-          {selectedTariff?.rate ?? "-"}%
-        </p>
+          <p className="font-medium mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
+            Ставка
+          </p>
+          <p className="font-medium text-[14px] leading-[136%] text-right text-[#222]">
+            {activeTariff?.rate ?? "-"}%
+          </p>
         </div>
         <hr className="mb-[16px]" />
         <div className="flex justify-between">
-
-        <p className="font-medium mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
-          ПКС
-        </p>
-        <p className="font-medium text-[14px] leading-[136%] text-right text-[#222]">
-          {selectedTariff?.real_annual_rate ?? "-"}%
-        </p>
-         </div>
-         <hr className="mb-[16px]" />
+          <p className="font-medium mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
+            ПКС
+          </p>
+          <p className="font-medium text-[14px] leading-[136%] text-right text-[#222]">
+            {activeTariff?.real_annual_rate ?? "-"}%
+          </p>
+        </div>
+        <hr className="mb-[16px]" />
       </div>
+    </>
+  );
+};
+
+// Wrapper component that manages the shared state
+interface TariffCalculatorWrapperProps {
+  tariffs: Tariff[];
+}
+
+export const TariffCalculatorWrapper = ({
+  tariffs,
+}: TariffCalculatorWrapperProps) => {
+  const [selectedTariff, setSelectedTariff] = useState<Tariff | null>(
+    tariffs.length > 0 ? tariffs[0] : null
+  );
+
+  const handleTariffSelect = (tariff: Tariff) => {
+    setSelectedTariff(tariff);
+  };
+
+  return (
+    <>
+      <CalctTarifButtonsts
+        tariffs={tariffs}
+        onSelect={handleTariffSelect}
+        selectedTariffId={selectedTariff?.id || null}
+      />
+      <Calculator tariffs={tariffs} selectedTariff={selectedTariff} />
     </>
   );
 };

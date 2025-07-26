@@ -145,10 +145,19 @@ export default function CompanyRewiwsClient({
 
   const closeAnswerModal = () => setOpenReplyId(null);
 
+  const getCompanyName = () => {
+    if (data?.mfo?.name) return data.mfo.name;
+    if (mfoData?.name) return mfoData.name;
+    return slug
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
   const webPageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: t("title", { company: data?.mfo?.name || t(`company.${slug}.name`) }),
+    name: t("title", { company: getCompanyName() }),
     url: `https://mfoxa.com.ua/${lang}/mfo/${slug}/reviews`,
     datePublished: dates?.date_published || mfoData.created_at || "2023-01-01",
     dateModified: dates?.date_modified || mfoData.updated_at || "2025-07-12",
@@ -158,7 +167,7 @@ export default function CompanyRewiwsClient({
     <>
       <MicrodataReviews
         reviewsData={data}
-        companyName={data?.mfo?.name || t(`company.${slug}.name`)}
+        companyName={getCompanyName()}
         companySlug={slug}
         locale={lang as "ua" | "ru"}
       />
@@ -172,7 +181,7 @@ export default function CompanyRewiwsClient({
           style={{ fontFamily: "var(--Jakarta)" }}
         >
           {t("title", {
-            company: data?.mfo?.name || t(`company.${slug}.name`),
+            company: getCompanyName(),
           })}
         </h1>
       </div>
@@ -233,7 +242,7 @@ export default function CompanyRewiwsClient({
               <div className="flex flex-col gap-[10px] md:gap-[14px]">
                 <p className="font-bold text-[12px] text-start text-nowrap sm:text-[14px] md:text-[16px] leading-[100%] text-[#222]">
                   {t("ratingsTitle", {
-                    company: data?.mfo?.name || t(`company.${slug}.name`),
+                    company: getCompanyName(),
                   })}
                 </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-[10px] md:gap-[14px] items-center">
@@ -287,7 +296,7 @@ export default function CompanyRewiwsClient({
         </div>
       </div>
       <div className="px-0 md:px-[20px]">
-        {Array.isArray(data?.data) &&
+        {Array.isArray(data?.data) && data.data.length > 0 ? (
           data.data.slice(0, visibleCount).map((review, i) => (
             <React.Fragment key={review.id}>
               <AnswerQap
@@ -330,10 +339,7 @@ export default function CompanyRewiwsClient({
                   itemScope
                   itemType="https://schema.org/FinancialService"
                 >
-                  <meta
-                    itemProp="name"
-                    content={data?.mfo?.name || t(`company.${slug}.name`)}
-                  />
+                  <meta itemProp="name" content={getCompanyName()} />
                   <meta
                     itemProp="url"
                     content={`https://mfoxa.com.ua/${lang}/mfo/${slug}`}
@@ -354,9 +360,7 @@ export default function CompanyRewiwsClient({
                       <meta
                         itemProp="name"
                         content={
-                          review.admin_response_author ||
-                          data?.mfo?.name ||
-                          t(`company.${slug}.name`)
+                          review.admin_response_author || getCompanyName()
                         }
                       />
                     </div>
@@ -463,18 +467,49 @@ export default function CompanyRewiwsClient({
                 </div>
               </div>
             </React.Fragment>
-          ))}
+          ))
+        ) : (
+          <div className="flex flex-col items-center justify-center py-10 text-center">
+            <div className="mb-4">
+              <svg
+                width="64"
+                height="64"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-gray-400"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              {t("noReviews")}
+            </h3>
+            <p className="text-gray-600 mb-4">{t("beFirstToReview")}</p>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="bg-[#00ba9e] text-white font-bold text-[14px] rounded-[8px] px-[16px] py-[9.5px] hover:bg-[#009680] transition-colors"
+            >
+              {t("writeFirstReview")}
+            </button>
+          </div>
+        )}
       </div>
-      {data?.data && visibleCount < data.data.length && (
-        <div className="px-0 md:px-[20px]">
-          <ButtonGreenBorder
-            width="100%"
-            text={t("showMore")}
-            className="mt-[20px] md:mt-[40px] mb-[20px] md:mb-[50px]"
-            onClick={handleLoadMore}
-          />
-        </div>
-      )}
+      {data?.data &&
+        Array.isArray(data.data) &&
+        visibleCount < data.data.length && (
+          <div className="px-0 md:px-[20px]">
+            <ButtonGreenBorder
+              width="100%"
+              text={t("showMore")}
+              className="mt-[20px] md:mt-[40px] mb-[20px] md:mb-[50px]"
+              onClick={handleLoadMore}
+            />
+          </div>
+        )}
 
       {data && data.mfo && <TermsOfRegistration mfo={data.mfo} />}
       <div className="px-0 md:px-[20px]">

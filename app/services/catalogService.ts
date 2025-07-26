@@ -41,7 +41,7 @@ export interface CatalogPageFull {
 export interface FaqItem {
   question: string;
   answer: string;
-  id: number
+  id: number;
 }
 
 export interface PageLink {
@@ -55,8 +55,8 @@ export interface GetCatalogBySlugResponse {
     catalog: CatalogPage;
   };
   message: string;
-  page: CatalogPageFull
-mfos: MfoDetails[]
+  page: CatalogPageFull;
+  mfos: MfoDetails[];
 }
 
 interface GetCatalogParams {
@@ -87,8 +87,7 @@ export const catalogService = {
       `${API_URL}/api/v1/catalog/loan/${slug}`,
       { params }
     );
-    
-    
+
     return response.data;
   },
 };

@@ -192,6 +192,9 @@
     "yes": "Да ({count})",
     "no": "Нет ({count})",
     "showMore": "Показать еще",
+    "noReviews": "Нет отзывов",
+    "beFirstToReview": "Будьте первым, кто напишет отзыв о компании",
+    "writeFirstReview": "Написать первый отзыв",
     "sortOptions": {
       "newest": "Сначала новые",
       "oldest": "Сначала старые",
@@ -315,6 +318,7 @@
   },
   "LastReviews": {
     "sectionTitle": "Последние отзывы на портале",
+    "lastMfoReviews": "Последние отзывы о {company}",
     "sectionTitleMFO": "Отзывы МФО",
     "name": "Инна",
     "showFull": "Показать полностью",
@@ -466,6 +470,7 @@
     "warningLink": "Предупреждение пользователя о последствиях",
     "reviews": "отзывов",
     "rating": "4.8 из 5",
+    "loading": "Загрузка...",
     "metadata": {
       "addedDate": "Дата добавления страницы ",
       "updatedDate": "Дата изменения страницы "

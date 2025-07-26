@@ -5,9 +5,8 @@ import Link from "next/link";
 import AboutButtons from "@/app/components/AboutButtons";
 import React from "react";
 import Bread from "@/app/components/Bread";
-import Calculator from "@/app/components/Catalog/Calculator";
+import { TariffCalculatorWrapper } from "@/app/components/Catalog/Calculator";
 import { Metadata } from "next";
-import CalctTarifButtonsts from "@/app/components/CalctTarifButtons";
 import TermsOfRegistration from "@/app/components/TermsOfRegistration";
 import { MicrodataCompany } from "@/app/structured-data/MicrodataCompany";
 import { getTranslations } from "next-intl/server";
@@ -82,6 +81,7 @@ export default async function CatalogPage({ params }: PageProps) {
     locale === "ua" ? "uk" : "ru"
   );
   const requirements = data.requirements;
+  console.log("requirements", requirements);
 
   const requirementsData = [
     {
@@ -129,7 +129,6 @@ export default async function CatalogPage({ params }: PageProps) {
     ? await getPageDates({ type: "mfo", mfo_id: data.id })
     : null;
 
-    
   return (
     <>
       <ClientOnly>
@@ -411,12 +410,11 @@ export default async function CatalogPage({ params }: PageProps) {
               companySlug={companySlug}
               locale={lang as "ru" | "ua"}
             />
-            <CalctTarifButtonsts tariffs={data.tariffs} />
             <MicrodataCalculator
               companyName={data.name || t(`company.${companySlug}.name`)}
               locale={lang as "ru" | "ua"}
             />
-            <Calculator tariffs={data.tariffs} />
+            <TariffCalculatorWrapper tariffs={data.tariffs} />
 
             <p
               className="font-medium text-[11px] leading-[145%] mb-[10px] text-center text-[#9393a3]"
@@ -442,8 +440,8 @@ export default async function CatalogPage({ params }: PageProps) {
               })}
             </h2>
             {data.payment_methods
-.filter((method: { type: string }) => method.type === "repayment")
-.map(
+              .filter((method: { type: string }) => method.type === "repayment")
+              .map(
                 (
                   method: {
                     id: any;
@@ -507,7 +505,11 @@ export default async function CatalogPage({ params }: PageProps) {
       </div>
       <OftenQuestions faqs={data.faqs} company={data.name} />
       <div className="mb-[30px] md:mb-[50px]"></div>
-      <LastReviews recent_reviews={homeData.recent_reviews} />
+      <LastReviews
+        recent_reviews={homeData.recent_reviews}
+        companyName={data.name}
+        companySlug={data.slug}
+      />
       <div className="h-[30px]"></div>
       <DetailsText html={data.seo_text} />
       {/* <LastReviews recent_reviews={data.recent_reviews || []} /> <DetailsText /> */}

@@ -9,6 +9,7 @@
   },
   "LastReviews": {
     "sectionTitle": "Останні відгуки на порталі",
+    "lastMfoReviews": "Останні відгуки про {company}",
     "sectionTitleMFO": "Відгуки МФО",
     "name": "Інна",
     "showFull": "Показати повністю",
@@ -99,6 +100,7 @@
     "warningLink": "Попередження користувача про наслідки",
     "reviews": "відгуків",
     "rating": "4.8 з 5",
+    "loading": "Завантаження...",
     "metadata": {
       "addedDate": "Дата додавання сторінки ",
       "updatedDate": "Дата зміни сторінки "
@@ -421,6 +423,9 @@
     "reviewUseful": "Відгук корисний?",
     "yes": "Так ({count})",
     "no": "Ні ({count})",
+    "noReviews": "Немає відгуків",
+    "beFirstToReview": "Будь ласка, будьте першим, хто напише відгук про цю компанію",
+    "writeFirstReview": "Написати перший відгук",
     "showMore": "Показати ще",
     "sortOptions": {
       "newest": "Спочатку нові",

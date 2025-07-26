@@ -23,7 +23,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
 
   console.log(mfo);
 
-  const offers = mfo?.tariffs;
+  const offers = mfo?.tariffs || [];
 
   const getClientTypeClass = (type: string) => {
     switch (type) {

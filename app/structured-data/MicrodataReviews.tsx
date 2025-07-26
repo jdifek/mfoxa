@@ -9,8 +9,19 @@ type MicrodataReviewsProps = {
   locale: "ru" | "ua";
 };
 
-export const MicrodataReviews = ({ reviewsData, companyName, companySlug, locale }: MicrodataReviewsProps) => {
-  if (!reviewsData || !reviewsData.data) return null;
+export const MicrodataReviews = ({
+  reviewsData,
+  companyName,
+  companySlug,
+  locale,
+}: MicrodataReviewsProps) => {
+  if (
+    !reviewsData ||
+    !reviewsData.data ||
+    !Array.isArray(reviewsData.data) ||
+    reviewsData.data.length === 0
+  )
+    return null;
 
   const reviewsSchema = {
     "@context": "https://schema.org",
