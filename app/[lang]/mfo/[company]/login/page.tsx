@@ -52,6 +52,8 @@ const Login: NextPage<Props> = async ({ params }) => {
     lang === "ua" ? "uk" : "ru"
   );
 
+
+
   return (
     <>
     <MicrodataLogin
@@ -73,7 +75,7 @@ const Login: NextPage<Props> = async ({ params }) => {
       <AboutButtons />
 
       <div
-        className="mt-6 prose"
+        className="mt-6 prose text-black"
         dangerouslySetInnerHTML={{ __html: data.login_page?.content || "" }}
       />
       {/* <div className="px-0 md:px-[20px]">

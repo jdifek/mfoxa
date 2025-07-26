@@ -97,7 +97,7 @@ export const LastReviews: React.FC<Props> = ({ recent_reviews }) => {
       </div>
 
       <ButtonGreenBorder
-        link={`/${lang}/reviews`}
+        link={`/${lang}/mfo/${displayedReviews[0].mfo.slug}/reviews`}
         width={"100%"}
         text={t("button")}
         className="mt-[40px] sm:mt-[60px]"

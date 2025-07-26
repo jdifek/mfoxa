@@ -117,6 +117,8 @@ export default async function LoanDescription({
   } catch (error) {
     console.error("Ошибка при получении настроек:", error);
   }
+
+  
   return (
     <>
       <MicrodataLoanCatalog data={data} locale={lang as 'ua' | 'ru'} slug={slug} />

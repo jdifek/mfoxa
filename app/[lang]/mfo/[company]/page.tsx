@@ -129,6 +129,7 @@ export default async function CatalogPage({ params }: PageProps) {
     ? await getPageDates({ type: "mfo", mfo_id: data.id })
     : null;
 
+    
   return (
     <>
       <ClientOnly>
@@ -327,10 +328,12 @@ export default async function CatalogPage({ params }: PageProps) {
               })}
             </h2>
             {data.payment_methods
-              .filter((method: { type: string }) => method.type === "repaying")
+              .filter((method: { type: string }) => method.type === "receiving")
               .map(
                 (
                   method: {
+                    title: any;
+
                     description:
                       | string
                       | number
@@ -378,7 +381,7 @@ export default async function CatalogPage({ params }: PageProps) {
                         />
                       </svg>
                       <p className="font-medium mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
-                        {method.description}
+                        {method.title}
                       </p>
                     </div>
                     <hr className="mb-[16px]" />
@@ -439,11 +442,12 @@ export default async function CatalogPage({ params }: PageProps) {
               })}
             </h2>
             {data.payment_methods
-              .filter((method: { type: string }) => method.type !== "repaying")
+              .filter((method: { type: string }) => method.type !== "repayment")
               .map(
                 (
                   method: {
                     id: any;
+                    title: any;
                     description:
                       | string
                       | number
@@ -491,7 +495,7 @@ export default async function CatalogPage({ params }: PageProps) {
                         />
                       </svg>
                       <p className="font-medium mb-[13px] text-[14px] leading-[136%] text-[#67677a]">
-                        {method.description}
+                        {method.title}
                       </p>
                     </div>
                     <hr className="mb-[16px]" />

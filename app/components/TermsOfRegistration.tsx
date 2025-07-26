@@ -129,9 +129,10 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                                 <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
                                   {t(key)}
                                 </p>
-                                <p className="text-[14px] font-medium text-[#222] text-right">
-                                  {value || "—"}
-                                </p>
+                                <p className="text-[14px] font-medium text-[#222] text-right truncate whitespace-nowrap overflow-hidden">
+  {value || "—"}
+</p>
+
                               </div>
                               <hr className="mb-[16px]" />
                             </React.Fragment>
