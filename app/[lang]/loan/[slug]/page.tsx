@@ -93,6 +93,7 @@ export default async function LoanDescription({
     res = await catalogService.getBySlug({
       slug,
       lang: lang === "ua" ? "uk" : "ru",
+      
     });
   } catch (error: any) {
     console.error("❌ Ошибка получения по slug:", slug);

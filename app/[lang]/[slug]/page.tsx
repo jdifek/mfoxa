@@ -17,7 +17,10 @@ export async function generateMetadata({
   const t = await getTranslations({ locale: lang, namespace: "Metadata" });
   const res = await catalogService.getBySlug({
     slug,
+    
     lang: lang === "ua" ? "uk" : "ru",
+    isLoan: false
+
   });
   console.log(`Metadata loaded for lang: ${lang}`, {
     title: t("loans.title"),
@@ -93,6 +96,7 @@ export default async function LoanDescription({
     res = await catalogService.getBySlug({
       slug,
       lang: lang === "ua" ? "uk" : "ru",
+      isLoan: false
     });
   } catch (error: any) {
     console.error("❌ Ошибка получения по slug:", slug);

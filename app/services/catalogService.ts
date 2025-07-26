@@ -81,13 +81,18 @@ export const catalogService = {
 
   async getBySlug({
     slug,
-    ...params
-  }: GetCatalogBySlugParams): Promise<GetCatalogBySlugResponse> {
+    lang,
+    isLoan = true,
+  }: GetCatalogBySlugParams & { isLoan?: boolean }): Promise<GetCatalogBySlugResponse> {
+    const path = isLoan ? `catalog/loan/${slug}` : `catalog/${slug}`;
+  
     const response = await axios.get<GetCatalogBySlugResponse>(
-      `${API_URL}/api/v1/catalog/loan/${slug}`,
-      { params }
+      `${API_URL}/api/v1/${path}`,
+      { params: { lang } }
     );
-
+  
     return response.data;
-  },
+  }
+  
+
 };
