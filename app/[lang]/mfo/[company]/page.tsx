@@ -442,8 +442,8 @@ export default async function CatalogPage({ params }: PageProps) {
               })}
             </h2>
             {data.payment_methods
-              .filter((method: { type: string }) => method.type !== "repayment")
-              .map(
+.filter((method: { type: string }) => method.type === "repayment")
+.map(
                 (
                   method: {
                     id: any;

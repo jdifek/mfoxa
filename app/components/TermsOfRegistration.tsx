@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
@@ -20,8 +21,9 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
     }
   }, []);
 
-  const offers = mfo?.catalog_offers;
-  const creditTypes = Object.entries(offers);
+  console.log(mfo);
+
+  const offers = mfo?.tariffs;
 
   const getClientTypeClass = (type: string) => {
     switch (type) {
@@ -82,76 +84,98 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                     1024: { slidesPerView: 3, spaceBetween: 20 },
                   }}
                 >
-                  {creditTypes.map(([, offer], index) => (
-                    <SwiperSlide key={index}>
-                      <div className="w-full rounded-lg bg-white p-[10px] md:p-[16px] shadow-md">
-                        <Image
-                          className="flex w-[152px] h-[49px] md:w-[333px] md:h-[107px] justify-center mx-auto mb-[16px]"
-                          src={mfo?.logo_url || "/image.png"}
-                          alt="photo"
-                          width={333}
-                          height={107}
-                        />
+                  {offers.map((offer: any) => {
+                    // Пример логики для client_type — можно заменить на более точную, если есть данные
+                    let client_type: "new" | "repeat" | "sale" = "new";
+                    if (offer.name.toLowerCase().includes("повтор"))
+                      client_type = "repeat";
+                    else if (offer.name.toLowerCase().includes("акци"))
+                      client_type = "sale";
 
-                        <p className="mb-[16px] font-bold text-[16px] leading-[100%] text-[#222]">
-                          {mfo?.name || "—"}
-                        </p>
+                    return (
+                      <SwiperSlide key={offer.id}>
+                        <div className="w-full rounded-lg bg-white p-[10px] md:p-[16px] shadow-md">
+                          <Image
+                            className="flex w-[152px] h-[49px] md:w-[333px] md:h-[107px] justify-center mx-auto mb-[16px]"
+                            src={mfo?.logo_url || "/image.png"}
+                            alt="photo"
+                            width={333}
+                            height={107}
+                          />
 
-                        <hr className="mb-[16px]" />
-                        <div className="flex justify-between">
-                          <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
-                            {t("tariff")}
+                          <p className="mb-[16px] font-bold text-[16px] leading-[100%] text-[#222]">
+                            {mfo?.name || "—"}
                           </p>
-                          <div
-                            className={getClientTypeClass(offer.client_type)}
-                          >
-                            {getClientTypeLabel(offer.client_type)}
+
+                          <hr className="mb-[16px]" />
+
+                          <div className="flex justify-between">
+                            <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
+                              {t("tariff")}
+                            </p>
+                            <div className={getClientTypeClass(client_type)}>
+                              {getClientTypeLabel(client_type)}
+                            </div>
                           </div>
+
+                          <hr className="mb-[16px]" />
+
+                          {/* amount */}
+                          <div className="flex justify-between">
+                            <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
+                              {t("amount")}
+                            </p>
+                            <p className="text-[14px] font-medium text-[#222] text-right truncate whitespace-nowrap overflow-hidden">
+                              {offer.amount || "—"} ₴
+                            </p>
+                          </div>
+                          <hr className="mb-[16px]" />
+
+                          {/* term */}
+                          <div className="flex justify-between">
+                            <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
+                              {t("term")}
+                            </p>
+                            <p className="text-[14px] font-medium text-[#222] text-right truncate whitespace-nowrap overflow-hidden">
+                              {offer.term_days || "—"} дней
+                            </p>
+                          </div>
+                          <hr className="mb-[16px]" />
+
+                          {/* rate */}
+                          <div className="flex justify-between">
+                            <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
+                              {t("rate")}
+                            </p>
+                            <p className="text-[14px] font-medium text-[#222] text-right truncate whitespace-nowrap overflow-hidden">
+                              {offer.rate || "—"}%
+                            </p>
+                          </div>
+                          <hr className="mb-[16px]" />
+
+                          {/* RRS */}
+                          <div className="flex justify-between">
+                            <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
+                              {t("rrs")}
+                            </p>
+                            <p className="text-[14px] font-medium text-[#222] text-right truncate whitespace-nowrap overflow-hidden">
+                              {offer.real_annual_rate || "—"}%
+                            </p>
+                          </div>
+                          <hr className="mb-[16px]" />
+
+                          <a
+                            href={offer.get_money_url || "#"}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            className="bg-[#00ba9e] hover:bg-[#009d85] block mx-auto h-[40px] w-full text-white font-bold text-[13px] rounded-[8px] px-[17px] md:px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer"
+                          >
+                            {t("getMoney")}
+                          </a>
                         </div>
-
-                        <hr className="mb-[16px]" />
-
-                        {["amount", "term", "rate", "rrs"].map((key, i) => {
-                          const value =
-                            key === "amount"
-                              ? offer?.amount_from + " - " + offer?.amount_to
-                              : key === "term"
-                              ? offer?.term_from + " - " + offer?.term_to
-                              : key === "rate"
-                              ? offer?.rate
-                              : offer?.real_annual_rate_from +
-                                " - " +
-                                offer?.real_annual_rate_to;
-
-                          return (
-                            <React.Fragment key={i}>
-                              <div className="flex justify-between">
-                                <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
-                                  {t(key)}
-                                </p>
-                                <p className="text-[14px] font-medium text-[#222] text-right truncate whitespace-nowrap overflow-hidden">
-  {value || "—"}
-</p>
-
-                              </div>
-                              <hr className="mb-[16px]" />
-                            </React.Fragment>
-                          );
-                        })}
-
-                        <a
-                          href={
-                            mfo?.apply_url || mfo?.get_money_button_url || "#"
-                          }
-                          rel="noopener noreferrer"
-                          target="_blank"
-                          className="bg-[#00ba9e] hover:bg-[#009d85] block mx-auto h-[40px] w-full text-white font-bold text-[13px] rounded-[8px] px-[17px] md:px-[32px] py-[10px] sm:w-[235px] text-center cursor-pointer"
-                        >
-                          {t("getMoney")}
-                        </a>
-                      </div>
-                    </SwiperSlide>
-                  ))}
+                      </SwiperSlide>
+                    );
+                  })}
                 </Swiper>
               )}
 

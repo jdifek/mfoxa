@@ -40,7 +40,8 @@ export interface MfoCatalogOffer {
 export type Mfo = {
   id: number;
   catalog_offers: MfoCatalogOffer[];
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tariffs: any[]
   slug: string;
   name: string;
   h1_title: string;
