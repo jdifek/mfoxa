@@ -33,6 +33,21 @@ const CreditsList: React.FC<CreditsListProps> = ({
     return amountStr.replace(/\.00$/, "");
   };
 
+  const renderStars = (rating: number | null | undefined) => {
+    if (!rating || rating <= 0) return [];
+    const starCount = Math.floor(rating);
+    return Array.from({ length: starCount }, (_, index) => (
+      <Image
+        key={index}
+        src="/Frame 5.svg"
+        height={14}
+        width={14}
+        alt="star"
+        className="w-[14px] h-[14px]"
+      />
+    ));
+  };
+
   // Получаем параметр сортировки из URL или используем значение по умолчанию
   const sortParam = searchParams.get("sort") || "rating";
 
@@ -88,13 +103,9 @@ const CreditsList: React.FC<CreditsListProps> = ({
                       {loan.name || "-"}
                     </p>
                     <div className="flex items-center gap-[5px]">
-                      <Image
-                        src="/Frame 5.svg"
-                        height={14}
-                        width={14}
-                        alt="star"
-                        className="w-[14px] h-[14px]"
-                      />
+                      <div className="flex gap-[2px]">
+                        {renderStars(loan.rating_average)}
+                      </div>
                       <p className="text-[13px] text-[#222] font-medium leading-[138%]">
                         {loan.rating_average ?? "-"}
                         <span className="text-[#67677a]">/5</span>
