@@ -112,7 +112,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
                       </p>
                       <Link href={`/${locale}/mfo/${loan.slug}/reviews`}>
                         <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
-                          {loan.rating_count ?? 0} {t("reviews") || "отзывов"}
+                          {loan.rating_count ?? "-"}%
                         </p>
                       </Link>
                     </div>
@@ -173,7 +173,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
                               {t("rate") || "Ставка"}
                             </p>
                             <p className="text-[#222] font-bold">
-                              {offer.rate ? `${offer.rate}%` : "-"}
+                              {formatAmount(offer.rate)}%
                             </p>
                           </div>
                         </div>

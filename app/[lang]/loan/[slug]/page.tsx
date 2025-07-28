@@ -23,32 +23,10 @@ export async function generateMetadata({
     title: t("loans.title"),
     description: t("loans.description"),
   });
-  let getAllSettings;
-
-  try {
-    getAllSettings = await settingsService.getSettingsByGroup(
-      "loan_page",
-      lang === "ua" ? "uk" : "ru"
-    );
-  } catch (error) {
-    console.error("Ошибка при получении настроек:", error);
-  }
-  console.log(`Metadata loaded for lang: ${lang}`, {
-    title: t("loans.title"),
-    description: t("loans.description"),
-  });
-
 
   return {
-    title:
-    getAllSettings?.settings.loan_page_meta_title ||
-    
-      (t("loans.title") ||
-        "Займы онлайн – взять микрозайм до 100 000 рублей | Займи.ру"),
-    description:
-    getAllSettings?.settings.loan_page_meta_description ||
-      (t("loans.description") ||
-        "Оформите займ до 100 000 рублей на срочные нужды через Займи.ру. Быстро, удобно и безопасно. Сравните условия МФО и выберите лучшее предложение."),
+    title: res.page.meta_title,
+    description: res.page.meta_description,
     keywords: [
       lang === "uk" ? "позики онлайн" : "займы онлайн",
       "микрозайм",
@@ -57,14 +35,8 @@ export async function generateMetadata({
       "быстрые займы",
     ],
     openGraph: {
-      title:
-        res.page.meta_title ??
-        (t("loans.title") ||
-          "Займы онлайн – взять микрозайм до 100 000 рублей | Займи.ру"),
-      description:
-        res.page.meta_description ??
-        (t("loans.description") ||
-          "Оформите займ до 100 000 рублей на срочные нужды через Займи.ру. Быстро, удобно и безопасно. Сравните условия МФО и выберите лучшее предложение."),
+      title: res.page.meta_title,
+      description: res.page.meta_description,
       url: "https://mfoxa.com.ua/loans",
       siteName: "Займи.ру",
       type: "website",
@@ -93,17 +65,20 @@ export default async function LoanDescription({
     res = await catalogService.getBySlug({
       slug,
       lang: lang === "ua" ? "uk" : "ru",
-      
     });
   } catch (error: any) {
     console.error("❌ Ошибка получения по slug:", slug);
     console.error("Axios message:", error);
     console.error("Axios response:", error?.response?.data || "Нет ответа");
-  
-    throw new Error(`Ошибка при запросе catalogService.getBySlug: ${error.message}`);
+
+    throw new Error(
+      `Ошибка при запросе catalogService.getBySlug: ${error.message}`
+    );
   }
   const dates = await getPageDates({ type: "loans" });
-  const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');  
+  const randomAuthor = await authorsService.getRandomAuthor(
+    lang === "ua" ? "uk" : "ru"
+  );
 
   if (!res) {
     throw new Error(`Не удалось получить страницу по slug: ${slug}`);
@@ -119,10 +94,13 @@ export default async function LoanDescription({
     console.error("Ошибка при получении настроек:", error);
   }
 
-  
   return (
     <>
-      <MicrodataLoanCatalog data={data} locale={lang as 'ua' | 'ru'} slug={slug} />
+      <MicrodataLoanCatalog
+        data={data}
+        locale={lang as "ua" | "ru"}
+        slug={slug}
+      />
       <LoanClientPage
         page={res.page}
         getAllSettings={getAllSettings}

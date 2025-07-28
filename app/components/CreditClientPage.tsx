@@ -93,8 +93,7 @@ const CreditClientPage: React.FC<CreditClientPageProps> = ({
           ) : (
             <p className="font-medium text-[13px] md:text-[15px] leading-[133%] text-[#222]">
               {getAllSettings?.settings.loan_page_description ||
-                t("description") ||
-                "Подберите и оформите лучший для себя займ на срочную покупку или хозяйственные нужды. Получение микрозайма принять 1 000 до 100 000 рублей через сервис «Займи.ру»"}
+                t("description")}
             </p>
           )}
         </div>

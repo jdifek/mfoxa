@@ -27,9 +27,6 @@ const Calculator = ({ tariffs, selectedTariff }: CalculatorProps) => {
   const activeTariff =
     selectedTariff || (tariffs.length > 0 ? tariffs[0] : null);
 
-  console.log("tariffs", tariffs);
-  console.log("selectedTariff", selectedTariff);
-
   const [amount, setAmount] = useState(() =>
     activeTariff ? parseFloat(activeTariff.amount) : 50000
   );

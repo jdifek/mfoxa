@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import LoanClientPage from "@/app/components/LoanClientPage";
-import { getTranslations } from "next-intl/server";
 import { catalogService } from "@/app/services/catalogService";
 import { MicrodataLoanCatalog } from "@/app/structured-data/MicrodataLoanCatalog";
 import authorsService from "@/app/services/authorsService";
@@ -14,31 +13,14 @@ export async function generateMetadata({
   params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const t = await getTranslations({ locale: lang, namespace: "Metadata" });
-  let getAllSettings;
-
-  try {
-    getAllSettings = await settingsService.getSettingsByGroup(
-      "loan_page",
-      lang === "ua" ? "uk" : "ru"
-    );
-  } catch (error) {
-    console.error("Ошибка при получении настроек:", error);
-  }
-  console.log(`Metadata loaded for lang: ${lang}`, {
-    title: t("loans.title"),
-    description: t("loans.description"),
+  const res = await catalogService.getAll({
+    lang: lang === "ua" ? "uk" : "ru",
+    type: "loan",
   });
 
   return {
-    title:
-    getAllSettings?.settings.loan_page_meta_title ||
-      t("loans.title") ||
-      "Займы онлайн – взять микрозайм до 100 000 рублей | Займи.ру",
-    description:
-    getAllSettings?.settings.loan_page_meta_description ||
-      t("loans.description") ||
-      "Оформите займ до 100 000 рублей на срочные нужды через Займи.ру. Быстро, удобно и безопасно. Сравните условия МФО и выберите лучшее предложение.",
+    title: res.data[0].meta_title,
+    description: res.data[0].meta_description,
     keywords: [
       lang === "uk" ? "позики онлайн" : "займы онлайн",
       "микрозайм",
@@ -47,12 +29,8 @@ export async function generateMetadata({
       "быстрые займы",
     ],
     openGraph: {
-      title:
-        t("loans.title") ||
-        "Займы онлайн – взять микрозайм до 100 000 рублей | Займи.ру",
-      description:
-        t("loans.description") ||
-        "Оформите займ до 100 000 рублей на срочные нужды через Займи.ру. Быстро, удобно и безопасно. Сравните условия МФО и выберите лучшее предложение.",
+      title: res.data[0].meta_title,
+      description: res.data[0].meta_description,
       url: "https://mfoxa.com.ua/loans",
       siteName: "Займи.ру",
       type: "website",
@@ -78,11 +56,13 @@ export default async function LoanPageWrapper({
     type: "loan",
   });
   console.log(data, "data");
-  const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');
+  const randomAuthor = await authorsService.getRandomAuthor(
+    lang === "ua" ? "uk" : "ru"
+  );
 
-  console.log(randomAuthor, 'randomAuthor');
+  console.log(randomAuthor, "randomAuthor");
   const faqs = await FaqsService.getFaqs({ page_name: "loan" });
-  
+
   let getAllSettings;
 
   try {
@@ -93,12 +73,20 @@ export default async function LoanPageWrapper({
   } catch (error) {
     console.error("Ошибка при получении настроек:", error);
   }
-  const homeData = await getHomeData(lang as LangType );
+  const homeData = await getHomeData(lang as LangType);
 
   return (
     <>
       <MicrodataLoanCatalog data={data} locale={lang as "ua" | "ru"} />
-      <LoanClientPage homeData={homeData} faqs={faqs} getAllSettings={getAllSettings} data={data} randomAuthor={randomAuthor} visibleCount={visibleCount} locale={lang} />
+      <LoanClientPage
+        homeData={homeData}
+        faqs={faqs}
+        getAllSettings={getAllSettings}
+        data={data}
+        randomAuthor={randomAuthor}
+        visibleCount={visibleCount}
+        locale={lang}
+      />
     </>
   );
 }
