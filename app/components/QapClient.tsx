@@ -120,11 +120,13 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
     setVisibleCount((prev) => prev + 3);
   };
 
+  console.log("data in qap client", data);
+
   return (
     <>
-      {data?.data && data?.data?.length > 0 && (
+      {((data?.data && data?.data?.length > 0) || mfo) && (
         <QapModal
-          mfoId={data.data[0].mfo?.id || 0}
+          mfoId={data?.data?.[0]?.mfo?.id || mfo?.id || 0}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
@@ -164,7 +166,7 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
       <div className="px-0 md:px-[20px]">
         <div className="flex gap-[10px] flex-row sm:justify-between items-center">
           <Dropdown
-            mfoId={data?.data?.[0]?.mfo?.id ?? 0}
+            mfoId={data?.data?.[0]?.mfo?.id ?? mfo?.id ?? 0}
             endpoint="https://mfo.webalchemy.fun/api/v1/questions"
             options={options}
           />
@@ -327,7 +329,7 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
       <QapModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        mfoId={data?.data?.[0]?.mfo?.id ?? 0}
+        mfoId={data?.data?.[0]?.mfo?.id ?? mfo?.id ?? 0}
       />
     </>
   );

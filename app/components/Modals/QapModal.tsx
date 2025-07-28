@@ -42,6 +42,8 @@ export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
   const [text, setText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  console.log(mfoId);
+
   const handleSubmit = async () => {
     if (!name || !email || !text) {
       toast.error("Пожалуйста, заполните все поля.");
