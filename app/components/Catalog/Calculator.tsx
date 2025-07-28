@@ -11,6 +11,11 @@ interface Tariff {
   term_days: number;
   real_annual_rate: string; // "1.00" — ПКС %
   get_money_url: string;
+  min_amount: string;
+  max_amount: string;
+  min_term_days: number;
+  max_term_days: number;
+  type?: string;
 }
 
 interface CalculatorProps {
@@ -21,6 +26,9 @@ interface CalculatorProps {
 const Calculator = ({ tariffs, selectedTariff }: CalculatorProps) => {
   const activeTariff =
     selectedTariff || (tariffs.length > 0 ? tariffs[0] : null);
+
+  console.log("tariffs", tariffs);
+  console.log("selectedTariff", selectedTariff);
 
   const [amount, setAmount] = useState(() =>
     activeTariff ? parseFloat(activeTariff.amount) : 50000
@@ -69,8 +77,8 @@ const Calculator = ({ tariffs, selectedTariff }: CalculatorProps) => {
           </div>
           <input
             type="range"
-            min="1000"
-            max="100000"
+            min={activeTariff ? parseFloat(activeTariff.min_amount) : 1000}
+            max={activeTariff ? parseFloat(activeTariff.max_amount) : 100000}
             step="1000"
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
@@ -102,8 +110,8 @@ const Calculator = ({ tariffs, selectedTariff }: CalculatorProps) => {
           </div>
           <input
             type="range"
-            min="7"
-            max="180"
+            min={activeTariff ? activeTariff.min_term_days : 7}
+            max={activeTariff ? activeTariff.max_term_days : 180}
             step="1"
             value={days}
             onChange={(e) => setDays(Number(e.target.value))}

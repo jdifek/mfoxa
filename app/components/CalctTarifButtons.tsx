@@ -10,6 +10,11 @@ type Tariff = {
   term_days: number;
   real_annual_rate: string; // ПКС %
   get_money_url: string;
+  min_amount: string;
+  max_amount: string;
+  min_term_days: number;
+  max_term_days: number;
+  type?: string;
 };
 
 type Props = {
