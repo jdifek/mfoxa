@@ -46,7 +46,6 @@ export default function AnswerQap({
   author_name,
 }: ReviewModalProps) {
   const [agreePolicy, setAgreePolicy] = useState(false);
-  const [notifyReply, setNotifyReply] = useState(false);
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,7 +84,7 @@ export default function AnswerQap({
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center text-black">
       <div
         style={{ scrollbarWidth: "none" }}
         className="bg-white  w-[335px]  max-h-[calc(100vh-40px)] overflow-y-auto rounded-[8px] border border-[#ebebf9] p-[14px] relative scroll-hidden"
@@ -114,18 +113,30 @@ export default function AnswerQap({
           </button>
         </div>
 
-        {[{ label: "Имя", value: name, onChange: setName }, { label: "Напишите ответ на отзыв", value: text, onChange: setText }].map(({ label, value, onChange }, i) => (
+        {[
+          { label: "Имя", value: name, onChange: setName },
+          { label: "Напишите ответ на отзыв", value: text, onChange: setText },
+        ].map(({ label, value, onChange }, i) => (
           <div key={i} className="mb-[14px]">
-            <p className="text-[13px] text-[#222]" style={{ fontFamily: "var(--third-family)" }}>
+            <p
+              className="text-[13px] text-[#222]"
+              style={{ fontFamily: "var(--third-family)" }}
+            >
               {label}
             </p>
-            <input
-              value={value}
-              onChange={(e) => onChange(e.target.value)}
-              className={`border border-[#e0e0e0] rounded-[6px] px-3 py-2 w-[307px] ${
-                label === "Напишите ответ на отзыв" ? "h-[119px]" : "h-[40px]"
-              } bg-white`}
-            />
+            {label === "Напишите ответ на отзыв" ? (
+              <textarea
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="border border-[#e0e0e0] rounded-[6px] px-3 py-2 w-[307px] h-[119px] bg-white resize-none"
+              />
+            ) : (
+              <input
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="border border-[#e0e0e0] rounded-[6px] px-3 py-2 w-[307px] h-[40px] bg-white"
+              />
+            )}
           </div>
         ))}
 
@@ -145,21 +156,12 @@ export default function AnswerQap({
             onChange={() => setAgreePolicy(!agreePolicy)}
             checked={agreePolicy}
           />
-          <p className="flex-1 text-[12px] text-[#222] font-medium leading-[142%]" style={{ fontFamily: "var(--font-family)" }}>
-            Я принимаю условия обработки персональных данных, указанных в Политике конфиденциальности
-          </p>
-        </div>
-
-        <div
-          className="flex items-start gap-[8px] mb-[14px] cursor-pointer"
-          onClick={() => setNotifyReply(!notifyReply)}
-        >
-          <Checkbox
-            onChange={() => setNotifyReply(!notifyReply)}
-            checked={notifyReply}
-          />
-          <p className="flex-1 text-[12px] text-[#222] font-medium leading-[142%]" style={{ fontFamily: "var(--font-family)" }}>
-            Хочу получать уведомления об ответах
+          <p
+            className="flex-1 text-[12px] text-[#222] font-medium leading-[142%]"
+            style={{ fontFamily: "var(--font-family)" }}
+          >
+            Я принимаю условия обработки персональных данных, указанных
+            в Политике конфиденциальности
           </p>
         </div>
       </div>

@@ -37,7 +37,6 @@ const Checkbox = ({
 
 export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
   const [agreePolicy, setAgreePolicy] = useState(false);
-  const [notifyReply, setNotifyReply] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [text, setText] = useState("");
@@ -48,8 +47,6 @@ export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
       toast.error("Пожалуйста, заполните все поля.");
       return;
     }
-
-   
 
     if (!agreePolicy) {
       toast.error("Необходимо принять политику конфиденциальности.");
@@ -69,7 +66,7 @@ export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
       setName("");
       setEmail("");
       setText("");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const errorMessage = error?.message || "Ошибка при отправке вопроса.";
       toast.error(errorMessage);
@@ -81,7 +78,7 @@ export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center text-black">
       <div
         style={{ scrollbarWidth: "none" }}
         className="bg-white w-[335px] max-h-[calc(100vh-40px)] overflow-y-auto rounded-[8px] border border-[#ebebf9] p-[14px] relative scroll-hidden"
@@ -120,13 +117,19 @@ export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
             >
               {label}
             </p>
-            <input
-              value={value}
-              onChange={(e) => onChange(e.target.value)}
-              className={`border border-[#e0e0e0] rounded-[6px] px-3 py-2 w-[307px] ${
-                label === "Напишите ваш вопрос" ? "h-[119px]" : "h-[40px]"
-              } bg-white`}
-            />
+            {label === "Напишите ваш вопрос" ? (
+              <textarea
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="border border-[#e0e0e0] rounded-[6px] px-3 py-2 w-[307px] h-[119px] bg-white resize-none"
+              />
+            ) : (
+              <input
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="border border-[#e0e0e0] rounded-[6px] px-3 py-2 w-[307px] h-[40px] bg-white"
+              />
+            )}
           </div>
         ))}
 
@@ -152,22 +155,6 @@ export default function QapModal({ isOpen, onClose, mfoId }: ReviewModalProps) {
           >
             Я принимаю условия обработки персональных данных, указанных
             в Политике конфиденциальности
-          </p>
-        </div>
-
-        <div
-          className="flex items-start gap-[8px] mb-[14px] cursor-pointer"
-          onClick={() => setNotifyReply(!notifyReply)}
-        >
-          <Checkbox
-            checked={notifyReply}
-            onChange={() => setNotifyReply(!notifyReply)}
-          />
-          <p
-            className="flex-1 text-[12px] text-[#222] font-medium leading-[142%]"
-            style={{ fontFamily: "var(--font-family)" }}
-          >
-            Хочу получать уведомления об ответах
           </p>
         </div>
       </div>

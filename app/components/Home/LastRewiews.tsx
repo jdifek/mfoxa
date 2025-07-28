@@ -88,7 +88,7 @@ export const LastReviews: React.FC<Props> = ({
             </p>
 
             <p
-              className="mb-[10px] text-[13px] md:text-[15px]"
+              className="mb-[10px] text-[13px] md:text-[15px] line-clamp-5"
               style={{
                 fontFamily: "var(--Montserrat)",
                 fontWeight: 500,

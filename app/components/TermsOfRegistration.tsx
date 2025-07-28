@@ -10,12 +10,20 @@ import "swiper/css/pagination";
 import { useTranslations } from "next-intl";
 import { Mfo } from "../services/mfosService";
 
+const formatAmount = (amount: string | number | null | undefined): string => {
+  if (!amount) return "-";
+  const amountStr = amount.toString();
+  return amountStr.replace(/\.00$/, "");
+};
+
 const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
   const t = useTranslations("terms");
   const paginationRef = useRef<HTMLDivElement | null>(null);
   const [isSwiperReady, setIsSwiperReady] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     if (paginationRef.current) {
       setIsSwiperReady(true);
     }
@@ -85,13 +93,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                   }}
                 >
                   {offers.map((offer: any) => {
-                    // Пример логики для client_type — можно заменить на более точную, если есть данные
-                    let client_type: "new" | "repeat" | "sale" = "new";
-                    if (offer.name.toLowerCase().includes("повтор"))
-                      client_type = "repeat";
-                    else if (offer.name.toLowerCase().includes("акци"))
-                      client_type = "sale";
-
+                    console.log(offer);
                     return (
                       <SwiperSlide key={offer.id}>
                         <div className="w-full rounded-lg bg-white p-[10px] md:p-[16px] shadow-md">
@@ -113,8 +115,12 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                             <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
                               {t("tariff")}
                             </p>
-                            <div className={getClientTypeClass(client_type)}>
-                              {getClientTypeLabel(client_type)}
+                            <div
+                              className={getClientTypeClass(
+                                isClient ? offer.type : ""
+                              )}
+                            >
+                              {getClientTypeLabel(isClient ? offer.type : "")}
                             </div>
                           </div>
 
@@ -126,7 +132,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                               {t("amount")}
                             </p>
                             <p className="text-[14px] font-medium text-[#222] text-right truncate whitespace-nowrap overflow-hidden">
-                              {offer.amount || "—"} ₴
+                              {formatAmount(offer.amount) || "—"} ₴
                             </p>
                           </div>
                           <hr className="mb-[16px]" />
@@ -148,7 +154,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                               {t("rate")}
                             </p>
                             <p className="text-[14px] font-medium text-[#222] text-right truncate whitespace-nowrap overflow-hidden">
-                              {offer.rate || "—"}%
+                              {formatAmount(offer.rate) || "—"}%
                             </p>
                           </div>
                           <hr className="mb-[16px]" />
@@ -159,7 +165,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                               {t("rrs")}
                             </p>
                             <p className="text-[14px] font-medium text-[#222] text-right truncate whitespace-nowrap overflow-hidden">
-                              {offer.real_annual_rate || "—"}%
+                              {formatAmount(offer.real_annual_rate) || "—"}%
                             </p>
                           </div>
                           <hr className="mb-[16px]" />

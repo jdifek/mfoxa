@@ -119,7 +119,7 @@ export default function ReviewModal({
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center text-black">
       <div
         style={{ scrollbarWidth: "none" }}
         className="bg-white text-black w-[335px] max-h-[calc(100vh-40px)] overflow-y-auto rounded-[8px] border border-[#ebebf9] p-[14px] relative"

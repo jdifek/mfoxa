@@ -94,7 +94,7 @@ export default async function Promotion({ params }: Props) {
     mfo_slug: companySlug,
   });
 
-  console.log(promocodes, 'promocodes');
+  console.log(promocodes, "promocodes");
 
   return (
     <>
@@ -129,19 +129,19 @@ export default async function Promotion({ params }: Props) {
                 image_url: any;
               }) => (
                 <div key={promo.id} className="p-[30px] bg-white rounded-lg">
-                  <div className="flex gap-[10px] sm:gap-[15px] md:gap-[20px]">
+                  <div className="flex flex-col gap-[10px] sm:gap-[15px] md:gap-[20px]">
                     <Image
                       src={promo?.image_url || "/default-logo.png"}
                       alt={promo?.mfo?.name || companyName}
                       width={100}
                       height={100}
-                      className="object-contain"
+                      className="object-contain flex-shrink-0 w-full"
                     />
-                    <div className="flex flex-col gap-[10px]">
-                      <p className="font-bold text-[16px] leading-[100%] text-[#222]">
+                    <div className="flex flex-col gap-[10px] min-w-0 flex-1">
+                      <p className="font-bold text-[16px] leading-[100%] text-[#222] line-clamp-1 overflow-hidden">
                         {promo?.title || companyName}
                       </p>
-                      <p className="font-medium text-[12px] xl:text-[14px] leading-[136%] text-[#222]">
+                      <p className="font-medium text-[12px] xl:text-[14px] leading-[136%] text-[#222] line-clamp-4 overflow-hidden">
                         {promo?.description || t("card.descriptionFallback")}
                       </p>
                     </div>
