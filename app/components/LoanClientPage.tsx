@@ -42,6 +42,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
   visibleCount,
   locale,
   data,
+  dataBySlug,
   dates,
   slug,
   faqs,
@@ -101,7 +102,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
         </div>
       </div>
 
-      <AboutButtons data={data} />
+      <AboutButtons data={data} dataBySlug={dataBySlug!} />
 
       <div className="px-0 md:px-[20px]">
         <Dropdown options={options} lang={locale as "ua" | "ru"} />

@@ -59,6 +59,15 @@ export default async function LoanDescription({
     lang: lang === "ua" ? "uk" : "ru",
     type: "loan",
   });
+
+  const dataBySlug = await catalogService.getBySlug({
+    slug,
+    lang: lang === "ua" ? "uk" : "ru",
+    isLoan: false,
+  });
+
+  console.log(dataBySlug);
+
   let res;
 
   try {
@@ -108,6 +117,7 @@ export default async function LoanDescription({
         faqs={res.page.faqs}
         dates={dates}
         data={data}
+        dataBySlug={dataBySlug}
         slug={slug}
         visibleCount={visibleCount}
         locale={lang}

@@ -55,6 +55,13 @@ export default async function LoanPageWrapper({
     lang: lang === "ua" ? "uk" : "ru",
     type: "loan",
   });
+
+  const dataBySlug = await catalogService.getBySlug({
+    slug: "loan",
+    lang: lang === "ua" ? "uk" : "ru",
+    isLoan: false,
+  });
+
   console.log(data, "data");
   const randomAuthor = await authorsService.getRandomAuthor(
     lang === "ua" ? "uk" : "ru"
@@ -83,6 +90,7 @@ export default async function LoanPageWrapper({
         faqs={faqs}
         getAllSettings={getAllSettings}
         data={data}
+        dataBySlug={dataBySlug}
         randomAuthor={randomAuthor}
         visibleCount={visibleCount}
         locale={lang}

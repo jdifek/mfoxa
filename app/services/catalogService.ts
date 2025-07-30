@@ -35,7 +35,7 @@ export interface CatalogPageFull {
   description_under_title: string;
   seo_text: string;
   faqs: FaqItem[]; // если FAQ — список вопросов-ответов
-  page_links: PageLink[]; // если есть ссылки на другие страницы или блоки
+  fast_links: FastLink[]; // если есть ссылки на другие страницы или блоки
 }
 
 export interface FaqItem {
@@ -44,9 +44,12 @@ export interface FaqItem {
   id: number;
 }
 
-export interface PageLink {
-  title: string;
+export interface FastLink {
+  id: number;
+  name: string;
   url: string;
+  color: string;
+  sort_order: number;
 }
 // Ответ от /api/v1/catalog/{slug}
 export interface GetCatalogBySlugResponse {
@@ -83,16 +86,16 @@ export const catalogService = {
     slug,
     lang,
     isLoan = true,
-  }: GetCatalogBySlugParams & { isLoan?: boolean }): Promise<GetCatalogBySlugResponse> {
+  }: GetCatalogBySlugParams & {
+    isLoan?: boolean;
+  }): Promise<GetCatalogBySlugResponse> {
     const path = isLoan ? `catalog/loan/${slug}` : `catalog/${slug}`;
-  
+
     const response = await axios.get<GetCatalogBySlugResponse>(
       `${API_URL}/api/v1/${path}`,
       { params: { lang } }
     );
-  
-    return response.data;
-  }
-  
 
+    return response.data;
+  },
 };
