@@ -185,6 +185,7 @@
     "reviewsCountLabel": "отзывов",
     "reviewsCount": "2 564",
     "ratingsTitle": "Оценки пользователей МФО {company}",
+    "ratingsRange": "из 5",
     "writeReview": "Написать отзыв",
     "reply": "Ответить",
     "reviewUseful": "Отзыв полезен?",

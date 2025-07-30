@@ -57,7 +57,7 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
             key={index}
             className="w-full rounded-[20px] bg-white p-[16px] shadow-md"
           >
-            <header className="flex gap-[10px] items-center mb-[10px]">
+            <section className="flex gap-[10px] items-center mb-[10px] h-[50px]">
               <Image
                 src={top.logo_url}
                 alt={top.name}
@@ -68,7 +68,7 @@ export const TopUkrMFO: React.FC<TopUkrMFOProps> = ({ top_mfos }) => {
               <p className="text-[#222] font-bold text-[16px] leading-[100%]">
                 {top.name}
               </p>
-            </header>
+            </section>
             <div className="mb-[10px] flex gap-[10px]">
               <div className="relative w-[74px] h-[74px]">
                 <Image

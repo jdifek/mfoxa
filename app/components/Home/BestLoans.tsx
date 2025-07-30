@@ -55,7 +55,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
               key={index}
               className="w-full h-auto rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0 flex flex-col"
             >
-              <header className="flex gap-[10px] items-center mb-[10px]">
+              <header className="flex gap-[10px] items-center mb-[10px] h-[50px]">
                 <Image
                   src={loan.logo_url || "/placeholder-logo.svg"}
                   alt={loan.name}

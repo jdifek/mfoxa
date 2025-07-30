@@ -382,13 +382,19 @@ export default function CompanyRewiwsClient({
                     >
                       {review.author_name || t(`reviews.${i}.user`)}
                     </p>
-                    <p
-                      className="font-[500] text-[12px] leading-[100%] text-[#724dea]"
-                      style={{ fontFamily: "var(--Manrope)" }}
-                    >
-                      <time dateTime={review.created_at}>
-                        {new Date(review.created_at).toLocaleDateString()}
-                      </time>
+                    {/* <p
+                        className="font-[500] text-[12px] leading-[100%] text-[#724dea]"
+                        style={{ fontFamily: "var(--Manrope)" }}
+                      >
+                        <time dateTime={review.created_at}>
+                          {new Date(review.created_at).toLocaleDateString()}
+                        </time>
+                      </p> */}
+                    <p className="font-medium text-[10px] leading-[180%] text-[#67677A] flex items-start gap-1">
+                      <span className="font-bold text-[20px] leading-[138%] text-[#724DEA]">
+                        {review.rating}
+                      </span>
+                      <span className="mb-2">{t("ratingsRange")}</span>
                     </p>
                   </div>
                 </div>

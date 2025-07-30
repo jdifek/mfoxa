@@ -27,8 +27,12 @@ const Calculator = ({ tariffs, selectedTariff }: CalculatorProps) => {
   const activeTariff =
     selectedTariff || (tariffs.length > 0 ? tariffs[0] : null);
 
+  const roundToStep = (value: number, step: number) => {
+    return Math.round(value / step) * step;
+  };
+
   const [amount, setAmount] = useState(() =>
-    activeTariff ? parseFloat(activeTariff.amount) : 50000
+    activeTariff ? roundToStep(parseFloat(activeTariff.amount), 1000) : 50000
   );
   const [days, setDays] = useState(() =>
     activeTariff ? activeTariff.term_days : 31
@@ -36,7 +40,7 @@ const Calculator = ({ tariffs, selectedTariff }: CalculatorProps) => {
 
   useEffect(() => {
     if (activeTariff) {
-      setAmount(parseFloat(activeTariff.amount));
+      setAmount(roundToStep(parseFloat(activeTariff.amount), 1000));
       setDays(activeTariff.term_days);
     }
   }, [activeTariff]);
@@ -74,8 +78,16 @@ const Calculator = ({ tariffs, selectedTariff }: CalculatorProps) => {
           </div>
           <input
             type="range"
-            min={activeTariff ? parseFloat(activeTariff.min_amount) : 1000}
-            max={activeTariff ? parseFloat(activeTariff.max_amount) : 100000}
+            min={
+              activeTariff
+                ? roundToStep(parseFloat(activeTariff.min_amount), 1000)
+                : 1000
+            }
+            max={
+              activeTariff
+                ? roundToStep(parseFloat(activeTariff.max_amount), 1000)
+                : 100000
+            }
             step="1000"
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
