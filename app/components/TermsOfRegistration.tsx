@@ -98,7 +98,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                       <SwiperSlide key={offer.id}>
                         <div className="w-full rounded-lg bg-white p-[10px] md:p-[16px] shadow-md">
                           <Image
-                            className="flex w-[152px] h-[49px] md:w-[333px] md:h-[107px] justify-center mx-auto mb-[16px]"
+                            className="flex h-[49px] md:h-[107px] justify-center mx-auto mb-[16px] object-contain"
                             src={mfo?.logo_url || "/image.png"}
                             alt="photo"
                             width={333}

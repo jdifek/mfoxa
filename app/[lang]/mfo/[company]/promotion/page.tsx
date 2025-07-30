@@ -128,7 +128,10 @@ export default async function Promotion({ params }: Props) {
                 redirect_url: any;
                 image_url: any;
               }) => (
-                <div key={promo.id} className="p-[30px] bg-white rounded-lg">
+                <div
+                  key={promo.id}
+                  className="p-[30px] bg-white rounded-lg flex flex-col"
+                >
                   <div className="flex flex-col gap-[10px] sm:gap-[15px] md:gap-[20px]">
                     <Image
                       src={promo?.image_url || "/default-logo.png"}
@@ -160,12 +163,12 @@ export default async function Promotion({ params }: Props) {
 
                   <hr className="mt-[10px]" />
 
-                  <div className="flex justify-end">
+                  <div className="flex justify-end mt-auto pt-[10px]">
                     <a
                       href={promo?.redirect_url || "#"}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-[#00ba9e] mt-[20px] text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer block"
+                      className="bg-[#00ba9e] text-white font-bold text-[14px] rounded-[8px] px-[32px] py-[10px] w-full sm:w-[235px] text-center cursor-pointer block"
                     >
                       {t("card.button")}
                     </a>

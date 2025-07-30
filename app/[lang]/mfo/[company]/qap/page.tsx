@@ -1,6 +1,7 @@
 import QapClient from "@/app/components/QapClient";
 import { getPageDates } from "@/app/services/PageDatesService";
 import { getQuestions } from "@/app/services/questionsService";
+import { getMfoDetails } from "@/app/services/getMfoDetailsService";
 import { MicrodataQAP } from "@/app/structured-data/MicrodataQAP";
 import { Metadata } from "next";
 
@@ -55,16 +56,24 @@ export default async function Qap({ params }: Props) {
   const dates = slug
     ? await getPageDates({ type: "questions", mfo_slug: slug })
     : null;
-    const questions = await getQuestions({
-      page: 1,
-      per_page: 10,
-      mfo_slug: slug,
-      sort: "newest",
-    });
+  const questions = await getQuestions({
+    page: 1,
+    per_page: 100,
+    mfo_slug: slug,
+    sort: "newest",
+  });
+  const mfoData = await getMfoDetails(slug, lang === "ua" ? "uk" : "ru");
+
   return (
     <>
-      <MicrodataQAP questions={questions.data} locale={lang as 'ua' | 'ru'} />
-      <QapClient company={company} dates={dates} locale={lang} />
+      <MicrodataQAP questions={questions.data} locale={lang as "ua" | "ru"} />
+      <QapClient
+        company={company}
+        dates={dates}
+        locale={lang}
+        initialMfoData={mfoData.data}
+        initialQuestionsData={questions}
+      />
     </>
   );
 }

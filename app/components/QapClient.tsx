@@ -25,13 +25,23 @@ type Props = {
   company: string;
   dates?: PageDatesResponse | null;
   locale: string;
+  initialMfoData?: Mfo;
+  initialQuestionsData?: QuestionsResponse;
 };
 
-const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
+const QapClient: React.FC<Props> = ({
+  company,
+  dates,
+  locale,
+  initialMfoData,
+  initialQuestionsData,
+}) => {
   const t = useTranslations("QapCompanyPage");
-  const [data, setData] = useState<QuestionsResponse | null>(null);
+  const [data, setData] = useState<QuestionsResponse | null>(
+    initialQuestionsData || null
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [mfo, setMfo] = useState<Mfo>();
+  const [mfo, setMfo] = useState<Mfo | undefined>(initialMfoData);
   const [visibleCount, setVisibleCount] = useState(6);
 
   const options =
@@ -50,6 +60,11 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
         ];
 
   useEffect(() => {
+    // Only fetch data if initial data wasn't provided
+    if (initialMfoData && initialQuestionsData) {
+      return; // Skip fetching if we already have initial data
+    }
+
     const fetchReviews = async () => {
       try {
         const data = await getQuestions({
@@ -70,7 +85,7 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
     };
 
     fetchReviews();
-  }, [company, locale]);
+  }, [company, locale, initialMfoData, initialQuestionsData]);
 
   const handleHelpful = async (id: number) => {
     try {
@@ -190,8 +205,9 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
                   <Image
                     src={el.mfo.logo_url}
                     alt="logo"
-                    width={34}
-                    height={34}
+                    width={40}
+                    height={40}
+                    className="object-contain rounded-full"
                   />
                 ) : (
                   <Skeleton width={34} height={34} />
@@ -207,7 +223,9 @@ const QapClient: React.FC<Props> = ({ company, dates, locale }) => {
                     className="font-[700] text-[16px] text-[#724dea]"
                     style={{ fontFamily: "var(--Manrope)" }}
                   >
-                    {mfo?.rating_average?.toFixed(1) || "4,8"}{" "}
+                    {mfo?.rating_average
+                      ? Number(mfo.rating_average).toFixed(1)
+                      : "4,8"}{" "}
                     <span className="text-[#67677a]">
                       {t("ratingText", { value: "из 5" })}
                     </span>

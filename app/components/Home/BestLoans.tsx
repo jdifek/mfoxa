@@ -53,7 +53,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
           {best_credits.slice(0, 6).map((loan, index) => (
             <div
               key={index}
-              className="w-full h-auto rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
+              className="w-full h-auto rounded-[20px] bg-white p-[10px] md:p-[16px] shadow-md hover:shadow-lg transition-shadow duration-300 flex-shrink-0 flex flex-col"
             >
               <header className="flex gap-[10px] items-center mb-[10px]">
                 <Image
@@ -215,7 +215,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                 </div>
               </main>
 
-              <footer className="mt-[10px] flex sm:flex-row gap-[10px] items-center justify-between flex-wrap">
+              <div className="mt-auto pt-[10px] flex sm:flex-row gap-[10px] items-center justify-between flex-wrap">
                 <ButtonGreenBorder
                   link={`/${locale}/mfo/${loan.slug}`}
                   width="100%"
@@ -229,7 +229,7 @@ const BestLoans: React.FC<Props> = ({ best_credits }) => {
                 >
                   {t("getMoney")}
                 </Link>
-              </footer>
+              </div>
             </div>
           ))}
         </div>

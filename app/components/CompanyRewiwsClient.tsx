@@ -195,7 +195,7 @@ export default function CompanyRewiwsClient({
                 alt={t("logoAlt")}
                 width={100}
                 height={50}
-                className="w-[163px] md:w-[300px] h-[52px] md:h-[96px]"
+                className="h-[52px] md:h-[96px] object-contain"
               />
             ) : (
               <div className="w-[163px] md:w-[300px] h-[52px] md:h-[96px] bg-gray-200 animate-pulse rounded" />
@@ -370,9 +370,9 @@ export default function CompanyRewiwsClient({
                   <Image
                     src={review.mfo?.logo_url}
                     alt={t("reviewLogoAlt")}
-                    width={34}
-                    height={34}
-                    className="rounded-full"
+                    width={40}
+                    height={40}
+                    className="rounded-full object-contain"
                   />
                   <div className="flex flex-col">
                     <p

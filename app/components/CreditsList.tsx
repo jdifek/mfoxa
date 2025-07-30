@@ -110,11 +110,6 @@ const CreditsList: React.FC<CreditsListProps> = ({
                         {loan.rating_average ?? "-"}
                         <span className="text-[#67677a]">/5</span>
                       </p>
-                      <Link href={`/${locale}/mfo/${loan.slug}/reviews`}>
-                        <p className="text-[13px] font-medium underline text-[#00ba9e] hover:text-[#009e88] cursor-pointer transition-colors duration-200">
-                          {loan.rating_count ?? "-"}%
-                        </p>
-                      </Link>
                     </div>
                   </div>
                 </header>
