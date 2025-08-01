@@ -29,35 +29,7 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
     }
   }, []);
 
-  console.log(mfo);
-
   const offers = mfo?.tariffs || [];
-
-  const getClientTypeClass = (type: string) => {
-    switch (type) {
-      case "new":
-        return "bg-[#e2ffe6] text-[#00ba9e] w-[60px] h-[22px] font-medium text-[11px] leading-[145%] px-[10px] py-[3px] rounded-[8px] font-[var(--font-family)]";
-      case "repeat":
-        return "bg-[#f5f5ff] text-[#724dea] w-[87px] h-[22px] font-medium text-[11px] leading-[145%] px-[10px] py-[3px] rounded-[8px] font-[var(--font-family)]";
-      case "sale":
-        return "bg-[#ffece2] text-[#f22a52] w-[57px] h-[22px] font-medium text-[11px] leading-[145%] px-[10px] py-[3px] rounded-[8px] font-[var(--font-family)]";
-      default:
-        return "bg-gray-200 text-gray-700 px-[10px] py-[3px] rounded-[8px] text-[11px]";
-    }
-  };
-
-  const getClientTypeLabel = (type: string) => {
-    switch (type) {
-      case "new":
-        return "Новый";
-      case "repeat":
-        return "Повторный";
-      case "sale":
-        return "Акция";
-      default:
-        return "Неизвестно";
-    }
-  };
 
   return (
     <>
@@ -93,7 +65,6 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
                   }}
                 >
                   {offers.map((offer: any) => {
-                    console.log(offer);
                     return (
                       <SwiperSlide key={offer.id}>
                         <div className="w-full rounded-lg bg-white p-[10px] md:p-[16px] shadow-md">
@@ -111,17 +82,24 @@ const TermsOfRegistrationComponent: React.FC<{ mfo: Mfo }> = ({ mfo }) => {
 
                           <hr className="mb-[16px]" />
 
-                          <div className="flex justify-between">
-                            <p className="font-medium mb-[13px] text-[14px] text-[#67677a]">
+                          <div className="flex justify-between mb-[13px]">
+                            <p className="font-medium text-[14px] text-[#67677a]">
                               {t("tariff")}
                             </p>
-                            <div
-                              className={getClientTypeClass(
-                                isClient ? offer.type : ""
-                              )}
-                            >
-                              {getClientTypeLabel(isClient ? offer.type : "")}
-                            </div>
+                            {offer.type && (
+                              <div
+                                style={{
+                                  backgroundColor:
+                                    offer.type_badge_styles?.[
+                                      "background-color"
+                                    ],
+                                  color: offer.type_badge_styles?.color,
+                                }}
+                                className="w-auto font-medium text-center text-[11px] leading-[145%] px-[10px] py-[3px] rounded-[8px]"
+                              >
+                                {isClient ? offer.type : ""}
+                              </div>
+                            )}
                           </div>
 
                           <hr className="mb-[16px]" />

@@ -91,7 +91,7 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
                   <p className="font-[700] text-[12px] md:text-[15px] leading-[142%] text-[#222] mb-[10px]">
                     {review.author_name}
                   </p>
-                  <p className="mb-[10px] text-[13px] md:text-[15px] font-[500] text-[#222] leading-[138%]">
+                  <p className="mb-[10px] text-[13px] md:text-[15px] font-[500] text-[#222] leading-[138%] line-clamp-5">
                     {review.review_text}
                   </p>
                   <Link href={`/${locale}/mfo/${review.mfo.slug}/reviews`}>

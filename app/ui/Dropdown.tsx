@@ -12,7 +12,12 @@ type DropdownProps = {
   lang?: "ua" | "ru"; // передаём язык, чтобы выбрать базовые опции
 };
 
-const Dropdown: React.FC<DropdownProps> = ({ options, endpoint, mfoId, lang = "ru" }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  options,
+  endpoint,
+  mfoId,
+  lang = "ru",
+}) => {
   const defaultOptions: DropdownOption[] =
     lang === "ua"
       ? [

@@ -61,7 +61,7 @@ export default async function LoanDescription({
   });
 
   const dataBySlug = await catalogService.getBySlug({
-    slug,
+    slug: `loan/${slug}`,
     lang: lang === "ua" ? "uk" : "ru",
     isLoan: false,
   });

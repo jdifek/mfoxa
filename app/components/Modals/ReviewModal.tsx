@@ -107,6 +107,14 @@ export default function ReviewModal({
         website_rating: website,
       });
       toast.success("Отзыв отправлен и отправлен на модерацию!");
+
+      // Clear form after successful submission
+      setRatings({});
+      setName("");
+      setEmail("");
+      setText("");
+      setAgreePolicy(false);
+
       onClose();
     } catch (error: any) {
       const errorMessage = error?.message || "Ошибка при отправке отзыва.";
