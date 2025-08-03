@@ -6,16 +6,19 @@ import { useRouter, useSearchParams } from "next/navigation";
 type DropdownOption = { label: string; value: string };
 
 type DropdownProps = {
-  options?: DropdownOption[]; // теперь опциональные
+  options?: DropdownOption[];
   endpoint?: string;
-  mfoId?: number;
-  lang?: "ua" | "ru"; // передаём язык, чтобы выбрать базовые опции
+  mfoSlug?: string; // slug вместо ID
+  lang?: "ua" | "ru";
+  onChange?: (value: string) => void;
+
 };
 
 const Dropdown: React.FC<DropdownProps> = ({
   options,
   endpoint,
-  mfoId,
+  mfoSlug,
+  onChange,
   lang = "ru",
 }) => {
   const defaultOptions: DropdownOption[] =
@@ -41,18 +44,17 @@ const Dropdown: React.FC<DropdownProps> = ({
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const updateQueryParam = async (value: string, label: string) => {
+  const updateQueryParam = async (value: string) => {
     if (endpoint) {
       const apiParams = new URLSearchParams();
       apiParams.set("sort", value);
-      if (mfoId !== undefined) apiParams.set("mfo_id", String(mfoId));
+      if (mfoSlug) apiParams.set("mfo_slug", mfoSlug); // <-- передаём slug
 
       try {
         const response = await fetch(`${endpoint}?${apiParams.toString()}`);
         const data = await response.json();
         console.log("Ответ API:", data);
-        // Здесь можно вызывать обновление отзывов
+        // Здесь можно обновить состояние отзывов
       } catch (error) {
         console.error("Ошибка запроса:", error);
       }
@@ -95,7 +97,9 @@ const Dropdown: React.FC<DropdownProps> = ({
               onClick={() => {
                 setSelected(label);
                 setIsOpen(false);
-                updateQueryParam(value, label);
+                updateQueryParam(value);
+                onChange?.(value); // <== добавь это
+
               }}
               className={`px-[10px] py-[8px] text-[12px] text-[#222] font-normal hover:bg-[#f0f0f0] cursor-pointer leading-[142%] ${
                 selected === label ? "bg-[#f0f0f0]" : ""
