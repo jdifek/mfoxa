@@ -144,7 +144,7 @@ export default async function Promotion({ params }: Props) {
                       <p className="font-bold text-[16px] leading-[100%] text-[#222] line-clamp-1 overflow-hidden">
                         {promo?.title || companyName}
                       </p>
-                      <p className="font-medium text-[12px] xl:text-[14px] leading-[136%] text-[#222] line-clamp-4 overflow-hidden">
+                      <p className="font-medium text-[12px] xl:text-[14px] leading-[136%] text-[#222] overflow-hidden">
                         {promo?.description || t("card.descriptionFallback")}
                       </p>
                     </div>

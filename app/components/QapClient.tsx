@@ -15,6 +15,7 @@ import {
   QuestionsResponse,
 } from "../services/questionsService";
 import QapModal from "./Modals/QapModal";
+import AnswerQap from "./Modals/AnswerQap";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { PageDatesResponse } from "../services/PageDatesService";
@@ -43,6 +44,11 @@ const QapClient: React.FC<Props> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mfo, setMfo] = useState<Mfo | undefined>(initialMfoData);
   const [visibleCount, setVisibleCount] = useState(6);
+  const [openAnswer, setOpenAnswer] = useState<{
+    id: number;
+    author: string;
+    date: string;
+  } | null>(null);
 
   const options =
     locale === "ua"
@@ -144,6 +150,15 @@ const QapClient: React.FC<Props> = ({
           mfoId={data?.data?.[0]?.mfo?.id || mfo?.id || 0}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+        />
+      )}
+      {openAnswer && (
+        <AnswerQap
+          isOpen={!!openAnswer}
+          onClose={() => setOpenAnswer(null)}
+          parent_id={openAnswer.id}
+          author_name={openAnswer.author}
+          date={openAnswer.date}
         />
       )}
       <Bread lang={locale as "ru" | "ua"} />
@@ -276,7 +291,16 @@ const QapClient: React.FC<Props> = ({
                 </div>
               )}
 
-              <p className="mb-[14px] font-medium text-[13px] text-[#724dea] underline cursor-pointer hover:text-[#532bbf]">
+              <p
+                onClick={() =>
+                  setOpenAnswer({
+                    id: el.id,
+                    author: el.author_name || "",
+                    date: new Date(el.created_at).toLocaleDateString(),
+                  })
+                }
+                className="mb-[14px] font-medium text-[13px] text-[#724dea] underline cursor-pointer hover:text-[#532bbf]"
+              >
                 {t("replyText")}
               </p>
 

@@ -12,12 +12,12 @@ import { MfoDetails } from "../services/getMfoDetailsService";
 type CreditsListProps = {
   locale: string;
   visibleCount: number;
-  slug?: string;
+  catalogPageSlug?: string;
   handleShowMore: () => void;
 };
 
 const CreditsList: React.FC<CreditsListProps> = ({
-  slug,
+  catalogPageSlug,
   locale,
   visibleCount,
   handleShowMore,
@@ -57,7 +57,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
       try {
         const data = await getMFOs({
           lang: locale === "ua" ? "uk" : "ru",
-          ...(slug ? { catalog_page: slug } : {}),
+          ...(catalogPageSlug ? { catalog_page: catalogPageSlug } : {}),
           sort: sortParam as
             | "rating"
             | "amount_asc"
@@ -74,7 +74,7 @@ const CreditsList: React.FC<CreditsListProps> = ({
       }
     };
     fetchData();
-  }, [locale, sortParam, slug]);
+  }, [locale, sortParam, catalogPageSlug]);
 
   return (
     <>
@@ -102,14 +102,21 @@ const CreditsList: React.FC<CreditsListProps> = ({
                     <p className="text-[#222] font-bold text-[16px] leading-[100%]">
                       {loan.name || "-"}
                     </p>
-                    <div className="flex items-center gap-[5px]">
-                      <div className="flex gap-[2px]">
-                        {renderStars(loan.rating_average)}
+                    <div className="flex flex-row xl:flex-row md:flex-col gap-[5px]">
+                      <div className="flex items-center gap-[2px]">
+                        <div className="flex gap-[2px]">
+                          {renderStars(loan.rating_average)}
+                        </div>
+                        <p className="text-[13px] text-[#222] font-medium leading-[138%]">
+                          {loan.rating_average ?? "-"}
+                          <span className="text-[#67677a]">/5</span>
+                        </p>
                       </div>
-                      <p className="text-[13px] text-[#222] font-medium leading-[138%]">
-                        {loan.rating_average ?? "-"}
-                        <span className="text-[#67677a]">/5</span>
-                      </p>
+                      <Link href={`/${locale}/mfo/${loan.slug}/reviews`}>
+                        <p className="text-[13px] text-[#00ba9e] font-medium leading-[138%]">
+                          {loan.rating_count + " " + t("reviews")}
+                        </p>
+                      </Link>
                     </div>
                   </div>
                 </header>

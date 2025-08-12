@@ -109,7 +109,13 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
       </div>
 
       <CreditsList
-        slug={slug}
+        catalogPageSlug={
+          dataBySlug?.data?.catalog?.slug
+            ? dataBySlug.data.catalog.slug
+            : slug
+            ? `loan/${slug}`
+            : undefined
+        }
         locale={locale}
         visibleCount={currentVisibleCount}
         handleShowMore={handleShowMore}

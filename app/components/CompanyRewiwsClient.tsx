@@ -108,22 +108,22 @@ export default function CompanyRewiwsClient({
           { label: "По рейтингу ↑", value: "rating_asc" },
         ];
 
-        useEffect(() => {
-          const fetchReviews = async () => {
-            try {
-              const data = await getReviews({
-                mfo_slug: slug,
-                sort: sort as SortType,
-              });
-              setData(data);
-            } catch (error) {
-              console.error("Ошибка при загрузке отзывов:", error);
-            }
-          };
-        
-          fetchReviews();
-        }, [slug, sort]); // <== добавили зависимость от sort
-        
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const data = await getReviews({
+          mfo_slug: slug,
+          sort: sort as SortType,
+        });
+        setData(data);
+      } catch (error) {
+        console.error("Ошибка при загрузке отзывов:", error);
+      }
+    };
+
+    fetchReviews();
+  }, [slug, sort]); // <== добавили зависимость от sort
+
   const handleVote = async (id: number, type: "helpful" | "not_helpful") => {
     if (!data) return;
     try {
@@ -277,13 +277,13 @@ export default function CompanyRewiwsClient({
       </div>
       <div className="px-0 md:px-[20px]">
         <div className="flex gap-[10px] justify-between items-center">
-        <Dropdown
-  endpoint="https://mfo.webalchemy.fun/api/v1/reviews"
-  mfoSlug={data?.mfo.slug}
-  options={options}
-  lang={lang as "ua" | "ru"}
-  onChange={(val) => setSort(val as SortType)} // <== передаём выбранный сорт
-/>
+          <Dropdown
+            endpoint="https://mfo.webalchemy.fun/api/v1/reviews"
+            mfoSlug={data?.mfo.slug}
+            options={options}
+            lang={lang as "ua" | "ru"}
+            onChange={(val) => setSort(val as SortType)} // <== передаём выбранный сорт
+          />
           <div
             onClick={() => setIsModalOpen(true)}
             className="bg-[#00ba9e] text-white font-bold text-[14px] rounded-[8px] px-[16px] py-[9.5px] w-full sm:w-[235px] text-center cursor-pointer"
