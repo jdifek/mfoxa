@@ -1,6 +1,21 @@
 import axios from "axios";
 import { Mfo } from "./mfosService";
 
+export type ReviewReply = {
+  id: number;
+  author_name: string;
+  review_text: string;
+  helpful_count: number;
+  not_helpful_count: number;
+  is_reply: boolean;
+  admin_response: string | null;
+  admin_response_at: string | null;
+  admin_response_author: string | null;
+  created_at: string;
+  // Nested replies (rare, but API supports array)
+  replies: ReviewReply[];
+};
+
 export interface Review {
   id: number;
   author_name: string;
@@ -18,6 +33,8 @@ export interface Review {
     slug: string;
     logo_url: string;
   };
+  // Replies to this review
+  replies?: ReviewReply[];
 }
 
 export type SortType = "newest" | "helpful" | "rating_desc" | "rating_asc";

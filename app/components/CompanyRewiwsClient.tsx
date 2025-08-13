@@ -15,6 +15,7 @@ import {
   ReviewsApiResponse,
   SortType,
 } from "../services/reviewService";
+import type { ReviewReply } from "../services/reviewService";
 import ReviewModal from "./Modals/ReviewModal";
 import AnswerQap from "./Modals/AnswerQap";
 import { PageDatesResponse } from "../services/PageDatesService";
@@ -416,6 +417,11 @@ export default function CompanyRewiwsClient({
                 >
                   {review.review_text}
                 </p>
+                {Array.isArray(review.replies) && review.replies.length > 0 && (
+                  <div className="mt-[12px] space-y-2">
+                    <RepliesList replies={review.replies} lang={lang} />
+                  </div>
+                )}
                 {review.admin_response && (
                   <div className="rounded-lg p-2.5 w-full mb-[10px] bg-[#ebebf9]">
                     <div className="flex gap-[10px]">
@@ -548,5 +554,62 @@ export default function CompanyRewiwsClient({
         </p>
       </div>
     </>
+  );
+}
+
+type RepliesListProps = {
+  replies: ReviewReply[];
+  lang: string;
+};
+
+function RepliesList({ replies, lang }: RepliesListProps) {
+  return (
+    <div className={`space-y-2 mb-2`}>
+      {replies.map((reply) => (
+        <div key={reply.id} className="bg-[#EBEBF9] p-[10px] rounded-[8px]">
+          <div className="flex items-start gap-[8px]">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.4 3.48438H1V9.88437H4.2V13.0844H7.4V3.48438Z"
+                stroke="#724DEA"
+                stroke-width="2"
+              />
+              <path
+                d="M15 3.48438H8.6V9.88437H11.8V13.0844H15V3.48438Z"
+                stroke="#724DEA"
+                stroke-width="2"
+              />
+            </svg>
+
+            <div className="flex-1">
+              <p
+                className="font-[700] text-[12px] leading-[142%] text-[#222]"
+                style={{ fontFamily: "var(--Montserrat)" }}
+              >
+                {reply.author_name ||
+                  (lang === "ua" ? "Користувач" : "Пользователь")}
+              </p>
+              <p
+                className="font-medium text-[12px] leading-[140%] text-[#222]"
+                style={{ fontFamily: "var(--Montserrat)" }}
+              >
+                {reply.review_text}
+              </p>
+              {Array.isArray(reply.replies) && reply.replies.length > 0 && (
+                <div className="mt-2">
+                  <RepliesList replies={reply.replies} lang={lang} />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
