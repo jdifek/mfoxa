@@ -10,6 +10,8 @@ export type Question = {
   status: "approved" | "pending" | "rejected";
   answered_at: string | null;
   answer_author: string | null;
+  is_reply?: boolean;
+  parent_id?: number | null;
   created_at: string;
   updated_at: string;
   mfo: {
@@ -18,6 +20,7 @@ export type Question = {
     slug: string;
     logo_url: string;
   } | null;
+  replies?: Question[];
 };
 
 export type QuestionsResponse = {

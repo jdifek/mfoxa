@@ -14,6 +14,7 @@ import {
   notHelpfulQuestions,
   QuestionsResponse,
 } from "../services/questionsService";
+import type { Question } from "../services/questionsService";
 import QapModal from "./Modals/QapModal";
 import AnswerQap from "./Modals/AnswerQap";
 import Skeleton from "react-loading-skeleton";
@@ -196,9 +197,10 @@ const QapClient: React.FC<Props> = ({
       <div className="px-0 md:px-[20px]">
         <div className="flex gap-[10px] flex-row sm:justify-between items-center">
           <Dropdown
-            mfoId={data?.data?.[0]?.mfo?.id ?? mfo?.id ?? 0}
             endpoint="https://mfo.webalchemy.fun/api/v1/questions"
+            mfoSlug={data?.data?.[0]?.mfo?.slug ?? mfo?.slug}
             options={options}
+            lang={locale as "ua" | "ru"}
           />
 
           <div
@@ -291,6 +293,12 @@ const QapClient: React.FC<Props> = ({
                 </div>
               )}
 
+              {Array.isArray(el.replies) && el.replies.length > 0 && (
+                <div className="mt-[12px] space-y-2">
+                  <QapRepliesList replies={el.replies} locale={locale} />
+                </div>
+              )}
+
               <p
                 onClick={() =>
                   setOpenAnswer({
@@ -378,3 +386,59 @@ const QapClient: React.FC<Props> = ({
 };
 
 export default QapClient;
+
+type QapRepliesListProps = {
+  replies: Question[];
+  locale: string;
+};
+
+function QapRepliesList({ replies, locale }: QapRepliesListProps) {
+  return (
+    <div className={`space-y-2 mb-2`}>
+      {replies.map((reply) => (
+        <div key={reply.id} className="bg-[#EBEBF9] p-[10px] rounded-[8px]">
+          <div className="flex items-start gap-[8px]">
+            <svg
+              width="16"
+              height="17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.4 3.96692H1V10.3669H4.2V13.5669H7.4V3.96692Z"
+                stroke="#724DEA"
+                strokeWidth="2"
+              />
+              <path
+                d="M15 3.96692H8.6V10.3669H11.8V13.5669H15V3.96692Z"
+                stroke="#724DEA"
+                strokeWidth="2"
+              />
+            </svg>
+
+            <div className="flex-1">
+              <p
+                className="font-[700] text-[12px] leading-[142%] text-[#222]"
+                style={{ fontFamily: "var(--Montserrat)" }}
+              >
+                {reply.author_name ||
+                  (locale === "ua" ? "Користувач" : "Пользователь")}
+              </p>
+              <p
+                className="font-medium text-[12px] leading-[140%] text-[#222]"
+                style={{ fontFamily: "var(--Montserrat)" }}
+              >
+                {reply.question_text}
+              </p>
+              {Array.isArray(reply.replies) && reply.replies.length > 0 && (
+                <div className="mt-2">
+                  <QapRepliesList replies={reply.replies} locale={locale} />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
