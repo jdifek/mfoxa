@@ -104,6 +104,7 @@ const CreditClientPage: React.FC<CreditClientPageProps> = ({
       </div>
 
       <CreditsList
+        // @ts-expect-error slug
         slug={slug}
         locale={locale}
         visibleCount={currentVisibleCount}
