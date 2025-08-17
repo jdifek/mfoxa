@@ -311,6 +311,7 @@ export default function CompanyRewiwsClient({
                 date={new Date(review.created_at).toLocaleDateString()}
                 isOpen={openReplyId === review.id}
                 onClose={closeAnswerModal}
+                type="review"
               />
               <div
                 className=" border-[1px] border-[#d6d6f9] p-[10px] md:p-[30px] bg-white rounded-lg mt-[10px]"

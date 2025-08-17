@@ -76,6 +76,8 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
     setVisibleCount((prev) => prev + 3);
   };
 
+  console.log("dataBySlug", dataBySlug?.page.seo_text);
+
   return (
     <>
       <Bread lang={locale as "ru" | "ua"} />
@@ -123,7 +125,7 @@ const LoanClientPage: React.FC<LoanClientPageProps> = ({
 
       {homeData && <LastReviews recent_reviews={homeData.recent_reviews} />}
 
-      <DetailsText html={getAllSettings?.settings.loan_page_text} />
+      <DetailsText html={dataBySlug?.page.seo_text} />
       {faqs && faqs.length > 0 ? (
         <OftenQuestions faqs={faqs} />
       ) : (

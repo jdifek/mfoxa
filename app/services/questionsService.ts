@@ -131,3 +131,39 @@ export const createQuestion = async (
     throw new Error("Failed to create question");
   }
 };
+
+export interface CreateQuestionReplyParams {
+  parent_id: number;
+  author_name: string;
+  question_text: string;
+}
+
+export interface CreateQuestionReplyResponse {
+  message: string;
+  reply: {
+    id: number;
+    parent_id: number;
+    author_name: string;
+    question_text: string;
+    created_at: string;
+  };
+}
+
+export const createQuestionReply = async (
+  data: CreateQuestionReplyParams
+): Promise<CreateQuestionReplyResponse> => {
+  try {
+    const response = await axios.post<CreateQuestionReplyResponse>(
+      "https://mfo.webalchemy.fun/api/v1/questions/reply",
+      data
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 422) {
+      console.error("Validation errors:", error.response.data.errors);
+      throw error.response.data;
+    }
+    console.error("createQuestionReply error:", error);
+    throw new Error("Failed to create question reply");
+  }
+};

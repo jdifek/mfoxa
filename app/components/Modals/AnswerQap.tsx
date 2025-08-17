@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import { createQuestionReply } from "@/app/services/questionsService";
 import { createReviewReply } from "@/app/services/reviewService";
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
@@ -11,6 +12,7 @@ type ReviewModalProps = {
   parent_id: number;
   author_name: string;
   date: string;
+  type?: "question" | "review"; // Add type to distinguish between questions and reviews
 };
 
 const Checkbox = ({
@@ -44,6 +46,7 @@ export default function AnswerQap({
   parent_id,
   date,
   author_name,
+  type = "question", // Default to question for backward compatibility
 }: ReviewModalProps) {
   const [agreePolicy, setAgreePolicy] = useState(false);
   const [name, setName] = useState("");
@@ -63,19 +66,34 @@ export default function AnswerQap({
 
     try {
       setIsSubmitting(true);
-      await createReviewReply({
-        parent_id,
-        author_name: name,
-        review_text: text,
-      });
+
+      if (type === "review") {
+        await createReviewReply({
+          parent_id,
+          author_name: name,
+          review_text: text,
+        });
+      } else {
+        await createQuestionReply({
+          parent_id,
+          author_name: name,
+          question_text: text,
+        });
+      }
+
       toast.success("Ответ успешно отправлен и отправлен на модерацию!");
       onClose();
       setName("");
       setText("");
     } catch (error) {
-      const errorMessage =
-        (error as any)?.message || "Ошибка при отправке ответа.";
-      toast.error(errorMessage);
+      if ((error as any)?.message && (error as any)?.errors) {
+        const apiError = error as any;
+        toast.error(apiError.message);
+      } else {
+        const errorMessage =
+          (error as any)?.message || "Ошибка при отправке ответа.";
+        toast.error(errorMessage);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -115,7 +133,14 @@ export default function AnswerQap({
 
         {[
           { label: "Имя", value: name, onChange: setName },
-          { label: "Напишите ответ на отзыв", value: text, onChange: setText },
+          {
+            label:
+              type === "review"
+                ? "Напишите ответ на отзыв"
+                : "Напишите ответ на вопрос",
+            value: text,
+            onChange: setText,
+          },
         ].map(({ label, value, onChange }, i) => (
           <div key={i} className="mb-[14px]">
             <p
@@ -124,7 +149,7 @@ export default function AnswerQap({
             >
               {label}
             </p>
-            {label === "Напишите ответ на отзыв" ? (
+            {label.includes("ответ на") ? (
               <textarea
                 value={value}
                 onChange={(e) => onChange(e.target.value)}

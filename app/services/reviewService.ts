@@ -187,6 +187,10 @@ export const createReviewReply = async (
     );
     return response.data;
   } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 422) {
+      console.error("Validation errors:", error.response.data.errors);
+      throw error.response.data;
+    }
     console.error("createReviewReply error:", error);
     throw new Error("Failed to create review reply");
   }

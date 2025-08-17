@@ -23,8 +23,10 @@ export const LastReviews: React.FC<Props> = ({
   const lang = useLocale();
 
   const filteredReviews = companySlug
-    ? recent_reviews.filter((review) => review.mfo.slug === companySlug)
-    : recent_reviews;
+    ? recent_reviews.filter(
+        (review) => review.mfo.slug === companySlug && !review.is_reply
+      )
+    : recent_reviews.filter((review) => !review.is_reply);
 
   const title = companyName
     ? t("lastMfoReviews", { company: companyName })
