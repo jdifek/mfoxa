@@ -65,7 +65,13 @@ export const LastReviews: React.FC<Props> = ({
             className="w-full rounded-lg bg-white p-[10px] h-[243px] md:p-[16px] shadow-md"
           >
             <div className="flex gap-[10px] mb-[14px]">
-              <Image src={el.mfo.logo_url} alt="logo" width={34} height={34} />
+              <Image
+                src={el.mfo.logo_url}
+                alt="logo"
+                className="object-contain"
+                width={34}
+                height={34}
+              />
               <div className="flex flex-col">
                 <p
                   className="font-[700] text-[12px] leading-[142%] text-[#222]"
