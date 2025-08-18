@@ -75,6 +75,7 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
                     <Image
                       src={review.mfo.logo_url}
                       alt={review.mfo.name}
+                      className="w-[34px] h-[34px] object-contain"
                       width={34}
                       height={34}
                     />
