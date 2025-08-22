@@ -45,6 +45,7 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
       setLoading(true);
       try {
         const data = await getReviews({ page: 1, sort: selectedSort });
+        console.log("data", data);
         setReviews(data.data || []);
         console.log(data.data);
       } catch (error) {

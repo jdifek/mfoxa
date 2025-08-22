@@ -18,7 +18,6 @@ import DetailsText from "@/app/components/DetailsText";
 import { ScrollReset } from "@/app/components/ScrollReset";
 import ClientOnly from "@/app/components/ClientOnly";
 import { LastReviews } from "@/app/components/Home/LastRewiews";
-import { getHomeData, LangType } from "@/app/services/HomeService";
 
 // export const dynamic = "force-dynamic";
 export const revalidate = 60; // ISR / 1 минута
@@ -73,7 +72,6 @@ export default async function CatalogPage({ params }: PageProps) {
   const { lang, company } = await params;
   const companySlug = decodeURIComponent(company || "sgroshi");
   const locale = lang;
-  const homeData = await getHomeData(lang as LangType);
 
   const t = await getTranslations({ locale: lang, namespace: "Catalog" });
   const { data } = await getMfoDetails(
@@ -506,9 +504,10 @@ export default async function CatalogPage({ params }: PageProps) {
       <OftenQuestions faqs={data.faqs} company={data.name} />
       <div className="mb-[30px] md:mb-[50px]"></div>
       <LastReviews
-        recent_reviews={homeData.recent_reviews}
+        recent_reviews={data.recent_reviews || []}
         companyName={data.name}
         companySlug={data.slug}
+        companyLogo={data.logo_url}
       />
       <div className="h-[30px]"></div>
       <DetailsText html={data.seo_text} />

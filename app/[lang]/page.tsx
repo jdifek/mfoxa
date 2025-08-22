@@ -85,12 +85,14 @@ export default async function Home({
     <>
       <MicrodataHome locale={lang as "ru" | "ua"} homeData={homeData} />
       <div>
-        <FinancialMarketplace locale={lang}  settings={getAllSettings?.settings}/>
+        <FinancialMarketplace
+          locale={lang}
+          settings={getAllSettings?.settings}
+        />
         <BestLoans best_credits={homeData.best_credits} />
         <TopUkrMFO top_mfos={homeData.top_mfos} />
         <LastReviews recent_reviews={homeData.recent_reviews} />
-        <DetailsText         html={getAllSettings?.settings.main_page_text}
-        />
+        <DetailsText html={getAllSettings?.settings.main_page_text} />
         <Questions />
       </div>
     </>

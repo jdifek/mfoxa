@@ -11,22 +11,18 @@ type Props = {
   recent_reviews: Review[];
   companyName?: string;
   companySlug?: string;
+  companyLogo?: string;
 };
 
 export const LastReviews: React.FC<Props> = ({
   recent_reviews,
   companyName,
   companySlug,
+  companyLogo,
 }) => {
   const t = useTranslations("LastReviews");
   const pathname = usePathname();
   const lang = useLocale();
-
-  const filteredReviews = companySlug
-    ? recent_reviews.filter(
-        (review) => review.mfo.slug === companySlug && !review.is_reply
-      )
-    : recent_reviews.filter((review) => !review.is_reply);
 
   const title = companyName
     ? t("lastMfoReviews", { company: companyName })
@@ -34,7 +30,7 @@ export const LastReviews: React.FC<Props> = ({
     ? t("sectionTitleMFO")
     : t("sectionTitle");
 
-  const displayedReviews = filteredReviews
+  const displayedReviews = recent_reviews
     .sort(
       (a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
@@ -66,7 +62,7 @@ export const LastReviews: React.FC<Props> = ({
           >
             <div className="flex gap-[10px] mb-[14px]">
               <Image
-                src={el.mfo.logo_url}
+                src={el.mfo?.logo_url || companyLogo || ""}
                 alt="logo"
                 className="object-contain"
                 width={34}
@@ -77,7 +73,7 @@ export const LastReviews: React.FC<Props> = ({
                   className="font-[700] text-[12px] leading-[142%] text-[#222]"
                   style={{ fontFamily: "var(--Montserrat)" }}
                 >
-                  {el.mfo.name}
+                  {el.mfo?.name || companyName}
                 </p>
                 <p
                   className="font-[700] text-[16px] leading-[100%] text-[#724dea]"
@@ -107,7 +103,7 @@ export const LastReviews: React.FC<Props> = ({
               {el.review_text}
             </p>
 
-            <Link href={`/${lang}/mfo/${el.mfo.slug}/reviews`}>
+            <Link href={`/${lang}/mfo/${el.mfo?.slug || companySlug}/reviews`}>
               <p
                 className="text-[13px] w-max md:text-[15px] cursor-pointer underline text-[#6239e8] transition-colors duration-200 hover:text-[#9278ea]"
                 style={{

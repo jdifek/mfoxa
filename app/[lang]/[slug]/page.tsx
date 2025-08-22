@@ -4,6 +4,7 @@ import authorsService from "@/app/services/authorsService";
 import { catalogService } from "@/app/services/catalogService";
 import { getPageDates } from "@/app/services/PageDatesService";
 import settingsService from "@/app/services/settingsService";
+import { getHomeData, LangType } from "@/app/services/HomeService";
 import { MicrodataLoanCatalog } from "@/app/structured-data/MicrodataLoanCatalog";
 import { Metadata } from "next";
 
@@ -76,6 +77,7 @@ export default async function LoanDescription({
   const randomAuthor = await authorsService.getRandomAuthor(
     lang === "ua" ? "uk" : "ru"
   );
+  const homeData = await getHomeData(lang as LangType);
 
   if (!res) {
     throw new Error(`Не удалось получить страницу по slug: ${slug}`);
@@ -110,6 +112,7 @@ export default async function LoanDescription({
         slug={slug}
         visibleCount={visibleCount}
         locale={lang}
+        homeData={homeData}
       />
     </>
   );
