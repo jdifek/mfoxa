@@ -25,9 +25,12 @@ export async function generateMetadata({
     console.error("Ошибка при получении настроек:", error);
   }
   return {
-    title:  getAllSettings?.settings.reviews_page_meta_title || t("reviewss.title") || "Отзывы об МФО Украины — Честные мнения клиентов",
+    title:
+      getAllSettings?.settings.reviews_page_meta_title ||
+      t("reviewss.title") ||
+      "Отзывы об МФО Украины — Честные мнения клиентов",
     description:
-    getAllSettings?.settings.reviews_page_meta_description  || 
+      getAllSettings?.settings.reviews_page_meta_description ||
       t("reviewss.description") ||
       "Читайте отзывы клиентов о микрофинансовых организациях Украины. Реальный опыт, оценки и советы от заемщиков.",
     keywords: ["отзывы МФО", "МФО Украина", "займы онлайн", "мнение клиентов"],
@@ -53,7 +56,9 @@ export default async function ReviewsPageWrapper({
   const { count, sort } = await searchParams;
   const reviewsCount = count ? parseInt(count, 10) : 16;
 
-  const randomAuthor = await authorsService.getRandomAuthor(lang === 'ua' ? 'uk' : 'ru');  
+  const randomAuthor = await authorsService.getRandomAuthor(
+    lang === "ua" ? "uk" : "ru"
+  );
   const stats = await getReviewStatistics();
   const faqs = await FaqsService.getFaqs({ page_name: "reviews" });
   let getAllSettings;
@@ -66,13 +71,13 @@ export default async function ReviewsPageWrapper({
   } catch (error) {
     console.error("Ошибка при получении настроек:", error);
   }
-  
+
   return (
     <ReviewsClient
-    stats={stats}
-    getAllSettings={getAllSettings}
-    faqs={faqs}
-    randomAuthor={randomAuthor}
+      stats={stats}
+      getAllSettings={getAllSettings}
+      faqs={faqs}
+      randomAuthor={randomAuthor}
       locale={lang}
       reviewsCount={reviewsCount}
       selectedSortKey={sort || ""}

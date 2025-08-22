@@ -9,7 +9,7 @@ import Link from "next/link";
 
 type Review = {
   id: number;
-  mfo: { name: string; logo_url: string; slug: string };
+  mfo: { id: number; name: string; logo_url: string; slug: string };
   rating: number;
   author_name: string;
   review_text: string;
@@ -20,12 +20,16 @@ type ReviewsListProps = {
   locale: string;
   reviewsCount: number;
   selectedSortKey: string;
+  onTotalChange?: (total: number) => void;
+  onMfoCountChange?: (mfoCount: number) => void;
 };
 
 const ReviewsList: React.FC<ReviewsListProps> = ({
   reviewsCount,
   selectedSortKey,
   locale,
+  onTotalChange,
+  onMfoCountChange,
 }) => {
   const t = useTranslations("ReviewsPage");
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -44,10 +48,48 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
     const fetchReviews = async () => {
       setLoading(true);
       try {
-        const data = await getReviews({ page: 1, sort: selectedSort });
-        console.log("data", data);
-        setReviews(data.data || []);
-        console.log(data.data);
+        const reviewsPerPage = 10;
+        const allReviews: Review[] = [];
+        let totalAvailable = 0;
+
+        const firstPageData = await getReviews({
+          page: 1,
+          sort: selectedSort,
+        });
+
+        if (firstPageData.data && Array.isArray(firstPageData.data)) {
+          allReviews.push(...firstPageData.data);
+        }
+
+        if (firstPageData.meta?.total) {
+          totalAvailable = firstPageData.meta.total;
+          onTotalChange?.(totalAvailable);
+        }
+
+        const reviewsToFetch = Math.min(reviewsCount, totalAvailable);
+        const pagesNeeded = Math.ceil(reviewsToFetch / reviewsPerPage);
+
+        for (let page = 2; page <= pagesNeeded; page++) {
+          const data = await getReviews({
+            page,
+            sort: selectedSort,
+          });
+
+          if (data.data && Array.isArray(data.data)) {
+            allReviews.push(...data.data);
+          }
+
+          if (data.meta?.last_page && page >= data.meta.last_page) {
+            break;
+          }
+        }
+
+        const limitedReviews = allReviews.slice(0, reviewsToFetch);
+        setReviews(limitedReviews);
+
+        const uniqueMfoIds = new Set(allReviews.map((review) => review.mfo.id));
+        const mfoCount = uniqueMfoIds.size;
+        onMfoCountChange?.(mfoCount);
       } catch (error) {
         console.error("Ошибка загрузки отзывов:", error);
         setReviews([]);
@@ -56,7 +98,7 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
       }
     };
     fetchReviews();
-  }, [selectedSort]);
+  }, [selectedSort, reviewsCount, onTotalChange, onMfoCountChange]);
 
   return (
     <>
@@ -67,7 +109,7 @@ const ReviewsList: React.FC<ReviewsListProps> = ({
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {Array.isArray(reviews) &&
-              reviews.slice(0, reviewsCount).map((review) => (
+              reviews.map((review) => (
                 <div
                   key={review.id}
                   className="w-full  border-[1px] border-[#d6d6f9] rounded-lg  h-[243px] bg-white p-[16px] shadow-md"
