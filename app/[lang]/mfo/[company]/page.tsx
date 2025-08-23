@@ -81,6 +81,8 @@ export default async function CatalogPage({ params }: PageProps) {
   const requirements = data.requirements;
   console.log("requirements", requirements);
 
+  console.log("data", data);
+
   const requirementsData = [
     {
       key: "age",
@@ -258,7 +260,7 @@ export default async function CatalogPage({ params }: PageProps) {
                 {t("website")}
               </p>
               <Link
-                href={data.official_website}
+                href={data.redirect_url}
                 target="_blank"
                 className="w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
                 style={{ textDecorationSkipInk: "none" }}
@@ -274,14 +276,14 @@ export default async function CatalogPage({ params }: PageProps) {
           <Link
             href={data.basic_characteristics_pdf_url || t("termsLink")}
             target="_blank"
-            className="block w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
+            className="block w-max font-medium text-[14px] leading-[136%] text-[#00ba9e]"
           >
             {t("termsText")}
           </Link>
           <Link
             href={data.user_warning_pdf_url || ""}
             target="_blank"
-            className="w-max font-medium text-[14px] leading-[136%] underline underline-offset-2 text-[#00ba9e]"
+            className="w-max font-medium text-[14px] leading-[136%] text-[#00ba9e]"
           >
             {t("warningText")}
           </Link>
